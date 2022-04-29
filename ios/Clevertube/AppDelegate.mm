@@ -3,6 +3,9 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <Firebase.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -49,12 +52,25 @@
     rootView.backgroundColor = [UIColor whiteColor];
   }
 
+  [FIRApp configure];
+
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] 
+    || [RNGoogleSignin application:application openURL:url options:options];
+  // return YES;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
