@@ -40,11 +40,11 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>700947241099492</string>
+	<string>${FACEBOOK_APP_ID}</string>
 	<key>FacebookClientToken</key>
-	<string>e76a2661df0469a4c9c0ad4eb9de80ee</string>
+	<string>${FACEBOOK_CLIENT_TOKEN}</string>
 	<key>FacebookDisplayName</key>
-	<string>CleverTube</string>
+	<string>${FACEBOOK_DISPLAY_NAME}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

@@ -13,6 +13,10 @@ import { AccessToken, LoginButton } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import { LoginProps } from '@clvtube/common/navigators/Root'
 import auth from '@react-native-firebase/auth'
+import appleAuth, {
+  AppleButton,
+} from '@invertase/react-native-apple-authentication'
+import { envData } from '@clvtube/common/constants/envData'
 
 interface InputReference extends TextInput {
   value: string
@@ -25,8 +29,13 @@ function Login({ route, navigation }: LoginProps) {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '213696605314-hbs530r83vb2anga4sv7lf7kjt8249om.apps.googleusercontent.com',
+      webClientId: envData.webClientId,
+    })
+    // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
+    return appleAuth.onCredentialRevoked(async () => {
+      console.warn(
+        'If this function executes, User Credentials have been Revoked',
+      )
     })
   }, [])
 
@@ -67,12 +76,59 @@ function Login({ route, navigation }: LoginProps) {
     return auth().signInWithCredential(googleCredential)
   }
 
+  const onAppleButtonPress = async () => {
+    // performs login request
+    // const appleAuthRequestResponse = await appleAuth.performRequest({
+    //   requestedOperation: appleAuth.Operation.LOGIN,
+    //   requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    // })
+
+    // // get current authentication state for user
+    // // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    // const credentialState = await appleAuth.getCredentialStateForUser(
+    //   appleAuthRequestResponse.user,
+    // )
+
+    // console.log(credentialState)
+
+    // // use credentialState response to ensure the user is authenticated
+    // if (credentialState === appleAuth.State.AUTHORIZED) {
+    //   // user is authenticated
+    //   console.log('authenticated')
+    // }
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+  
+    // Ensure Apple returned a user identityToken
+    if (!appleAuthRequestResponse.identityToken) {
+      throw new Error('Apple Sign-In failed - no identify token returned');
+    }
+  
+    // Create a Firebase credential from the response
+    const { identityToken, nonce } = appleAuthRequestResponse;
+    const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+  
+    // Sign the user in with the credential
+    return auth().signInWithCredential(appleCredential);
+  }
+
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={50}
         behavior="padding"
         style={styles.containerAvoidingView}>
+        <AppleButton
+          buttonStyle={AppleButton.Style.WHITE}
+          buttonType={AppleButton.Type.SIGN_IN}
+          style={{
+            width: 160, // You must specify a width
+            height: 45, // You must specify a height
+          }}
+          onPress={onAppleButtonPress}
+        />
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
@@ -80,19 +136,23 @@ function Login({ route, navigation }: LoginProps) {
             } else if (result.isCancelled) {
               console.log('canceled')
             } else {
-              AccessToken.getCurrentAccessToken().then(data => {
-                console.log(data?.accessToken.toString())
-                if (data?.accessToken) {
-                  const facebookCredential =
-                    auth.FacebookAuthProvider.credential(data.accessToken)
-                  console.log(facebookCredential)
-                  auth()
-                    .signInWithCredential(facebookCredential)
-                    .then(res => {
-                      console.log(res)
-                    })
-                }
-              })
+              AccessToken.getCurrentAccessToken()
+                .then(data => {
+                  console.log(data?.accessToken.toString())
+                  if (data?.accessToken) {
+                    const facebookCredential =
+                      auth.FacebookAuthProvider.credential(data.accessToken)
+                    console.log(facebookCredential)
+                    auth()
+                      .signInWithCredential(facebookCredential)
+                      .then(res => {
+                        console.log(res)
+                      })
+                  }
+                })
+                .catch(err => {
+                  console.log(err)
+                })
             }
           }}
           onLogoutFinished={() => console.log('logout')}
