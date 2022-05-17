@@ -7,6 +7,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:213696605314:android:f22db5950f40992b84989b",
+        "android_client_info": {
+          "package_name": "com.bili.clevertube"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213696605314-j23fkh0ij9akao7lvscnegcj7s042oco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bili.clevertube",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "213696605314-hbs530r83vb2anga4sv7lf7kjt8249om.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7xcvSug_ZKboHwPkFLeRKg-Ghul7YDJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213696605314-hbs530r83vb2anga4sv7lf7kjt8249om.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "213696605314-3mtsjsn6r5hnhqevola0g79k8bckmird.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.clevertubemobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:213696605314:android:588349dc342f45a284989b",
         "android_client_info": {
           "package_name": "com.clevertube"

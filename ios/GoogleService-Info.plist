@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>213696605314-s575002csb6qa724gdl6pa9kqj39noc2.apps.googleusercontent.com</string>
+	<string>213696605314-aabf9afil0g32obdm31uipme2dqttsdk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.213696605314-s575002csb6qa724gdl6pa9kqj39noc2</string>
+	<string>com.googleusercontent.apps.213696605314-aabf9afil0g32obdm31uipme2dqttsdk</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>213696605314-isoakmv176bt21mkv5kr601fruem6f0s.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.clevertube.learnenglish</string>
+	<string>com.bili.clevertube</string>
 	<key>PROJECT_ID</key>
 	<string>bili-dev</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:213696605314:ios:b5eacc592573043d84989b</string>
+	<string>1:213696605314:ios:ca415a057c67ea5a84989b</string>
 </dict>
 </plist>

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  Platform,
 } from 'react-native'
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
@@ -17,6 +18,9 @@ import appleAuth, {
   AppleButton,
 } from '@invertase/react-native-apple-authentication'
 import { envData } from '@clvtube/common/constants/envData'
+import Config from 'react-native-config'
+
+const isIOS = Platform.OS === 'ios'
 
 interface InputReference extends TextInput {
   value: string
@@ -28,15 +32,18 @@ function Login({ route, navigation }: LoginProps) {
   const [focusInput, setFocusedInput] = useState<boolean>(true)
 
   useEffect(() => {
+    console.log(Config.WEB_CLIENT_ID)
     GoogleSignin.configure({
       webClientId: envData.webClientId,
     })
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
-    return appleAuth.onCredentialRevoked(async () => {
-      console.warn(
-        'If this function executes, User Credentials have been Revoked',
-      )
-    })
+    if (isIOS) {
+      return appleAuth.onCredentialRevoked(async () => {
+        console.warn(
+          'If this function executes, User Credentials have been Revoked',
+        )
+      })
+    }
   }, [])
 
   const onChangePhone = (number: string) => {
@@ -69,6 +76,8 @@ function Login({ route, navigation }: LoginProps) {
     // Get the users ID token
     const { idToken } = await GoogleSignin.signIn()
 
+    console.log(idToken, 'idToken')
+
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken)
 
@@ -99,19 +108,22 @@ function Login({ route, navigation }: LoginProps) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
-  
+    })
+
     // Ensure Apple returned a user identityToken
     if (!appleAuthRequestResponse.identityToken) {
-      throw new Error('Apple Sign-In failed - no identify token returned');
+      throw new Error('Apple Sign-In failed - no identify token returned')
     }
-  
+
     // Create a Firebase credential from the response
-    const { identityToken, nonce } = appleAuthRequestResponse;
-    const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
-  
+    const { identityToken, nonce } = appleAuthRequestResponse
+    const appleCredential = auth.AppleAuthProvider.credential(
+      identityToken,
+      nonce,
+    )
+
     // Sign the user in with the credential
-    return auth().signInWithCredential(appleCredential);
+    return auth().signInWithCredential(appleCredential)
   }
 
   return (
@@ -120,15 +132,18 @@ function Login({ route, navigation }: LoginProps) {
         keyboardVerticalOffset={50}
         behavior="padding"
         style={styles.containerAvoidingView}>
-        <AppleButton
-          buttonStyle={AppleButton.Style.WHITE}
-          buttonType={AppleButton.Type.SIGN_IN}
-          style={{
-            width: 160, // You must specify a width
-            height: 45, // You must specify a height
-          }}
-          onPress={onAppleButtonPress}
-        />
+        {isIOS && (
+          <AppleButton
+            buttonStyle={AppleButton.Style.WHITE}
+            buttonType={AppleButton.Type.SIGN_IN}
+            style={{
+              width: 160, // You must specify a width
+              height: 45, // You must specify a height
+            }}
+            onPress={onAppleButtonPress}
+          />
+        )}
+
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
