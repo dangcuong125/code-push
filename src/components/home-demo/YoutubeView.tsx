@@ -97,7 +97,7 @@ const YoutubeView = () => {
         <Carousel
           ref={refCarousel}
           data={dataTranscript}
-          renderItem={({ item, index }) =>
+          renderItem={({ item, index}) =>
             renderItemSlide({ item, speakWord, index })
           }
           sliderWidth={width}

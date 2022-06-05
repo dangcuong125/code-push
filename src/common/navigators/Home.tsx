@@ -1,35 +1,72 @@
-import AudioBook from '@clvtube/components/home/AudioBook'
-import PlayerAudio from '@clvtube/components/home/PlayerAudio'
-import YoutubeView from '@clvtube/components/home/YoutubeView'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-// import Icon from 'react-native-vector-icons/Ionicons' 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomePage from '@clvtube/components/home/home-page/index';
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import HomeVideo from '@clvtube/components/home/home-video';
+
 
 const Tab = createBottomTabNavigator()
+
 const Home = () => {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        // tabBarIcon: ({ focused, color, size }) => {
-        //   let iconName = ''
+        // initialRouteNames={"Trang chủ"}
+        screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: 'black',
+            tabBarInactiveTintColor: 'gray',
+            tabBarStyle: {
+                backgroundColor: 'transparent',
+            }
+        }}
+    >
+        <Tab.Screen 
+            name="Trang chủ" 
+            component={HomePage} 
+            options={{
+                tabBarIcon: ({focused}) => {
+                    return(
+                        <AntDesign name="search1" size={20} />
+                    )
+                }
+            }}
+        />
 
-        //   if (route.name === 'Youtube') {
-        //     iconName = 'logo-youtube'
-        //   } else if (route.name === 'AudioBook') {
-        //     iconName = 'headset-outline'
-        //   } else if (route.name === 'PlayerAudio') {
-        //     iconName = 'headset-outline'
-        //   }
+        <Tab.Screen 
+            name="Video" 
+            component={HomeVideo} 
+            options={{
+                tabBarIcon: ({focused}) => {
+                    return(
+                        <AntDesign name="search1" size={20} />
+                    )
+                }
+            }}
+        />
 
-        //   // You can return any component that you like here!
-        //   return <Icon name={iconName} size={size} color={color} />
-        // },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
-      })}>
-      <Tab.Screen name="AudioBook" component={AudioBook} />
-      <Tab.Screen name="Youtube" component={YoutubeView} />
-      <Tab.Screen name="PlayerAudio" component={PlayerAudio} />
+        <Tab.Screen 
+            name="Podcast" 
+            component={HomePage} 
+            options={{
+                tabBarIcon: ({focused}) => {
+                    return(
+                        <AntDesign name="search1" size={20} />
+                    )
+                }
+            }}
+        />
+
+        <Tab.Screen 
+            name="Tài khoản" 
+            component={HomePage} 
+            options={{
+                tabBarIcon: ({focused}) => {
+                    return(
+                        <AntDesign name="search1" size={20} />
+                    )
+                }
+            }}
+        />
     </Tab.Navigator>
   )
 }
