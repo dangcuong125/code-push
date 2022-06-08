@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 
 const HomePodcast = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>HomePodcast</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

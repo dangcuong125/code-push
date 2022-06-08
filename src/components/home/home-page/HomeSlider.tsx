@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useRef, useState } from 'react';
 
 import { Text, VStack, Image, Box, HStack } from 'native-base';
@@ -39,30 +40,77 @@ const renderItemSlide = ({ item, index }) => {
             </Text>
         </VStack>
     )
+=======
+import { Text, VStack, Image, Box, HStack } from 'native-base'
+import React, { useRef, useState } from 'react'
+import { Dimensions } from 'react-native'
+import Carousel from 'react-native-snap-carousel'
+import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants'
+
+const Slider = [
+  {
+    title: 'Taodzo is the developer code',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU',
+  },
+  {
+    title: 'Taodzo is the developer code',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU',
+  },
+  {
+    title: 'Taodzo is the developer code',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU',
+  },
+  {
+    title: 'Taodzo is the developer code',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU',
+  },
+  {
+    title: 'Taodzo is the developer code',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU',
+  },
+]
+
+const renderItemSlide = ({ item, index }) => {
+  return (
+    <Box alignItems={'center'} key={index}>
+      <HStack>
+        <Image
+          source={{
+            uri: item.image,
+          }}
+          style={{
+            height: 150,
+            width: 300,
+            borderRadius: 10,
+          }}
+        />
+      </HStack>
+    </Box>
+  )
+>>>>>>> test
 }
 
-const { width, height } = Dimensions.get('window') 
+const { width, height } = Dimensions.get('window')
 
-const HomeSlider = () => {
-
-    const refCarousel = useRef<Carousel<any>>(null)
-
+<<<<<<< HEAD
     const [dataSilder, setDataSilder] = useState(slider)
+=======
+const HomeSlider = ({ navigation }) => {
+  const refCarousel = useRef<Carousel<any>>(null)
+>>>>>>> test
 
-    return (
-        <VStack space={3}>
+  const [dataSilder, setDataSilder] = useState(Slider)
 
-            <Text 
-                color={'black'}
-                w={'64px'}
-                h={'28px'}
-                lineHeight={'28px'}
-                fontWeight={700}
-                fontSize={'18px'}
-            >
-                Video
-            </Text>
+  const onMoveVideoDetail = () => {
+    navigation.navigate(VIDEO_DETAILS_PAGE)
+  }
 
+<<<<<<< HEAD
             <Carousel
                 layout={'stack'}
                 layoutCardOffset={1}
@@ -75,9 +123,32 @@ const HomeSlider = () => {
                 itemWidth={width}
                 // inactiveSlideScale={1}
             />
+=======
+  return (
+    <VStack space={3}>
+      <Text
+        color={'black'}
+        w={'64px'}
+        h={'28px'}
+        lineHeight={'28px'}
+        onPress={onMoveVideoDetail}
+        fontWeight={700}
+        fontSize={'18px'}>
+        Video
+      </Text>
+>>>>>>> test
 
-        </VStack>
-    )
+      <Carousel
+        layout={'default'}
+        ref={refCarousel}
+        data={dataSilder}
+        renderItem={renderItemSlide}
+        sliderWidth={width}
+        itemWidth={width}
+        inactiveSlideScale={1}
+      />
+    </VStack>
+  )
 }
 
 export default HomeSlider

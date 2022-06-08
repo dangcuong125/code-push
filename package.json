@@ -24,7 +24,7 @@
     "appcenter-crashes": "4.4.4",
     "moti": "^0.17.1",
     "native-base": "^3.4.3",
-    "react": "17.0.2",
+    "react": "^17.0.2",
     "react-native": "0.68.1",
     "react-native-config": "^1.4.5",
     "react-native-fbsdk-next": "^8.0.0",
