@@ -1,49 +1,43 @@
-import { Text, VStack, Image, Box, HStack } from 'native-base';
 import React, { useRef, useState } from 'react';
+
+import { Text, VStack, Image, Box, HStack } from 'native-base';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
+import { imagePath } from '@clvtube/common/constants/imagePath';
 
-const Slider = [
+
+const slider = [
     {
-        title: 'Taodzo is the developer code',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU'
+      id: '1',
+      image: imagePath.ONBOARDING1,
+      title: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet'
     },
     {
-        title: 'Taodzo is the developer code',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU'
+      id: '2',
+      image: imagePath.ONBOARDING2,
+      title: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet',
     },
     {
-        title: 'Taodzo is the developer code',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU'
+      id: '3',
+      image: imagePath.ONBOARDING3,
+      title: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet',
     },
-    {
-        title: 'Taodzo is the developer code',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU'
-    },
-    {
-        title: 'Taodzo is the developer code',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRknxDMGvGHIF1MWFrTFpDK2xyu4jnixXpI0Q&usqp=CAU'
-    },
-]
+];
 
 const renderItemSlide = ({ item, index }) => {
-  
     return (
-      <Box alignItems={'center'} key={index}>
-        <HStack>
+        <VStack>
             <Image
-                source={{
-                   uri: item.image 
-                }}
-                style={{
-                    height:150,
-                    width:300,
-                    borderRadius: 10
-                }}
+                key={index}
+                source={item?.image}
+                style={{height: height* 0.75, width, resizeMode: 'contain'}}
+                alt="taodzo"
             />
-        </HStack>
-      </Box>
+            <Text color={'black'}>
+                {item?.title}
+            </Text>
+        </VStack>
     )
 }
 
@@ -53,7 +47,7 @@ const HomeSlider = () => {
 
     const refCarousel = useRef<Carousel<any>>(null)
 
-    const [dataSilder, setDataSilder] = useState(Slider)
+    const [dataSilder, setDataSilder] = useState(slider)
 
     return (
         <VStack space={3}>
@@ -70,13 +64,16 @@ const HomeSlider = () => {
             </Text>
 
             <Carousel
-                layout={"default"}
+                layout={'stack'}
+                layoutCardOffset={1}
                 ref={refCarousel}
                 data={dataSilder}
-                renderItem={renderItemSlide}
+                renderItem={({ item, index}) =>
+                    renderItemSlide({ item, index })
+                }
                 sliderWidth={width}
                 itemWidth={width}
-                inactiveSlideScale={1}
+                // inactiveSlideScale={1}
             />
 
         </VStack>

@@ -30,6 +30,7 @@ const PlayerAudio = () => {
           animatedStyles,
         ]}
       />
+      
       <Button
         onPress={() => (offset.value = withSpring(Math.random()))}
         title="Move"

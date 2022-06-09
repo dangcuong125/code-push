@@ -1,6 +1,7 @@
 import { Box, HStack, Input } from 'native-base'
 import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Foundation from 'react-native-vector-icons/Foundation'
 import { useNavigation } from '@react-navigation/native';
 
 const SearchInput = () => {
@@ -14,10 +15,10 @@ const SearchInput = () => {
             borderBottomColor={'gray.200'}
             alignItems={'center'}
             safeAreaX={4}
-
+            space={2}
         >
             <Box>
-                <AntDesign name="search1" size={25} onPress={()=>navigation.goBack()} />
+                <AntDesign name="arrowleft" size={25} onPress={()=>navigation.goBack()} />
             </Box>
             <Box 
                 flexGrow={1}
@@ -37,7 +38,7 @@ const SearchInput = () => {
                 />
             </Box>
             <Box>
-                <AntDesign name="search1" size={25}/>
+                <Foundation name="microphone" size={25}/>
             </Box>
             <Box>
                 <AntDesign name="search1" size={25}/>

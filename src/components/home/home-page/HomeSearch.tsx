@@ -2,9 +2,9 @@ import React from 'react'
 import { Avatar, Box, CheckIcon, Heading, HStack, Icon } from 'native-base'
 import { Dimensions } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+
+
 import { useNavigation } from '@react-navigation/native'
-
-
 
 const { width, height } = Dimensions.get('window')
 
@@ -34,7 +34,7 @@ const HomeSearch = () => {
           </Heading>
         </HStack>
 
-        <AntDesign name="stepforward" size={20} onPress={()=>navigator.navigate('Search')} />
+        <AntDesign name="search1" size={20} onPress={()=>navigator.navigate('Search')} />
 
       </HStack>
 

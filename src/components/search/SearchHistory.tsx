@@ -28,7 +28,7 @@ const SearchHistory = () => {
                         >
                         education
                     </Text>
-                    <AntDesign name="stepforward" />
+                    <AntDesign name="close" />
                 </HStack>
                 <HStack 
                     alignItems={'center'} 
@@ -41,7 +41,7 @@ const SearchHistory = () => {
                         >
                         travel
                     </Text>
-                    <AntDesign name="stepforward" />
+                    <AntDesign name="close" />
                 </HStack>
                 <HStack 
                     alignItems={'center'} 
@@ -54,7 +54,7 @@ const SearchHistory = () => {
                         >
                         video nói chào buổi sáng
                     </Text>
-                    <AntDesign name="stepforward" />
+                    <AntDesign name="close" />
                 </HStack>
             </Box>
             <Text
