@@ -1,3 +1,6 @@
 export const imagePath = {
-  HOME: require('../../assets/images/cottage-cottage_symbol.svg'),
+  LOGO: require('../assets/images/logo.png'),
+  ONBOARDING1: require('../assets/images/onboarding1.png'),
+  ONBOARDING2: require('../assets/images/onboarding2.png'),
+  ONBOARDING3: require('../assets/images/onboarding3.png'),
 }

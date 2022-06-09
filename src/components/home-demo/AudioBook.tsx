@@ -1,4 +1,4 @@
-import { Box, Button, Container, HStack, Text, VStack } from 'native-base';
+import { Box, Button, Container, HStack, Image, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import { WebView } from 'react-native-webview';
@@ -7,7 +7,9 @@ import TrackPlayer, {
   useProgress,
 } from 'react-native-track-player';
 
+
 const { width, height } = Dimensions.get('window');
+
 const AudioBook = () => {
   const progress = useProgress();
   const [isReady, setIsReady] = useState(false);
@@ -104,6 +106,7 @@ const AudioBook = () => {
     styleTag.appendChild(document.createTextNode(customCSS));
     true; // note: this is required, or you'll sometimes get silent failures
     `;
+
 
   return (
     <Container flex={1}>
