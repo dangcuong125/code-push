@@ -9,9 +9,13 @@ import Intro from '@clvtube/components/intro/component/Intro'
 import Home from '../../common/navigators/Home'
 import SearchPage from '../../components/search'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 import VideoDetailPage from '@clvtube/components/video-details/index'
+=======
+import VideoDetailPage from '@clvtube/components/video-details/components/index'
+>>>>>>> implement UI for detail screen
 import {
   HOME_PAGE,
   SEARCH_PAGE,
@@ -19,11 +23,12 @@ import {
 } from '../constants/route.constants'
 >>>>>>> test
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Login: { navigation: any }
   InputOTP: { confirmation: any }
   Intro: {}
   Home: {}
+<<<<<<< HEAD
 <<<<<<< HEAD
   Search: {}
 
@@ -35,6 +40,18 @@ type RootStackParamList = {
 
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
 export type InputOTPProps = NativeStackScreenProps<RootStackParamList, 'InputOTP'>
+=======
+  Search: {}
+  VideoDetails: {}
+}
+
+export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
+export type InputOTPProps = NativeStackScreenProps<
+  RootStackParamList,
+  'InputOTP'
+>
+export type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>
+>>>>>>> implement UI for detail screen
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 

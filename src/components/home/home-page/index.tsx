@@ -13,9 +13,13 @@ import HomeSearch from './HomeSearch'
 import HomeSlider from './HomeSlider'
 import HomeList from './HomeList'
 import { SafeAreaView } from 'react-native'
+<<<<<<< HEAD
 >>>>>>> test
+=======
+import { HomePageProps } from '@clvtube/common/navigators/Root'
+>>>>>>> implement UI for detail screen
 
-const HomePage = ({ navigation }) => {
+const HomePage = ({ navigation, route }: HomePageProps) => {
   return (
     <SafeAreaView>
 <<<<<<< HEAD
@@ -30,7 +34,7 @@ const HomePage = ({ navigation }) => {
 =======
       <VStack space={5} safeAreaX={4}>
         <HomeSearch />
-        <HomeSlider navigation={navigation} />
+        <HomeSlider navigation={navigation} route={route} />
         <HomeList />
       </VStack>
 >>>>>>> test

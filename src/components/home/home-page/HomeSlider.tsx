@@ -43,9 +43,10 @@ const renderItemSlide = ({ item, index }) => {
 =======
 import { Text, VStack, Image, Box, HStack } from 'native-base'
 import React, { useRef, useState } from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants'
+import { HomePageProps } from '@clvtube/common/navigators/Root'
 
 const Slider = [
   {
@@ -98,16 +99,20 @@ const renderItemSlide = ({ item, index }) => {
 const { width, height } = Dimensions.get('window')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [dataSilder, setDataSilder] = useState(slider)
 =======
 const HomeSlider = ({ navigation }) => {
+=======
+const HomeSlider = ({ route, navigation }: HomePageProps) => {
+>>>>>>> implement UI for detail screen
   const refCarousel = useRef<Carousel<any>>(null)
 >>>>>>> test
 
   const [dataSilder, setDataSilder] = useState(Slider)
 
   const onMoveVideoDetail = () => {
-    navigation.navigate(VIDEO_DETAILS_PAGE)
+    navigation.navigate('VideoDetails', VIDEO_DETAILS_PAGE)
   }
 
 <<<<<<< HEAD
@@ -136,8 +141,11 @@ const HomeSlider = ({ navigation }) => {
         fontSize={'18px'}>
         Video
       </Text>
+<<<<<<< HEAD
 >>>>>>> test
 
+=======
+>>>>>>> implement UI for detail screen
       <Carousel
         layout={'default'}
         ref={refCarousel}
