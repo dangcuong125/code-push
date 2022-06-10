@@ -35,7 +35,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Root = () => {
   return (
-    <Stack.Navigator initialRouteName={'Intro'}>
+    <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen
         name="Intro"
         component={Intro}

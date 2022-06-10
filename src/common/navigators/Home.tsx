@@ -1,16 +1,18 @@
 import React from 'react'
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomePage from '@clvtube/components/home/home-page/index'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+
+import HomePage from '@clvtube/components/home/home-page/index'
 import HomeVideo from '@clvtube/components/home/home-video'
-import HomePodcast from '@clvtube/components/home/home-podcast/index'
+import HomePodcast from '@clvtube/components/home/home-podcast/components/index'
 
 const Tab = createBottomTabNavigator()
 
 const Home = () => {
   return (
     <Tab.Navigator
-      //   initialRouteNames={"Trang chủ"}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: 'black',
@@ -24,7 +26,7 @@ const Home = () => {
         component={HomePage}
         options={{
           tabBarIcon: ({ focused }) => {
-            return <AntDesign name="search1" size={20} />
+            return <AntDesign name="home" size={20} />
           },
         }}
       />
@@ -34,7 +36,7 @@ const Home = () => {
         component={HomeVideo}
         options={{
           tabBarIcon: ({ focused }) => {
-            return <AntDesign name="search1" size={20} />
+            return <AntDesign name="videocamera" size={20} />
           },
         }}
       />
@@ -44,7 +46,7 @@ const Home = () => {
         component={HomePodcast}
         options={{
           tabBarIcon: ({ focused }) => {
-            return <AntDesign name="search1" size={20} />
+            return <FontAwesome name="podcast" size={20} />
           },
         }}
       />
@@ -54,7 +56,7 @@ const Home = () => {
         component={HomePage}
         options={{
           tabBarIcon: ({ focused }) => {
-            return <AntDesign name="search1" size={20} />
+            return <AntDesign name="user" size={20} />
           },
         }}
       />
