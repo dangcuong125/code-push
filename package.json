@@ -28,11 +28,7 @@
     "react-native": "0.68.1",
     "react-native-config": "^1.4.5",
     "react-native-fbsdk-next": "^8.0.0",
-<<<<<<< HEAD
-    "react-native-onboarding-swiper": "^1.2.0",
-=======
     "react-native-gesture-handler": "^2.4.2",
->>>>>>> implement UI for detail screen
     "react-native-reanimated": "^2.8.0",
     "react-native-reanimated-carousel": "^2.6.0",
     "react-native-safe-area-context": "^4.2.5",
