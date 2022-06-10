@@ -1,35 +1,32 @@
-import { slider } from '@clvtube/mocks/dataOnboarding';
-import { Box, Button, Center, Text, VStack } from 'native-base';
-import React, { useRef, useState } from 'react';
+import { slider } from '@clvtube/mocks/dataOnboarding'
+import { Box, Button, Center, Text, VStack } from 'native-base'
+import React, { useRef, useState } from 'react'
 
-import { useNavigation } from '@react-navigation/native';
-import { Dimensions, Image, TouchableOpacity } from 'react-native';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-
+import { useNavigation } from '@react-navigation/native'
+import { Dimensions, Image, TouchableOpacity } from 'react-native'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 
 const { width, height } = Dimensions.get('window')
 
-
 const renderItemSlider = ({ item, index }) => {
   return (
-      <VStack >
-          <Image
-              key={index}
-              source={item?.image}
-              style={{height: height * 0.5, width, resizeMode: 'contain'}}
-          />
-          <Center marginBottom={5}> 
-            <Text
-              color={'neutral.800'} 
-              fontSize={'22px'}
-              fontWeight={600}
-              lineHeight={'46px'}
-              textAlign={'center'}
-            >
-              {item?.title}
-            </Text>
-          </Center>
-      </VStack>
+    <VStack>
+      <Image
+        key={index}
+        source={item?.image}
+        style={{ height: height * 0.5, width, resizeMode: 'contain' }}
+      />
+      <Center marginBottom={5}>
+        <Text
+          color={'neutral.800'}
+          fontSize={'22px'}
+          fontWeight={600}
+          lineHeight={'46px'}
+          textAlign={'center'}>
+          {item?.title}
+        </Text>
+      </Center>
+    </VStack>
   )
 }
 
@@ -40,12 +37,11 @@ const Intro = () => {
   const navigator = useNavigation()
 
   const nextSlider = () => {
-    if(index !== slider.length - 1) {
-        const nextSlideIndex = index + 1;
-        setIndex(nextSlideIndex);
-        refCarousel?.current?.snapToItem(nextSlideIndex)
-    }
-    else {
+    if (index !== slider.length - 1) {
+      const nextSlideIndex = index + 1
+      setIndex(nextSlideIndex)
+      refCarousel?.current?.snapToItem(nextSlideIndex)
+    } else {
       navigator.navigate('Search')
     }
   }
@@ -53,18 +49,16 @@ const Intro = () => {
   return (
     <VStack bgColor={'white'} height={height} justifyContent={'space-evenly'}>
       <VStack safeAreaY={10} flex={1}>
-        <Carousel 
+        <Carousel
           layout={'default'}
           ref={refCarousel}
           data={slider}
-          renderItem={({item, index})=>
-            renderItemSlider({item, index})
-          }
+          renderItem={({ item, index }) => renderItemSlider({ item, index })}
           sliderWidth={width}
           itemWidth={width}
-          onSnapToItem={(index) => setIndex(index)}
+          onSnapToItem={index => setIndex(index)}
         />
-        <Pagination 
+        <Pagination
           dotsLength={slider.length}
           activeDotIndex={index}
           // carouselRef={refCarousel}
@@ -101,11 +95,8 @@ const Intro = () => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={nextSlider}
-            >
-              {
-                index == slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'
-              }
+            onPress={nextSlider}>
+            {index == slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>
       </Box>
