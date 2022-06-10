@@ -4,9 +4,18 @@ export const theme = extendTheme({
   colors: {
     // Add new color
     primary: {
-      100: '#3D9BE0',
-      200: '#216BCD',
-      300: '#0E3C9E',
+      50: '#E3F2F9',
+      100: '#C5E4F3',
+      150: '#DEDEDE',
+      200: '#A2D4EC',
+      250: '#FFFFFF',
+      300: '#7AC1E4',
+      400: '#47A9DA',
+      500: '#0088CC',
+      600: '#007AB8',
+      700: '#006BA1',
+      800: '#005885',
+      900: '#003F5E',
     },
     neutral: {
       50: '#E6E6E6',

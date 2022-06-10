@@ -11,15 +11,19 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+import { Provider } from 'react-redux'
+import { store } from '@clvtube/common/redux/store'
 import { theme } from '@clvtube/common/theme/theme'
 import Root from '@clvtube/common/navigators/Root'
 
 const App = () => {
   return (
     <NativeBaseProvider theme={theme}>
-      <NavigationContainer>
-        <Root />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Root />
+        </NavigationContainer>
+      </Provider>
     </NativeBaseProvider>
   )
 }

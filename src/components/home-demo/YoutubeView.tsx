@@ -34,8 +34,7 @@ const renderItemSlide = ({ item, speakWord, index }) => {
   )
 }
 
-const { width, height } = Dimensions.get('window')
-
+const { width } = Dimensions.get('window')
 const YoutubeView = () => {
   const [dataTranscript, setDataTranscript] = useState(sampleTranscript)
   const refYoutube = useRef<YouTube>(null)
@@ -100,7 +99,7 @@ const YoutubeView = () => {
         <Carousel
           ref={refCarousel}
           data={dataTranscript}
-          renderItem={({ item, index}) =>
+          renderItem={({ item, index }) =>
             renderItemSlide({ item, speakWord, index })
           }
           sliderWidth={width}
