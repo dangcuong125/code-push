@@ -4,11 +4,6 @@ export const theme = extendTheme({
   colors: {
     // Add new color
     primary: {
-<<<<<<< HEAD
-      100: '#3D9BE0',
-      200: '#216BCD',
-      300: '#0E3C9E',
-=======
       50: '#E3F2F9',
       100: '#C5E4F3',
       150: '#DEDEDE',
@@ -21,7 +16,6 @@ export const theme = extendTheme({
       700: '#006BA1',
       800: '#005885',
       900: '#003F5E',
->>>>>>> implement UI for detail screen
     },
     neutral: {
       50: '#E6E6E6',
