@@ -34,12 +34,7 @@ const renderItemSlide = ({ item, speakWord, index }) => {
   )
 }
 
-<<<<<<< HEAD
-const { width, height } = Dimensions.get('window')
-
-=======
 const { width } = Dimensions.get('window')
->>>>>>> implement UI for detail screen
 const YoutubeView = () => {
   const [dataTranscript, setDataTranscript] = useState(sampleTranscript)
   const refYoutube = useRef<YouTube>(null)
