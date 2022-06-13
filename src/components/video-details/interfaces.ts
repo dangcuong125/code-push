@@ -5,12 +5,9 @@ export interface IinitialState {
   numberTranscipt: number
   totalTranscipt: number
   loopVideo: boolean
+  previewVideo: boolean
 }
 export type VideoDetailPageProps = NativeStackScreenProps<
   RootStackParamList,
   'VideoDetails'
 >
-export interface ItemProps {
-  index: number
-  scrollX: number
-}

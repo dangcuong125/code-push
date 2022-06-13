@@ -311,26 +311,26 @@ PODS:
   - React-jsinspector (0.68.1)
   - React-logger (0.68.1):
     - glog
-  - react-native-config (1.4.5):
-    - react-native-config/App (= 1.4.5)
-  - react-native-config/App (1.4.5):
+  - react-native-config (1.4.6):
+    - react-native-config/App (= 1.4.6)
+  - react-native-config/App (1.4.6):
     - React-Core
-  - react-native-fbsdk-next (8.0.2):
+  - react-native-fbsdk-next (8.0.5):
     - React-Core
-    - react-native-fbsdk-next/Core (= 8.0.2)
-    - react-native-fbsdk-next/Login (= 8.0.2)
-    - react-native-fbsdk-next/Share (= 8.0.2)
-  - react-native-fbsdk-next/Core (8.0.2):
+    - react-native-fbsdk-next/Core (= 8.0.5)
+    - react-native-fbsdk-next/Login (= 8.0.5)
+    - react-native-fbsdk-next/Share (= 8.0.5)
+  - react-native-fbsdk-next/Core (8.0.5):
     - FBSDKCoreKit (~> 13.2.0)
     - React-Core
-  - react-native-fbsdk-next/Login (8.0.2):
+  - react-native-fbsdk-next/Login (8.0.5):
     - FBSDKLoginKit (~> 13.2.0)
     - React-Core
-  - react-native-fbsdk-next/Share (8.0.2):
+  - react-native-fbsdk-next/Share (8.0.5):
     - FBSDKGamingServicesKit (~> 13.2.0)
     - FBSDKShareKit (~> 13.2.0)
     - React-Core
-  - react-native-safe-area-context (4.2.5):
+  - react-native-safe-area-context (4.3.1):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -411,12 +411,12 @@ PODS:
     - React-jsi (= 0.68.1)
     - React-logger (= 0.68.1)
     - React-perflogger (= 0.68.1)
-  - RNAppleAuthentication (2.1.5):
+  - RNAppleAuthentication (2.2.1):
     - React-Core
-  - RNFBApp (14.9.1):
+  - RNFBApp (14.11.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBAuth (14.9.1):
+  - RNFBAuth (14.11.0):
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -689,9 +689,9 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 4a4bae5671b064a2248a690cf75957669489d08c
   React-jsinspector: 218a2503198ff28a085f8e16622a8d8f507c8019
   React-logger: f79dd3cc0f9b44f5611c6c7862badd891a862cf8
-  react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
-  react-native-fbsdk-next: 9c60b989b5b7df96d09c16dfa9208d04b22c124f
-  react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
+  react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
+  react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-track-player: c4147afddd29de936caa06561f78a32d6502eb12
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
   react-native-webview: 8ec7ddf9eb4ddcd92b32cee7907efec19a9ec7cb

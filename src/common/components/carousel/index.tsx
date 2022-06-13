@@ -1,21 +1,21 @@
 import React, { useState, useRef } from 'react'
 import { FlatList, StyleSheet, Dimensions } from 'react-native'
+import { Box } from 'native-base'
 import YouTube from 'react-native-youtube'
 import Animated, {
   useAnimatedStyle,
   interpolate,
   useSharedValue,
 } from 'react-native-reanimated'
-import { ItemProps } from '../interfaces'
+// import { ItemProps } from '../../../components/video-details/interfaces'
+import { CarouselProps, ItemProps } from '../../interfaces/common.interface'
 
 const SRC_WIDTH = Dimensions.get('window').width
 const CARD_LENGTH = SRC_WIDTH * 0.8
 const SPACING = SRC_WIDTH * 0.02
 const SIDE_CARD_LENGTH = (SRC_WIDTH * 0.18) / 2
 
-const Item = ({ index, scrollX }: ItemProps) => {
-  const youtubeRef = useRef<YouTube>(null)
-  const [isPlayingVideo, setIsPlayingVideo] = useState(false)
+const Item = ({ index, scrollX, component }: ItemProps) => {
   const size = useSharedValue(0.8)
   const inputRange = [
     (index - 1) * CARD_LENGTH,
@@ -28,11 +28,6 @@ const Item = ({ index, scrollX }: ItemProps) => {
       transform: [{ scaleY: size.value }],
     }
   })
-  const handleYoutubeVideo = async () => {
-    setIsPlayingVideo(true)
-    const currentTime = await youtubeRef?.current?.getCurrentTime()
-    if (currentTime === 2) setIsPlayingVideo(false)
-  }
   return (
     <Animated.View
       style={[
@@ -43,29 +38,20 @@ const Item = ({ index, scrollX }: ItemProps) => {
           marginRight: index === 2 ? SIDE_CARD_LENGTH : SPACING,
         },
       ]}>
-      <YouTube
-        ref={youtubeRef}
-        apiKey="hello world"
-        videoId="Z9CbQ_JILko"
-        play={isPlayingVideo}
-        fullscreen={false}
-        loop={false}
-        onProgress={handleYoutubeVideo}
-        style={styles.videoLearning}
-      />
+      <Box>{component}</Box>
     </Animated.View>
   )
 }
 
-export const Carousel = () => {
+export const Carousel = ({ data, component }: CarouselProps) => {
   const [scrollX, setScrollX] = useState(0)
   return (
     <Animated.View>
       <FlatList
-        data={[1, 2, 3]}
+        data={data}
         horizontal={true}
         renderItem={({ item, index }) => {
-          return <Item index={index} scrollX={scrollX} />
+          return <Item index={index} scrollX={scrollX} component={component} />
         }}
         onScroll={e => setScrollX(e.nativeEvent.contentOffset.x)}
       />
