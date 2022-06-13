@@ -6,9 +6,13 @@ import { imagePodcast } from '@clvtube/common/constants/imagePath'
 
 const PopularTopicsPodcast = () => {
   return (
-    <Box marginLeft="17px" marginTop="24px">
+    <Box marginLeft="17px" marginTop="24px" paddingBottom={'15px'}>
       <Heading color={'#222B45'}>Chủ đề phổ biến</Heading>
-      <Flex direction="row" justifyContent="space-around" marginTop="12px">
+      <Flex
+        direction="row"
+        justifyContent="space-around"
+        marginTop="12px"
+        bgColor="#FFFFFF">
         <PopularTopics
           contentTopic="Mathematics"
           imageSrc={imagePodcast.MATH_PODCAST}

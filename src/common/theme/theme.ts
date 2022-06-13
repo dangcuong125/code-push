@@ -39,6 +39,10 @@ export const theme = extendTheme({
     amber: {
       400: '#d97706',
     },
+    text: {
+      100: '#161719',
+      200: '#000000',
+    },
   },
   config: {
     // Changing initialColorMode to 'dark'

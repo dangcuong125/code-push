@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { Box, Flex, Button, HStack } from 'native-base'
 // import Carousel from 'react-native-reanimated-carousel'
@@ -7,9 +7,9 @@ import { Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { VideoDetailPageProps } from '../interfaces'
 import { useAppSelector } from '@clvtube/hooks/useAppSelector'
-import { loopVideo } from '../redux/videoDetails'
+import { loopVideo, previewVideo } from '../redux/videoDetails'
 import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
-import { Carousel } from './Carousel'
+import { Carousel } from '../../../common/components/carousel'
 
 const transcript = [
   {
@@ -19,6 +19,7 @@ const transcript = [
   },
 ]
 const VideoLearning = ({ navigation, route }: VideoDetailPageProps) => {
+  const youtubeRef = useRef<YouTube>(null)
   const dispatch = useAppDispatch()
   const numberTranscipt = useAppSelector(
     state => state.videoDetails.numberTranscipt,
@@ -27,6 +28,12 @@ const VideoLearning = ({ navigation, route }: VideoDetailPageProps) => {
     state => state.videoDetails.totalTranscipt,
   )
   const isLoopVideo = useAppSelector(state => state.videoDetails.loopVideo)
+  const isStopVideo = useAppSelector(state => state.videoDetails.previewVideo)
+  const handleYoutubeVideo = async () => {
+    dispatch(previewVideo(true))
+    const currentTime = await youtubeRef?.current?.getCurrentTime()
+    if (currentTime === 2) dispatch(previewVideo(false))
+  }
   return (
     <>
       <SafeAreaView>
@@ -87,7 +94,22 @@ const VideoLearning = ({ navigation, route }: VideoDetailPageProps) => {
       </SafeAreaView>
       <Box bg="primary.250" marginTop="15px" height="350px" padding="10px">
         <Text style={styles.textSuggestion}>Video đề xuất</Text>
-        <Carousel />;
+        <Carousel
+          data={[1, 2, 3]}
+          component={
+            <YouTube
+              ref={youtubeRef}
+              apiKey="hello world"
+              videoId="Z9CbQ_JILko"
+              play={isStopVideo}
+              fullscreen={false}
+              loop={false}
+              onProgress={handleYoutubeVideo}
+              style={styles.videoLearning}
+            />
+          }
+        />
+        ;
       </Box>
     </>
   )
