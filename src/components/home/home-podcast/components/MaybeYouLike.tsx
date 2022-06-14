@@ -88,7 +88,6 @@ export const MaybeYouLike = () => {
   }
   const dataWithOddId = itemData.filter(item => item.id % 2 === 1)
   const dataWithEvenId = itemData.filter(item => item.id % 2 === 0)
-  console.log(dataWithEvenId)
   return (
     <Box bgColor="#FFFFFF" marginTop="16px">
       <Box margin="16px">

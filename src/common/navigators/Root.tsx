@@ -39,7 +39,6 @@ export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'
 >
-export type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
