@@ -6,10 +6,10 @@ import YouTube from 'react-native-youtube'
 import { Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { VideoDetailPageProps } from '../interfaces'
-import { useAppSelector } from '@clvtube/hooks/useAppSelector'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import { loopVideo, previewVideo } from '../redux/videoDetails'
-import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
-import { Carousel } from '../../../common/components/carousel'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
+import { Carousel } from '@clvtube/common/components/carousel'
 
 const transcript = [
   {

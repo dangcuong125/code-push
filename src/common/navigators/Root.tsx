@@ -5,10 +5,10 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack'
 
-import Intro from '@clvtube/components/intro/component/Intro'
+import Intro from '@clvtube/intro/component/Intro'
 import Home from '../../common/navigators/Home'
-import SearchPage from '../../components/search'
-import VideoDetailPage from '@clvtube/components/video-details/components/index'
+import SearchPage from '../../search'
+import VideoDetailPage from '@clvtube/video-details/components/index'
 import {
   HOME_PAGE,
   SEARCH_PAGE,
@@ -17,8 +17,8 @@ import {
   TOPIC,
   START_DASHBOARD,
 } from '../constants/route.constants'
-import Topic from '@clvtube/components/level-topic/component/Topic'
-import StartDashboard from '@clvtube/components/level-topic/component/StartDashboard'
+import Topic from '@clvtube/level-topic/component/Topic'
+import StartDashboard from '@clvtube/level-topic/component/StartDashboard'
 
 export type RootStackParamList = {
   Login: { navigation: any }

@@ -1,8 +1,8 @@
 import { Box, HStack, Heading, Text, Button, Image } from 'native-base'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { useAppSelector } from '@clvtube/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { selectOnlyOneType } from '../redux/homePage'
 import {
   VideoTypeCarouselProps,

@@ -14,8 +14,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 import { selectLevel, selectTopic } from '../reducer/topicReducer';
-import { useAppSelector } from '@clvtube/hooks/useAppSelector';
-import { useAppDispatch } from '@clvtube/hooks/useAppDispatch';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { START_DASHBOARD } from '@clvtube/common/constants/route.constants';
 
 

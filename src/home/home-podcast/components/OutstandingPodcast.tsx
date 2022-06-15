@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppSelector } from '@clvtube/hooks/useAppSelector'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import { Pressable, Flex, Heading, Box, Image, Text } from 'native-base'
 import { FlatList } from 'react-native'
 import { IItemPodcastOutstanding, IItemPodcastPopular } from '../interfaces'

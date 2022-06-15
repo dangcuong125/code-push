@@ -10,8 +10,8 @@ import {
 } from 'native-base'
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
-import { useAppSelector } from '@clvtube/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { handleClickPodcastList } from '../redux/podcastList'
 import { imagePodcast } from '@clvtube/common/constants/imagePath'
 

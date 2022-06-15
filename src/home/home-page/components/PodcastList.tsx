@@ -10,8 +10,8 @@ import {
 } from 'native-base'
 import React from 'react'
 import { FlatList, ScrollView } from 'react-native'
-import { useAppSelector } from '@clvtube/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { PODCASTS } from '@clvtube/mocks/homePage'
 import { IPodcastTypes, IPodcastTypeCarouselProps } from '../interfaces'
 

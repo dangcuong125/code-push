@@ -4,9 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-import HomePage from '@clvtube/components/home/home-page/components/index'
-import HomeVideo from '@clvtube/components/home/home-video'
-import HomePodcast from '@clvtube/components/home/home-podcast/components/index'
+import HomePage from '@clvtube/home/home-page/components/index'
+import HomeVideo from '@clvtube/home/home-video'
+import HomePodcast from '@clvtube/home/home-podcast/components/index'
 
 const Tab = createBottomTabNavigator()
 
