@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Dimensions, Image, TouchableOpacity } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { TOPIC } from '@clvtube/common/constants/route.constants'
 
 const { width, height } = Dimensions.get('window')
 
@@ -42,7 +43,7 @@ const Intro = () => {
       setIndex(nextSlideIndex)
       refCarousel?.current?.snapToItem(nextSlideIndex)
     } else {
-      navigator.navigate('Search')
+      navigator.navigate(TOPIC)
     }
   }
 

@@ -3,6 +3,7 @@ export const imagePath = {
   ONBOARDING1: require('../assets/images/onboarding1.png'),
   ONBOARDING2: require('../assets/images/onboarding2.png'),
   ONBOARDING3: require('../assets/images/onboarding3.png'),
+  REGISTERSUCCESS: require('../assets/images/registerSuccess.png'),
 }
 export const imagePodcast = {
   MATH_PODCAST: require('../assets/images/math-podcast.png'),

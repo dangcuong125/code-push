@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import { reducer as videoDetails } from '@clvtube/components/video-details/redux/videoDetails'
 import { reducer as podcastList } from '@clvtube/components/home/home-podcast/redux/podcastList'
+import topicReducer from '@clvtube/components/level-topic/reducer/topicReducer'
 
 const rootReducer = combineReducers({
   videoDetails,
   podcastList,
+  topicReducer,
 })
 
 const store = configureStore({
