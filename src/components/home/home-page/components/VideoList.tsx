@@ -4,7 +4,11 @@ import { FlatList } from 'react-native'
 import { useAppSelector } from '@clvtube/hooks/useAppSelector'
 import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
 import { selectOnlyOneType } from '../redux/homePage'
-import { VideoTypeCarouselProps } from '../interfaces'
+import {
+  VideoTypeCarouselProps,
+  IVideoListCarouselProps,
+  IVideoTypeCarousel,
+} from '../interfaces'
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   return (
@@ -20,7 +24,7 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   )
 }
 
-const VideoListCarousel = ({ item }: any) => {
+const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
   return (
     <Box
       marginTop="17px"
@@ -47,11 +51,11 @@ const VideoListCarousel = ({ item }: any) => {
 
 export const VideoList = () => {
   const videoTypeCarousel = useAppSelector(
-    state => state.homePage.videoTypeCarousel,
+    state => state?.homePage?.videoTypeCarousel,
   )
   const videoListCarousel = useAppSelector(state => state.homePage.videoList)
   const dispatch = useAppDispatch()
-  const renderVideoTypeCarousel = ({ item }: any) => {
+  const renderVideoTypeCarousel = ({ item }: { item: IVideoTypeCarousel }) => {
     return (
       <VideoTypeCarousel
         onPress={() => dispatch(selectOnlyOneType(item.id))}
@@ -59,7 +63,7 @@ export const VideoList = () => {
       />
     )
   }
-  const renderVideoListCarousel = ({ item }: any) => {
+  const renderVideoListCarousel = ({ item }: IVideoListCarouselProps) => {
     return <VideoListCarousel item={item} />
   }
   return (

@@ -8,21 +8,21 @@ import {
   //   Flex,
   Text,
 } from 'native-base'
-import React, { useState } from 'react'
+import React from 'react'
 import { FlatList, ScrollView } from 'react-native'
 import { useAppSelector } from '@clvtube/hooks/useAppSelector'
 import { useAppDispatch } from '@clvtube/hooks/useAppDispatch'
-//   import { handleClickPodcastList } from '../redux/podcastList'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import { PODCASTS } from '@clvtube/mocks/homePage'
+import { IPodcastTypes, IPodcastTypeCarouselProps } from '../interfaces'
 
-const Item = ({ item, backgroundColor, color, onPress }: any) => {
+const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
     <Button
       marginTop="20px"
       marginLeft="16px"
       borderColor="#3D9BE0"
-      bgColor={backgroundColor}
-      color={color}
+      bgColor={item.backgroundColor}
+      color={item.color}
       onPress={onPress}
       variant="outline">
       <Text style={{ color: item.color }}>{item.type}</Text>
@@ -30,42 +30,14 @@ const Item = ({ item, backgroundColor, color, onPress }: any) => {
   )
 }
 
-const data = [
-  {
-    id: 1,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here',
-    hashtag: '#Friend',
-  },
-  {
-    id: 2,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here',
-    hashtag: '#Friend',
-  },
-  {
-    id: 3,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here123',
-    hashtag: '#Friend',
-  },
-]
-
 export const PodcastList = () => {
-  const [selectedId, setSelectedId] = useState(null)
   const dispatch = useAppDispatch()
-  const podcastTypes = useAppSelector(state => state.podcastList.podcastTypes)
-  const renderItem = ({ item }: any) => {
+  const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
+  const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
-      <Item
+      <PodcastTypeCarousel
         item={item}
-        onPress={() => {
-          // dispatch(handleClickPodcastList(item.id))
-          setSelectedId(item.id)
-        }}
-        dispatch={dispatch}
-        backgroundColor={item.backgroundColor}
-        color={item.color}
+        onPress={() => console.log('hello world')}
       />
     )
   }
@@ -81,12 +53,11 @@ export const PodcastList = () => {
           </Text>
         </HStack>
         <FlatList
-          data={podcastTypes}
+          data={PODCAST_TYPE}
           renderItem={renderItem}
           horizontal={true}
-          extraData={selectedId}
         />
-        {data.map(item => (
+        {PODCASTS?.map(item => (
           <ScrollView>
             <Pressable
               marginTop={'20px'}

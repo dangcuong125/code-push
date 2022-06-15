@@ -43,7 +43,6 @@ const YoutubeView = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isProgress, setIsProgress] = useState(false)
 
-
   const handleSnapToItem = (index: number) => {
     if (index !== currentIndex) {
       const transcript = dataTranscript[index]
@@ -68,7 +67,6 @@ const YoutubeView = () => {
     Tts.speak(word)
   }
 
-  
   useEffect(() => {
     Tts.addEventListener('tts-start', event => {})
     Tts.addEventListener('tts-progress', event => {})

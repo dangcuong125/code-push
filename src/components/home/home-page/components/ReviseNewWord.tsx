@@ -3,62 +3,10 @@ import React from 'react'
 import Carousel from 'react-native-reanimated-carousel'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Tts from 'react-native-tts'
+import { REVISE_WORDS } from '@clvtube/mocks/homePage'
+import { IReviseNewWordItem } from '../interfaces'
 
-const words = [
-  {
-    id: 1,
-    word: 'Assume',
-    spelling: ' /ə.ˈsuːm/',
-    answers: [
-      {
-        id: 1,
-        meaning: 'Giả định',
-        isCorrected: true,
-      },
-      {
-        id: 2,
-        meaning: 'Phản kháng',
-        isCorrected: false,
-      },
-    ],
-  },
-  {
-    id: 2,
-    word: 'Goodbye',
-    spelling: ' /ə.ˈsuːm/',
-    answers: [
-      {
-        id: 1,
-        meaning: 'Giả định',
-        isCorrected: true,
-      },
-      {
-        id: 2,
-        meaning: 'Phản kháng',
-        isCorrected: false,
-      },
-    ],
-  },
-  {
-    id: 3,
-    word: 'Hello',
-    spelling: ' /ə.ˈsuːm/',
-    answers: [
-      {
-        id: 1,
-        meaning: 'Giả định',
-        isCorrected: true,
-      },
-      {
-        id: 2,
-        meaning: 'Phản kháng',
-        isCorrected: false,
-      },
-    ],
-  },
-]
-
-const Item = ({ item }: any) => {
+const NewWord = ({ item }: { item: IReviseNewWordItem }) => {
   return (
     <Box>
       <Box>
@@ -98,8 +46,8 @@ const Item = ({ item }: any) => {
 }
 
 export const ReviseNewWord = () => {
-  const renderItem = ({ item }: any) => {
-    return <Item item={item} />
+  const renderItem = ({ item }: { item: IReviseNewWordItem }) => {
+    return <NewWord item={item} />
   }
   return (
     <Box
@@ -115,7 +63,7 @@ export const ReviseNewWord = () => {
         <Carousel
           width={350}
           height={200}
-          data={words}
+          data={REVISE_WORDS}
           renderItem={renderItem}
           loop={false}
         />

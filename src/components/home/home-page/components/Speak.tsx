@@ -1,27 +1,6 @@
 import React from 'react'
 import { Box, Heading, Image, Text, Flex } from 'native-base'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
-
-const audioRecommend = [
-  {
-    id: 1,
-    image: imagePodcast.AUDIO_RECOMMEND,
-    title: '“Anh ấy đi thi” tiếng anh là?',
-    source: 'Học từ vựng theo ví dụ (P.2)',
-  },
-  {
-    id: 2,
-    image: imagePodcast.AUDIO_RECOMMEND,
-    title: '“Cho tôi xem vé lên máy bay” tiếng anh là?',
-    source: 'Học từ vựng theo ví dụ (P.2)',
-  },
-  {
-    id: 3,
-    image: imagePodcast.AUDIO_RECOMMEND,
-    title: '“Đừng khoe khoang nữa” tiếng anh là?',
-    source: 'Học từ vựng theo ví dụ (P.2)',
-  },
-]
+import { AUDIO_RECOMMEND } from '@clvtube/mocks/homePage'
 
 export const Speak = () => {
   return (
@@ -33,7 +12,7 @@ export const Speak = () => {
         <Text color="text.200" fontSize="16px" fontWeight={600} marginTop="8px">
           Học bài audio được đề cử
         </Text>
-        {audioRecommend.map(item => (
+        {AUDIO_RECOMMEND?.map(item => (
           <Flex direction="row" marginTop={'20px'}>
             <Image source={item.image} />
             <Box marginLeft="12px">

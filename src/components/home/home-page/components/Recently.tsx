@@ -1,33 +1,10 @@
 import { Box, Image, Progress, Text, Heading } from 'native-base'
 import { FlatList } from 'react-native'
 import React from 'react'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import { DATA_VIEWED_RECENTLY } from '@clvtube/mocks/homePage'
+import { IDataViewRecently } from '../interfaces'
 
-const data = [
-  {
-    id: 1,
-    image: imagePodcast.MAYBE_YOU_LIKE,
-    title: 'Mathematics',
-    content: 'High School Algebra I: Help and Review',
-    progress: 50,
-  },
-  {
-    id: 2,
-    image: imagePodcast.MAYBE_YOU_LIKE,
-    title: 'Mathematics',
-    content: 'High School Algebra I: Help and Review',
-    progress: 50,
-  },
-  {
-    id: 3,
-    image: imagePodcast.MAYBE_YOU_LIKE,
-    title: 'Mathematics',
-    content: 'High School Algebra I: Help and Review',
-    progress: 50,
-  },
-]
-
-const VideoRecommended = ({ item }: any) => {
+const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
   return (
     <Box mt="13px">
       <Box width="161px" marginRight={'21px'}>
@@ -49,7 +26,7 @@ const VideoRecommended = ({ item }: any) => {
 }
 
 export const Recently = () => {
-  const renderItem = ({ item }: any) => {
+  const renderItem = ({ item }: { item: IDataViewRecently }) => {
     return <VideoRecommended item={item} />
   }
   return (
@@ -60,7 +37,11 @@ export const Recently = () => {
       paddingTop="15px">
       <Box marginLeft="16px">
         <Heading color="text.200">Gần đây</Heading>
-        <FlatList data={data} horizontal={true} renderItem={renderItem} />
+        <FlatList
+          data={DATA_VIEWED_RECENTLY}
+          horizontal={true}
+          renderItem={renderItem}
+        />
       </Box>
     </Box>
   )

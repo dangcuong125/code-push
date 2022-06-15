@@ -1,31 +1,17 @@
-import { imageHomePage } from '@clvtube/common/constants/imagePath'
 import { Box, Heading, Text, Image } from 'native-base'
 import React from 'react'
 import Carousel from 'react-native-reanimated-carousel'
+import { DISCOUNT_BANNER } from '@clvtube/mocks/homePage'
+import { IDiscountBanner, IDiscountBannerProps } from '../interfaces'
 
-const discountDataBanner = [
-  {
-    id: 1,
-    image: imageHomePage.DISCOUNT_BANNER,
-  },
-  {
-    id: 2,
-    image: imageHomePage.DISCOUNT_BANNER,
-  },
-  {
-    id: 3,
-    image: imageHomePage.DISCOUNT_BANNER,
-  },
-]
-
-const Item = ({ item }: any) => {
+const DiscountBanner = ({ item }: IDiscountBannerProps) => {
   return <Image source={item.image} />
 }
 
 export const Welcome = () => {
   const username = 'MThu'
-  const renderItem = ({ item }: any) => {
-    return <Item item={item} />
+  const renderItem = ({ item }: { item: IDiscountBanner }) => {
+    return <DiscountBanner item={item} />
   }
   return (
     <Box marginTop={'18px'} bgColor="#FFFFFF">
@@ -36,7 +22,7 @@ export const Welcome = () => {
         </Text>
         <Box margin="auto" marginTop="18px">
           <Carousel
-            data={discountDataBanner}
+            data={DISCOUNT_BANNER}
             height={121}
             width={262}
             renderItem={renderItem}
