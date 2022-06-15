@@ -13,3 +13,7 @@ export const imagePodcast = {
   AUDIO_RECOMMEND: require('../assets/images/audio-recommend.png'),
   PODCAST_POPULAR: require('../assets/images/podcast-popular.png'),
 }
+export const imageHomePage = {
+  DISCOUNT_BANNER: require('../assets/images/discount-banner.png'),
+  VIDEO_LIST: require('../assets/images/video-list.png'),
+}

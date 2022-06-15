@@ -20,7 +20,7 @@ interface IPodcastTypes {
 interface IPodcastOutstanding {
   title: string
   content: string
-  image: any
+  image: HTMLImageElement
 }
 export interface IInitialState {
   podcastTypes: IPodcastTypes[]
@@ -29,6 +29,6 @@ export interface IInitialState {
 }
 interface IPodcastOutstandingItem {
   id: number
-  image: any
+  image: HTMLImageElement
   title: string
 }

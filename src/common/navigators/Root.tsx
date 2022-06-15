@@ -9,19 +9,16 @@ import Intro from '@clvtube/components/intro/component/Intro'
 import Home from '../../common/navigators/Home'
 import SearchPage from '../../components/search'
 import VideoDetailPage from '@clvtube/components/video-details/components/index'
-
 import {
   HOME_PAGE,
   SEARCH_PAGE,
   VIDEO_DETAILS_PAGE,
   INTRO,
   TOPIC,
-  START_DASHBOARD
+  START_DASHBOARD,
 } from '../constants/route.constants'
 import Topic from '@clvtube/components/level-topic/component/Topic'
 import StartDashboard from '@clvtube/components/level-topic/component/StartDashboard'
-
-
 
 export type RootStackParamList = {
   Login: { navigation: any }
@@ -39,8 +36,6 @@ export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'
 >
-export type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>
-
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -71,12 +66,12 @@ const Root = () => {
         name={TOPIC}
         component={Topic}
         options={{ headerShown: false }}
-       />
-       <Stack.Screen 
+      />
+      <Stack.Screen
         name={START_DASHBOARD}
         component={StartDashboard}
         options={{ headerShown: false }}
-       />
+      />
     </Stack.Navigator>
   )
 }
