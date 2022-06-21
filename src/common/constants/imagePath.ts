@@ -4,6 +4,8 @@ export const imagePath = {
   ONBOARDING2: require('../assets/images/onboarding2.png'),
   ONBOARDING3: require('../assets/images/onboarding3.png'),
   REGISTERSUCCESS: require('../assets/images/registerSuccess.png'),
+  LOGIN_REGISTER: require('../assets/images/login-register.png'),
+  OTP: require('../assets/images/otp.png'),
 }
 export const imagePodcast = {
   MATH_PODCAST: require('../assets/images/math-podcast.png'),
@@ -16,4 +18,10 @@ export const imagePodcast = {
 export const imageHomePage = {
   DISCOUNT_BANNER: require('../assets/images/discount-banner.png'),
   VIDEO_LIST: require('../assets/images/video-list.png'),
+}
+
+export const imageSocial = {
+  GOOGLE: require('../assets/images/google.png'),
+  FB: require('../assets/images/fb.png'),
+  APPLE: require('../assets/images/apple.png'),
 }

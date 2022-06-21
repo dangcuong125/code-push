@@ -7,6 +7,7 @@ export const theme = extendTheme({
       100: '#3D9BE0',
       200: '#216BCD',
       300: '#0E3C9E',
+      400: '#ECF7FB',
     },
     neutral: {
       50: '#E6E6E6',
@@ -18,6 +19,7 @@ export const theme = extendTheme({
       600: '#4D4D4D',
       700: '#333333',
       800: '#1A1A1A',
+      900: '#999999',
     },
     secondary: {
       100: '#ECF7FB',
@@ -37,6 +39,7 @@ export const theme = extendTheme({
       400: '#888888',
       500: '#216BCD',
       600: '#3D9BE0',
+      700: '#FDFDFD',
     },
   },
   config: {
