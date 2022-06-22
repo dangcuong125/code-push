@@ -12,13 +12,14 @@ import {
 } from 'react-native'
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { LoginProps } from '@clvtube/common/navigators/Root'
 import auth from '@react-native-firebase/auth'
 import appleAuth, {
   AppleButton,
 } from '@invertase/react-native-apple-authentication'
+import { LoginProps } from '@clvtube/common/navigators/Root'
 import { envData } from '@clvtube/common/constants/envData'
 import Config from 'react-native-config'
+
 
 const isIOS = Platform.OS === 'ios'
 
@@ -127,6 +128,8 @@ function Login({ route, navigation }: LoginProps) {
   }
 
   return (
+    // <SafeAreaView>
+
     <View style={styles.container}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={50}
@@ -213,6 +216,7 @@ function Login({ route, navigation }: LoginProps) {
         </View>
       </KeyboardAvoidingView>
     </View>
+    // </SafeAreaView>
   )
 }
 

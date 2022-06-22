@@ -148,6 +148,7 @@ export default InputOTP;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
   },
   containerAvoidingView: {
     flex: 1,
@@ -166,15 +167,20 @@ const styles = StyleSheet.create({
   },
   cellView: {
     paddingVertical: 11,
-    width: 40,
+    width: 52,
+    height: 52,
     margin: 5,
+    backgroundColor: '#ECF7FB',
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1.5,
+    borderWidth: 1,
+    borderColor: '#216BCD',
+    borderRadius: 4
   },
   cellText: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 24,
+    fontWeight: "600"
   },
   bottomView: {
     flexDirection: "row",
