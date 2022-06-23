@@ -126,7 +126,6 @@ const Login = ({route, navigation}: LoginProps) => {
                 _focus={{
                     backgroundColor: 'primary.400',
                     borderColor: 'primary.200',
-                    placehorder: ''
                 }}
             />
             <Button

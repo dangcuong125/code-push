@@ -15,8 +15,10 @@ import SearchPage from '../../search'
 // import Login from '@clvtube/auth/Login'
 // import InputOTP from '../../auth/InputOTP';
 import InputOTP from '@clvtube/login/component/InputOTP'
+import CreateInfo from '@clvtube/login/component/CreateInfo'
 
 import {
+  CREATE_INFO,
   HOME_PAGE, INPUT_OTP, INTRO, LOGIN, SEARCH_PAGE, START_DASHBOARD, TOPIC, VIDEO_DETAILS_PAGE
 } from '../constants/route.constants'
 
@@ -24,13 +26,14 @@ import {
 export type RootStackParamList = {
   Login: { navigation: any }
   InputOTP: { confirmation: any }
+  CreateInfo: {}
   Intro: {}
   Home: {}
   Search: {}
   VideoDetails: {}
   Topic: {}
   StartDashboard: {}
-  // Login: {}
+
 }
 
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
@@ -43,8 +46,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Root = () => {
   return (
-    <Stack.Navigator initialRouteName={LOGIN}>
-
+    <Stack.Navigator initialRouteName={HOME_PAGE}>
       <Stack.Screen 
         name={LOGIN}
         component={Login}
@@ -53,6 +55,11 @@ const Root = () => {
       <Stack.Screen 
         name={INPUT_OTP}
         component={InputOTP}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name={CREATE_INFO}
+        component={CreateInfo}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -8,7 +8,7 @@ import { PodcastList } from './PodcastList'
 import { Speak } from './Speak'
 import { MaybeYouLike } from './MaybeYouLike'
 
-const HomePodcast = () => {
+const Podcast = () => {
   return (
     <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>
       <StatusBar barStyle="dark-content" />
@@ -26,6 +26,6 @@ const HomePodcast = () => {
   )
 }
 
-export default HomePodcast
+export default Podcast
 
 const styles = StyleSheet.create({})

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Flex, Input, Icon } from 'native-base'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export const SearchingHeader = () => {
   return (
@@ -20,7 +21,7 @@ export const SearchingHeader = () => {
           <Icon as={AntDesign} name="search1" size={15} marginLeft={2} />
         }
       />
-      <AntDesign name="bells" size={20} />
+      <Ionicons name="ios-notifications" size={25} />
     </Flex>
   )
 }
