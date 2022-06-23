@@ -11,7 +11,7 @@ import {
     Input,
     Text,
     VStack
-} from 'native-base';
+} from 'native-base'
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
