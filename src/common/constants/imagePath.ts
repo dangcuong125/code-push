@@ -1,3 +1,4 @@
+import { PODCASTS } from '../../mocks/homePage'
 export const imagePath = {
   LOGO: require('../assets/images/logo.png'),
   ONBOARDING1: require('../assets/images/onboarding1.png'),

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import React from 'react'
 
-const HomeVideo = () => {
+const Video = () => {
   return (
     <SafeAreaView>
       <Text>
@@ -17,4 +17,4 @@ const HomeVideo = () => {
   )
 }
 
-export default HomeVideo
+export default Video

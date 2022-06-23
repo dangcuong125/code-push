@@ -7,7 +7,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
 import { Link, useNavigation } from '@react-navigation/native';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { InputOTPProps } from '@clvtube/common/navigators/Root';
 import { HOME_PAGE } from '@clvtube/common/constants/route.constants';
 

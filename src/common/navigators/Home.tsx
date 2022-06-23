@@ -1,12 +1,16 @@
 import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import Feather from 'react-native-vector-icons/Feather'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Octicons from 'react-native-vector-icons/Octicons'
 
-import HomePage from '@clvtube/home/home-page/components/index'
-import HomeVideo from '@clvtube/home/home-video'
-import HomePodcast from '@clvtube/home/home-podcast/components/index'
+import HomePage from '@clvtube/home/index/components/index'
+import Video from '@clvtube/home/video'
+import Podcast from '@clvtube/home/podcast/components/index'
+import Account from '@clvtube/home/account'
+
+
 
 const Tab = createBottomTabNavigator()
 
@@ -15,48 +19,52 @@ const Home = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#0E3C9E',
+        tabBarInactiveTintColor: '#999999',
         tabBarStyle: {
-          backgroundColor: 'transparent',
+          backgroundColor: 'white',
         },
+        headerStyle: {
+          height: 200,
+        }
       }}>
       <Tab.Screen
         name="Trang chủ"
         component={HomePage}
         options={{
-          tabBarIcon: ({ focused }) => {
-            return <AntDesign name="home" size={20} />
+          tabBarLabel: 'Trang chủ',
+          tabBarIcon: ({ color }) => {
+            return <Feather name="home" color={color} size={25} />
           },
         }}
       />
 
       <Tab.Screen
         name="Video"
-        component={HomeVideo}
+        component={Video}
         options={{
-          tabBarIcon: ({ focused }) => {
-            return <AntDesign name="videocamera" size={20} />
+          tabBarIcon: ({ color }) => {
+            return <Octicons name="video" color={color} size={25} />
           },
         }}
       />
 
       <Tab.Screen
         name="Podcast"
-        component={HomePodcast}
+        component={Podcast}
         options={{
-          tabBarIcon: ({ focused }) => {
-            return <FontAwesome name="podcast" size={20} />
+          tabBarIcon: ({ color }) => {
+            return <MaterialCommunityIcons name="podcast" color={color} size={25} />
           },
         }}
       />
 
       <Tab.Screen
         name="Tài khoản"
-        component={HomePage}
+        component={Account}
         options={{
-          tabBarIcon: ({ focused }) => {
-            return <AntDesign name="user" size={20} />
+          tabBarIcon: ({ color }) => {
+            return <MaterialCommunityIcons name="account-circle" color={color} size={25} />
           },
         }}
       />

@@ -4,7 +4,7 @@ import HomeSearch from './HomeSearch'
 import HomeSlider from './HomeSlider'
 import HomeList from './HomeList'
 import { SafeAreaView } from 'react-native'
-import { HomePageProps } from '../home-page/interfaces'
+import { HomePageProps } from '../index/interfaces'
 
 const HomePage = ({ navigation, route }: HomePageProps) => {
   return (
