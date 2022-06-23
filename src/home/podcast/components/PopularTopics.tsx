@@ -1,8 +1,7 @@
-import { Text } from 'react-native'
-import React from 'react'
-import { Flex, Heading, Box } from 'native-base'
 import { PopularTopics } from '@clvtube/common/components/popular-topic/index'
 import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import { Box, Flex, Heading } from 'native-base'
+import React from 'react'
 
 const PopularTopicsPodcast = () => {
   return (

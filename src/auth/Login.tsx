@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  TextInput,
   Alert,
+  Button,
+  KeyboardAvoidingView,
   Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
@@ -20,17 +20,16 @@ import { LoginProps } from '@clvtube/common/navigators/Root'
 import { envData } from '@clvtube/common/constants/envData'
 import Config from 'react-native-config'
 
-
 const isIOS = Platform.OS === 'ios'
 
 interface InputReference extends TextInput {
   value: string
 }
 
-function Login({ route, navigation }: LoginProps) {
-  let inputRef = useRef<InputReference>(null)
+function Login({ navigation }: LoginProps) {
+  const inputRef = useRef<InputReference>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>()
-  const [focusInput, setFocusedInput] = useState<boolean>(true)
+  const [, setFocusedInput] = useState<boolean>(true)
 
   useEffect(() => {
     console.log(Config.WEB_CLIENT_ID)
@@ -128,8 +127,6 @@ function Login({ route, navigation }: LoginProps) {
   }
 
   return (
-    // <SafeAreaView>
-
     <View style={styles.container}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={50}

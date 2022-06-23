@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
 
-import { Text, VStack, Image, Box, HStack } from 'native-base'
+import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants'
+import { Image, Text, VStack } from 'native-base'
 import { Dimensions } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
-import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants'
-import { HomePageProps } from '@clvtube/common/navigators/Root'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
+import { HomePageProps } from '../index/interfaces'
 
 const slider = [
   {
@@ -45,10 +45,10 @@ const renderItemSlide = ({ item, index }) => {
 
 const { width, height } = Dimensions.get('window')
 
-const HomeSlider = ({ navigation, route }: HomePageProps) => {
+const HomeSlider = ({ navigation }: HomePageProps) => {
   const refCarousel = useRef<Carousel<any>>(null)
 
-  const [dataSilder, setDataSilder] = useState(slider)
+  const [dataSilder] = useState(slider)
 
   const onMoveVideoDetail = () => {
     navigation.navigate('VideoDetails', VIDEO_DETAILS_PAGE)

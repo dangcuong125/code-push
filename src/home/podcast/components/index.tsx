@@ -1,12 +1,12 @@
-import { StyleSheet, SafeAreaView, ScrollView, StatusBar } from 'react-native'
-import React from 'react'
-import { Box } from 'native-base'
 import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
-import PopularTopics from './PopularTopics'
+import { Box } from 'native-base'
+import React from 'react'
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native'
+import { MaybeYouLike } from './MaybeYouLike'
 import { OutStandingPodcast } from './OutstandingPodcast'
 import { PodcastList } from './PodcastList'
+import PopularTopics from './PopularTopics'
 import { Speak } from './Speak'
-import { MaybeYouLike } from './MaybeYouLike'
 
 const Podcast = () => {
   return (
@@ -27,5 +27,3 @@ const Podcast = () => {
 }
 
 export default Podcast
-
-const styles = StyleSheet.create({})

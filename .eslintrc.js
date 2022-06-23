@@ -18,7 +18,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'array-bracket-spacing': [2, 'never'],
-    'arrow-parens': [2, 'always'],
+    'arrow-parens': [2, 'as-needed'],
     'arrow-spacing': [2],
     'block-spacing': [2, 'always'],
     'brace-style': [2, '1tbs', { allowSingleLine: true }],
@@ -129,6 +129,6 @@ module.exports = {
       },
     ],
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
   },
 }

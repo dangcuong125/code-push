@@ -1,12 +1,8 @@
+import { Avatar, HStack, Heading } from 'native-base'
 import React from 'react'
-import { Avatar, Box, CheckIcon, Heading, HStack, Icon } from 'native-base'
-import { Dimensions } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-
 import { useNavigation } from '@react-navigation/native'
-
-const { width, height } = Dimensions.get('window')
 
 const HomeSearch = () => {
   const navigator = useNavigation()

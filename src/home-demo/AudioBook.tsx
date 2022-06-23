@@ -1,26 +1,22 @@
-import { Box, Button, Container, HStack, Image, Text, VStack } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { Dimensions, View } from 'react-native';
-import { WebView } from 'react-native-webview';
-import TrackPlayer, {
-  Capability,
-  useProgress,
-} from 'react-native-track-player';
+import { Button, Container, HStack, Text, VStack } from 'native-base'
+import React, { useEffect } from 'react'
+import { Dimensions } from 'react-native'
+import TrackPlayer, { Capability, useProgress } from 'react-native-track-player'
+import { WebView } from 'react-native-webview'
 
-
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
 
 const AudioBook = () => {
-  const progress = useProgress();
-  const [isReady, setIsReady] = useState(false);
+  const progress = useProgress()
+  // const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
-    preparePlayer();
-  }, []);
+    preparePlayer()
+  }, [])
 
   const preparePlayer = async () => {
-    //NOTE: need to await the track player to be ready
-    await TrackPlayer.setupPlayer();
+    // NOTE: need to await the track player to be ready
+    await TrackPlayer.setupPlayer()
 
     TrackPlayer.updateOptions({
       // Media controls capabilities
@@ -44,8 +40,8 @@ const AudioBook = () => {
       //   Capability.JumpForward,
       //   Capability.JumpBackward,
       // ],
-    });
-    //TODO: Need to check if track player state is ready
+    })
+    // TODO: Need to check if track player state is ready
     // Add a track to the queue
     await TrackPlayer.add([
       {
@@ -64,25 +60,25 @@ const AudioBook = () => {
         artwork:
           'https://www.gutenberg.org/cache/epub/15660/pg15660.cover.medium.jpg',
       },
-    ]);
-  };
+    ])
+  }
 
   const startAudio = async () => {
     // Start playing it
-    await TrackPlayer.play();
-  };
+    await TrackPlayer.play()
+  }
 
   const stopAudio = async () => {
-    await TrackPlayer.stop();
-  };
+    await TrackPlayer.stop()
+  }
 
   const pauseAudio = async () => {
-    await TrackPlayer.pause();
-  };
+    await TrackPlayer.pause()
+  }
 
-  const downloadFile = () => {
-    //
-  };
+  // const downloadFile = () => {
+  //
+  // }
 
   const jsInjected = `let customCSS = "p { font-weight: bold; font-size: 40px; } pre { display: none;}"
     let headTag = document.getElementsByTagName('head')[0];
@@ -105,8 +101,7 @@ const AudioBook = () => {
     styleTag.type = 'text/css';
     styleTag.appendChild(document.createTextNode(customCSS));
     true; // note: this is required, or you'll sometimes get silent failures
-    `;
-
+    `
 
   return (
     <Container flex={1}>
@@ -135,13 +130,13 @@ const AudioBook = () => {
           style={{ marginTop: 20, width }}
           injectedJavaScript={jsInjected}
           scalesPageToFit={true}
-          onMessage={event => {
-            alert(`${event.nativeEvent.data}`);
-          }}
+          // onMessage={event => {
+          //   alert(`${event.nativeEvent.data}`)
+          // }}
         />
       </VStack>
     </Container>
-  );
-};
+  )
+}
 
-export default AudioBook;
+export default AudioBook

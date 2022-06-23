@@ -1,4 +1,4 @@
-import { Box, Image, Progress, Text, Heading } from 'native-base'
+import { Box, Heading, Image, Progress, Text } from 'native-base'
 import { FlatList } from 'react-native'
 import React from 'react'
 import { DATA_VIEWED_RECENTLY } from '@clvtube/mocks/homePage'

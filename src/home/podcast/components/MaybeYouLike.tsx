@@ -1,12 +1,12 @@
 import {
   Box,
-  Text,
+  Button,
+  Flex,
   HStack,
   Heading,
-  Button,
-  Pressable,
   Image,
-  Flex,
+  Pressable,
+  Text,
 } from 'native-base'
 import React from 'react'
 import { FlatList } from 'react-native'

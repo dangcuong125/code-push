@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { level, topic } from '../../mocks/topic'
 
 const initialState = {
   level: [

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Pressable } from 'native-base'
-import { Text, StyleSheet, Image } from 'react-native'
+import { Image, StyleSheet, Text } from 'react-native'
 
 type PopularTopicsProps = {
   contentTopic: string

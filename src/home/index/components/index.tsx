@@ -1,16 +1,16 @@
-import React from 'react'
-import { Box, ScrollView } from 'native-base'
-import { SafeAreaView, StatusBar } from 'react-native'
 import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
-import { Welcome } from './Welcome'
-import { HomePageProps } from '../interfaces'
-import { VideoList } from './VideoList'
-import { Recently } from './Recently'
+import { ScrollView } from 'native-base'
+import React from 'react'
+import { SafeAreaView } from 'react-native'
+// import { HomePageProps } from '../interfaces'
 import { PodcastList } from './PodcastList'
+import { Recently } from './Recently'
 import { ReviseNewWord } from './ReviseNewWord'
 import { Speak } from './Speak'
+import { VideoList } from './VideoList'
+import { Welcome } from './Welcome'
 
-const HomePage = ({ navigation, route }: HomePageProps) => {
+const HomePage = () => {
   return (
     <ScrollView>
       <SafeAreaView>

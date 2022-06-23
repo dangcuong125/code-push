@@ -10,8 +10,6 @@ import Video from '@clvtube/home/video'
 import Podcast from '@clvtube/home/podcast/components/index'
 import Account from '@clvtube/home/account'
 
-
-
 const Tab = createBottomTabNavigator()
 
 const Home = () => {
@@ -26,7 +24,7 @@ const Home = () => {
         },
         headerStyle: {
           height: 200,
-        }
+        },
       }}>
       <Tab.Screen
         name="Trang chủ"
@@ -54,7 +52,9 @@ const Home = () => {
         component={Podcast}
         options={{
           tabBarIcon: ({ color }) => {
-            return <MaterialCommunityIcons name="podcast" color={color} size={25} />
+            return (
+              <MaterialCommunityIcons name="podcast" color={color} size={25} />
+            )
           },
         }}
       />
@@ -64,7 +64,13 @@ const Home = () => {
         component={Account}
         options={{
           tabBarIcon: ({ color }) => {
-            return <MaterialCommunityIcons name="account-circle" color={color} size={25} />
+            return (
+              <MaterialCommunityIcons
+                name="account-circle"
+                color={color}
+                size={25}
+              />
+            )
           },
         }}
       />

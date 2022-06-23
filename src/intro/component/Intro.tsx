@@ -97,7 +97,7 @@ const Intro = () => {
               color: '#FDFDFD',
             }}
             onPress={nextSlider}>
-            {index == slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
+            {index === slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>
       </Box>

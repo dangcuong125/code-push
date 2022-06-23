@@ -1,9 +1,7 @@
 import React, { useRef } from 'react'
-import { StyleSheet, SafeAreaView } from 'react-native'
-import { Box, Flex, Button, HStack } from 'native-base'
-// import Carousel from 'react-native-reanimated-carousel'
+import { SafeAreaView, StyleSheet, Text } from 'react-native'
+import { Box, Button, Flex, HStack } from 'native-base'
 import YouTube from 'react-native-youtube'
-import { Text } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { VideoDetailPageProps } from '../interfaces'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
@@ -18,7 +16,7 @@ const transcript = [
     offset: 480,
   },
 ]
-const VideoLearning = ({ navigation, route }: VideoDetailPageProps) => {
+const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
   const youtubeRef = useRef<YouTube>(null)
   const dispatch = useAppDispatch()
   const numberTranscipt = useAppSelector(
@@ -84,8 +82,10 @@ const VideoLearning = ({ navigation, route }: VideoDetailPageProps) => {
               <Text style={styles.increaseSpeed}>0.75x</Text>
             </Button>
           </HStack>
-          {transcript.map(item => (
-            <Text style={styles.transcript}>{item.text}</Text>
+          {transcript.map((item, index) => (
+            <Text key={index} style={styles.transcript}>
+              {item.text}
+            </Text>
           ))}
           <Text style={styles.textNumberAndTotal}>
             {numberTranscipt}/ {totalTranscipt}

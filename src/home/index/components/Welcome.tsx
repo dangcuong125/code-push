@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Image } from 'native-base'
+import { Box, Heading, Image, Text } from 'native-base'
 import React from 'react'
 import Carousel from 'react-native-reanimated-carousel'
 import { DISCOUNT_BANNER } from '@clvtube/mocks/homePage'

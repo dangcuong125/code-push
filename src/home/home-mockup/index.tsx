@@ -1,10 +1,10 @@
+import { VStack } from 'native-base'
 import React from 'react'
-import { ScrollView, VStack } from 'native-base'
-import HomeSearch from './HomeSearch'
-import HomeSlider from './HomeSlider'
-import HomeList from './HomeList'
 import { SafeAreaView } from 'react-native'
 import { HomePageProps } from '../index/interfaces'
+import HomeList from './HomeList'
+import HomeSearch from './HomeSearch'
+import HomeSlider from './HomeSlider'
 
 const HomePage = ({ navigation, route }: HomePageProps) => {
   return (

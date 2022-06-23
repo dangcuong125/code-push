@@ -1,5 +1,4 @@
 // interface
-import YouTube from 'react-native-youtube'
 import { ReactElement } from 'react'
 
 export interface CarouselProps {

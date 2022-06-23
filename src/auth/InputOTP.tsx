@@ -1,31 +1,30 @@
-import React, { useState, useEffect, useRef } from "react"
+import { InputOTPProps } from '@clvtube/common/navigators/Root'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
+  Alert,
   KeyboardAvoidingView,
+  StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
-  Alert
-} from "react-native"
-import { InputOTPProps } from "@clvtube/common/navigators/Root"
+  View,
+} from 'react-native'
 
 export interface InputReference extends TextInput {
   value: string
 }
 
-function InputOTP({route, navigation}: InputOTPProps) {
-  let inputRef = useRef<InputReference>(null)
+function InputOTP({ navigation }: InputOTPProps) {
+  const inputRef = useRef<InputReference>(null)
   let clockCall: any = null
   const lengthInput = 6
   const defaultCountDown = 60
-  const {confirmation} = route.params
+  // const { confirmation } = route.params
 
-  const [internalValue, setInternalValue] = useState<string>("")
+  const [internalValue, setInternalValue] = useState<string>('')
   const [countDown, setCountDown] = useState<number>(defaultCountDown)
   const [enableResend, setEnableResend] = useState<boolean>(false)
-  const [confirm, setConfirm] = useState(confirmation)
+  // const [confirm, setConfirm] = useState(confirmation)
 
   useEffect(() => {
     clockCall = setInterval(() => {
@@ -37,7 +36,7 @@ function InputOTP({route, navigation}: InputOTPProps) {
   })
 
   const decrementClock = () => {
-    if(countDown === 0){
+    if (countDown === 0) {
       setEnableResend(true)
       setCountDown(0)
       clearInterval(clockCall)
@@ -48,14 +47,14 @@ function InputOTP({route, navigation}: InputOTPProps) {
 
   const onChangeText = (value: string) => {
     setInternalValue(value)
-  };
+  }
 
   const onChangeNumber = () => {
-    setInternalValue("")
+    setInternalValue('')
   }
 
   const onResendOTP = () => {
-    if(enableResend){
+    if (enableResend) {
       setCountDown(defaultCountDown)
       setEnableResend(false)
       clearInterval(clockCall)
@@ -66,12 +65,12 @@ function InputOTP({route, navigation}: InputOTPProps) {
   }
 
   const onSubmitOTP = async () => {
-    if(internalValue.length === lengthInput){
+    if (internalValue.length === lengthInput) {
       try {
-        const response = await confirm.confirm(internalValue)
+        // const response = await confirm.confirm(internalValue)
         // const authData = JSON.parse(response)
         // if(!lodash.isEmpty(authData.user)){
-          navigation.navigate('Home', {})
+        navigation.navigate('Home', {})
         // }
       } catch (error) {
         Alert.alert(JSON.stringify(error))
@@ -81,7 +80,7 @@ function InputOTP({route, navigation}: InputOTPProps) {
   }
 
   useEffect(() => {
-    inputRef.current?.focus
+    inputRef.current?.focus()
   }, [])
 
   return (
@@ -89,8 +88,7 @@ function InputOTP({route, navigation}: InputOTPProps) {
       <KeyboardAvoidingView
         keyboardVerticalOffset={50}
         behavior="padding"
-        style={styles.containerAvoidingView}
-      >
+        style={styles.containerAvoidingView}>
         <Text style={styles.titleStyle}>Input your OTP code sent via SMS</Text>
         <View>
           <TextInput
@@ -106,17 +104,18 @@ function InputOTP({route, navigation}: InputOTPProps) {
             {[1, 2, 3, 4, 5, 6].map((data, index) => {
               return (
                 <TouchableOpacity
-                  onPress={() => inputRef.current?.focus()}
-                >
-              <View key={index} style={styles.cellView}>
-                
-                  <Text style={styles.cellText}>
-                    {internalValue && internalValue.length > 0 ? internalValue[index] : ""}
-                  </Text>
-                
-              </View>
-              </TouchableOpacity>
-            )})}
+                  key={index}
+                  onPress={() => inputRef.current?.focus()}>
+                  <View style={styles.cellView}>
+                    <Text style={styles.cellText}>
+                      {internalValue && internalValue.length > 0
+                        ? internalValue[index]
+                        : ''}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            })}
           </View>
           <View style={styles.containerInput}>
             <TouchableOpacity onPress={onSubmitOTP}>
@@ -140,19 +139,19 @@ function InputOTP({route, navigation}: InputOTPProps) {
         </View>
       </KeyboardAvoidingView>
     </View>
-  );
+  )
 }
 
-export default InputOTP;
+export default InputOTP
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   containerAvoidingView: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 10,
   },
   titleStyle: {
@@ -161,9 +160,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   containerInput: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cellView: {
     paddingVertical: 11,
@@ -171,53 +170,53 @@ const styles = StyleSheet.create({
     height: 52,
     margin: 5,
     backgroundColor: '#ECF7FB',
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: '#216BCD',
-    borderRadius: 4
+    borderRadius: 4,
   },
   cellText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 24,
-    fontWeight: "600"
+    fontWeight: '600',
   },
   bottomView: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
     // justifyContent: "center",
     marginBottom: 50,
-    alignItems: "center"
+    alignItems: 'center',
   },
   btnSubmit: {
     width: 150,
     height: 50,
     borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
   },
   btnChangeNumber: {
     width: 150,
     height: 50,
     borderRadius: 10,
-    alignItems: "flex-start",
-    justifyContent: "center",
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   textChange: {
-    color: "#234db7",
-    alignItems: "center",
+    color: '#234db7',
+    alignItems: 'center',
     fontSize: 16,
   },
   btnResend: {
     width: 150,
     height: 50,
     borderRadius: 10,
-    alignItems: "flex-end",
-    justifyContent: "center",
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   textResend: {
-    alignItems: "center",
+    alignItems: 'center',
     fontSize: 16,
-  }
-});
+  },
+})

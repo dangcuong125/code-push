@@ -1,15 +1,4 @@
-import {
-  VStack,
-  Text,
-  Container,
-  HStack,
-  Image,
-  Box,
-  Button,
-  Divider,
-  Center,
-  Heading,
-} from 'native-base'
+import { HStack, Image, Text, VStack } from 'native-base'
 import React from 'react'
 
 import ListBottom from '../ListBottom'

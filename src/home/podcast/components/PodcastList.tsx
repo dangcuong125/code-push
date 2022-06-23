@@ -1,19 +1,19 @@
+import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import {
   Box,
-  Heading,
-  HStack,
   Button,
-  Pressable,
+  HStack,
+  Heading,
   Image,
+  Pressable,
   //   Flex,
   Text,
 } from 'native-base'
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { handleClickPodcastList } from '../redux/podcastList'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
 
 const Item = ({ item, backgroundColor, color, onPress }: any) => {
   return (
@@ -86,8 +86,9 @@ export const PodcastList = () => {
           horizontal={true}
           extraData={selectedId}
         />
-        {data.map(item => (
+        {data.map((item, index) => (
           <Pressable
+            key={index}
             marginTop={'20px'}
             borderColor="primary.100"
             borderWidth={1}

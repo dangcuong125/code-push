@@ -1,19 +1,19 @@
 import {
   Box,
-  Heading,
-  HStack,
   Button,
-  Pressable,
+  HStack,
+  Heading,
   Image,
+  Pressable,
   //   Flex,
   Text,
 } from 'native-base'
 import React from 'react'
 import { FlatList, ScrollView } from 'react-native'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
+// import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { PODCASTS } from '@clvtube/mocks/homePage'
-import { IPodcastTypes, IPodcastTypeCarouselProps } from '../interfaces'
+import { IPodcastTypeCarouselProps, IPodcastTypes } from '../interfaces'
 
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
@@ -31,7 +31,7 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
 }
 
 export const PodcastList = () => {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
@@ -57,8 +57,8 @@ export const PodcastList = () => {
           renderItem={renderItem}
           horizontal={true}
         />
-        {PODCASTS?.map(item => (
-          <ScrollView>
+        {PODCASTS?.map((item, index) => (
+          <ScrollView key={index}>
             <Pressable
               marginTop={'20px'}
               borderColor="primary.100"

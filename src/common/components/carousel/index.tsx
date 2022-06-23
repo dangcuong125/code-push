@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react'
-import { FlatList, StyleSheet, Dimensions } from 'react-native'
 import { Box } from 'native-base'
-import YouTube from 'react-native-youtube'
+import React, { useState } from 'react'
+import { Dimensions, FlatList, StyleSheet } from 'react-native'
 import Animated, {
-  useAnimatedStyle,
   interpolate,
+  useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated'
 // import { ItemProps } from '../../../components/video-details/interfaces'
@@ -50,7 +49,7 @@ export const Carousel = ({ data, component }: CarouselProps) => {
       <FlatList
         data={data}
         horizontal={true}
-        renderItem={({ item, index }) => {
+        renderItem={({ index }) => {
           return <Item index={index} scrollX={scrollX} component={component} />
         }}
         onScroll={e => setScrollX(e.nativeEvent.contentOffset.x)}

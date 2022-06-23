@@ -30,7 +30,7 @@ const PlayerAudio = () => {
           animatedStyles,
         ]}
       />
-      
+
       <Button
         onPress={() => (offset.value = withSpring(Math.random()))}
         title="Move"
@@ -40,7 +40,7 @@ const PlayerAudio = () => {
         from={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ type: 'timing' }}>
-        <Text color='primary.100'>Hello</Text>
+        <Text color="primary.100">Hello</Text>
       </MotiView>
     </View>
   )

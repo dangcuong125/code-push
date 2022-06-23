@@ -5,7 +5,6 @@ import SearchHistory from './SearchHistory'
 import SearchInput from './SearchInput'
 import SearchRecommend from './SearchRecommend'
 
-
 const SearchPage = () => {
   return (
     <SafeAreaView>
@@ -19,4 +18,3 @@ const SearchPage = () => {
 }
 
 export default SearchPage
-

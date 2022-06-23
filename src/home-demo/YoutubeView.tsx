@@ -1,19 +1,11 @@
-import {
-  Box,
-  Button,
-  Center,
-  Container,
-  HStack,
-  Text,
-  VStack,
-} from 'native-base'
+import { sampleTranscript } from '@clvtube/mocks/sampleTranscript'
+import Lodash from 'lodash'
+import { Box, Button, Container, HStack, Text, VStack } from 'native-base'
 import React, { useEffect, useRef, useState } from 'react'
 import { Dimensions, Pressable } from 'react-native'
-import YouTube from 'react-native-youtube'
 import Carousel from 'react-native-snap-carousel'
-import Lodash from 'lodash'
 import Tts from 'react-native-tts'
-import { sampleTranscript } from '@clvtube/mocks/sampleTranscript'
+import YouTube from 'react-native-youtube'
 
 // When user touch and move slide, we need to pause video
 const renderItemSlide = ({ item, speakWord, index }) => {
@@ -36,12 +28,12 @@ const renderItemSlide = ({ item, speakWord, index }) => {
 
 const { width } = Dimensions.get('window')
 const YoutubeView = () => {
-  const [dataTranscript, setDataTranscript] = useState(sampleTranscript)
+  const [dataTranscript] = useState(sampleTranscript)
   const refYoutube = useRef<YouTube>(null)
   const refCarousel = useRef<Carousel<any>>(null)
-  const [currentTime, setCurrentTime] = useState(0)
+  // const [currentTime, setCurrentTime] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isProgress, setIsProgress] = useState(false)
+  // const [isProgress, setIsProgress] = useState(false)
 
   const handleSnapToItem = (index: number) => {
     if (index !== currentIndex) {
@@ -68,10 +60,10 @@ const YoutubeView = () => {
   }
 
   useEffect(() => {
-    Tts.addEventListener('tts-start', event => {})
-    Tts.addEventListener('tts-progress', event => {})
-    Tts.addEventListener('tts-finish', event => {})
-    Tts.addEventListener('tts-cancel', event => {})
+    // Tts.addEventListener('tts-start', event => {})
+    // Tts.addEventListener('tts-progress', event => {})
+    // Tts.addEventListener('tts-finish', event => {})
+    // Tts.addEventListener('tts-cancel', event => {})
 
     return () => {
       // remove listener here.

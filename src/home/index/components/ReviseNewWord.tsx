@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, Icon } from 'native-base'
+import { Box, Button, Heading, Icon, Text } from 'native-base'
 import React from 'react'
 import Carousel from 'react-native-reanimated-carousel'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -34,8 +34,8 @@ const NewWord = ({ item }: { item: IReviseNewWordItem }) => {
           onPress={() => Tts.speak(item.word)}
         />
         <Box marginTop={'43px'}>
-          {item.answers.map((answer: any) => (
-            <Button marginTop="5px" width="343px">
+          {item.answers.map((answer: any, index: number) => (
+            <Button key={index} marginTop="5px" width="343px">
               {answer.meaning}
             </Button>
           ))}

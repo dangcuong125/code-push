@@ -82,8 +82,7 @@ export const podcastList = createSlice({
   reducers: {
     handleClickPodcastList: (state, action) => {
       state.podcastTypes = state.podcastTypes.map(podcastType => {
-        podcastType.isSelected =
-          podcastType.id === action.payload ? true : false
+        podcastType.isSelected = podcastType.id === action.payload
         podcastType.backgroundColor =
           podcastType.id === action.payload ? '#3D9BE0' : '#FFFFFF'
         podcastType.color =

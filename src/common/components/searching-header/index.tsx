@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Flex, Input, Icon } from 'native-base'
+import { Avatar, Flex, Icon, Input } from 'native-base'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 

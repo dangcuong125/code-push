@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {
+  NativeStackScreenProps,
   createNativeStackNavigator,
-  NativeStackScreenProps
 } from '@react-navigation/native-stack'
 
 import Intro from '@clvtube/intro/component/Intro'
@@ -19,9 +19,15 @@ import CreateInfo from '@clvtube/login/component/CreateInfo'
 
 import {
   CREATE_INFO,
-  HOME_PAGE, INPUT_OTP, INTRO, LOGIN, SEARCH_PAGE, START_DASHBOARD, TOPIC, VIDEO_DETAILS_PAGE
+  HOME_PAGE,
+  INPUT_OTP,
+  INTRO,
+  LOGIN,
+  SEARCH_PAGE,
+  START_DASHBOARD,
+  TOPIC,
+  VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants'
-
 
 export type RootStackParamList = {
   Login: { navigation: any }
@@ -33,7 +39,6 @@ export type RootStackParamList = {
   VideoDetails: {}
   Topic: {}
   StartDashboard: {}
-
 }
 
 export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
@@ -47,17 +52,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 const Root = () => {
   return (
     <Stack.Navigator initialRouteName={HOME_PAGE}>
-      <Stack.Screen 
+      <Stack.Screen
         name={LOGIN}
         component={Login}
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
+      <Stack.Screen
         name={INPUT_OTP}
         component={InputOTP}
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
+      <Stack.Screen
         name={CREATE_INFO}
         component={CreateInfo}
         options={{ headerShown: false }}
