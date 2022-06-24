@@ -19,7 +19,7 @@ import { IPodcastTypeCarouselProps, IPodcastTypes } from '../interfaces'
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
     <Button
-      size={'none'}
+      // size={'none'}
       height={'27px'}
       lineHeight={'27px'}
       px={2}

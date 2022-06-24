@@ -13,7 +13,7 @@ import {
 } from 'native-base'
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
-import { handleClickPodcastList } from '../redux/podcastList'
+import { handleClickPodcastList } from '../reducer/podcastList'
 
 const Item = ({ item, backgroundColor, color, onPress }: any) => {
   return (

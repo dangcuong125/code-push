@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
-import { reducer as videoDetails } from '@clvtube/video-details/redux/videoDetails'
-import { reducer as podcastList } from '@clvtube/home/podcast/redux/podcastList'
-import topicReducer from '@clvtube/level-topic/redux/topicReducer'
+import { reducer as videoDetails } from '@clvtube/video-details/reducer/videoDetails'
+import { reducer as podcastList } from '@clvtube/home/podcast/reducer/podcastList'
+import topicReducer from '@clvtube/level-topic/reducer/topicReducer'
 import { reducer as homePage } from '@clvtube/home/index/redux/homePage'
 
 const rootReducer = combineReducers({

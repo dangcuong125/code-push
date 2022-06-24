@@ -12,7 +12,7 @@ import {
 } from 'native-base'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-import { selectLevel, selectTopic } from '../redux/topicReducer'
+import { selectLevel, selectTopic } from '../reducer/topicReducer'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { HOME } from '../../common/constants/route.constants'
