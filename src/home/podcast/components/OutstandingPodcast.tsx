@@ -69,8 +69,8 @@ export const OutStandingPodcast = () => {
   }
   return (
     <>
-      <Box marginTop="16px" bgColor="#FFFFFF" padding="10px">
-        <Box marginLeft="16px">
+      <Box marginTop="16px" bgColor="#FFFFFF">
+        <Box margin="16px">
           <Heading marginTop="7px" color="#222B45">
             Podcast nổi bật
           </Heading>
@@ -81,8 +81,8 @@ export const OutStandingPodcast = () => {
           />
         </Box>
       </Box>
-      <Box marginTop="16px" bgColor="#FFFFFF" padding="10px">
-        <Box marginLeft="16px">
+      <Box marginTop="16px" bgColor="#FFFFFF">
+        <Box margin="16px">
           <Heading color="#222B45">Podcast thịnh hành</Heading>
           <FlatList
             data={podcastPopular}

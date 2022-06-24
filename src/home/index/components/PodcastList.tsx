@@ -64,7 +64,6 @@ export const PodcastList = () => {
               borderColor="primary.100"
               borderWidth={1}
               padding="20px"
-              width="360px"
               textAlign={'center'}
               borderRadius={'10px'}>
               <HStack>
