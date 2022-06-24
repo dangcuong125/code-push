@@ -1,21 +1,21 @@
 import { slider } from '@clvtube/mocks/dataOnboarding'
-import { Box, Button, Center, Text, VStack } from 'native-base'
+import { Box, Button, Center, Text, VStack, Pressable } from 'native-base';
 import React, { useRef, useState } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
 import { Dimensions, Image, TouchableOpacity } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { TOPIC } from '@clvtube/common/constants/route.constants'
+import { LOGIN, TOPIC } from '@clvtube/common/constants/route.constants'
 
 const { width, height } = Dimensions.get('window')
 
 const renderItemSlider = ({ item, index }) => {
   return (
-    <VStack>
+    <VStack mt={5}>
       <Image
         key={index}
         source={item?.image}
-        style={{ height: height * 0.5, width, resizeMode: 'contain' }}
+        style={{ height: height * 0.4, width, resizeMode: 'contain' }}
       />
       <Center marginBottom={5}>
         <Text
@@ -43,13 +43,32 @@ const Intro = () => {
       setIndex(nextSlideIndex)
       refCarousel?.current?.snapToItem(nextSlideIndex)
     } else {
-      navigator.navigate(TOPIC)
+      navigator.navigate(LOGIN)
     }
   }
 
   return (
     <VStack bgColor={'white'} height={height} justifyContent={'space-evenly'}>
       <VStack safeAreaY={10} flex={1}>
+        <Pressable
+          px={4}
+          mt={10}
+          onPress={() => {
+            console.warn('Redirect Page Login!')
+            return navigator.navigate(LOGIN)
+          }}
+        >
+          <Text
+            fontStyle={'normal'}
+            fontSize={'16px'}
+            fontWeight={600}
+            lineHeight={'22px'}
+            textAlign={'right'}
+            color={'#0E3C9E'}
+          >
+            Skip
+          </Text>
+        </Pressable>
         <Carousel
           layout={'default'}
           ref={refCarousel}
@@ -62,8 +81,6 @@ const Intro = () => {
         <Pagination
           dotsLength={slider.length}
           activeDotIndex={index}
-          // carouselRef={refCarousel}
-          // containerStyle={{width: width}}
           dotStyle={{
             height: 8,
             width: 40,
@@ -80,14 +97,13 @@ const Intro = () => {
           }}
           inactiveDotOpacity={1}
           inactiveDotScale={1}
-          // tappableDots={true}
         />
       </VStack>
 
       <Box marginBottom={8} paddingBottom={8} safeAreaX={4}>
         <TouchableOpacity>
           <Button
-            bgColor={'primary.100'}
+            bgColor={'#216BCD'}
             borderRadius={'8px'}
             height={'48px'}
             _text={{

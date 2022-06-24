@@ -1,10 +1,12 @@
 import React from 'react'
 
+// import component from package
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from 'react-native-vector-icons/Feather'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Octicons from 'react-native-vector-icons/Octicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
+// import component from pages
 import HomePage from '@clvtube/home/index/components/index'
 import Video from '@clvtube/home/video'
 import Podcast from '@clvtube/home/podcast/components/index'
@@ -26,6 +28,7 @@ const Home = () => {
           height: 200,
         },
       }}>
+      {/* Page Home Index */}
       <Tab.Screen
         name="Trang chủ"
         component={HomePage}
@@ -37,6 +40,7 @@ const Home = () => {
         }}
       />
 
+      {/* Page Home Video*/}
       <Tab.Screen
         name="Video"
         component={Video}
@@ -47,6 +51,7 @@ const Home = () => {
         }}
       />
 
+      {/* Page Home Podcast */}
       <Tab.Screen
         name="Podcast"
         component={Podcast}
@@ -59,6 +64,7 @@ const Home = () => {
         }}
       />
 
+      {/* Page Home Account */}
       <Tab.Screen
         name="Tài khoản"
         component={Account}

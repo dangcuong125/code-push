@@ -132,6 +132,24 @@ export const PODCASTS = [
     title: 'Title for teacher, you can write anything here123',
     hashtag: '#Friend',
   },
+  {
+    id: 4,
+    image: imagePodcast.PODCAST_LIST,
+    title: 'Title for teacher, you can write anything here',
+    hashtag: '#Friend',
+  },
+  {
+    id: 5,
+    image: imagePodcast.PODCAST_LIST,
+    title: 'Title for teacher, you can write anything here',
+    hashtag: '#Friend',
+  },
+  {
+    id: 6,
+    image: imagePodcast.PODCAST_LIST,
+    title: 'Title for teacher, you can write anything here123',
+    hashtag: '#Friend',
+  },
 ]
 export const VIDEO_TYPE_CAROUSEL = [
   {

@@ -5,7 +5,7 @@ import YouTube from 'react-native-youtube'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { VideoDetailPageProps } from '../interfaces'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { loopVideo, previewVideo } from '../redux/videoDetails'
+import { loopVideo, previewVideo } from '../reducer/videoDetails'
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { Carousel } from '@clvtube/common/components/carousel'
 

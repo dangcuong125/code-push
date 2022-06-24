@@ -15,7 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { selectLevel, selectTopic } from '../reducer/topicReducer'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-import { START_DASHBOARD } from '@clvtube/common/constants/route.constants'
+import { HOME } from '../../common/constants/route.constants'
 
 const Topic = () => {
   const { level, topic } = useAppSelector(state => state.topicReducer)
@@ -121,7 +121,7 @@ const Topic = () => {
             fontStyle: 'normal',
             color: '#FDFDFD',
           }}
-          onPress={() => navigator.navigate(START_DASHBOARD)}>
+          onPress={() => navigator.navigate(HOME)}>
           Tiếp tục
         </Button>
       </Pressable>
