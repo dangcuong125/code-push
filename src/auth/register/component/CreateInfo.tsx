@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
@@ -16,10 +16,26 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { imageSocial } from '@clvtube/common/constants/imagePath'
 import { Dimensions, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
+import { REGISTER_SUCCESS } from '@clvtube/common/constants/route.constants'
 
 const { width, height } = Dimensions.get('window')
 
 const CreateInfo = () => {
+
+  const [InfoUser, setInfoUser] = useState({
+    phoneNumber: '',
+    email: '',
+    fisrtName: '',
+    lastName: ''
+  })
+  const {phoneNumber, email, fisrtName, lastName} = InfoUser
+
+
+  console.log(InfoUser);
+
+  const navigation = useNavigation()
+
   return (
     <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'white'}>
       <Box mt={5}>
@@ -38,7 +54,9 @@ const CreateInfo = () => {
       </Heading>
       <VStack space={5} mb={10}>
         <Input
+          onChangeText={(text) => setInfoUser({...InfoUser, phoneNumber: text})}
           type="text"
+          value={phoneNumber}
           InputLeftElement={
             <Icon
               as={<Feather name="phone" />}
@@ -66,6 +84,7 @@ const CreateInfo = () => {
           }}
         />
         <Input
+          onChangeText={text => setInfoUser({...InfoUser, email: text})}
           type="text"
           InputLeftElement={
             <Icon
@@ -94,6 +113,7 @@ const CreateInfo = () => {
           }}
         />
         <Input
+          onChangeText={text => setInfoUser({...InfoUser, fisrtName: text})}
           type="text"
           InputLeftElement={
             <Icon
@@ -122,6 +142,7 @@ const CreateInfo = () => {
           }}
         />
         <Input
+          onChangeText={text => setInfoUser({...InfoUser, lastName: text})}
           type="text"
           InputLeftElement={
             <Icon
@@ -160,7 +181,9 @@ const CreateInfo = () => {
           fontWeight: 400,
           fontStyle: 'normal',
           color: 'text.700',
-        }}>
+        }}
+        onPress={() => navigation.navigate(REGISTER_SUCCESS)}  
+      >
         Đăng ký
       </Button>
       <Box mt={12}>

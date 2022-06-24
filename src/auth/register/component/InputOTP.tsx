@@ -5,7 +5,7 @@ import { Image, TextInput, TouchableOpacity, View } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
-import { HOME_PAGE } from '@clvtube/common/constants/route.constants'
+import { CREATE_INFO, HOME_PAGE } from '@clvtube/common/constants/route.constants'
 import { InputOTPProps } from '@clvtube/common/navigators/Root'
 
 export interface InputReference extends TextInput {
@@ -33,8 +33,9 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
     if (internalValue.length === lengthInput) {
       try {
         await confirm.confirm(internalValue)
+        // 
 
-        navigation.navigate(HOME_PAGE, {})
+        return navigation.navigate(CREATE_INFO, {})
       } catch (error) {
         console.log(error)
       }
@@ -129,7 +130,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
       </View>
 
       <Box marginTop={12}>
-        <TouchableOpacity onPress={onSubmitOTP}>
+        <TouchableOpacity>
           <Button
             bgColor={'primary.100'}
             borderRadius={'8px'}
@@ -139,7 +140,9 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontWeight: 400,
               fontStyle: 'normal',
               color: '#FDFDFD',
-            }}>
+            }}
+            onPress={onSubmitOTP}
+          >
             Xác nhận
           </Button>
         </TouchableOpacity>

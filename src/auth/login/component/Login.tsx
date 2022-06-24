@@ -16,10 +16,10 @@ import {
 import { Dimensions, Image } from 'react-native'
 
 import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath'
-import { INPUT_OTP } from '@clvtube/common/constants/route.constants'
+import { INPUT_OTP, REGISTER } from '@clvtube/common/constants/route.constants'
 import { LoginProps } from '@clvtube/common/navigators/Root'
 import appleAuth from '@invertase/react-native-apple-authentication'
-import { InputReference } from '../../auth/InputOTP'
+import { InputReference } from '../../../auth-demo/InputOTP'
 
 const { width, height } = Dimensions.get('screen')
 
@@ -115,6 +115,7 @@ const Login = ({ navigation }: LoginProps) => {
           onChangeText={onChangePhone}
           onBlur={onChangeBlur}
           onFocus={onChangeFocus}
+          selectionColor={'black'}
           _input={{
             color: 'neutral.800',
             fontStyle: 'normal',
@@ -193,27 +194,6 @@ const Login = ({ navigation }: LoginProps) => {
           </HStack>
         </Button>
         {/* Feature login with Facebook */}
-        {/* <LoginButton
-                onLoginFinished={(error, result) => {
-                    if(error) {
-                        console.log(`Login: ${error}`)
-                    } else if (result.isCancelled) {
-                        console.log('Canceled')
-                    } else {
-                        AccessToken.getCurrentAccessToken()
-                            .then(data => {
-                                console.log(data?.accessToken.toString())
-                                if(data?.accessToken) {
-                                    const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken)
-                                    console.log(facebookCredential);
-                                    auth().signInWithCredential(facebookCredential).then(res => console.log(res))
-                                }
-                            })
-                            .catch(err => console.log(err))
-                    }
-                }}
-                onLogoutFinished={() => console.log('Logout')}
-            /> */}
         <Button
           height={'48px'}
           backgroundColor={'transparent'}
@@ -267,9 +247,9 @@ const Login = ({ navigation }: LoginProps) => {
         {/* redirect Sreen Register */}
         <Center mt={'40px'}>
           <Text fontSize={'14px'} fontWeight={400} color={'text.200'}>
-            Nếu bạn chưa có tài khoản?Đăng ký
+            Nếu bạn chưa có tài khoản?Đăng ký{' '}
             <Link
-              to={{ screen: 'Otp' }}
+              to={{ screen: REGISTER }}
               style={{
                 color: '#216BCD',
                 textDecorationLine: 'underline',

@@ -1,5 +1,9 @@
-export const imagePath = {
+export const imageLogo = {
   LOGO: require('../assets/images/logo.png'),
+  LOGO_MINI: require('../assets/images/logo_mini.png'),
+}
+
+export const imagePath = {
   ONBOARDING1: require('../assets/images/onboarding1.png'),
   ONBOARDING2: require('../assets/images/onboarding2.png'),
   ONBOARDING3: require('../assets/images/onboarding3.png'),

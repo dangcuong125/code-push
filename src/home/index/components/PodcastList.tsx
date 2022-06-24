@@ -1,31 +1,40 @@
 import {
-  Box,
   Button,
   HStack,
   Heading,
   Image,
   Pressable,
-  //   Flex,
+  ScrollView,
   Text,
+  VStack,
 } from 'native-base'
 import React from 'react'
-import { FlatList, ScrollView } from 'react-native'
+import { FlatList } from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-// import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import { PODCASTS } from '@clvtube/mocks/homePage'
 import { IPodcastTypeCarouselProps, IPodcastTypes } from '../interfaces'
 
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
     <Button
-      marginTop="20px"
-      marginLeft="16px"
+      size={'none'}
+      height={'27px'}
+      lineHeight={'27px'}
+      px={2}
+      marginLeft={3}
+      variant="outline"
       borderColor="#3D9BE0"
       bgColor={item.backgroundColor}
-      color={item.color}
       onPress={onPress}
-      variant="outline">
-      <Text style={{ color: item.color }}>{item.type}</Text>
+      _text={{
+        color: item.color,
+        fontStyle: 'normal',
+        fontSize: '14px',
+        fontWeight: 400,
+      }}>
+      {item.type}
     </Button>
   )
 }
@@ -37,53 +46,104 @@ export const PodcastList = () => {
     return (
       <PodcastTypeCarousel
         item={item}
-        onPress={() => console.log('hello world')}
+        onPress={() => console.warn(JSON.stringify(item))}
       />
     )
   }
   return (
-    <Box bgColor="#FFFFFF" marginTop="16px">
-      <Box margin="16px">
-        <HStack alignItems="center" justifyContent="space-between">
-          <Heading color="#222B45">Danh sách Podcast</Heading>
+    <VStack space={2} safeAreaY={2} bgColor={'white'}>
+      <VStack bgColor={'white'} safeAreaY={2} space={4}>
+        <HStack
+          safeAreaX={4}
+          justifyContent={'space-between'}
+          alignItems={'center'}>
+          <Heading
+            fontStyle={'normal'}
+            fontSize={'18px'}
+            fontWeight={600}
+            color={'#000000'}>
+            Podcast
+          </Heading>
           <Text
-            style={{ color: '#216BCD' }}
-            onPress={() => console.log('See All')}>
+            fontStyle={'normal'}
+            fontSize={'12px'}
+            fontWeight={400}
+            color={'#216BCD'}>
             Xem tất cả
           </Text>
         </HStack>
         <FlatList
+          horizontal={true}
           data={PODCAST_TYPE}
           renderItem={renderItem}
-          horizontal={true}
         />
-        {PODCASTS?.map((item, index) => (
-          <ScrollView key={index}>
+      </VStack>
+      <ScrollView>
+        <VStack height={'400px'} safeAreaX={4} space={5}>
+          {PODCASTS?.map((item, index) => (
             <Pressable
-              marginTop={'20px'}
-              borderColor="primary.100"
-              borderWidth={1}
-              padding="20px"
-              textAlign={'center'}
-              borderRadius={'10px'}>
-              <HStack>
+              key={index}
+              borderColor="#E6E6E6"
+              borderWidth={'1px'}
+              borderRadius={'12px'}
+              p={3}>
+              <HStack space={4} alignItems={'center'}>
                 <Image source={item.image} />
-                <Box marginLeft={'18px'}>
-                  <Text
-                    marginTop={'10px'}
-                    width="200px"
-                    fontSize="14px"
-                    fontWeight={600}
-                    color="tileText.100">
+                <VStack space={1.5} width={'60%'}>
+                  <Heading
+                    fontStyle={'normal'}
+                    fontSize={'16px'}
+                    fontWeight={400}
+                    lineHeight={'22px'}
+                    color={'#161719'}>
                     {item.title}
+                  </Heading>
+                  <Text
+                    fontStyle={'normal'}
+                    fontSize={'14px'}
+                    fontWeight={400}
+                    lineHeight={'19px'}
+                    color={'#999999'}>
+                    {item.hashtag}
                   </Text>
-                  <Text color="neutral.300">{item.hashtag}</Text>
-                </Box>
+                  <HStack justifyContent={'flex-start'} alignItems={'center'}>
+                    <HStack space={0.5} alignItems={'center'}>
+                      <MaterialCommunityIcons
+                        name="clock-time-three-outline"
+                        size={15}
+                        color={'#3D9BE0'}
+                      />
+                      <Text
+                        fontStyle={'normal'}
+                        fontSize={'10px'}
+                        fontWeight={400}
+                        color={'#666666'}>
+                        01:30
+                      </Text>
+                    </HStack>
+                    <Entypo name="dot-single" size={15} color={'#999999'} />
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'10px'}
+                      fontWeight={400}
+                      color={'#999999'}>
+                      Dev Taodzo
+                    </Text>
+                    <Entypo name="dot-single" size={15} color={'#999999'} />
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'10px'}
+                      fontWeight={400}
+                      color={'#999999'}>
+                      Mobile App
+                    </Text>
+                  </HStack>
+                </VStack>
               </HStack>
             </Pressable>
-          </ScrollView>
-        ))}
-      </Box>
-    </Box>
+          ))}
+        </VStack>
+      </ScrollView>
+    </VStack>
   )
 }

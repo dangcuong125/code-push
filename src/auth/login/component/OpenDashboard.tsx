@@ -5,10 +5,11 @@ import { Dimensions, Image } from 'react-native'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
 import { useNavigation } from '@react-navigation/native'
+import { HOME } from '../../../common/constants/route.constants'
 
 const { width } = Dimensions.get('screen')
 
-const StartDashboard = () => {
+const OpenDashboard = () => {
   const navigator = useNavigation()
 
   return (
@@ -62,11 +63,11 @@ const StartDashboard = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate('VideoDetails')}>
+        onPress={() => navigator.navigate(HOME)}>
         Bắt đầu ngay
       </Button>
     </VStack>
   )
 }
 
-export default StartDashboard
+export default OpenDashboard
