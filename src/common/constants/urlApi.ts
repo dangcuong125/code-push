@@ -1,0 +1,2 @@
+export const BASE_URL =
+  'http://clevertube-dev-alb-1086634962.ap-northeast-1.elb.amazonaws.com'

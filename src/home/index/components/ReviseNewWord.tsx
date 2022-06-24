@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, Icon } from 'native-base'
+import { Box, Button, Heading, Icon, Text } from 'native-base'
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
@@ -35,8 +35,8 @@ const NewWord = ({ item }: { item: IReviseNewWordItem }) => {
           onPress={() => Tts.speak(item.word)}
         />
         <Box marginTop={'43px'} margin="auto">
-          {item.answers.map((answer: any) => (
-            <Button marginTop="5px" width="343px">
+          {item.answers.map((answer: any, index) => (
+            <Button key={index} marginTop="5px" width="343px">
               {answer.meaning}
             </Button>
           ))}
