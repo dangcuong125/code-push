@@ -102,53 +102,56 @@ export const MaybeYouLike = () => {
             Xem tất cả
           </Text>
         </HStack>
-        <FlatList
-          data={topicCarousel}
-          renderItem={renderItem}
-          horizontal={true}
-        />
-        <Flex
-          direction="row"
-          width="360px"
-          marginTop="20px"
-          justifyContent="space-between">
-          <Box>
-            {dataWithOddId.map(item => {
-              return (
-                <Pressable
-                  key={item.id}
-                  height="195px"
-                  width="162px"
-                  onPress={() => console.log('hello')}>
-                  <Image source={item.image} />
-                  <Box bgColor="#5AC8FA1A" padding="10px">
-                    <Text color={'text.100'} fontWeight={400}>
-                      {item.title}
-                    </Text>
-                  </Box>
-                </Pressable>
-              )
-            })}
-          </Box>
-          <Box>
-            {dataWithEvenId.map(item => {
-              return (
-                <Pressable
-                  key={item.id}
-                  height="195px"
-                  width="162px"
-                  onPress={() => console.log('hello')}>
-                  <Image source={item.image} />
-                  <Box bgColor="#5AC8FA1A" padding="10px">
-                    <Text color={'text.100'} fontWeight={400}>
-                      {item.title}
-                    </Text>
-                  </Box>
-                </Pressable>
-              )
-            })}
-          </Box>
-        </Flex>
+        <Box margin="auto">
+          <FlatList
+            data={topicCarousel}
+            renderItem={renderItem}
+            horizontal={true}
+          />
+          <Flex
+            direction="row"
+            // width="360px"
+            marginTop="20px"
+            justifyContent="space-between">
+            <Box>
+              {dataWithOddId.map(item => {
+                return (
+                  <Pressable
+                    key={item.id}
+                    height="195px"
+                    width="162px"
+                    textAlign={'center'}
+                    onPress={() => console.log('hello')}>
+                    <Image source={item.image} />
+                    <Box bgColor="#5AC8FA1A" padding="10px">
+                      <Text color={'text.100'} fontWeight={400}>
+                        {item.title}
+                      </Text>
+                    </Box>
+                  </Pressable>
+                )
+              })}
+            </Box>
+            <Box>
+              {dataWithEvenId.map(item => {
+                return (
+                  <Pressable
+                    key={item.id}
+                    height="195px"
+                    width="162px"
+                    onPress={() => console.log('hello')}>
+                    <Image source={item.image} />
+                    <Box bgColor="#5AC8FA1A" padding="10px">
+                      <Text color={'text.100'} fontWeight={400}>
+                        {item.title}
+                      </Text>
+                    </Box>
+                  </Pressable>
+                )
+              })}
+            </Box>
+          </Flex>
+        </Box>
       </Box>
     </Box>
   )

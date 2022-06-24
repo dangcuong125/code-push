@@ -68,16 +68,9 @@ export const VideoList = () => {
   }
   return (
     <>
-      <Box
-        marginTop="28px"
-        bgColor="#FFFFFF"
-        paddingBottom={'15px'}
-        paddingTop="15px">
-        <Box marginLeft="16px">
-          <HStack
-            alignItems="center"
-            justifyContent="space-between"
-            width="360px">
+      <Box marginTop="28px" bgColor="#FFFFFF">
+        <Box margin="16px">
+          <HStack alignItems="center" justifyContent="space-between">
             <Heading color="text.200">Video</Heading>
             <Text color="text.500">Xem tất cả</Text>
           </HStack>
