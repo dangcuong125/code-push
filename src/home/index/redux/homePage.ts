@@ -10,7 +10,7 @@ export const homePage = createSlice({
   name: 'home-page',
   initialState,
   reducers: {
-    selectOnlyOneType: (state: any, action: any) => {
+    selectOnlyOneType: (state: IInitialState, action: any) => {
       state.videoTypeCarousel = state.videoTypeCarousel.map(
         (item: IVideoTypeCarousel) => {
           const isSelected = item.id === action.payload

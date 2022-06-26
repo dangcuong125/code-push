@@ -247,7 +247,7 @@ const Register = ({ navigation }: RegisterProps) => {
         {/* redirect Sreen Register */}
         <Center mt={'40px'}>
           <Text fontSize={'14px'} fontWeight={400} color={'text.200'}>
-          Bạn đã từng đăng ký?Đăng nhập{' '}
+            Bạn đã từng đăng ký?Đăng nhập{' '}
             <Link
               to={{ screen: LOGIN }}
               style={{

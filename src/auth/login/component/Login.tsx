@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import auth from '@react-native-firebase/auth'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
@@ -20,6 +20,8 @@ import { INPUT_OTP, REGISTER } from '@clvtube/common/constants/route.constants'
 import { LoginProps } from '@clvtube/common/navigators/Root'
 import appleAuth from '@invertase/react-native-apple-authentication'
 import { InputReference } from '../../../auth-demo/InputOTP'
+import { envData } from '@clvtube/common/constants/envData'
+// import auth from '@react-native-firebase/auth';
 
 const { width, height } = Dimensions.get('screen')
 
@@ -28,6 +30,12 @@ const Login = ({ navigation }: LoginProps) => {
   const [focusInput, setFocusInput] = useState<boolean>(false)
 
   const inputRef = useRef<InputReference>(null)
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: envData.webClientId,
+    })
+  })
 
   // Event login with phoneNumber
   const onChangePhone = (text: string) => {
@@ -63,6 +71,11 @@ const Login = ({ navigation }: LoginProps) => {
       console.log({ idToken })
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
       const idGoogle = await auth().signInWithCredential(googleCredential)
+      auth()
+        .currentUser?.getIdTokenResult()
+        .then(token => {
+          console.log('bello', token)
+        })
       console.log({ idGoogle })
       return idGoogle
     } catch (error) {

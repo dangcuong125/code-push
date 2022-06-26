@@ -42,7 +42,6 @@ const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
         <HStack justifyContent={'space-between'} alignItems={'center'}>
           <Progress
             value={item.progress}
-            size={'none'}
             height={'4px'}
             bg={'rgba(90, 200, 250, 0.4)'}
             _filledTrack={{ bg: '#216BCD' }}

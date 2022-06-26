@@ -25,7 +25,6 @@ import {
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   return (
     <Button
-      size={'none'}
       height={'27px'}
       lineHeight={'27px'}
       px={2}
@@ -37,7 +36,7 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
       _text={{
         color: item.color,
         fontStyle: 'normal',
-        fontSize: '14px',
+        height: '20px',
         fontWeight: 400,
       }}>
       {item.type}
