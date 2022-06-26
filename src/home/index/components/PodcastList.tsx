@@ -13,13 +13,16 @@ import { FlatList } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { PODCASTS } from '@clvtube/mocks/homePage'
-import { IPodcastTypeCarouselProps, IPodcastTypes } from '../interfaces'
+import {
+  IAudioTopicItem,
+  IPodcastTypeCarouselProps,
+  IPodcastTypes,
+} from '../interfaces'
+import { useGetPodcastList } from '../hooks/useGetPodcastList'
 
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
     <Button
-      // size={'none'}
       height={'27px'}
       lineHeight={'27px'}
       px={2}
@@ -31,7 +34,7 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
       _text={{
         color: item.color,
         fontStyle: 'normal',
-        fontSize: '14px',
+        height: '20px',
         fontWeight: 400,
       }}>
       {item.type}
@@ -42,6 +45,7 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
 export const PodcastList = () => {
   // const dispatch = useAppDispatch()
   const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
+  const { data } = useGetPodcastList(1, 10)
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
       <PodcastTypeCarousel
@@ -80,7 +84,7 @@ export const PodcastList = () => {
       </VStack>
       <ScrollView>
         <VStack height={'400px'} safeAreaX={4} space={5}>
-          {PODCASTS?.map((item, index) => (
+          {data?.data?.items?.map((item: any, index: number) => (
             <Pressable
               key={index}
               borderColor="#E6E6E6"
@@ -88,7 +92,12 @@ export const PodcastList = () => {
               borderRadius={'12px'}
               p={3}>
               <HStack space={4} alignItems={'center'}>
-                <Image source={item.image} />
+                <Image
+                  source={item.audioThumbnail?.thumbnailId}
+                  width={'101px'}
+                  height={'100px'}
+                  borderRadius={'10px'}
+                />
                 <VStack space={1.5} width={'60%'}>
                   <Heading
                     fontStyle={'normal'}
@@ -104,7 +113,7 @@ export const PodcastList = () => {
                     fontWeight={400}
                     lineHeight={'19px'}
                     color={'#999999'}>
-                    {item.hashtag}
+                    {item.desc}
                   </Text>
                   <HStack justifyContent={'flex-start'} alignItems={'center'}>
                     <HStack space={0.5} alignItems={'center'}>
@@ -135,7 +144,9 @@ export const PodcastList = () => {
                       fontSize={'10px'}
                       fontWeight={400}
                       color={'#999999'}>
-                      Mobile App
+                      {item.audiosToTopics?.map(
+                        (topic: IAudioTopicItem) => topic?.topicKey,
+                      )}
                     </Text>
                   </HStack>
                 </VStack>

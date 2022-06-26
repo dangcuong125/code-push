@@ -70,4 +70,23 @@ export interface IPodcastTypeCarouselProps {
   item: IPodcastTypes
   onPress: () => void
 }
+export interface IAudioTopicItem {
+  id: number
+  topicKey: string
+  audioId: number
+  topic: {
+    createdAt: string
+    updatedAt: string
+    deletedAt: null | string
+    version: number
+    key: string
+    slug: string
+    description: string
+    enabled: number
+    translates: []
+  }
+}
+// export interface IAudioToTopics {
+//   IAudioTopicItem[]
+// }
 export type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>
