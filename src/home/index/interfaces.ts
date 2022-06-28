@@ -2,11 +2,18 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '@clvtube/common/navigators/Root'
 
 export interface IVideoTypeCarousel {
-  id: number
-  type: string
-  isSelected: boolean
-  backgroundColor: string
-  color: string
+  createdAt: string
+  updatedAt: string
+  deletedAt: null | string
+  version: number
+  isSelected?: boolean
+  color?: string
+  bgColor?: string
+  key: string
+  slug: string
+  description: string
+  enabled: number
+  translates: []
 }
 interface IVideoListCarousel {
   id: number
@@ -18,13 +25,14 @@ interface IVideoListCarousel {
 export interface IInitialState {
   videoTypeCarousel: IVideoTypeCarousel[]
   videoList: IVideoListCarousel[]
+  podcastTypeCarousel: IVideoTypeCarousel[]
 }
 export interface IVideoListCarouselProps {
   item: IVideoListCarousel
 }
 export interface VideoTypeCarouselProps {
   item: IVideoTypeCarousel
-  onPress: () => void
+  onPress?: () => void
 }
 
 export interface IDiscountBanner {
@@ -60,11 +68,18 @@ export interface IPodcast {
   hashtag: string
 }
 export interface IPodcastTypes {
-  id: null | number
-  type: string
-  isSelected: boolean
-  backgroundColor: string
-  color: string
+  createdAt: string
+  updatedAt: string
+  deletedAt: null | string
+  version: number
+  isSelected?: boolean
+  color?: string
+  bgColor?: string
+  key: string
+  slug: string
+  description: string
+  enabled: number
+  translates: []
 }
 export interface IPodcastTypeCarouselProps {
   item: IPodcastTypes

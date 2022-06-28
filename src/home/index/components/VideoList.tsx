@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList } from 'react-native'
 import {
   Box,
@@ -13,14 +13,14 @@ import {
 
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-
-import { selectOnlyOneType } from '../redux/homePage'
+import { receiveTopicsVideo, selectOnlyOneTypeVideo } from '../redux/homePage'
 
 import {
   IVideoListCarouselProps,
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
 } from '../interfaces'
+import { useGetAllTopics } from '../hooks/useGetAllTopics'
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   return (
@@ -31,15 +31,15 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
       marginLeft={3}
       variant="outline"
       borderColor="#3D9BE0"
-      bgColor={item.backgroundColor}
+      bgColor={item.bgColor || '#FFFFFF'}
       onPress={onPress}
       _text={{
-        color: item.color,
+        color: item.color || '#3D9BE0',
         fontStyle: 'normal',
         height: '20px',
         fontWeight: 400,
       }}>
-      {item.type}
+      {item.description}
     </Button>
   )
 }
@@ -64,7 +64,13 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
             lineHeight={'22px'}>
             {item.title}
           </Text>
-          <Image source={item.image} resizeMode="contain" mt={1} mb={4} />
+          <Image
+            source={item.image}
+            resizeMode="contain"
+            mt={1}
+            mb={4}
+            alt=""
+          />
           <Text
             fontStyle={'normal'}
             fontSize={'14px'}
@@ -89,17 +95,20 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
 }
 
 export const VideoList = () => {
-  const videoTypeCarousel = useAppSelector(
-    state => state?.homePage?.videoTypeCarousel,
-  )
+  const { data } = useGetAllTopics('en', -1, 1, 100)
   const videoListCarousel = useAppSelector(state => state.homePage.videoList)
+  const videoTypeCarousel = useAppSelector(
+    state => state.homePage.videoTypeCarousel,
+  )
 
   const dispatch = useAppDispatch()
 
   const renderVideoTypeCarousel = ({ item }: { item: IVideoTypeCarousel }) => {
     return (
       <VideoTypeCarousel
-        onPress={() => dispatch(selectOnlyOneType(item.id))}
+        onPress={() => {
+          dispatch(selectOnlyOneTypeVideo(item.key))
+        }}
         item={item}
       />
     )
@@ -108,6 +117,9 @@ export const VideoList = () => {
   const renderVideoListCarousel = ({ item }: IVideoListCarouselProps) => {
     return <VideoListCarousel item={item} />
   }
+  useEffect(() => {
+    dispatch(receiveTopicsVideo(data?.data?.items))
+  }, [data?.data?.items])
 
   return (
     <VStack bgColor={'transparent'}>
