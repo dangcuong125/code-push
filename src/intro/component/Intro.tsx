@@ -1,12 +1,13 @@
-import { slider } from '@clvtube/mocks/dataOnboarding'
-import { Box, Button, Center, Text, VStack, Pressable } from 'native-base';
+// import Component from Package
 import React, { useRef, useState } from 'react'
+import { Box, Button, Center, Pressable, Text, VStack } from 'native-base'
 
 import { useNavigation } from '@react-navigation/native'
 import { Dimensions, Image, TouchableOpacity } from 'react-native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { LOGIN, TOPIC } from '@clvtube/common/constants/route.constants'
+import { AUTH } from '@clvtube/common/constants/route.constants'
 
+import { slider } from '@clvtube/mocks/dataOnboarding'
 const { width, height } = Dimensions.get('window')
 
 const renderItemSlider = ({ item, index }) => {
@@ -43,7 +44,7 @@ const Intro = () => {
       setIndex(nextSlideIndex)
       refCarousel?.current?.snapToItem(nextSlideIndex)
     } else {
-      navigator.navigate(LOGIN)
+      navigator.navigate(AUTH)
     }
   }
 
@@ -55,7 +56,7 @@ const Intro = () => {
           mt={10}
           onPress={() => {
             console.warn('Redirect Page Login!')
-            return navigator.navigate(LOGIN)
+            return navigator.navigate(AUTH)
           }}
         >
           <Text

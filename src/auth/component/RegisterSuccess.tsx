@@ -5,11 +5,13 @@ import { Dimensions, Image } from 'react-native'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
 import { useNavigation } from '@react-navigation/native'
-import { HOME } from '../../../common/constants/route.constants'
+import { TOPIC } from '@clvtube/common/constants/route.constants'
+// import auth from '@react-native-firebase/auth'
+
 
 const { width } = Dimensions.get('screen')
 
-const OpenDashboard = () => {
+const RegisterSuccess = () => {
   const navigator = useNavigation()
 
   return (
@@ -37,7 +39,7 @@ const OpenDashboard = () => {
           fontWeight={600}
           color={'neutral.800'}
           lineHeight={'46px'}>
-          Chào buổi sáng, TDzo!
+          Đăng ký thành công!
         </Heading>
         <Text
           textAlign={'center'}
@@ -54,7 +56,7 @@ const OpenDashboard = () => {
       </Center>
 
       <Button
-        bgColor={'primary.100'}
+        bgColor={'#216BCD'}
         borderRadius={'8px'}
         height={'48px'}
         _text={{
@@ -63,11 +65,11 @@ const OpenDashboard = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate(HOME)}>
+        onPress={() => navigator.navigate(TOPIC)}>
         Bắt đầu ngay
       </Button>
     </VStack>
   )
 }
 
-export default OpenDashboard
+export default RegisterSuccess

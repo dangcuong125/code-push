@@ -1,8 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-
-import auth from '@react-native-firebase/auth'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { Link } from '@react-navigation/native'
+// 🚀 import component from Package
 import {
   Box,
   Button,
@@ -13,31 +9,52 @@ import {
   Text,
   VStack,
 } from 'native-base'
-import { Dimensions, Image } from 'react-native'
-
-import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath'
-import { INPUT_OTP, REGISTER } from '@clvtube/common/constants/route.constants'
-import { LoginProps } from '@clvtube/common/navigators/Root'
+import React, { useEffect, useRef, useState } from 'react'
+import { Dimensions, Image, Platform } from 'react-native'
+// 🚀 import component auth with firebase
 import appleAuth from '@invertase/react-native-apple-authentication'
-import { InputReference } from '../../../auth-demo/InputOTP'
+import auth from '@react-native-firebase/auth'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
+
 import { envData } from '@clvtube/common/constants/envData'
-// import auth from '@react-native-firebase/auth';
+import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath'
+import { CREATE_INFO, INPUT_OTP, OPENDASHBOARD } from '@clvtube/common/constants/route.constants'
+import { useAppDispatch } from '../common/hooks/useAppDispatch'
+import { AuthProps } from '../common/navigators/Root'
+import { InputReference } from './component/InputOTP'
+import { useLoginMutation } from './hook/useAuthMutation'
+import { updateAccountWithAuthGoogle } from './slice'
+
+
 
 const { width, height } = Dimensions.get('screen')
+const isIOS = Platform.OS === 'ios'
 
-const Login = ({ navigation }: LoginProps) => {
+const Auth = ({ navigation }: AuthProps) => {
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [focusInput, setFocusInput] = useState<boolean>(false)
-
   const inputRef = useRef<InputReference>(null)
 
+  const { mutate } = useLoginMutation()
+
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
+    // console.log(Config.WEB_CLIENT_ID)
     GoogleSignin.configure({
       webClientId: envData.webClientId,
     })
-  })
+    // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
+    if (isIOS) {
+      return appleAuth.onCredentialRevoked(async () => {
+        console.warn(
+          'If this function executes, User Credentials have been Revoked',
+        )
+      })
+    }
+  }, [])
 
-  // Event login with phoneNumber
+  // 🚀 Event auth with phoneNumber
   const onChangePhone = (text: string) => {
     setFocusInput(true)
     setPhoneNumber(text)
@@ -62,27 +79,39 @@ const Login = ({ navigation }: LoginProps) => {
       console.log(error)
     }
   }
-  console.log(phoneNumber)
 
-  // Event login with Google
+  // 🚀 Event auth with Google
   const handleLoginWithGoogle = async () => {
     try {
       const { idToken } = await GoogleSignin.signIn()
-      console.log({ idToken })
       const googleCredential = auth.GoogleAuthProvider.credential(idToken)
       const idGoogle = await auth().signInWithCredential(googleCredential)
+
       auth()
         .currentUser?.getIdTokenResult()
         .then(token => {
-          console.log('bello', token)
+          dispatch(updateAccountWithAuthGoogle({
+            email: idGoogle.user.email,
+            name: idGoogle.user.displayName,
+            firIdToken: token.token,
+          }))
+
+          mutate(token.token, {
+            onSuccess: data => {
+              if (data?.status === 201) {
+                navigation.navigate(OPENDASHBOARD)
+              }
+            },
+            onError: () => navigation.navigate(CREATE_INFO),
+          })
         })
-      console.log({ idGoogle })
       return idGoogle
     } catch (error) {
       console.log(error)
     }
   }
 
+  // 🚀 Event auth with Apple
   const handleLoginWithApple = async () => {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
@@ -98,13 +127,15 @@ const Login = ({ navigation }: LoginProps) => {
       identityToken,
       nonce,
     )
+    console.log({ identityToken, nonce })
 
     return auth().signInWithCredential(appleCredential)
   }
 
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4}>
-      {/* Images Screen Login */}
+
+      {/* 🚀 Images Screen Login */}
       <Center marginBottom={'-50px'}>
         <Image
           source={imagePath.LOGIN_REGISTER}
@@ -114,23 +145,24 @@ const Login = ({ navigation }: LoginProps) => {
           }}
         />
       </Center>
+
       <VStack space={5}>
-        {/* Feature login with phoneNumber */}
+        {/* 🚀 Feature login with phoneNumber */}
         <Input
           ref={inputRef}
           height={'47px'}
           borderWidth={'1px'}
           borderColor={'neutral.50'}
           borderRadius={'8px'}
-          placeholder={focusInput ? '' : 'Số điện thoại'}
-          placeholderTextColor={'neutral.800'}
+          placeholder={focusInput ? '' : 'Nhập số điện thoại'}
+          placeholderTextColor={'#999999'}
           value={phoneNumber}
           onChangeText={onChangePhone}
           onBlur={onChangeBlur}
           onFocus={onChangeFocus}
-          selectionColor={'black'}
+          selectionColor={'#1A1A1A'}
           _input={{
-            color: 'neutral.800',
+            color: '#1A1A1A',
             fontStyle: 'normal',
             fontSize: '14px',
             fontWeight: 400,
@@ -149,11 +181,13 @@ const Login = ({ navigation }: LoginProps) => {
             fontSize: '14px',
             fontWeight: 400,
             fontStyle: 'normal',
-            color: 'text.300',
+            color: '#FFFFFF',
           }}
           onPress={handleLoginWithPhonenumber}>
           {phoneNumber ? 'Đăng nhập' : 'Tiếp tục'}
         </Button>
+
+        {/* 🚀 Option auth with Social */}
         <Box mt={'10px'}>
           <Divider height={'1px'} backgroundColor={'neutral.900'} />
           <Center>
@@ -172,18 +206,16 @@ const Login = ({ navigation }: LoginProps) => {
             </Box>
           </Center>
         </Box>
-        {/* Feature login with Google */}
+
+        {/* 🚀 Feature login with Google */}
         <Button
           height={'48px'}
           backgroundColor={'transparent'}
           borderWidth={'1px'}
           borderColor={'neutral.50'}
           borderRadius={'8px'}
-          onPress={() =>
-            handleLoginWithGoogle().then(() =>
-              console.log('SignIn Google successFly'),
-            )
-          }>
+          onPress={handleLoginWithGoogle}
+        >
           <HStack
             space={3}
             width={'100%'}
@@ -206,7 +238,8 @@ const Login = ({ navigation }: LoginProps) => {
             </Text>
           </HStack>
         </Button>
-        {/* Feature login with Facebook */}
+
+        {/* 🚀 Feature login with Facebook */}
         <Button
           height={'48px'}
           backgroundColor={'transparent'}
@@ -231,49 +264,52 @@ const Login = ({ navigation }: LoginProps) => {
             </Text>
           </HStack>
         </Button>
-        {/* Feature login with Apple */}
-        <Button
-          height={'48px'}
-          backgroundColor={'transparent'}
-          borderWidth={'1px'}
-          borderColor={'neutral.50'}
-          borderRadius={'8px'}
-          onPress={handleLoginWithApple}>
-          <HStack space={3} alignItems={'center'}>
-            <Image
-              source={imageSocial.APPLE}
-              style={{
-                height: height * 0.06,
-                width: width * 0.06,
-                resizeMode: 'contain',
-              }}
-            />
-            <Text
-              fontStyle={'normal'}
-              fontSize={'14px'}
-              fontWeight={400}
-              color={'neutral.800'}>
-              Tiếp tục với Apple
-            </Text>
-          </HStack>
-        </Button>
-        {/* redirect Sreen Register */}
+
+        {/* 🚀 Feature login with Apple */}
+        {isIOS &&
+          <Button
+            height={'48px'}
+            backgroundColor={'transparent'}
+            borderWidth={'1px'}
+            borderColor={'neutral.50'}
+            borderRadius={'8px'}
+            onPress={handleLoginWithApple}>
+            <HStack space={3} alignItems={'center'}>
+              <Image
+                source={imageSocial.APPLE}
+                style={{
+                  height: height * 0.06,
+                  width: width * 0.06,
+                  resizeMode: 'contain',
+                }}
+              />
+              <Text
+                fontStyle={'normal'}
+                fontSize={'14px'}
+                fontWeight={400}
+                color={'neutral.800'}>
+                Tiếp tục với Apple
+              </Text>
+            </HStack>
+          </Button>
+        }
+
+        {/* 🚀 version Application */}
         <Center mt={'40px'}>
-          <Text fontSize={'14px'} fontWeight={400} color={'text.200'}>
-            Nếu bạn chưa có tài khoản?Đăng ký{' '}
-            <Link
-              to={{ screen: REGISTER }}
-              style={{
-                color: '#216BCD',
-                textDecorationLine: 'underline',
-              }}>
-              tại đây
-            </Link>
+          <Text
+            fontStyle={'normal'}
+            fontSize={'14px'} 
+            fontWeight={600} 
+            lineHeight={'20px'}
+            color={'#999999'}
+          >
+              Phiên bản 1.0.0
           </Text>
         </Center>
       </VStack>
+
     </VStack>
   )
 }
 
-export default Login
+export default Auth

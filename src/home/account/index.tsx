@@ -8,8 +8,11 @@ import Fontiso from 'react-native-vector-icons/Fontisto'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const Account = () => {
+  const authState = useAppSelector(state => state.authReducer)
+
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
       <HStack space={4} alignItems={'center'} my={8}>
@@ -30,7 +33,7 @@ const Account = () => {
             fontSize={'16px'}
             fontWeight={600}
             color={'#000000'}>
-            Taodzo Phan
+            { authState.name }
           </Heading>
           <Text
             fontStyle={'normal'}
@@ -44,7 +47,7 @@ const Account = () => {
             fontSize={'12px'}
             fontWeight={400}
             color={'#4D4D4D'}>
-            phanthanhtao.96@gmail.com
+            { authState.email }
           </Text>
           <HStack alignItems={'center'}>
             <Ionicons name="md-star-sharp" color={'#FFC107'} size={20} />

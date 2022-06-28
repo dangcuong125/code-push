@@ -46,6 +46,7 @@ export const PodcastList = () => {
   // const dispatch = useAppDispatch()
   const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
   const { data } = useGetPodcastList(1, 10)
+  console.log('data',typeof data?.data)
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
       <PodcastTypeCarousel

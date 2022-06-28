@@ -1,6 +1,5 @@
-import React from 'react'
-
 // import Component from package
+import React from 'react'
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
@@ -8,40 +7,38 @@ import {
 
 // import Components from Pages
 import Intro from '@clvtube/intro/component/Intro'
-import Login from '@clvtube/auth/login/component/Login'
-import OpenDashboard from '@clvtube/auth/login/component/OpenDashboard'
-import CreateInfo from '@clvtube/auth/register/component/CreateInfo'
-import InputOTP from '@clvtube/auth/register/component/InputOTP'
-import Register from '@clvtube/auth/register/component/Register'
-import RegisterSuccess from '@clvtube/auth/register/component/RegisterSuccess'
+import Auth from '@clvtube/auth'
+import InputOTP from '@clvtube/auth/component/InputOTP'
+import CreateInfo from '@clvtube/auth/component/CreateInfo'
+import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess'
+import OpenDashboard from '@clvtube/auth/component/OpenDashboard'
 import Topic from '@clvtube/level-topic/component/Topic'
 import Home from './Home'
 
 import SearchPage from '../../search'
 import VideoDetailPage from '@clvtube/video-details/components/index'
 
-// import Constants from file Constants Route
+// import Constants from file.Constants.Route
 import {
+  AUTH,
   CREATE_INFO,
   HOME,
   INPUT_OTP,
   INTRO,
-  LOGIN,
   OPENDASHBOARD,
-  REGISTER,
   REGISTER_SUCCESS,
   SEARCH_PAGE,
   TOPIC,
   VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants'
 
+
 export type RootStackParamList = {
   Intro: {}
-  Login: { navigation: any }
+  Auth: { navigation: any }
   OpenDashboard: {}
-  Register: { navigation: any }
   InputOTP: { navigation: any; confirmation: any }
-  CreateInfo: {}
+  CreateInfo: { navigation: any }
   RegisterSuccess: {}
   Topic: {}
   Home: {}
@@ -51,11 +48,8 @@ export type RootStackParamList = {
   StartDashboard: {}
 }
 
-export type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
-export type RegisterProps = NativeStackScreenProps<
-  RootStackParamList,
-  'Register'
->
+export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>
+export type CreateInfoProps = NativeStackScreenProps<RootStackParamList, 'CreateInfo'>
 export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'
@@ -65,7 +59,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Root = () => {
   return (
-    <Stack.Navigator initialRouteName={HOME}>
+    <Stack.Navigator initialRouteName={INTRO}>
       {/* Route Intro */}
       <Stack.Screen
         name={INTRO}
@@ -73,22 +67,10 @@ const Root = () => {
         options={{ headerShown: false }}
       />
 
-      {/* Route Auth - Login */}
+      {/* Route Auth */}
       <Stack.Screen
-        name={LOGIN}
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={OPENDASHBOARD}
-        component={OpenDashboard}
-        options={{ headerShown: false }}
-      />
-
-      {/* Route Auth - Register */}
-      <Stack.Screen
-        name={REGISTER}
-        component={Register}
+        name={AUTH}
+        component={Auth}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -104,6 +86,11 @@ const Root = () => {
       <Stack.Screen
         name={REGISTER_SUCCESS}
         component={RegisterSuccess}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={OPENDASHBOARD}
+        component={OpenDashboard}
         options={{ headerShown: false }}
       />
 
@@ -135,5 +122,6 @@ const Root = () => {
     </Stack.Navigator>
   )
 }
+
 
 export default Root

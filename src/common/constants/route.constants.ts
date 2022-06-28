@@ -1,12 +1,9 @@
 // Route rule Intro
 export const INTRO = 'Intro'
 
-// Route rule Login
-export const LOGIN = 'Login'
+// Route rule Auth
+export const AUTH = 'Auth'
 export const OPENDASHBOARD = 'OpenDashboard'
-
-// Route rule Register
-export const REGISTER = 'Register'
 export const INPUT_OTP = 'InputOTP'
 export const CREATE_INFO = 'CreateInfo'
 export const REGISTER_SUCCESS = 'RegisterSuccess'
