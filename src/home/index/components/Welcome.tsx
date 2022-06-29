@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import { Image } from 'react-native'
-import { Center, Heading, Text, VStack } from 'native-base'
-import Carousel from 'react-native-reanimated-carousel'
+import { Image } from 'react-native';
+import { Center, Heading, Text, VStack } from 'native-base';
+import Carousel from 'react-native-reanimated-carousel';
 
-import { IDiscountBanner, IDiscountBannerProps } from '../interfaces'
-import { DISCOUNT_BANNER } from '@clvtube/mocks/homePage'
+import { IDiscountBanner, IDiscountBannerProps } from '../interfaces';
+import { DISCOUNT_BANNER } from '@clvtube/mocks/homePage';
 import { useAppSelector } from '../../../common/hooks/useAppSelector';
 
 const DiscountBanner = ({ item }: IDiscountBannerProps) => {
@@ -18,15 +18,15 @@ const DiscountBanner = ({ item }: IDiscountBannerProps) => {
         resizeMode: 'contain',
       }}
     />
-  )
-}
+  );
+};
 
 export const Welcome = () => {
-  const { name } = useAppSelector(state => state.authReducer)
+  const { name } = useAppSelector(state => state.authReducer);
 
   const renderItem = ({ item }: { item: IDiscountBanner }) => {
-    return <DiscountBanner item={item} />
-  }
+    return <DiscountBanner item={item} />;
+  };
 
   return (
     <VStack safeAreaX={4} pt={3} pb={6} space={3}>
@@ -56,5 +56,5 @@ export const Welcome = () => {
         />
       </Center>
     </VStack>
-  )
-}
+  );
+};

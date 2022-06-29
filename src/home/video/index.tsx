@@ -1,13 +1,11 @@
-import { ScrollView, VStack } from 'native-base'
-import React from 'react'
+import { ScrollView, VStack } from 'native-base';
+import React from 'react';
 
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
-import ListVideo from './component/ListVideo'
-import PopularVideo from './component/PopularVideo'
-import VideoPupolar from './component/VideoPupolar'
-import MaybeYouLikeVideo from './component/MaybeYouLikeVideo'
-
-
+import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import ListVideo from './component/ListVideo';
+import PopularVideo from './component/PopularVideo';
+import VideoPupolar from './component/VideoPupolar';
+import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
 
 const HomePage = () => {
   return (
@@ -22,7 +20,7 @@ const HomePage = () => {
         <MaybeYouLikeVideo />
       </VStack>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

@@ -1,13 +1,13 @@
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
-import { ScrollView, VStack } from 'native-base'
-import React from 'react'
+import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import { ScrollView, VStack } from 'native-base';
+import React from 'react';
 
-import { PodcastList } from './PodcastList'
-import { Recently } from './Recently'
-import { ReviseNewWord } from './ReviseNewWord'
-import { Speak } from './Speak'
-import { VideoList } from './VideoList'
-import { Welcome } from './Welcome'
+import { PodcastList } from './PodcastList';
+import { Recently } from './Recently';
+import { ReviseNewWord } from './ReviseNewWord';
+import { Speak } from './Speak';
+import { VideoList } from './VideoList';
+import { Welcome } from './Welcome';
 
 const HomePage = () => {
   return (
@@ -24,7 +24,7 @@ const HomePage = () => {
         <Speak />
       </VStack>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

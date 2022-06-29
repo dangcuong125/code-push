@@ -1,8 +1,8 @@
-import { Box, HStack, Heading, Progress, Text, VStack } from 'native-base'
-import { FlatList, Image } from 'react-native'
-import React from 'react'
-import { DATA_VIEWED_RECENTLY } from '@clvtube/mocks/homePage'
-import { IDataViewRecently } from '../interfaces'
+import { Box, HStack, Heading, Progress, Text, VStack } from 'native-base';
+import { FlatList, Image } from 'react-native';
+import React from 'react';
+import { DATA_VIEWED_RECENTLY } from '@clvtube/mocks/homePage';
+import { IDataViewRecently } from '../interfaces';
 
 const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
   return (
@@ -58,13 +58,13 @@ const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
         </HStack>
       </VStack>
     </Box>
-  )
-}
+  );
+};
 
 export const Recently = () => {
   const renderItem = ({ item }: { item: IDataViewRecently }) => {
-    return <VideoRecommended item={item} />
-  }
+    return <VideoRecommended item={item} />;
+  };
   return (
     <VStack bgColor={'white'} safeAreaY={3}>
       <Heading
@@ -83,5 +83,5 @@ export const Recently = () => {
         renderItem={renderItem}
       />
     </VStack>
-  )
-}
+  );
+};

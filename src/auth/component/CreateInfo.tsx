@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -9,29 +9,28 @@ import {
   Icon,
   Input,
   VStack,
-} from 'native-base'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Feather from 'react-native-vector-icons/Feather'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import Entypo from 'react-native-vector-icons/Entypo'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+} from 'native-base';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { imageSocial } from '@clvtube/common/constants/imagePath'
-import { Dimensions, Image } from 'react-native'
-import { useAppSelector } from '../../common/hooks/useAppSelector'
-import { useAppDispatch } from '../../common/hooks/useAppDispatch'
-import { updateAccountWithAuthGoogle } from '../slice'
-import { useRegisterMutation } from '../hook/useAuthMutation'
-import { REGISTER_SUCCESS } from '../../common/constants/route.constants'
-import { CreateInfoProps } from '../../common/navigators/Root'
+import { imageSocial } from '@clvtube/common/constants/imagePath';
+import { Dimensions, Image } from 'react-native';
+import { useAppSelector } from '../../common/hooks/useAppSelector';
+import { useAppDispatch } from '../../common/hooks/useAppDispatch';
+import { updateAccountWithAuthGoogle } from '../slice';
+import { useRegisterMutation } from '../hook/useAuthMutation';
+import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
+import { CreateInfoProps } from '../../common/navigators/Root';
 
-
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window');
 
 const CreateInfo = ({ navigation }: CreateInfoProps) => {
-  const authState = useAppSelector(state => state.authReducer)
-  const { email, phone, name, address, firIdToken } = authState
-  console.log({ authState })
+  const authState = useAppSelector(state => state.authReducer);
+  const { email, phone, name, address, firIdToken } = authState;
+  console.log({ authState });
 
   const [account, setAccount] = useState({
     email: email || '',
@@ -39,35 +38,37 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
     name: name || '',
     address: address || '',
     firIdToken,
-  })
+  });
 
-  const { mutate } = useRegisterMutation()
+  const { mutate } = useRegisterMutation();
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleSubmitToRegister = () => {
-    dispatch(updateAccountWithAuthGoogle(account))
-    mutate({
-      email: authState.email,
-      phone: authState.phone,
-      address: authState.address,
-      firIdToken: authState.firIdToken,
-    }, {
-      onSuccess: data => {
-        console.log({ taodzo: data?.data })
-        navigation.navigate(REGISTER_SUCCESS)
+    dispatch(updateAccountWithAuthGoogle(account));
+    mutate(
+      {
+        email: authState.email,
+        phone: authState.phone,
+        address: authState.address,
+        firIdToken: authState.firIdToken,
       },
-      onError: () => {
-        setAccount({
-          ...account,
-          phone: '',
-          address: '',
-        })
-        dispatch(updateAccountWithAuthGoogle(account))
+      {
+        onSuccess: data => {
+          console.log({ taodzo: data?.data });
+          navigation.navigate(REGISTER_SUCCESS);
+        },
+        onError: () => {
+          setAccount({
+            ...account,
+            phone: '',
+            address: '',
+          });
+          dispatch(updateAccountWithAuthGoogle(account));
+        },
       },
-    },
-    )
-  }
+    );
+  };
 
   return (
     <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'white'}>
@@ -89,12 +90,12 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         {/* label phone */}
         <Input
           onChangeText={text => {
-            setAccount({ ...account, phone: text })
+            setAccount({ ...account, phone: text });
             // dispatch(updateAccountWithAuthGoogle({ phone: text }))
           }}
           type="text"
           value={phone}
-          name='phone'
+          name="phone"
           isDisabled={Boolean(phone)}
           height={'48px'}
           borderRadius={'8px'}
@@ -128,14 +129,14 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         {/* Label email */}
         <Input
           onChangeText={text => {
-            setAccount({ ...account, phone: text })
+            setAccount({ ...account, phone: text });
             // dispatch(updateAccountWithAuthGoogle({ email: text }))
           }}
           type="text"
           value={account.email}
-          name='email'
+          name="email"
           isDisabled={Boolean(email)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<MaterialCommunityIcons name="email" />}
@@ -167,15 +168,15 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         />
         {/* Label name */}
         <Input
-          onChangeText={text =>
-            setAccount({ ...account, email: text })
+          onChangeText={
+            text => setAccount({ ...account, email: text })
             // dispatch(updateAccountWithAuthGoogle({ name: text }))
           }
           type="text"
           value={account.name}
           name="name"
           isDisabled={Boolean(name)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<Ionicons name="text" />}
@@ -207,15 +208,15 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         />
         {/* Label address */}
         <Input
-          onChangeText={text =>
-            setAccount({ ...account, address: text })
+          onChangeText={
+            text => setAccount({ ...account, address: text })
             // dispatch(updateAccountWithAuthGoogle({ address: text }))
           }
           type="text"
           value={address}
           name="name"
           isDisabled={Boolean(address)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<Entypo name="address" />}
@@ -245,7 +246,6 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             backgroundColor: '#3D9BE0',
           }}
         />
-
       </VStack>
       <Button
         onPress={handleSubmitToRegister}
@@ -339,7 +339,7 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         </Box>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
-export default CreateInfo
+export default CreateInfo;

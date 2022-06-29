@@ -1,5 +1,5 @@
 export function toQueryString(objParams: object) {
-  const str = []
+  const str = [];
   for (const p in objParams) {
     if (
       Object.prototype.hasOwnProperty.call(objParams, p) &&
@@ -9,17 +9,17 @@ export function toQueryString(objParams: object) {
       str.push(
         // @ts-ignore
         `${encodeURIComponent(p)}=${encodeURIComponent(objParams[p])}`,
-      )
+      );
     }
   }
 
-  return '?' + str.join('&')
+  return '?' + str.join('&');
 }
 export function replacePathParams(path: string, newData: object): string {
-  let newPath = path
+  let newPath = path;
   Object.keys(newData).forEach(it => {
     // @ts-ignore
-    newPath = newPath.replace(`:${it}`, newData[it])
-  })
-  return newPath
+    newPath = newPath.replace(`:${it}`, newData[it]);
+  });
+  return newPath;
 }

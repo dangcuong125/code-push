@@ -1,11 +1,11 @@
-import { Box, HStack, Input } from 'native-base'
-import React from 'react'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Foundation from 'react-native-vector-icons/Foundation'
-import { useNavigation } from '@react-navigation/native'
+import { Box, HStack, Input } from 'native-base';
+import React from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Foundation from 'react-native-vector-icons/Foundation';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchInput = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <HStack
@@ -45,7 +45,7 @@ const SearchInput = () => {
         <AntDesign name="search1" size={25} />
       </Box>
     </HStack>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

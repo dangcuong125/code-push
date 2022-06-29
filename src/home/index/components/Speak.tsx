@@ -1,6 +1,6 @@
-import React from 'react'
-import { Box, Flex, Heading, Image, Text } from 'native-base'
-import { AUDIO_RECOMMEND } from '@clvtube/mocks/homePage'
+import React from 'react';
+import { Box, Flex, Heading, Image, Text } from 'native-base';
+import { AUDIO_RECOMMEND } from '@clvtube/mocks/homePage';
 
 export const Speak = () => {
   return (
@@ -25,5 +25,5 @@ export const Speak = () => {
         ))}
       </Box>
     </Box>
-  )
-}
+  );
+};

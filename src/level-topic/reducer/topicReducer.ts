@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   level: [
@@ -17,7 +17,7 @@ const initialState = {
     { id: 8, topic: 'Technology', isSelected: false },
     { id: 9, topic: 'Agricuture', isSelected: false },
   ],
-}
+};
 
 const topicSlice = createSlice({
   name: 'topic',
@@ -26,27 +26,27 @@ const topicSlice = createSlice({
     selectLevel: (state: any, action: any) => {
       state.level = state.level.map((item: any) => {
         if (item.isSelected) {
-          return { ...item, isSelected: false }
+          return { ...item, isSelected: false };
         }
         if (item.id === action.payload.id) {
-          return { ...item, isSelected: !item.isSelected }
+          return { ...item, isSelected: !item.isSelected };
         }
-        return item
-      })
+        return item;
+      });
     },
     selectTopic: (state: any, action: any) => {
       state.topic = state.topic.map((item: any) => {
         if (item.id === action.payload.id) {
-          item.isSelected = !item.isSelected
+          item.isSelected = !item.isSelected;
         }
-        return item
-      })
+        return item;
+      });
     },
   },
-})
+});
 
-export const { selectLevel, selectTopic } = topicSlice.actions
+export const { selectLevel, selectTopic } = topicSlice.actions;
 
-const topicReducer = topicSlice.reducer
+const topicReducer = topicSlice.reducer;
 
-export default topicReducer
+export default topicReducer;

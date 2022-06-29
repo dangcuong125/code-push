@@ -1,11 +1,11 @@
-import { Box, Button, Heading, Icon, Text } from 'native-base'
-import React, { useState } from 'react'
-import { Dimensions } from 'react-native'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Tts from 'react-native-tts'
-import { REVISE_WORDS } from '@clvtube/mocks/homePage'
-import { IReviseNewWordItem } from '../interfaces'
+import { Box, Button, Heading, Icon, Text } from 'native-base';
+import React, { useState } from 'react';
+import { Dimensions } from 'react-native';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Tts from 'react-native-tts';
+import { REVISE_WORDS } from '@clvtube/mocks/homePage';
+import { IReviseNewWordItem } from '../interfaces';
 
 const NewWord = ({ item }: { item: IReviseNewWordItem }) => {
   return (
@@ -43,15 +43,15 @@ const NewWord = ({ item }: { item: IReviseNewWordItem }) => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export const ReviseNewWord = () => {
-  const [index, setIndex] = useState(0)
-  const { width } = Dimensions.get('screen')
+  const [index, setIndex] = useState(0);
+  const { width } = Dimensions.get('screen');
   const renderItem = ({ item }: { item: IReviseNewWordItem }) => {
-    return <NewWord item={item} />
-  }
+    return <NewWord item={item} />;
+  };
   return (
     <Box
       marginTop="16px"
@@ -98,5 +98,5 @@ export const ReviseNewWord = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};

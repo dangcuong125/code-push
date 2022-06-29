@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import {
   Button,
   HStack,
@@ -9,19 +9,19 @@ import {
   Pressable,
   Text,
   VStack,
-} from 'native-base'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+} from 'native-base';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { selectLevel, selectTopic } from '../reducer/topicReducer'
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-import { HOME } from '../../common/constants/route.constants'
+import { selectLevel, selectTopic } from '../reducer/topicReducer';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { HOME } from '../../common/constants/route.constants';
 
 const Topic = () => {
-  const { level, topic } = useAppSelector(state => state.topicReducer)
-  const dispatch = useAppDispatch()
+  const { level, topic } = useAppSelector(state => state.topicReducer);
+  const dispatch = useAppDispatch();
 
-  const navigator = useNavigation()
+  const navigator = useNavigation();
 
   return (
     <VStack
@@ -126,7 +126,7 @@ const Topic = () => {
         </Button>
       </Pressable>
     </VStack>
-  )
-}
+  );
+};
 
-export default Topic
+export default Topic;

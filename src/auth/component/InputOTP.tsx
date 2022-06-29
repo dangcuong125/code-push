@@ -1,46 +1,46 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 
-import { Box, Button, Center, Text, VStack } from 'native-base'
-import { Image, TextInput, TouchableOpacity, View } from 'react-native'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { Box, Button, Center, Text, VStack } from 'native-base';
+import { Image, TextInput, TouchableOpacity, View } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { imagePath } from '@clvtube/common/constants/imagePath'
-import { CREATE_INFO, HOME_PAGE } from '@clvtube/common/constants/route.constants'
-import { InputOTPProps } from '@clvtube/common/navigators/Root'
+import { imagePath } from '@clvtube/common/constants/imagePath';
+import { CREATE_INFO } from '@clvtube/common/constants/route.constants';
+import { InputOTPProps } from '@clvtube/common/navigators/Root';
 
 export interface InputReference extends TextInput {
-  value: string
+  value: string;
 }
 
 const InputOTP = ({ route, navigation }: InputOTPProps) => {
-  const inputRef = useRef<InputReference>(null)
+  const inputRef = useRef<InputReference>(null);
 
   // const clockCall: any = null
-  const lengthInput = 6
+  const lengthInput = 6;
   // const defaultCountDown = 60
-  const { confirmation } = route.params
+  const { confirmation } = route.params;
 
-  const [internalValue, setInternalValue] = useState<string>('')
+  const [internalValue, setInternalValue] = useState<string>('');
   // const [countDown, setCountDown] = useState<number>(defaultCountDown)
   // const [enableResend, setEnableResend] = useState<boolean>(false)
-  const [confirm] = useState(confirmation)
+  const [confirm] = useState(confirmation);
 
   const onChangeText = (value: string) => {
-    setInternalValue(value)
-  }
+    setInternalValue(value);
+  };
 
   const onSubmitOTP = async () => {
     if (internalValue.length === lengthInput) {
       try {
-        await confirm.confirm(internalValue)
-        // 
+        await confirm.confirm(internalValue);
+        //
 
-        return navigation.navigate(CREATE_INFO, {})
+        return navigation.navigate(CREATE_INFO, {});
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }
+  };
 
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
@@ -115,7 +115,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
                   </Text>
                 </View>
               </TouchableOpacity>
-            )
+            );
           })}
         </View>
         <Center marginTop={3}>
@@ -141,14 +141,13 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={onSubmitOTP}
-          >
+            onPress={onSubmitOTP}>
             Xác nhận
           </Button>
         </TouchableOpacity>
       </Box>
     </VStack>
-  )
-}
+  );
+};
 
-export default InputOTP
+export default InputOTP;

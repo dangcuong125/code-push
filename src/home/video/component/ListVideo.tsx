@@ -1,5 +1,5 @@
-import React from 'react'
-import { FlatList } from 'react-native'
+import React from 'react';
+import { FlatList } from 'react-native';
 import {
   Box,
   Button,
@@ -9,11 +9,9 @@ import {
   Image,
   Text,
   VStack,
-} from 'native-base'
+} from 'native-base';
 
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
 const VideoTypeCarousel = ({ item, onPress }) => {
   return (
@@ -34,8 +32,8 @@ const VideoTypeCarousel = ({ item, onPress }) => {
       }}>
       {item.type}
     </Button>
-  )
-}
+  );
+};
 
 const VideoListCarousel = ({ item }) => {
   return (
@@ -79,27 +77,22 @@ const VideoListCarousel = ({ item }) => {
         </Center>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 const ListVideo = () => {
   const videoTypeCarousel = useAppSelector(
     state => state?.homePage?.videoTypeCarousel,
-  )
-  const videoListCarousel = useAppSelector(state => state.homePage.videoList)
-
+  );
+  const videoListCarousel = useAppSelector(state => state.homePage.videoList);
 
   const renderVideoTypeCarousel = ({ item }) => {
-    return (
-      <VideoTypeCarousel
-        item={item}
-      />
-    )
-  }
+    return <VideoTypeCarousel item={item} />;
+  };
 
   const renderVideoListCarousel = ({ item }) => {
-    return <VideoListCarousel item={item} />
-  }
+    return <VideoListCarousel item={item} />;
+  };
 
   return (
     <VStack bgColor={'transparent'}>
@@ -135,7 +128,7 @@ const ListVideo = () => {
         renderItem={renderVideoListCarousel}
       />
     </VStack>
-  )
-}
+  );
+};
 
-export default ListVideo
+export default ListVideo;

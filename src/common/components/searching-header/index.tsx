@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import { Image } from 'react-native'
-import { HStack, Icon, Input } from 'native-base'
+import { Image } from 'react-native';
+import { HStack, Icon, Input } from 'native-base';
 
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { imageLogo } from '../../constants/imagePath'
+import { imageLogo } from '../../constants/imagePath';
 
 export const SearchingHeader = () => {
   return (
@@ -44,5 +44,5 @@ export const SearchingHeader = () => {
         style={{ paddingLeft: 12 }}
       />
     </HStack>
-  )
-}
+  );
+};

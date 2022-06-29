@@ -1,8 +1,8 @@
 import {
   GET_ALL_TOPICS,
   GET_PODCAST_LIST,
-} from '@clvtube/common/constants/urlApi'
-import { execute } from '@clvtube/common/lib/request'
+} from '@clvtube/common/constants/urlApi';
+import { execute } from '@clvtube/common/lib/request';
 
 export const getPodcastList = (
   topicKey: string,
@@ -15,8 +15,8 @@ export const getPodcastList = (
       page,
       limit,
     },
-  })
-}
+  });
+};
 export const getAllTopics = (
   lang: string,
   enabled: number,
@@ -30,5 +30,5 @@ export const getAllTopics = (
       page,
       limit,
     },
-  })
-}
+  });
+};

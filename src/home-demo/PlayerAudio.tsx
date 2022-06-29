@@ -1,21 +1,21 @@
-import React from 'react'
-import { Button, View } from 'react-native'
-import { MotiView } from 'moti'
-import { Text } from 'native-base'
+import React from 'react';
+import { Button, View } from 'react-native';
+import { MotiView } from 'moti';
+import { Text } from 'native-base';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from 'react-native-reanimated'
+} from 'react-native-reanimated';
 
 const PlayerAudio = () => {
-  const offset = useSharedValue(0)
+  const offset = useSharedValue(0);
 
   const animatedStyles = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: offset.value * 255 }],
-    }
-  })
+    };
+  });
 
   /**
    * We can try to using native base animation.
@@ -43,7 +43,7 @@ const PlayerAudio = () => {
         <Text color="primary.100">Hello</Text>
       </MotiView>
     </View>
-  )
-}
+  );
+};
 
-export default PlayerAudio
+export default PlayerAudio;

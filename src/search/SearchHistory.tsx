@@ -1,6 +1,6 @@
-import { Box, HStack, Text, VStack } from 'native-base'
-import React from 'react'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { Box, HStack, Text, VStack } from 'native-base';
+import React from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const SearchHistory = () => {
   return (
@@ -32,7 +32,7 @@ const SearchHistory = () => {
         Xoá lịch sử tìm kiếm
       </Text>
     </VStack>
-  )
-}
+  );
+};
 
-export default SearchHistory
+export default SearchHistory;

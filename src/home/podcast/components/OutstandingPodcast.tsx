@@ -1,8 +1,8 @@
-import React from 'react'
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { Box, Flex, Heading, Image, Pressable, Text } from 'native-base'
-import { FlatList } from 'react-native'
-import { IItemPodcastOutstanding, IItemPodcastPopular } from '../interfaces'
+import React from 'react';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { Box, Flex, Heading, Image, Pressable, Text } from 'native-base';
+import { FlatList } from 'react-native';
+import { IItemPodcastOutstanding, IItemPodcastPopular } from '../interfaces';
 
 const ItemPodcastOutstanding = ({ item }: IItemPodcastOutstanding) => {
   return (
@@ -34,8 +34,8 @@ const ItemPodcastOutstanding = ({ item }: IItemPodcastOutstanding) => {
         />
       </Flex>
     </Pressable>
-  )
-}
+  );
+};
 const ItemPodcastPopular = ({ item }: IItemPodcastPopular) => {
   return (
     <Flex
@@ -51,22 +51,22 @@ const ItemPodcastPopular = ({ item }: IItemPodcastPopular) => {
         {item.title}
       </Text>
     </Flex>
-  )
-}
+  );
+};
 
 export const OutStandingPodcast = () => {
   const podcastOutstanding = useAppSelector(
     state => state.podcastList.podcastOutstanding,
-  )
+  );
   const podcastPopular = useAppSelector(
     state => state.podcastList.podcastPopular,
-  )
+  );
   const renderPodcastOutstanding = ({ item }: IItemPodcastOutstanding) => {
-    return <ItemPodcastOutstanding item={item} />
-  }
+    return <ItemPodcastOutstanding item={item} />;
+  };
   const renderPocastPopular = ({ item }: IItemPodcastPopular) => {
-    return <ItemPodcastPopular item={item} />
-  }
+    return <ItemPodcastPopular item={item} />;
+  };
   return (
     <>
       <Box marginTop="16px" bgColor="#FFFFFF">
@@ -92,5 +92,5 @@ export const OutStandingPodcast = () => {
         </Box>
       </Box>
     </>
-  )
-}
+  );
+};

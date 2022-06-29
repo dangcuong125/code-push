@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { FlatList } from 'react-native'
+import React, { useEffect } from 'react';
+import { FlatList } from 'react-native';
 import {
   Box,
   Button,
@@ -9,18 +9,18 @@ import {
   Image,
   Text,
   VStack,
-} from 'native-base'
+} from 'native-base';
 
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-import { receiveTopicsVideo, selectOnlyOneTypeVideo } from '../redux/homePage'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { receiveTopicsVideo, selectOnlyOneTypeVideo } from '../redux/homePage';
 
 import {
   IVideoListCarouselProps,
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
-} from '../interfaces'
-import { useGetAllTopics } from '../hooks/useGetAllTopics'
+} from '../interfaces';
+import { useGetAllTopics } from '../hooks/useGetAllTopics';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   return (
@@ -41,8 +41,8 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
       }}>
       {item.description}
     </Button>
-  )
-}
+  );
+};
 
 const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
   return (
@@ -91,35 +91,35 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
         </Center>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export const VideoList = () => {
-  const { data } = useGetAllTopics('en', -1, 1, 100)
-  const videoListCarousel = useAppSelector(state => state.homePage.videoList)
+  const { data } = useGetAllTopics('en', -1, 1, 100);
+  const videoListCarousel = useAppSelector(state => state.homePage.videoList);
   const videoTypeCarousel = useAppSelector(
     state => state.homePage.videoTypeCarousel,
-  )
+  );
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const renderVideoTypeCarousel = ({ item }: { item: IVideoTypeCarousel }) => {
     return (
       <VideoTypeCarousel
         onPress={() => {
-          dispatch(selectOnlyOneTypeVideo(item.key))
+          dispatch(selectOnlyOneTypeVideo(item.key));
         }}
         item={item}
       />
-    )
-  }
+    );
+  };
 
   const renderVideoListCarousel = ({ item }: IVideoListCarouselProps) => {
-    return <VideoListCarousel item={item} />
-  }
+    return <VideoListCarousel item={item} />;
+  };
   useEffect(() => {
-    dispatch(receiveTopicsVideo(data?.data?.items))
-  }, [data?.data?.items])
+    dispatch(receiveTopicsVideo(data?.data?.items));
+  }, [data?.data?.items]);
 
   return (
     <VStack bgColor={'transparent'}>
@@ -155,5 +155,5 @@ export const VideoList = () => {
         renderItem={renderVideoListCarousel}
       />
     </VStack>
-  )
-}
+  );
+};

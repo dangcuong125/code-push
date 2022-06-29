@@ -234,6 +234,6 @@ const sampleTranscript = [
     duration: 3260,
     offset: 122220,
   },
-]
+];
 
-export { sampleTranscript }
+export { sampleTranscript };

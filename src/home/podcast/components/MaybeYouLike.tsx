@@ -7,10 +7,10 @@ import {
   Image,
   Pressable,
   Text,
-} from 'native-base'
-import React from 'react'
-import { FlatList } from 'react-native'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
+} from 'native-base';
+import React from 'react';
+import { FlatList } from 'react-native';
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
 
 const itemData = [
   {
@@ -43,7 +43,7 @@ const itemData = [
     image: imagePodcast.MAYBE_YOU_LIKE,
     title: '1234',
   },
-]
+];
 const topicCarousel = [
   {
     id: 1,
@@ -57,7 +57,7 @@ const topicCarousel = [
     id: 3,
     title: 'lorem ipsum',
   },
-]
+];
 
 const Item = ({ backgroundColor, onPress, color, item }: any) => {
   return (
@@ -71,12 +71,12 @@ const Item = ({ backgroundColor, onPress, color, item }: any) => {
       variant="outline">
       <Text color={color}>{item.title}</Text>
     </Button>
-  )
-}
+  );
+};
 
 export const MaybeYouLike = () => {
   const renderItem = ({ item }: any) => {
-    const handlePress = () => console.log('pressed')
+    const handlePress = () => console.log('pressed');
     return (
       <Item
         color="#FFFFFF"
@@ -84,10 +84,10 @@ export const MaybeYouLike = () => {
         onPress={handlePress}
         item={item}
       />
-    )
-  }
-  const dataWithOddId = itemData.filter(item => item.id % 2 === 1)
-  const dataWithEvenId = itemData.filter(item => item.id % 2 === 0)
+    );
+  };
+  const dataWithOddId = itemData.filter(item => item.id % 2 === 1);
+  const dataWithEvenId = itemData.filter(item => item.id % 2 === 0);
   return (
     <Box bgColor="#FFFFFF" marginTop="16px">
       <Box margin="16px">
@@ -129,7 +129,7 @@ export const MaybeYouLike = () => {
                       </Text>
                     </Box>
                   </Pressable>
-                )
+                );
               })}
             </Box>
             <Box>
@@ -147,12 +147,12 @@ export const MaybeYouLike = () => {
                       </Text>
                     </Box>
                   </Pressable>
-                )
+                );
               })}
             </Box>
           </Flex>
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};

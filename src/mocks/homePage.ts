@@ -1,7 +1,7 @@
 import {
   imageHomePage,
   imagePodcast,
-} from '@clvtube/common/constants/imagePath'
+} from '@clvtube/common/constants/imagePath';
 
 export const DISCOUNT_BANNER = [
   {
@@ -16,7 +16,7 @@ export const DISCOUNT_BANNER = [
     id: 3,
     image: imageHomePage.DISCOUNT_BANNER,
   },
-]
+];
 export const AUDIO_RECOMMEND = [
   {
     id: 1,
@@ -36,7 +36,7 @@ export const AUDIO_RECOMMEND = [
     title: '“Đừng khoe khoang nữa” tiếng anh là?',
     source: 'Học từ vựng theo ví dụ (P.2)',
   },
-]
+];
 export const REVISE_WORDS = [
   {
     id: 1,
@@ -89,7 +89,7 @@ export const REVISE_WORDS = [
       },
     ],
   },
-]
+];
 export const DATA_VIEWED_RECENTLY = [
   {
     id: 1,
@@ -112,7 +112,7 @@ export const DATA_VIEWED_RECENTLY = [
     content: 'High School Algebra I: Help and Review',
     progress: 50,
   },
-]
+];
 export const PODCASTS = [
   {
     id: 1,
@@ -150,7 +150,7 @@ export const PODCASTS = [
     title: 'Title for teacher, you can write anything here123',
     hashtag: '#Friend',
   },
-]
+];
 export const VIDEO_TYPE_CAROUSEL = [
   {
     id: 1,
@@ -187,7 +187,7 @@ export const VIDEO_TYPE_CAROUSEL = [
     backgroundColor: '',
     color: '#3D9BE0',
   },
-]
+];
 export const VIDEO_LIST = [
   {
     id: 1,
@@ -210,4 +210,4 @@ export const VIDEO_LIST = [
     content: '“We’re back on _ _ _ _.',
     suggestion: '“Tạm biệt!”',
   },
-]
+];
