@@ -8,17 +8,23 @@ import {
   Text,
   VStack,
 } from 'native-base'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
 import {
   IAudioTopicItem,
   IPodcastTypeCarouselProps,
   IPodcastTypes,
 } from '../interfaces'
 import { useGetPodcastList } from '../hooks/useGetPodcastList'
+import { useGetAllTopics } from '../hooks/useGetAllTopics'
+import {
+  receiveTopicsPodcast,
+  selectOnlyOneTypePodcast,
+} from '../redux/homePage'
 
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
@@ -29,31 +35,44 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
       marginLeft={3}
       variant="outline"
       borderColor="#3D9BE0"
-      bgColor={item.backgroundColor}
+      bgColor={item.bgColor || '#FFFFFF'}
       onPress={onPress}
       _text={{
-        color: item.color,
+        color: item.color || '#3D9BE0',
         fontStyle: 'normal',
         height: '20px',
         fontWeight: 400,
       }}>
-      {item.type}
+      {item.description}
     </Button>
   )
 }
 
 export const PodcastList = () => {
-  // const dispatch = useAppDispatch()
-  const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
-  const { data } = useGetPodcastList(1, 10)
+  const dispatch = useAppDispatch()
+  const [topicKey, setTopicKey] = useState<string>('')
+  console.log(topicKey)
+  const PODCAST_TYPE = useAppSelector(
+    state => state.homePage.podcastTypeCarousel,
+  )
+  const { data } = useGetPodcastList(topicKey, 1, 10)
+  const podcastList = data?.data?.items
+  const { data: topics } = useGetAllTopics('en', -1, 1, 100)
+
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
       <PodcastTypeCarousel
         item={item}
-        onPress={() => console.warn(JSON.stringify(item))}
+        onPress={() => {
+          setTopicKey(item.key)
+          dispatch(selectOnlyOneTypePodcast(item.key))
+        }}
       />
     )
   }
+  useEffect(() => {
+    dispatch(receiveTopicsPodcast(topics?.data?.items))
+  }, [topics?.data?.items])
   return (
     <VStack space={2} safeAreaY={2} bgColor={'white'}>
       <VStack bgColor={'white'} safeAreaY={2} space={4}>
@@ -84,7 +103,7 @@ export const PodcastList = () => {
       </VStack>
       <ScrollView>
         <VStack height={'400px'} safeAreaX={4} space={5}>
-          {data?.data?.items?.map((item: any, index: number) => (
+          {podcastList?.map((item: any, index: number) => (
             <Pressable
               key={index}
               borderColor="#E6E6E6"
