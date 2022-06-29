@@ -50,9 +50,6 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
 
 export const PodcastList = () => {
   // const dispatch = useAppDispatch()
-  const PODCAST_TYPE = useAppSelector(state => state.podcastList.podcastTypes)
-  const { data } = useGetPodcastList(1, 10)
-  console.log('data',typeof data?.data)
   const dispatch = useAppDispatch()
   const [topicKey, setTopicKey] = useState<string>('')
   console.log(topicKey)
