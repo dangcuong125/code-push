@@ -1,12 +1,12 @@
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
-import { Box } from 'native-base'
-import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native'
-import { MaybeYouLike } from './MaybeYouLike'
-import { OutStandingPodcast } from './OutstandingPodcast'
-import { PodcastList } from './PodcastList'
-import PopularTopics from './PopularTopics'
-import { Speak } from './Speak'
+import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import { Box } from 'native-base';
+import React from 'react';
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import { MaybeYouLike } from './MaybeYouLike';
+import { OutStandingPodcast } from './OutstandingPodcast';
+import { PodcastList } from './PodcastList';
+import PopularTopics from './PopularTopics';
+import { Speak } from './Speak';
 
 const Podcast = () => {
   return (
@@ -23,7 +23,7 @@ const Podcast = () => {
         <Speak />
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default Podcast
+export default Podcast;

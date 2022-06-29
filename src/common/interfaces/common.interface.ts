@@ -1,5 +1,5 @@
 // interface
-import { ReactElement } from 'react'
+import { ReactElement } from 'react';
 
 export interface CarouselProps {
   data?: Array<number | Object>

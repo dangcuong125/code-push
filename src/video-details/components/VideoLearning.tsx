@@ -1,13 +1,13 @@
-import React, { useRef } from 'react'
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import { Box, Button, Flex, HStack } from 'native-base'
-import YouTube from 'react-native-youtube'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import { VideoDetailPageProps } from '../interfaces'
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { loopVideo, previewVideo } from '../reducer/videoDetails'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-import { Carousel } from '@clvtube/common/components/carousel'
+import React, { useRef } from 'react';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { Box, Button, Flex, HStack } from 'native-base';
+import YouTube from 'react-native-youtube';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { VideoDetailPageProps } from '../interfaces';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { loopVideo, previewVideo } from '../reducer/videoDetails';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { Carousel } from '@clvtube/common/components/carousel';
 
 const transcript = [
   {
@@ -15,23 +15,23 @@ const transcript = [
     duration: 3680,
     offset: 480,
   },
-]
+];
 const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
-  const youtubeRef = useRef<YouTube>(null)
-  const dispatch = useAppDispatch()
+  const youtubeRef = useRef<YouTube>(null);
+  const dispatch = useAppDispatch();
   const numberTranscipt = useAppSelector(
     state => state.videoDetails.numberTranscipt,
-  )
+  );
   const totalTranscipt = useAppSelector(
     state => state.videoDetails.totalTranscipt,
-  )
-  const isLoopVideo = useAppSelector(state => state.videoDetails.loopVideo)
-  const isStopVideo = useAppSelector(state => state.videoDetails.previewVideo)
+  );
+  const isLoopVideo = useAppSelector(state => state.videoDetails.loopVideo);
+  const isStopVideo = useAppSelector(state => state.videoDetails.previewVideo);
   const handleYoutubeVideo = async () => {
-    dispatch(previewVideo(true))
-    const currentTime = await youtubeRef?.current?.getCurrentTime()
-    if (currentTime === 2) dispatch(previewVideo(false))
-  }
+    dispatch(previewVideo(true));
+    const currentTime = await youtubeRef?.current?.getCurrentTime();
+    if (currentTime === 2) dispatch(previewVideo(false));
+  };
   return (
     <>
       <SafeAreaView>
@@ -112,8 +112,8 @@ const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
         ;
       </Box>
     </>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
   videoLearning: {
     height: 230,
@@ -144,5 +144,5 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
   },
-})
-export default VideoLearning
+});
+export default VideoLearning;

@@ -1,6 +1,6 @@
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch'
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import {
   Box,
   Button,
@@ -10,10 +10,10 @@ import {
   Pressable,
   //   Flex,
   Text,
-} from 'native-base'
-import React, { useState } from 'react'
-import { FlatList } from 'react-native'
-import { handleClickPodcastList } from '../reducer/podcastList'
+} from 'native-base';
+import React, { useState } from 'react';
+import { FlatList } from 'react-native';
+import { handleClickPodcastList } from '../reducer/podcastList';
 
 const Item = ({ item, backgroundColor, color, onPress }: any) => {
   return (
@@ -27,8 +27,8 @@ const Item = ({ item, backgroundColor, color, onPress }: any) => {
       variant="outline">
       <Text style={{ color: item.color }}>{item.type}</Text>
     </Button>
-  )
-}
+  );
+};
 
 const data = [
   {
@@ -49,26 +49,26 @@ const data = [
     title: 'Title for teacher, you can write anything here123',
     hashtag: '#Friend',
   },
-]
+];
 
 export const PodcastList = () => {
-  const [selectedId, setSelectedId] = useState(null)
-  const dispatch = useAppDispatch()
-  const podcastTypes = useAppSelector(state => state.podcastList.podcastTypes)
+  const [selectedId, setSelectedId] = useState(null);
+  const dispatch = useAppDispatch();
+  const podcastTypes = useAppSelector(state => state.podcastList.podcastTypes);
   const renderItem = ({ item }: any) => {
     return (
       <Item
         item={item}
         onPress={() => {
-          dispatch(handleClickPodcastList(item.id))
-          setSelectedId(item.id)
+          dispatch(handleClickPodcastList(item.id));
+          setSelectedId(item.id);
         }}
         dispatch={dispatch}
         backgroundColor={item.backgroundColor}
         color={item.color}
       />
-    )
-  }
+    );
+  };
   return (
     <Box bgColor="#FFFFFF" marginTop="16px">
       <Box margin="16px">
@@ -113,5 +113,5 @@ export const PodcastList = () => {
         ))}
       </Box>
     </Box>
-  )
-}
+  );
+};

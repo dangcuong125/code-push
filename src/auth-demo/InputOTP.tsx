@@ -1,5 +1,5 @@
-import { InputOTPProps } from '@clvtube/common/navigators/Root'
-import React, { useEffect, useRef, useState } from 'react'
+import { InputOTPProps } from '@clvtube/common/navigators/Root';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -8,61 +8,61 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native'
+} from 'react-native';
 
 export interface InputReference extends TextInput {
   value: string
 }
 
 function InputOTP({ navigation }: InputOTPProps) {
-  const inputRef = useRef<InputReference>(null)
-  let clockCall: any = null
-  const lengthInput = 6
-  const defaultCountDown = 60
+  const inputRef = useRef<InputReference>(null);
+  let clockCall: any = null;
+  const lengthInput = 6;
+  const defaultCountDown = 60;
   // const { confirmation } = route.params
 
-  const [internalValue, setInternalValue] = useState<string>('')
-  const [countDown, setCountDown] = useState<number>(defaultCountDown)
-  const [enableResend, setEnableResend] = useState<boolean>(false)
+  const [internalValue, setInternalValue] = useState<string>('');
+  const [countDown, setCountDown] = useState<number>(defaultCountDown);
+  const [enableResend, setEnableResend] = useState<boolean>(false);
   // const [confirm, setConfirm] = useState(confirmation)
 
   useEffect(() => {
     clockCall = setInterval(() => {
-      decrementClock()
-    }, 1000)
+      decrementClock();
+    }, 1000);
     return () => {
-      clearInterval(clockCall)
-    }
-  })
+      clearInterval(clockCall);
+    };
+  });
 
   const decrementClock = () => {
     if (countDown === 0) {
-      setEnableResend(true)
-      setCountDown(0)
-      clearInterval(clockCall)
+      setEnableResend(true);
+      setCountDown(0);
+      clearInterval(clockCall);
     } else {
-      setCountDown(countDown - 1)
+      setCountDown(countDown - 1);
     }
-  }
+  };
 
   const onChangeText = (value: string) => {
-    setInternalValue(value)
-  }
+    setInternalValue(value);
+  };
 
   const onChangeNumber = () => {
-    setInternalValue('')
-  }
+    setInternalValue('');
+  };
 
   const onResendOTP = () => {
     if (enableResend) {
-      setCountDown(defaultCountDown)
-      setEnableResend(false)
-      clearInterval(clockCall)
+      setCountDown(defaultCountDown);
+      setEnableResend(false);
+      clearInterval(clockCall);
       clockCall = setInterval(() => {
-        decrementClock()
-      }, 1000)
+        decrementClock();
+      }, 1000);
     }
-  }
+  };
 
   const onSubmitOTP = async () => {
     if (internalValue.length === lengthInput) {
@@ -70,18 +70,18 @@ function InputOTP({ navigation }: InputOTPProps) {
         // const response = await confirm.confirm(internalValue)
         // const authData = JSON.parse(response)
         // if(!lodash.isEmpty(authData.user)){
-        navigation.navigate('Home', {})
+        navigation.navigate('Home', {});
         // }
       } catch (error) {
-        Alert.alert(JSON.stringify(error))
-        console.log('err')
+        Alert.alert(JSON.stringify(error));
+        console.log('err');
       }
     }
-  }
+  };
 
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -108,13 +108,11 @@ function InputOTP({ navigation }: InputOTPProps) {
                   onPress={() => inputRef.current?.focus()}>
                   <View style={styles.cellView}>
                     <Text style={styles.cellText}>
-                      {internalValue && internalValue.length > 0
-                        ? internalValue[index]
-                        : ''}
+                      {internalValue && internalValue.length > 0 ? internalValue[index] : ''}
                     </Text>
                   </View>
                 </TouchableOpacity>
-              )
+              );
             })}
           </View>
           <View style={styles.containerInput}>
@@ -139,10 +137,10 @@ function InputOTP({ navigation }: InputOTPProps) {
         </View>
       </KeyboardAvoidingView>
     </View>
-  )
+  );
 }
 
-export default InputOTP
+export default InputOTP;
 
 const styles = StyleSheet.create({
   container: {
@@ -219,4 +217,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 16,
   },
-})
+});

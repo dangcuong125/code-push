@@ -1,11 +1,11 @@
-import { Avatar, HStack, Heading } from 'native-base'
-import React from 'react'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { Avatar, HStack, Heading } from 'native-base';
+import React from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
 const HomeSearch = () => {
-  const navigator = useNavigation()
+  const navigator = useNavigation();
 
   return (
     <HStack alignItems={'center'} justifyContent={'space-between'}>
@@ -36,7 +36,7 @@ const HomeSearch = () => {
         onPress={() => navigator.navigate('Search')}
       />
     </HStack>
-  )
-}
+  );
+};
 
-export default HomeSearch
+export default HomeSearch;

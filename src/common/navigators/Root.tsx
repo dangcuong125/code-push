@@ -1,22 +1,22 @@
 // import Component from package
-import React from 'react'
+import React from 'react';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
-} from '@react-navigation/native-stack'
+} from '@react-navigation/native-stack';
 
 // import Components from Pages
-import Intro from '@clvtube/intro/component/Intro'
-import Auth from '@clvtube/auth'
-import InputOTP from '@clvtube/auth/component/InputOTP'
-import CreateInfo from '@clvtube/auth/component/CreateInfo'
-import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess'
-import OpenDashboard from '@clvtube/auth/component/OpenDashboard'
-import Topic from '@clvtube/level-topic/component/Topic'
-import Home from './Home'
+import Intro from '@clvtube/intro/component/Intro';
+import Auth from '@clvtube/auth';
+import InputOTP from '@clvtube/auth/component/InputOTP';
+import CreateInfo from '@clvtube/auth/component/CreateInfo';
+import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
+import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
+import Topic from '@clvtube/level-topic/component/Topic';
+import Home from './Home';
 
-import SearchPage from '../../search'
-import VideoDetailPage from '@clvtube/video-details/components/index'
+import SearchPage from '../../search';
+import VideoDetailPage from '@clvtube/video-details/components/index';
 
 // import Constants from file.Constants.Route
 import {
@@ -30,7 +30,7 @@ import {
   SEARCH_PAGE,
   TOPIC,
   VIDEO_DETAILS_PAGE,
-} from '../constants/route.constants'
+} from '../constants/route.constants';
 
 
 export type RootStackParamList = {
@@ -55,7 +55,7 @@ export type InputOTPProps = NativeStackScreenProps<
   'InputOTP'
 >
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Root = () => {
   return (
@@ -120,8 +120,8 @@ const Root = () => {
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 
-export default Root
+export default Root;

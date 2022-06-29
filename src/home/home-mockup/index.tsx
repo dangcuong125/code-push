@@ -1,10 +1,10 @@
-import { VStack } from 'native-base'
-import React from 'react'
-import { SafeAreaView } from 'react-native'
-import { HomePageProps } from '../index/interfaces'
-import HomeList from './HomeList'
-import HomeSearch from './HomeSearch'
-import HomeSlider from './HomeSlider'
+import { VStack } from 'native-base';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { HomePageProps } from '../index/interfaces';
+import HomeList from './HomeList';
+import HomeSearch from './HomeSearch';
+import HomeSlider from './HomeSlider';
 
 const HomePage = ({ navigation, route }: HomePageProps) => {
   return (
@@ -15,7 +15,7 @@ const HomePage = ({ navigation, route }: HomePageProps) => {
         <HomeList />
       </VStack>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

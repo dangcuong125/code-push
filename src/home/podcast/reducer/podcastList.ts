@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { IInitialState } from '../interfaces'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import { createSlice } from '@reduxjs/toolkit';
+import { IInitialState } from '../interfaces';
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
 
 const initialState: IInitialState = {
   podcastTypes: [
@@ -74,7 +74,7 @@ const initialState: IInitialState = {
       title: 'Lorem Ipsum is simply dummy dummy text',
     },
   ],
-}
+};
 
 export const podcastList = createSlice({
   name: 'podcast-list',
@@ -82,17 +82,17 @@ export const podcastList = createSlice({
   reducers: {
     handleClickPodcastList: (state, action) => {
       state.podcastTypes = state.podcastTypes.map(podcastType => {
-        podcastType.isSelected = podcastType.id === action.payload
+        podcastType.isSelected = podcastType.id === action.payload;
         podcastType.backgroundColor =
-          podcastType.id === action.payload ? '#3D9BE0' : '#FFFFFF'
+          podcastType.id === action.payload ? '#3D9BE0' : '#FFFFFF';
         podcastType.color =
-          podcastType.id === action.payload ? '#FFFFFF' : '#3D9BE0'
-        return podcastType
-      })
+          podcastType.id === action.payload ? '#FFFFFF' : '#3D9BE0';
+        return podcastType;
+      });
     },
   },
-})
+});
 export const {
   actions: { handleClickPodcastList },
   reducer,
-} = podcastList
+} = podcastList;

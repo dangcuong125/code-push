@@ -3,4 +3,4 @@ export const QUERY_KEYS = Object.freeze({
   LOGIN: 'LOGIN',
   REGISTER: 'REGISTER',
   ALL_TOPICS: 'ALL_TOPICS',
-})
+});

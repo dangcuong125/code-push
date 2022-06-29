@@ -1,7 +1,7 @@
-import { PopularTopics } from '@clvtube/common/components/popular-topic/index'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
-import { Heading, HStack, VStack } from 'native-base'
-import React from 'react'
+import { PopularTopics } from '@clvtube/common/components/popular-topic/index';
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
+import { HStack, Heading, VStack } from 'native-base';
+import React from 'react';
 
 const PopularVideo = () => {
   return (
@@ -26,6 +26,6 @@ const PopularVideo = () => {
         </HStack>
       </VStack>
     </VStack>
-  )
-}
-export default PopularVideo
+  );
+};
+export default PopularVideo;

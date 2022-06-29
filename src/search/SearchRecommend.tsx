@@ -1,5 +1,5 @@
-import { Box, Text, VStack } from 'native-base'
-import React from 'react'
+import { Box, Text, VStack } from 'native-base';
+import React from 'react';
 
 const SearchRecommend = () => {
   return (
@@ -19,7 +19,7 @@ const SearchRecommend = () => {
         </Text>
       </Box>
     </VStack>
-  )
-}
+  );
+};
 
-export default SearchRecommend
+export default SearchRecommend;

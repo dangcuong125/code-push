@@ -1,19 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-import { Button, Center, Heading, Text, VStack } from 'native-base'
-import { Dimensions, Image } from 'react-native'
+import { Button, Center, Heading, Text, VStack } from 'native-base';
+import { Dimensions, Image } from 'react-native';
 
-import { imagePath } from '@clvtube/common/constants/imagePath'
-import { useNavigation } from '@react-navigation/native'
-import { HOME } from '../../common/constants/route.constants'
-import { useAppSelector } from '../../common/hooks/useAppSelector'
+import { imagePath } from '@clvtube/common/constants/imagePath';
+import { useNavigation } from '@react-navigation/native';
+import { HOME } from '../../common/constants/route.constants';
+import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 
-const { width } = Dimensions.get('screen')
+const { width } = Dimensions.get('screen');
 
 const OpenDashboard = () => {
-  const navigator = useNavigation()
-  const { name } = useAppSelector(state => state.authReducer)
+  const navigator = useNavigation();
+  const { name } = useAppSelector(state => state.authReducer);
 
   return (
     <VStack
@@ -70,7 +70,7 @@ const OpenDashboard = () => {
         Bắt đầu ngay
       </Button>
     </VStack>
-  )
-}
+  );
+};
 
-export default OpenDashboard
+export default OpenDashboard;

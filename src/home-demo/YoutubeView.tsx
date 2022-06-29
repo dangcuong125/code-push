@@ -1,15 +1,15 @@
-import { sampleTranscript } from '@clvtube/mocks/sampleTranscript'
-import Lodash from 'lodash'
-import { Box, Button, Container, HStack, Text, VStack } from 'native-base'
-import React, { useEffect, useRef, useState } from 'react'
-import { Dimensions, Pressable } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
-import Tts from 'react-native-tts'
-import YouTube from 'react-native-youtube'
+import { sampleTranscript } from '@clvtube/mocks/sampleTranscript';
+import Lodash from 'lodash';
+import { Box, Button, Container, HStack, Text, VStack } from 'native-base';
+import React, { useEffect, useRef, useState } from 'react';
+import { Dimensions, Pressable } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+import Tts from 'react-native-tts';
+import YouTube from 'react-native-youtube';
 
 // When user touch and move slide, we need to pause video
 const renderItemSlide = ({ item, speakWord, index }) => {
-  const words = Lodash.words(item.text)
+  const words = Lodash.words(item.text);
 
   return (
     <Box alignItems={'center'} key={index}>
@@ -19,45 +19,45 @@ const renderItemSlide = ({ item, speakWord, index }) => {
             <Pressable key={idx} onPress={() => speakWord(word)}>
               <Text fontSize={'lg'}>{`${word} `}</Text>
             </Pressable>
-          )
+          );
         })}
       </HStack>
     </Box>
-  )
-}
+  );
+};
 
-const { width } = Dimensions.get('window')
+const { width } = Dimensions.get('window');
 const YoutubeView = () => {
-  const [dataTranscript] = useState(sampleTranscript)
-  const refYoutube = useRef<YouTube>(null)
-  const refCarousel = useRef<Carousel<any>>(null)
+  const [dataTranscript] = useState(sampleTranscript);
+  const refYoutube = useRef<YouTube>(null);
+  const refCarousel = useRef<Carousel<any>>(null);
   // const [currentTime, setCurrentTime] = useState(0)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
   // const [isProgress, setIsProgress] = useState(false)
 
   const handleSnapToItem = (index: number) => {
     if (index !== currentIndex) {
-      const transcript = dataTranscript[index]
-      refYoutube?.current?.seekTo(transcript.offset / 1000)
-      setCurrentIndex(index)
+      const transcript = dataTranscript[index];
+      refYoutube?.current?.seekTo(transcript.offset / 1000);
+      setCurrentIndex(index);
     }
-  }
+  };
 
   const handleProgress = (time: number) => {
-    const timeMili = time * 1000
+    const timeMili = time * 1000;
     const indexTranscript = Lodash.findLastIndex(dataTranscript, obj => {
-      return timeMili >= obj.offset
-    })
+      return timeMili >= obj.offset;
+    });
 
     if (currentIndex < indexTranscript) {
-      refCarousel?.current?.snapToItem(indexTranscript)
-      setCurrentIndex(indexTranscript)
+      refCarousel?.current?.snapToItem(indexTranscript);
+      setCurrentIndex(indexTranscript);
     }
-  }
+  };
 
   const speakWord = (word: string) => {
-    Tts.speak(word)
-  }
+    Tts.speak(word);
+  };
 
   useEffect(() => {
     // Tts.addEventListener('tts-start', event => {})
@@ -67,8 +67,8 @@ const YoutubeView = () => {
 
     return () => {
       // remove listener here.
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <Container>
@@ -81,7 +81,7 @@ const YoutubeView = () => {
           fullscreen={false} // control whether the video should play in fullscreen or inline
           loop={false} // control whether the video should loop when ended
           onProgress={e => {
-            handleProgress(e.currentTime)
+            handleProgress(e.currentTime);
           }}
           style={{ alignSelf: 'stretch', height: (width * 9) / 16, width }}
         />
@@ -103,7 +103,7 @@ const YoutubeView = () => {
         </Button>
       </VStack>
     </Container>
-  )
-}
+  );
+};
 
-export default YoutubeView
+export default YoutubeView;

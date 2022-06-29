@@ -1,5 +1,5 @@
-import { CheckIcon, HStack, Heading, Text } from 'native-base'
-import React from 'react'
+import { CheckIcon, HStack, Heading, Text } from 'native-base';
+import React from 'react';
 
 const ListBottom = () => {
   return (
@@ -28,7 +28,7 @@ const ListBottom = () => {
         Entertaiment
       </Heading>
     </HStack>
-  )
-}
+  );
+};
 
-export default ListBottom
+export default ListBottom;

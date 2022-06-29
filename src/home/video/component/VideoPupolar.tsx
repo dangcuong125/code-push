@@ -1,9 +1,9 @@
-import { Heading, HStack, Text, VStack, Box } from 'native-base'
-import React from 'react'
-import { Image } from 'react-native'
-import { imageHomePage } from '../../../common/constants/imagePath'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Box, HStack, Heading, Text, VStack } from 'native-base';
+import React from 'react';
+import { Image } from 'react-native';
+import { imageHomePage } from '../../../common/constants/imagePath';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const VideoPupolar = () => {
   return (
@@ -139,7 +139,7 @@ const VideoPupolar = () => {
             </Box>
         </HStack>
     </VStack>
-  )
-}
+  );
+};
 
-export default VideoPupolar
+export default VideoPupolar;

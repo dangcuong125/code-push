@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
   Button,
@@ -9,81 +9,81 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native'
-import { AccessToken, LoginButton } from 'react-native-fbsdk-next'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import auth from '@react-native-firebase/auth'
+} from 'react-native';
+import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 import appleAuth, {
   AppleButton,
-} from '@invertase/react-native-apple-authentication'
-import { LoginProps } from '@clvtube/common/navigators/Root'
-import { envData } from '@clvtube/common/constants/envData'
-import Config from 'react-native-config'
+} from '@invertase/react-native-apple-authentication';
+import { LoginProps } from '@clvtube/common/navigators/Root';
+import { envData } from '@clvtube/common/constants/envData';
+import Config from 'react-native-config';
 
-const isIOS = Platform.OS === 'ios'
+const isIOS = Platform.OS === 'ios';
 
 interface InputReference extends TextInput {
   value: string
 }
 
 function Login({ navigation }: LoginProps) {
-  const inputRef = useRef<InputReference>(null)
-  const [phoneNumber, setPhoneNumber] = useState<string>()
-  const [, setFocusedInput] = useState<boolean>(true)
+  const inputRef = useRef<InputReference>(null);
+  const [phoneNumber, setPhoneNumber] = useState<string>();
+  const [, setFocusedInput] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log(Config.WEB_CLIENT_ID)
+    console.log(Config.WEB_CLIENT_ID);
     GoogleSignin.configure({
       webClientId: envData.webClientId,
-    })
+    });
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
     if (isIOS) {
       return appleAuth.onCredentialRevoked(async () => {
         console.warn(
           'If this function executes, User Credentials have been Revoked',
-        )
-      })
+        );
+      });
     }
-  }, [])
+  }, []);
 
   const onChangePhone = (number: string) => {
-    setPhoneNumber(number)
-  }
+    setPhoneNumber(number);
+  };
 
   const onPressContinue = async () => {
     try {
       if (phoneNumber) {
         const confirmation = await auth().signInWithPhoneNumber(
           `+84${phoneNumber}`,
-        )
-        navigation.navigate('InputOTP', { confirmation })
+        );
+        navigation.navigate('InputOTP', { confirmation });
       }
     } catch (error) {
-      Alert.alert(JSON.stringify(error))
+      Alert.alert(JSON.stringify(error));
     }
-  }
+  };
 
   const onChangeFocus = () => {
-    setFocusedInput(true)
-  }
+    setFocusedInput(true);
+  };
 
   const onChangeBlur = () => {
-    inputRef.current?.blur()
-    setFocusedInput(false)
-  }
+    inputRef.current?.blur();
+    setFocusedInput(false);
+  };
 
   const onGoogleButtonPress = async () => {
     // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn()
+    const { idToken } = await GoogleSignin.signIn();
 
-    console.log(idToken, 'idToken')
+    console.log(idToken, 'idToken');
 
     // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential)
-  }
+    return auth().signInWithCredential(googleCredential);
+  };
 
   const onAppleButtonPress = async () => {
     // performs login request
@@ -108,23 +108,23 @@ function Login({ navigation }: LoginProps) {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    })
+    });
 
     // Ensure Apple returned a user identityToken
     if (!appleAuthRequestResponse.identityToken) {
-      throw new Error('Apple Sign-In failed - no identify token returned')
+      throw new Error('Apple Sign-In failed - no identify token returned');
     }
 
     // Create a Firebase credential from the response
-    const { identityToken, nonce } = appleAuthRequestResponse
+    const { identityToken, nonce } = appleAuthRequestResponse;
     const appleCredential = auth.AppleAuthProvider.credential(
       identityToken,
       nonce,
-    )
+    );
 
     // Sign the user in with the credential
-    return auth().signInWithCredential(appleCredential)
-  }
+    return auth().signInWithCredential(appleCredential);
+  };
 
   return (
     <View style={styles.container}>
@@ -147,27 +147,27 @@ function Login({ navigation }: LoginProps) {
         <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
-              console.log('login err' + error)
+              console.log('login err' + error);
             } else if (result.isCancelled) {
-              console.log('canceled')
+              console.log('canceled');
             } else {
               AccessToken.getCurrentAccessToken()
                 .then(data => {
-                  console.log(data?.accessToken.toString())
+                  console.log(data?.accessToken.toString());
                   if (data?.accessToken) {
                     const facebookCredential =
-                      auth.FacebookAuthProvider.credential(data.accessToken)
-                    console.log(facebookCredential)
+                      auth.FacebookAuthProvider.credential(data.accessToken);
+                    console.log(facebookCredential);
                     auth()
                       .signInWithCredential(facebookCredential)
                       .then(res => {
-                        console.log(res)
-                      })
+                        console.log(res);
+                      });
                   }
                 })
                 .catch(err => {
-                  console.log(err)
-                })
+                  console.log(err);
+                });
             }
           }}
           onLogoutFinished={() => console.log('logout')}
@@ -214,10 +214,10 @@ function Login({ navigation }: LoginProps) {
       </KeyboardAvoidingView>
     </View>
     // </SafeAreaView>
-  )
+  );
 }
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
@@ -268,4 +268,4 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     alignItems: 'center',
   },
-})
+});

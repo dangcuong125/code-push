@@ -8,84 +8,84 @@ import {
   Input,
   Text,
   VStack,
-} from 'native-base'
-import React, { useEffect, useRef, useState } from 'react'
-import { Dimensions, Image, Platform } from 'react-native'
+} from 'native-base';
+import React, { useEffect, useRef, useState } from 'react';
+import { Dimensions, Image, Platform } from 'react-native';
 // 🚀 import component auth with firebase
-import appleAuth from '@invertase/react-native-apple-authentication'
-import auth from '@react-native-firebase/auth'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import appleAuth from '@invertase/react-native-apple-authentication';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-import { envData } from '@clvtube/common/constants/envData'
-import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath'
-import { CREATE_INFO, INPUT_OTP, OPENDASHBOARD } from '@clvtube/common/constants/route.constants'
-import { useAppDispatch } from '../common/hooks/useAppDispatch'
-import { AuthProps } from '../common/navigators/Root'
-import { InputReference } from './component/InputOTP'
-import { useLoginMutation } from './hook/useAuthMutation'
-import { updateAccountWithAuthGoogle } from './slice'
+import { envData } from '@clvtube/common/constants/envData';
+import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath';
+import { CREATE_INFO, INPUT_OTP, OPENDASHBOARD } from '@clvtube/common/constants/route.constants';
+import { useAppDispatch } from '../common/hooks/useAppDispatch';
+import { AuthProps } from '../common/navigators/Root';
+import { InputReference } from './component/InputOTP';
+import { useLoginMutation } from './hook/useAuthMutation';
+import { updateAccountWithAuthGoogle } from './slice';
 
 
 
-const { width, height } = Dimensions.get('screen')
-const isIOS = Platform.OS === 'ios'
+const { width, height } = Dimensions.get('screen');
+const isIOS = Platform.OS === 'ios';
 
 const Auth = ({ navigation }: AuthProps) => {
-  const [phoneNumber, setPhoneNumber] = useState<string>('')
-  const [focusInput, setFocusInput] = useState<boolean>(false)
-  const inputRef = useRef<InputReference>(null)
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [focusInput, setFocusInput] = useState<boolean>(false);
+  const inputRef = useRef<InputReference>(null);
 
-  const { mutate } = useLoginMutation()
+  const { mutate } = useLoginMutation();
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // console.log(Config.WEB_CLIENT_ID)
     GoogleSignin.configure({
       webClientId: envData.webClientId,
-    })
+    });
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
     if (isIOS) {
       return appleAuth.onCredentialRevoked(async () => {
         console.warn(
           'If this function executes, User Credentials have been Revoked',
-        )
-      })
+        );
+      });
     }
-  }, [])
+  }, []);
 
   // 🚀 Event auth with phoneNumber
   const onChangePhone = (text: string) => {
-    setFocusInput(true)
-    setPhoneNumber(text)
-  }
+    setFocusInput(true);
+    setPhoneNumber(text);
+  };
   const onChangeBlur = () => {
-    inputRef.current?.blur()
-    setFocusInput(false)
-  }
+    inputRef.current?.blur();
+    setFocusInput(false);
+  };
   const onChangeFocus = () => {
-    inputRef.current?.focus()
-    setFocusInput(true)
-  }
+    inputRef.current?.focus();
+    setFocusInput(true);
+  };
   const handleLoginWithPhonenumber = async () => {
     try {
       if (phoneNumber) {
         const confirmation = await auth().signInWithPhoneNumber(
           `+84${phoneNumber}`,
-        )
-        navigation.navigate(INPUT_OTP, { confirmation })
+        );
+        navigation.navigate(INPUT_OTP, { confirmation });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // 🚀 Event auth with Google
   const handleLoginWithGoogle = async () => {
     try {
-      const { idToken } = await GoogleSignin.signIn()
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-      const idGoogle = await auth().signInWithCredential(googleCredential)
+      const { idToken } = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const idGoogle = await auth().signInWithCredential(googleCredential);
 
       auth()
         .currentUser?.getIdTokenResult()
@@ -94,43 +94,43 @@ const Auth = ({ navigation }: AuthProps) => {
             email: idGoogle.user.email,
             name: idGoogle.user.displayName,
             firIdToken: token.token,
-          }))
+          }));
 
           mutate(token.token, {
             onSuccess: data => {
               if (data?.status === 201) {
-                navigation.navigate(OPENDASHBOARD)
+                navigation.navigate(OPENDASHBOARD);
               }
             },
             onError: () => navigation.navigate(CREATE_INFO),
-          })
-        })
-      return idGoogle
+          });
+        });
+      return idGoogle;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // 🚀 Event auth with Apple
   const handleLoginWithApple = async () => {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    })
+    });
 
     if (appleAuthRequestResponse.identityToken) {
-      throw new Error('Apple undefined login...')
+      throw new Error('Apple undefined login...');
     }
 
-    const { identityToken, nonce } = appleAuthRequestResponse
+    const { identityToken, nonce } = appleAuthRequestResponse;
     const appleCredential = auth.AppleAuthProvider.credential(
       identityToken,
       nonce,
-    )
-    console.log({ identityToken, nonce })
+    );
+    console.log({ identityToken, nonce });
 
-    return auth().signInWithCredential(appleCredential)
-  }
+    return auth().signInWithCredential(appleCredential);
+  };
 
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4}>
@@ -298,8 +298,8 @@ const Auth = ({ navigation }: AuthProps) => {
         <Center mt={'40px'}>
           <Text
             fontStyle={'normal'}
-            fontSize={'14px'} 
-            fontWeight={600} 
+            fontSize={'14px'}
+            fontWeight={600}
             lineHeight={'20px'}
             color={'#999999'}
           >
@@ -309,7 +309,7 @@ const Auth = ({ navigation }: AuthProps) => {
       </VStack>
 
     </VStack>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;

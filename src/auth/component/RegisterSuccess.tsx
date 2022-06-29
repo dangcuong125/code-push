@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import { Button, Center, Heading, Text, VStack } from 'native-base'
-import { Dimensions, Image } from 'react-native'
+import { Button, Center, Heading, Text, VStack } from 'native-base';
+import { Dimensions, Image } from 'react-native';
 
-import { imagePath } from '@clvtube/common/constants/imagePath'
-import { useNavigation } from '@react-navigation/native'
-import { TOPIC } from '@clvtube/common/constants/route.constants'
+import { imagePath } from '@clvtube/common/constants/imagePath';
+import { useNavigation } from '@react-navigation/native';
+import { TOPIC } from '@clvtube/common/constants/route.constants';
 // import auth from '@react-native-firebase/auth'
 
 
-const { width } = Dimensions.get('screen')
+const { width } = Dimensions.get('screen');
 
 const RegisterSuccess = () => {
-  const navigator = useNavigation()
+  const navigator = useNavigation();
 
   return (
     <VStack
@@ -69,7 +69,7 @@ const RegisterSuccess = () => {
         Bắt đầu ngay
       </Button>
     </VStack>
-  )
-}
+  );
+};
 
-export default RegisterSuccess
+export default RegisterSuccess;

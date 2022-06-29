@@ -1,4 +1,4 @@
-import { extendTheme } from 'native-base'
+import { extendTheme } from 'native-base';
 
 export const theme = extendTheme({
   colors: {
@@ -46,4 +46,4 @@ export const theme = extendTheme({
     // Changing initialColorMode to 'dark'
     initialColorMode: 'dark',
   },
-})
+});

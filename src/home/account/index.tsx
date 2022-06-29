@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-import { Image } from 'react-native'
-import { Box, HStack, Heading, Pressable, Text, VStack, ScrollView, } from 'native-base'
+import { Image } from 'react-native';
+import { Box, HStack, Heading, Pressable, ScrollView, Text, VStack } from 'native-base';
 
-import Feather from 'react-native-vector-icons/Feather'
-import Fontiso from 'react-native-vector-icons/Fontisto'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import Feather from 'react-native-vector-icons/Feather';
+import Fontiso from 'react-native-vector-icons/Fontisto';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const Account = () => {
-  const authState = useAppSelector(state => state.authReducer)
+  const authState = useAppSelector(state => state.authReducer);
 
   return (
     <ScrollView bgColor={'white'}>
@@ -207,7 +207,7 @@ const Account = () => {
       </VStack>
     </VStack>
   </ScrollView>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

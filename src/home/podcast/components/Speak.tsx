@@ -1,6 +1,6 @@
-import React from 'react'
-import { Box, Flex, Heading, Image, Text } from 'native-base'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
+import React from 'react';
+import { Box, Flex, Heading, Image, Text } from 'native-base';
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
 
 const audioRecommend = [
   {
@@ -21,7 +21,7 @@ const audioRecommend = [
     title: '“Đừng khoe khoang nữa” tiếng anh là?',
     source: 'Học từ vựng theo ví dụ (P.2)',
   },
-]
+];
 
 export const Speak = () => {
   return (
@@ -46,5 +46,5 @@ export const Speak = () => {
         ))}
       </Box>
     </Box>
-  )
-}
+  );
+};

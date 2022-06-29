@@ -1,7 +1,7 @@
-import { PopularTopics } from '@clvtube/common/components/popular-topic/index'
-import { imagePodcast } from '@clvtube/common/constants/imagePath'
-import { Box, Flex, Heading } from 'native-base'
-import React from 'react'
+import { PopularTopics } from '@clvtube/common/components/popular-topic/index';
+import { imagePodcast } from '@clvtube/common/constants/imagePath';
+import { Box, Flex, Heading } from 'native-base';
+import React from 'react';
 
 const PopularTopicsPodcast = () => {
   return (
@@ -34,6 +34,6 @@ const PopularTopicsPodcast = () => {
         </Flex>
       </Box>
     </Box>
-  )
-}
-export default PopularTopicsPodcast
+  );
+};
+export default PopularTopicsPodcast;

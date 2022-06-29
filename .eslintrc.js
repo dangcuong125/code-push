@@ -92,7 +92,7 @@ module.exports = {
     'quote-props': [2, 'as-needed'],
     quotes: [2, 'single', { avoidEscape: true }],
     'rest-spread-spacing': [2, 'never'],
-    semi: [2, 'never'],
+    semi: [1, 'always'],
     'semi-spacing': [2, { before: false, after: true }],
     'sort-imports': [
       2,
@@ -130,5 +130,6 @@ module.exports = {
     ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+    'multiline-ternary': ['error', 'never'],
   },
 }

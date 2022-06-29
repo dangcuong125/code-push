@@ -1,7 +1,7 @@
-import { HStack, Image, Text, VStack } from 'native-base'
-import React from 'react'
+import { HStack, Image, Text, VStack } from 'native-base';
+import React from 'react';
 
-import ListBottom from '../ListBottom'
+import ListBottom from '../ListBottom';
 
 export default function HomeList() {
   return (
@@ -85,5 +85,5 @@ export default function HomeList() {
         </VStack>
       </HStack>
     </VStack>
-  )
+  );
 }

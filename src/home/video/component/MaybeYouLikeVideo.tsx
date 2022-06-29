@@ -1,14 +1,14 @@
 import {
-    Button, Heading, HStack, Text,
-    VStack, Box
-} from 'native-base'
-import React from 'react'
-import { FlatList, Image } from 'react-native'
+  Box, Button, HStack, Heading,
+  Text, VStack,
+} from 'native-base';
+import React from 'react';
+import { FlatList, Image } from 'react-native';
 
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector'
-import { imageHomePage } from '@clvtube/common/constants/imagePath'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { imageHomePage } from '@clvtube/common/constants/imagePath';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 const VideoTypeCarousel = ({ item, onPress }) => {
@@ -30,23 +30,23 @@ const VideoTypeCarousel = ({ item, onPress }) => {
       }}>
       {item.type}
     </Button>
-  )
-}
+  );
+};
 
 const MaybeYouLikeVideo = () => {
   const videoTypeCarousel = useAppSelector(
     state => state?.homePage?.videoTypeCarousel,
-  )
+  );
 
-  const videoListCarousel = useAppSelector(state => state.homePage.videoList)
+  const videoListCarousel = useAppSelector(state => state.homePage.videoList);
 
   const renderVideoTypeCarousel = ({ item }) => {
     return (
       <VideoTypeCarousel
         item={item}
       />
-    )
-  }
+    );
+  };
 
   return (
     <VStack mb={4}>
@@ -263,7 +263,7 @@ const MaybeYouLikeVideo = () => {
         </VStack>
       </VStack>
     </VStack>
-  )
-}
+  );
+};
 
-export default MaybeYouLikeVideo
+export default MaybeYouLikeVideo;

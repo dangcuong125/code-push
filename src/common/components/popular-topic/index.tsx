@@ -1,6 +1,6 @@
-import React from 'react'
-import { Image } from 'react-native'
-import { HStack, Pressable, Text } from 'native-base'
+import React from 'react';
+import { Image } from 'react-native';
+import { HStack, Pressable, Text } from 'native-base';
 
 type PopularTopicsProps = {
   contentTopic: string
@@ -34,5 +34,5 @@ export const PopularTopics = ({
         <Image source={imageSrc} />
       </HStack>
     </Pressable>
-  )
-}
+  );
+};

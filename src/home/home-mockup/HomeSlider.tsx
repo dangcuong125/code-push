@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 
-import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants'
-import { Image, Text, VStack } from 'native-base'
-import { Dimensions } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+import { VIDEO_DETAILS_PAGE } from '@clvtube/common/constants/route.constants';
+import { Image, Text, VStack } from 'native-base';
+import { Dimensions } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
-import { imagePath } from '@clvtube/common/constants/imagePath'
-import { HomePageProps } from '../index/interfaces'
+import { imagePath } from '@clvtube/common/constants/imagePath';
+import { HomePageProps } from '../index/interfaces';
 
 const slider = [
   {
@@ -27,7 +27,7 @@ const slider = [
     title:
       'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet',
   },
-]
+];
 
 const renderItemSlide = ({ item, index }) => {
   return (
@@ -40,19 +40,19 @@ const renderItemSlide = ({ item, index }) => {
       />
       <Text color={'black'}>{item?.title}</Text>
     </VStack>
-  )
-}
+  );
+};
 
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window');
 
 const HomeSlider = ({ navigation }: HomePageProps) => {
-  const refCarousel = useRef<Carousel<any>>(null)
+  const refCarousel = useRef<Carousel<any>>(null);
 
-  const [dataSilder] = useState(slider)
+  const [dataSilder] = useState(slider);
 
   const onMoveVideoDetail = () => {
-    navigation.navigate('VideoDetails', VIDEO_DETAILS_PAGE)
-  }
+    navigation.navigate('VideoDetails', VIDEO_DETAILS_PAGE);
+  };
 
   return (
     <VStack space={3}>
@@ -77,7 +77,7 @@ const HomeSlider = ({ navigation }: HomePageProps) => {
         inactiveSlideScale={1}
       />
     </VStack>
-  )
-}
+  );
+};
 
-export default HomeSlider
+export default HomeSlider;

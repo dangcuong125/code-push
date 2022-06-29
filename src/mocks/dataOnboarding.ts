@@ -1,4 +1,4 @@
-import { imagePath } from '@clvtube/common/constants/imagePath'
+import { imagePath } from '@clvtube/common/constants/imagePath';
 
 export const slider = [
   {
@@ -18,4 +18,4 @@ export const slider = [
     title:
       'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet',
   },
-]
+];
