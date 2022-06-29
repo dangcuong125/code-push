@@ -6,6 +6,7 @@ import Carousel from 'react-native-reanimated-carousel'
 
 import { IDiscountBanner, IDiscountBannerProps } from '../interfaces'
 import { DISCOUNT_BANNER } from '@clvtube/mocks/homePage'
+import { useAppSelector } from '../../../common/hooks/useAppSelector';
 
 const DiscountBanner = ({ item }: IDiscountBannerProps) => {
   return (
@@ -21,7 +22,7 @@ const DiscountBanner = ({ item }: IDiscountBannerProps) => {
 }
 
 export const Welcome = () => {
-  const username = 'MThu'
+  const { name } = useAppSelector(state => state.authReducer)
 
   const renderItem = ({ item }: { item: IDiscountBanner }) => {
     return <DiscountBanner item={item} />
@@ -34,7 +35,7 @@ export const Welcome = () => {
         fontSize={'24px'}
         fontWeight={600}
         color={'#181818'}>
-        Hi, {username}
+        Hi, {name}
       </Heading>
       <Text
         fontStyle={'normal'}

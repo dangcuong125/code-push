@@ -22,6 +22,8 @@ export const imagePodcast = {
 export const imageHomePage = {
   DISCOUNT_BANNER: require('../assets/images/discount-banner.png'),
   VIDEO_LIST: require('../assets/images/video-list.png'),
+  VIDEO_POPULAR: require('../assets/images/videoPopular.png'),
+  VIDEO_2: require('../assets/images/video_2.png'),
 }
 
 export const imageSocial = {

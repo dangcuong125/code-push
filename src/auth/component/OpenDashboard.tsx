@@ -5,13 +5,15 @@ import { Dimensions, Image } from 'react-native'
 
 import { imagePath } from '@clvtube/common/constants/imagePath'
 import { useNavigation } from '@react-navigation/native'
-import { TOPIC } from '@clvtube/common/constants/route.constants'
-// import auth from '@react-native-firebase/auth'
+import { HOME } from '../../common/constants/route.constants'
+import { useAppSelector } from '../../common/hooks/useAppSelector'
+
 
 const { width } = Dimensions.get('screen')
 
-const RegisterSuccess = () => {
+const OpenDashboard = () => {
   const navigator = useNavigation()
+  const { name } = useAppSelector(state => state.authReducer)
 
   return (
     <VStack
@@ -38,7 +40,7 @@ const RegisterSuccess = () => {
           fontWeight={600}
           color={'neutral.800'}
           lineHeight={'46px'}>
-          Chào buổi sáng, TDzo!
+          Chào buổi sáng, {name}
         </Heading>
         <Text
           textAlign={'center'}
@@ -55,7 +57,7 @@ const RegisterSuccess = () => {
       </Center>
 
       <Button
-        bgColor={'primary.100'}
+        bgColor={'#216BCD'}
         borderRadius={'8px'}
         height={'48px'}
         _text={{
@@ -64,11 +66,11 @@ const RegisterSuccess = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate(TOPIC)}>
+        onPress={() => navigator.navigate(HOME)}>
         Bắt đầu ngay
       </Button>
     </VStack>
   )
 }
 
-export default RegisterSuccess
+export default OpenDashboard

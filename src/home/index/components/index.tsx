@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <ScrollView>
       <VStack space={4}>
-        <VStack safeAreaTop={12} bgColor={'white'}>
+        <VStack safeAreaTop={10} bgColor={'white'}>
           <SearchingHeader />
           <Welcome />
         </VStack>

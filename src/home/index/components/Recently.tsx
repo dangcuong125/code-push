@@ -23,6 +23,7 @@ const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
           borderTopRightRadius: 12,
         }}
       />
+
       <VStack space={2} safeAreaY={2} safeAreaX={1}>
         <Text
           fontStyle={'normal'}

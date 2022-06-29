@@ -112,7 +112,7 @@ const Topic = () => {
       </VStack>
       <Pressable>
         <Button
-          bgColor={'primary.100'}
+          bgColor={'#216BCD'}
           borderRadius={'8px'}
           height={'48px'}
           _text={{
