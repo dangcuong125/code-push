@@ -59,7 +59,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Root = () => {
   return (
-    <Stack.Navigator initialRouteName={INTRO}>
+    <Stack.Navigator initialRouteName={HOME}>
       {/* Route Intro */}
       <Stack.Screen
         name={INTRO}

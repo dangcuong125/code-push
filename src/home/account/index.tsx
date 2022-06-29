@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Image } from 'react-native'
-import { Box, HStack, Heading, Pressable, Text, VStack } from 'native-base'
+import { Box, HStack, Heading, Pressable, Text, VStack, ScrollView, } from 'native-base'
 
 import Feather from 'react-native-vector-icons/Feather'
 import Fontiso from 'react-native-vector-icons/Fontisto'
@@ -14,7 +14,8 @@ const Account = () => {
   const authState = useAppSelector(state => state.authReducer)
 
   return (
-    <VStack bgColor={'white'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
+    <ScrollView bgColor={'white'}>
+      <VStack bgColor={'white'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
       <HStack space={4} alignItems={'center'} my={8}>
         <Image
           source={{
@@ -205,6 +206,7 @@ const Account = () => {
         </Pressable>
       </VStack>
     </VStack>
+  </ScrollView>
   )
 }
 

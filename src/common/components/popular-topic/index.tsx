@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Pressable } from 'native-base'
-import { Image, StyleSheet, Text } from 'react-native'
+import { Image } from 'react-native'
+import { HStack, Pressable, Text } from 'native-base'
 
 type PopularTopicsProps = {
   contentTopic: string
@@ -14,23 +14,25 @@ export const PopularTopics = ({
 }: PopularTopicsProps) => {
   return (
     <Pressable
-      borderColor="primary.100"
+      width={'46.5%'}
+      height="70px"
       borderWidth={1}
-      width="161px"
-      textAlign={'center'}
+      borderColor="#E6E6E6"
       borderRadius={'10px'}
       {...rest}
-      height="70px">
-      <Flex direction="row" justifyContent="space-around">
-        <Text style={styles.textTopic}>{contentTopic}</Text>
+    >
+      <HStack safeAreaX={2} justifyContent={'space-evenly'} alignItems={'center'}>
+        <Text
+          fontStyle={'normal'}
+          fontSize={'14px'}
+          fontWeight={600}
+          lineHeight={'20px'}
+          color={'#1A1A1A'}
+        >
+          {contentTopic}
+        </Text>
         <Image source={imageSrc} />
-      </Flex>
+      </HStack>
     </Pressable>
   )
 }
-const styles = StyleSheet.create({
-  textTopic: {
-    lineHeight: 70,
-    marginLeft: 8,
-  },
-})

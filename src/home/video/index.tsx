@@ -1,20 +1,28 @@
+import { ScrollView, VStack } from 'native-base'
 import React from 'react'
-import { SafeAreaView, Text } from 'react-native'
 
-const Video = () => {
+import { SearchingHeader } from '@clvtube/common/components/searching-header/index'
+import ListVideo from './component/ListVideo'
+import PopularVideo from './component/PopularVideo'
+import VideoPupolar from './component/VideoPupolar'
+import MaybeYouLikeVideo from './component/MaybeYouLikeVideo'
+
+
+
+const HomePage = () => {
   return (
-    <SafeAreaView>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quisquam
-        ab consequatur cumque, enim numquam sapiente, eius, laborum voluptatem
-        quia asperiores neque voluptatum? Labore, iste beatae. Natus possimus
-        sunt pariatur? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Asperiores veritatis deserunt temporibus, dolorum sequi architecto
-        tenetur quam recusandae accusantium ad, nesciunt dolores debitis iusto
-        culpa commodi hic eligendi rerum nihil.
-      </Text>
-    </SafeAreaView>
+    <ScrollView>
+      <VStack space={4}>
+        <VStack safeAreaTop={10} bgColor={'white'}>
+          <SearchingHeader />
+          <PopularVideo />
+        </VStack>
+        <VideoPupolar />
+        <ListVideo />
+        <MaybeYouLikeVideo />
+      </VStack>
+    </ScrollView>
   )
 }
 
-export default Video
+export default HomePage
