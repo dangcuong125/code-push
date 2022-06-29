@@ -23,7 +23,7 @@ import Config from 'react-native-config';
 const isIOS = Platform.OS === 'ios';
 
 interface InputReference extends TextInput {
-  value: string
+  value: string;
 }
 
 function Login({ navigation }: LoginProps) {

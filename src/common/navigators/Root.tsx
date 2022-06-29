@@ -32,28 +32,30 @@ import {
   VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants';
 
-
 export type RootStackParamList = {
-  Intro: {}
-  Auth: { navigation: any }
-  OpenDashboard: {}
-  InputOTP: { navigation: any; confirmation: any }
-  CreateInfo: { navigation: any }
-  RegisterSuccess: {}
-  Topic: {}
-  Home: {}
+  Intro: {};
+  Auth: { navigation: any };
+  OpenDashboard: {};
+  InputOTP: { navigation: any; confirmation: any };
+  CreateInfo: { navigation: any };
+  RegisterSuccess: {};
+  Topic: {};
+  Home: {};
 
-  Search: {}
-  VideoDetails: {}
-  StartDashboard: {}
-}
+  Search: {};
+  VideoDetails: {};
+  StartDashboard: {};
+};
 
-export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>
-export type CreateInfoProps = NativeStackScreenProps<RootStackParamList, 'CreateInfo'>
+export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
+export type CreateInfoProps = NativeStackScreenProps<
+  RootStackParamList,
+  'CreateInfo'
+>;
 export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'
->
+>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -122,6 +124,5 @@ const Root = () => {
     </Stack.Navigator>
   );
 };
-
 
 export default Root;

@@ -7,8 +7,6 @@ import PopularVideo from './component/PopularVideo';
 import VideoPupolar from './component/VideoPupolar';
 import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
 
-
-
 const HomePage = () => {
   return (
     <ScrollView>

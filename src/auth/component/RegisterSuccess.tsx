@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { TOPIC } from '@clvtube/common/constants/route.constants';
 // import auth from '@react-native-firebase/auth'
 
-
 const { width } = Dimensions.get('screen');
 
 const RegisterSuccess = () => {

@@ -57,16 +57,14 @@ const Intro = () => {
           onPress={() => {
             console.warn('Redirect Page Login!');
             return navigator.navigate(AUTH);
-          }}
-        >
+          }}>
           <Text
             fontStyle={'normal'}
             fontSize={'16px'}
             fontWeight={600}
             lineHeight={'22px'}
             textAlign={'right'}
-            color={'#0E3C9E'}
-          >
+            color={'#0E3C9E'}>
             Skip
           </Text>
         </Pressable>

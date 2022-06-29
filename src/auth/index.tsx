@@ -18,14 +18,16 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 import { envData } from '@clvtube/common/constants/envData';
 import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath';
-import { CREATE_INFO, INPUT_OTP, OPENDASHBOARD } from '@clvtube/common/constants/route.constants';
+import {
+  CREATE_INFO,
+  INPUT_OTP,
+  OPENDASHBOARD,
+} from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '../common/hooks/useAppDispatch';
 import { AuthProps } from '../common/navigators/Root';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuthGoogle } from './slice';
-
-
 
 const { width, height } = Dimensions.get('screen');
 const isIOS = Platform.OS === 'ios';
@@ -90,11 +92,13 @@ const Auth = ({ navigation }: AuthProps) => {
       auth()
         .currentUser?.getIdTokenResult()
         .then(token => {
-          dispatch(updateAccountWithAuthGoogle({
-            email: idGoogle.user.email,
-            name: idGoogle.user.displayName,
-            firIdToken: token.token,
-          }));
+          dispatch(
+            updateAccountWithAuthGoogle({
+              email: idGoogle.user.email,
+              name: idGoogle.user.displayName,
+              firIdToken: token.token,
+            }),
+          );
 
           mutate(token.token, {
             onSuccess: data => {
@@ -134,7 +138,6 @@ const Auth = ({ navigation }: AuthProps) => {
 
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4}>
-
       {/* 🚀 Images Screen Login */}
       <Center marginBottom={'-50px'}>
         <Image
@@ -214,8 +217,7 @@ const Auth = ({ navigation }: AuthProps) => {
           borderWidth={'1px'}
           borderColor={'neutral.50'}
           borderRadius={'8px'}
-          onPress={handleLoginWithGoogle}
-        >
+          onPress={handleLoginWithGoogle}>
           <HStack
             space={3}
             width={'100%'}
@@ -266,7 +268,7 @@ const Auth = ({ navigation }: AuthProps) => {
         </Button>
 
         {/* 🚀 Feature login with Apple */}
-        {isIOS &&
+        {isIOS && (
           <Button
             height={'48px'}
             backgroundColor={'transparent'}
@@ -292,7 +294,7 @@ const Auth = ({ navigation }: AuthProps) => {
               </Text>
             </HStack>
           </Button>
-        }
+        )}
 
         {/* 🚀 version Application */}
         <Center mt={'40px'}>
@@ -301,13 +303,11 @@ const Auth = ({ navigation }: AuthProps) => {
             fontSize={'14px'}
             fontWeight={600}
             lineHeight={'20px'}
-            color={'#999999'}
-          >
-              Phiên bản 1.0.0
+            color={'#999999'}>
+            Phiên bản 1.0.0
           </Text>
         </Center>
       </VStack>
-
     </VStack>
   );
 };

@@ -1,7 +1,10 @@
 import { Button, Container, HStack, Text, VStack } from 'native-base';
 import React, { useEffect } from 'react';
 import { Dimensions } from 'react-native';
-import TrackPlayer, { Capability, useProgress } from 'react-native-track-player';
+import TrackPlayer, {
+  Capability,
+  useProgress,
+} from 'react-native-track-player';
 import { WebView } from 'react-native-webview';
 
 const { width } = Dimensions.get('window');

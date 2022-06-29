@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 export interface InputReference extends TextInput {
-  value: string
+  value: string;
 }
 
 function InputOTP({ navigation }: InputOTPProps) {
@@ -108,7 +108,9 @@ function InputOTP({ navigation }: InputOTPProps) {
                   onPress={() => inputRef.current?.focus()}>
                   <View style={styles.cellView}>
                     <Text style={styles.cellText}>
-                      {internalValue && internalValue.length > 0 ? internalValue[index] : ''}
+                      {internalValue && internalValue.length > 0
+                        ? internalValue[index]
+                        : ''}
                     </Text>
                   </View>
                 </TouchableOpacity>

@@ -12,8 +12,6 @@ import {
 } from 'native-base';
 
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-
 
 const VideoTypeCarousel = ({ item, onPress }) => {
   return (
@@ -88,13 +86,8 @@ const ListVideo = () => {
   );
   const videoListCarousel = useAppSelector(state => state.homePage.videoList);
 
-
   const renderVideoTypeCarousel = ({ item }) => {
-    return (
-      <VideoTypeCarousel
-        item={item}
-      />
-    );
+    return <VideoTypeCarousel item={item} />;
   };
 
   const renderVideoListCarousel = ({ item }) => {

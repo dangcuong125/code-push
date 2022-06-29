@@ -25,7 +25,6 @@ import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
 import { CreateInfoProps } from '../../common/navigators/Root';
 
-
 const { width, height } = Dimensions.get('window');
 
 const CreateInfo = ({ navigation }: CreateInfoProps) => {
@@ -47,25 +46,27 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
 
   const handleSubmitToRegister = () => {
     dispatch(updateAccountWithAuthGoogle(account));
-    mutate({
-      email: authState.email,
-      phone: authState.phone,
-      address: authState.address,
-      firIdToken: authState.firIdToken,
-    }, {
-      onSuccess: data => {
-        console.log({ taodzo: data?.data });
-        navigation.navigate(REGISTER_SUCCESS);
+    mutate(
+      {
+        email: authState.email,
+        phone: authState.phone,
+        address: authState.address,
+        firIdToken: authState.firIdToken,
       },
-      onError: () => {
-        setAccount({
-          ...account,
-          phone: '',
-          address: '',
-        });
-        dispatch(updateAccountWithAuthGoogle(account));
+      {
+        onSuccess: data => {
+          console.log({ taodzo: data?.data });
+          navigation.navigate(REGISTER_SUCCESS);
+        },
+        onError: () => {
+          setAccount({
+            ...account,
+            phone: '',
+            address: '',
+          });
+          dispatch(updateAccountWithAuthGoogle(account));
+        },
       },
-    },
     );
   };
 
@@ -94,7 +95,7 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
           }}
           type="text"
           value={phone}
-          name='phone'
+          name="phone"
           isDisabled={Boolean(phone)}
           height={'48px'}
           borderRadius={'8px'}
@@ -133,9 +134,9 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
           }}
           type="text"
           value={account.email}
-          name='email'
+          name="email"
           isDisabled={Boolean(email)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<MaterialCommunityIcons name="email" />}
@@ -167,15 +168,15 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         />
         {/* Label name */}
         <Input
-          onChangeText={text =>
-            setAccount({ ...account, email: text })
+          onChangeText={
+            text => setAccount({ ...account, email: text })
             // dispatch(updateAccountWithAuthGoogle({ name: text }))
           }
           type="text"
           value={account.name}
           name="name"
           isDisabled={Boolean(name)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<Ionicons name="text" />}
@@ -207,15 +208,15 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         />
         {/* Label address */}
         <Input
-          onChangeText={text =>
-            setAccount({ ...account, address: text })
+          onChangeText={
+            text => setAccount({ ...account, address: text })
             // dispatch(updateAccountWithAuthGoogle({ address: text }))
           }
           type="text"
           value={address}
           name="name"
           isDisabled={Boolean(address)}
-          autoCapitalize='none'
+          autoCapitalize="none"
           InputLeftElement={
             <Icon
               as={<Entypo name="address" />}
@@ -245,7 +246,6 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             backgroundColor: '#3D9BE0',
           }}
         />
-
       </VStack>
       <Button
         onPress={handleSubmitToRegister}

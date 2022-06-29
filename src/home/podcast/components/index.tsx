@@ -11,7 +11,7 @@ import { Speak } from './Speak';
 const Podcast = () => {
   return (
     <SafeAreaView>
-      <StatusBar barStyle="dark-content"/>
+      <StatusBar barStyle="dark-content" />
       <ScrollView>
         <Box bgColor="#FFFFFF" paddingTop="20px">
           <SearchingHeader />

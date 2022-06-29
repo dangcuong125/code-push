@@ -5,11 +5,11 @@ import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-import { CREATE_INFO, HOME_PAGE } from '@clvtube/common/constants/route.constants';
+import { CREATE_INFO } from '@clvtube/common/constants/route.constants';
 import { InputOTPProps } from '@clvtube/common/navigators/Root';
 
 export interface InputReference extends TextInput {
-  value: string
+  value: string;
 }
 
 const InputOTP = ({ route, navigation }: InputOTPProps) => {
@@ -109,7 +109,9 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
                       height: 52,
                       lineHeight: 52,
                     }}>
-                    {internalValue && internalValue.length > 0 ? internalValue[index] : ''}
+                    {internalValue && internalValue.length > 0
+                      ? internalValue[index]
+                      : ''}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -139,8 +141,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={onSubmitOTP}
-          >
+            onPress={onSubmitOTP}>
             Xác nhận
           </Button>
         </TouchableOpacity>

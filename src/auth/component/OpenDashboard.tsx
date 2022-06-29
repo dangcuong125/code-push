@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { HOME } from '../../common/constants/route.constants';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
-
 const { width } = Dimensions.get('screen');
 
 const OpenDashboard = () => {
