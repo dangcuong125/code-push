@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "linter": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "localize": "node src/common/utils/gen-localization.js"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "2.1.5",

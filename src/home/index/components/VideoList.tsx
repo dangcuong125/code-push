@@ -21,6 +21,7 @@ import {
   VideoTypeCarouselProps,
 } from '../interfaces';
 import { useGetAllTopics } from '../hooks/useGetAllTopics';
+import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   return (
@@ -95,6 +96,7 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
 };
 
 export const VideoList = () => {
+  const { t } = useTranslation();
   const { data } = useGetAllTopics('en', -1, 1, 100);
   const videoListCarousel = useAppSelector(state => state.homePage.videoList);
   const videoTypeCarousel = useAppSelector(
@@ -140,7 +142,7 @@ export const VideoList = () => {
             fontSize={'12px'}
             fontWeight={400}
             color={'#216BCD'}>
-            Xem tất cả
+            {t('viewAll')}
           </Text>
         </HStack>
         <FlatList

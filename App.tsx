@@ -8,17 +8,18 @@
  * @format
  */
 
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { NativeBaseProvider } from 'native-base'
-import { Provider } from 'react-redux'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { store } from '@clvtube/common/redux/store'
-import { theme } from '@clvtube/common/theme/theme'
-import Root from '@clvtube/common/navigators/Root'
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { NativeBaseProvider } from 'native-base';
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { store } from '@clvtube/common/redux/store';
+import { theme } from '@clvtube/common/theme/theme';
+import Root from '@clvtube/common/navigators/Root';
+import './i18n.config';
 
 const App = () => {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
   return (
     <NativeBaseProvider theme={theme}>
       <Provider store={store}>
@@ -29,7 +30,7 @@ const App = () => {
         </NavigationContainer>
       </Provider>
     </NativeBaseProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
