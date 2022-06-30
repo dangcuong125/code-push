@@ -20,7 +20,7 @@ import {
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
 } from '../interfaces';
-import { useGetAllTopics } from '../hooks/useGetAllTopics';
+import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {

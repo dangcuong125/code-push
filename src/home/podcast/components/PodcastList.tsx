@@ -1,8 +1,6 @@
-import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import {
-  Box,
   Button,
   HStack,
   Heading,
@@ -10,108 +8,168 @@ import {
   Pressable,
   //   Flex,
   Text,
+  VStack,
 } from 'native-base';
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
-import { handleClickPodcastList } from '../reducer/podcastList';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useEffect, useState } from 'react';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { FlatList, ScrollView } from 'react-native';
+import {
+  handleClickPodcastTopics,
+  receiveTopicPodcast,
+} from '../reducer/podcastList';
+import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
+import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
+import { IAllTopics, ITopicCarouselProps } from '../interfaces';
 
-const Item = ({ item, backgroundColor, color, onPress }: any) => {
+const Item = ({ item, onPress }: ITopicCarouselProps) => {
   return (
     <Button
-      marginTop="20px"
-      marginLeft="16px"
+      height={'27px'}
+      lineHeight={'27px'}
+      px={2}
+      marginLeft={3}
+      variant="outline"
       borderColor="#3D9BE0"
-      bgColor={backgroundColor}
-      color={color}
+      bgColor={item.bgColor || '#FFFFFF'}
       onPress={onPress}
-      variant="outline">
-      <Text style={{ color: item.color }}>{item.type}</Text>
+      _text={{
+        color: item.color || '#3D9BE0',
+        fontStyle: 'normal',
+        height: '20px',
+        fontWeight: 400,
+      }}>
+      {item?.description}
     </Button>
   );
 };
 
-const data = [
-  {
-    id: 1,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here',
-    hashtag: '#Friend',
-  },
-  {
-    id: 2,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here',
-    hashtag: '#Friend',
-  },
-  {
-    id: 3,
-    image: imagePodcast.PODCAST_LIST,
-    title: 'Title for teacher, you can write anything here123',
-    hashtag: '#Friend',
-  },
-];
-
 export const PodcastList = () => {
-  const [selectedId, setSelectedId] = useState(null);
+  const podcastTopics = useAppSelector(
+    state => state.podcastList.podcastTopics,
+  );
+  const [topicKey, setTopicKey] = useState('');
   const dispatch = useAppDispatch();
-  const podcastTypes = useAppSelector(state => state.podcastList.podcastTypes);
-  const renderItem = ({ item }: any) => {
+  const { data: topics } = useGetAllTopics('en', 1, 100);
+  const { data } = useGetPodcastList(topicKey, 1, 100);
+  const podcastList = data?.data?.items;
+  const renderItem = ({ item }: { item: IAllTopics }) => {
     return (
       <Item
         item={item}
         onPress={() => {
-          dispatch(handleClickPodcastList(item.id));
-          setSelectedId(item.id);
+          setTopicKey(item.key);
+          dispatch(handleClickPodcastTopics(item.key));
         }}
-        dispatch={dispatch}
-        backgroundColor={item.backgroundColor}
-        color={item.color}
       />
     );
   };
+  useEffect(() => {
+    console.log('hello', podcastTopics);
+    dispatch(receiveTopicPodcast(topics?.data?.items));
+  }, [topics?.data?.items]);
   return (
-    <Box bgColor="#FFFFFF" marginTop="16px">
-      <Box margin="16px">
-        <HStack alignItems="center" justifyContent="space-between">
-          <Heading color="#222B45">Danh sách Podcast</Heading>
+    <VStack space={2} safeAreaY={2} bgColor={'white'}>
+      <VStack bgColor={'white'} safeAreaY={2} space={4}>
+        <HStack
+          safeAreaX={4}
+          justifyContent={'space-between'}
+          alignItems={'center'}>
+          <Heading
+            fontStyle={'normal'}
+            fontSize={'18px'}
+            fontWeight={600}
+            color={'#000000'}>
+            Podcast
+          </Heading>
           <Text
-            style={{ color: '#216BCD' }}
-            onPress={() => console.log('See All')}>
+            fontStyle={'normal'}
+            fontSize={'12px'}
+            fontWeight={400}
+            color={'#216BCD'}>
             Xem tất cả
           </Text>
         </HStack>
         <FlatList
-          data={podcastTypes}
-          renderItem={renderItem}
           horizontal={true}
-          extraData={selectedId}
+          data={podcastTopics}
+          renderItem={renderItem}
         />
-        {data.map((item, index) => (
-          <Pressable
-            key={index}
-            marginTop={'20px'}
-            borderColor="primary.100"
-            borderWidth={1}
-            padding="20px"
-            textAlign={'center'}
-            borderRadius={'10px'}>
-            <HStack>
-              <Image source={item.image} />
-              <Box marginLeft={'18px'}>
-                <Text
-                  marginTop={'10px'}
-                  width="200px"
-                  fontSize="14px"
-                  fontWeight={600}
-                  color="tileText.100">
-                  {item.title}
-                </Text>
-                <Text color="neutral.300">{item.hashtag}</Text>
-              </Box>
-            </HStack>
-          </Pressable>
-        ))}
-      </Box>
-    </Box>
+      </VStack>
+      <ScrollView>
+        <VStack height={'400px'} safeAreaX={4} space={5}>
+          {podcastList?.map((item: any, index: number) => (
+            <Pressable
+              key={index}
+              borderColor="#E6E6E6"
+              borderWidth={'1px'}
+              borderRadius={'12px'}
+              p={3}>
+              <HStack space={4} alignItems={'center'}>
+                <Image
+                  source={item.audioThumbnail?.thumbnailId}
+                  width={'101px'}
+                  height={'100px'}
+                  borderRadius={'10px'}
+                />
+                <VStack space={1.5} width={'60%'}>
+                  <Heading
+                    fontStyle={'normal'}
+                    fontSize={'16px'}
+                    fontWeight={400}
+                    lineHeight={'22px'}
+                    color={'#161719'}>
+                    {item.title}
+                  </Heading>
+                  <Text
+                    fontStyle={'normal'}
+                    fontSize={'14px'}
+                    fontWeight={400}
+                    lineHeight={'19px'}
+                    color={'#999999'}>
+                    {item.desc}
+                  </Text>
+                  <HStack justifyContent={'flex-start'} alignItems={'center'}>
+                    <HStack space={0.5} alignItems={'center'}>
+                      <MaterialCommunityIcons
+                        name="clock-time-three-outline"
+                        size={15}
+                        color={'#3D9BE0'}
+                      />
+                      <Text
+                        fontStyle={'normal'}
+                        fontSize={'10px'}
+                        fontWeight={400}
+                        color={'#666666'}>
+                        01:30
+                      </Text>
+                    </HStack>
+                    <Entypo name="dot-single" size={15} color={'#999999'} />
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'10px'}
+                      fontWeight={400}
+                      color={'#999999'}>
+                      Dev Taodzo
+                    </Text>
+                    <Entypo name="dot-single" size={15} color={'#999999'} />
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'10px'}
+                      fontWeight={400}
+                      color={'#999999'}>
+                      {item.audiosToTopics?.map(
+                        (topic: any) => topic?.topicKey,
+                      )}
+                      hello
+                    </Text>
+                  </HStack>
+                </VStack>
+              </HStack>
+            </Pressable>
+          ))}
+        </VStack>
+      </ScrollView>
+    </VStack>
   );
 };

@@ -19,8 +19,8 @@ import {
   IPodcastTypeCarouselProps,
   IPodcastTypes,
 } from '../interfaces';
-import { useGetPodcastList } from '../hooks/useGetPodcastList';
-import { useGetAllTopics } from '../hooks/useGetAllTopics';
+import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
+import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import {
   receiveTopicsPodcast,
   selectOnlyOneTypePodcast,
@@ -58,7 +58,7 @@ export const PodcastList = () => {
   );
   const { data } = useGetPodcastList(topicKey, 1, 10);
   const podcastList = data?.data?.items;
-  const { data: topics } = useGetAllTopics('en', -1, 1, 100);
+  const { data: topics } = useGetAllTopics('en', 1, 100);
 
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
