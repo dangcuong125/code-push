@@ -97,7 +97,7 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
 
 export const VideoList = () => {
   const { t } = useTranslation();
-  const { data } = useGetAllTopics('en', -1, 1, 100);
+  const { data } = useGetAllTopics('en', 1, 100);
   const videoListCarousel = useAppSelector(state => state.homePage.videoList);
   const videoTypeCarousel = useAppSelector(
     state => state.homePage.videoTypeCarousel,

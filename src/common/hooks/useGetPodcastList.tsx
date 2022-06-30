@@ -17,14 +17,11 @@ export const getPodcastList = (
   page: number,
   limit: number,
 ) => {
-  //   return execute.get(GET_PODCAST_LIST, {
-  //     params: {
-  //       topicKey,
-  //       page,
-  //       limit,
-  //     },
-  //   });
-  return execute.get(
-    GET_PODCAST_LIST + `?topicKey=${topicKey}&page=${page}&limit=${limit}`,
-  );
+  return execute.get(GET_PODCAST_LIST, {
+    params: {
+      topicKey,
+      page,
+      limit,
+    },
+  });
 };

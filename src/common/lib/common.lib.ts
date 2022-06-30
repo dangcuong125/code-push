@@ -13,7 +13,7 @@ export function toQueryString(objParams: object) {
     }
   }
 
-  return '?' + str.join('&');
+  return str.join('&');
 }
 export function replacePathParams(path: string, newData: object): string {
   let newPath = path;

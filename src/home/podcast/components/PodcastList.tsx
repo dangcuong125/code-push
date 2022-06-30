@@ -21,6 +21,7 @@ import {
 import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import { IAllTopics, ITopicCarouselProps } from '../interfaces';
+import { useTranslation } from 'react-i18next';
 
 const Item = ({ item, onPress }: ITopicCarouselProps) => {
   return (
@@ -45,6 +46,7 @@ const Item = ({ item, onPress }: ITopicCarouselProps) => {
 };
 
 export const PodcastList = () => {
+  const { t } = useTranslation();
   const podcastTopics = useAppSelector(
     state => state.podcastList.podcastTopics,
   );
@@ -65,7 +67,6 @@ export const PodcastList = () => {
     );
   };
   useEffect(() => {
-    console.log('hello', podcastTopics);
     dispatch(receiveTopicPodcast(topics?.data?.items));
   }, [topics?.data?.items]);
   return (
@@ -87,7 +88,7 @@ export const PodcastList = () => {
             fontSize={'12px'}
             fontWeight={400}
             color={'#216BCD'}>
-            Xem tất cả
+            {t('viewAll')}
           </Text>
         </HStack>
         <FlatList
@@ -161,7 +162,6 @@ export const PodcastList = () => {
                       {item.audiosToTopics?.map(
                         (topic: any) => topic?.topicKey,
                       )}
-                      hello
                     </Text>
                   </HStack>
                 </VStack>
