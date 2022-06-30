@@ -22,11 +22,12 @@ Example:
 
 ## Installation
 
-Install the dependencies, devDependencies, pod.
+Install the dependencies, devDependencies, pod, husky hook.
 
 ```sh
 cd Clevertube
 yarn
+yarn prepare
 cd ios
 pod install (Mac intel) / arch -x86_64 pod install
 ```
