@@ -9,7 +9,8 @@
     "test": "jest",
     "linter": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "localize": "node src/common/utils/gen-localization.js"
+    "localize": "node src/common/utils/gen-localization.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "2.1.5",
