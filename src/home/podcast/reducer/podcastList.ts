@@ -1,45 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IInitialState } from '../interfaces';
+import { IAllTopics, IInitialState } from '../interfaces';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 
 const initialState: IInitialState = {
-  podcastTypes: [
-    {
-      id: 1,
-      type: 'All',
-      isSelected: false,
-      backgroundColor: '',
-      color: '#3D9BE0',
-    },
-    {
-      id: 2,
-      type: 'Friends',
-      isSelected: false,
-      backgroundColor: '',
-      color: '#3D9BE0',
-    },
-    {
-      id: 3,
-      type: 'Entertainment',
-      isSelected: false,
-      backgroundColor: '',
-      color: '#3D9BE0',
-    },
-    {
-      id: 4,
-      type: 'Music',
-      isSelected: false,
-      backgroundColor: '',
-      color: '#3D9BE0',
-    },
-    {
-      id: 5,
-      type: 'Film',
-      isSelected: false,
-      backgroundColor: '',
-      color: '#3D9BE0',
-    },
-  ],
+  podcastTopics: [],
   podcastOutstanding: [
     {
       title: 'hello world123',
@@ -80,19 +44,21 @@ export const podcastList = createSlice({
   name: 'podcast-list',
   initialState,
   reducers: {
-    handleClickPodcastList: (state, action) => {
-      state.podcastTypes = state.podcastTypes.map(podcastType => {
-        podcastType.isSelected = podcastType.id === action.payload;
-        podcastType.backgroundColor =
-          podcastType.id === action.payload ? '#3D9BE0' : '#FFFFFF';
-        podcastType.color =
-          podcastType.id === action.payload ? '#FFFFFF' : '#3D9BE0';
-        return podcastType;
+    receiveTopicPodcast: (state, action) => {
+      state.podcastTopics = action.payload;
+    },
+    handleClickPodcastTopics: (state, action) => {
+      state.podcastTopics = state?.podcastTopics?.map((item: IAllTopics) => {
+        const isSelected = item.key === action.payload;
+        item.isSelected = !isSelected;
+        item.bgColor = isSelected ? '#3D9BE0' : '#FFFFFF';
+        item.color = isSelected ? '#FFFFFF' : '#3D9BE0';
+        return item;
       });
     },
   },
 });
 export const {
-  actions: { handleClickPodcastList },
+  actions: { handleClickPodcastTopics, receiveTopicPodcast },
   reducer,
 } = podcastList;

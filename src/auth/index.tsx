@@ -42,7 +42,7 @@ const Auth = ({ navigation }: AuthProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // console.log(Config.WEB_CLIENT_ID)
+    // console.log(Config.WEB_CLIENT_ID)s
     GoogleSignin.configure({
       webClientId: envData.webClientId,
     });
@@ -99,6 +99,7 @@ const Auth = ({ navigation }: AuthProps) => {
               firIdToken: token.token,
             }),
           );
+          console.log(token);
 
           mutate(token.token, {
             onSuccess: data => {

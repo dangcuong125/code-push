@@ -10,20 +10,14 @@ export interface IItemPodcastOutstanding {
 export interface IItemPodcastPopular {
   item: IPodcastOutstandingItem;
 }
-interface IPodcastTypes {
-  id: number;
-  type: string;
-  isSelected: boolean;
-  backgroundColor: string;
-  color: string;
-}
+
 interface IPodcastOutstanding {
   title: string;
   content: string;
   image: HTMLImageElement;
 }
 export interface IInitialState {
-  podcastTypes: IPodcastTypes[];
+  podcastTopics: IAllTopics[];
   podcastOutstanding: IPodcastOutstanding[];
   podcastPopular: IPodcastOutstandingItem[];
 }
@@ -31,4 +25,74 @@ interface IPodcastOutstandingItem {
   id: number;
   image: HTMLImageElement;
   title: string;
+}
+export interface IPodcastListItem {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: null | string;
+  version: number;
+  id: number;
+  audioCode: string;
+  audioTypeKey: string;
+  title: string;
+  desc: string;
+  levelKey: string;
+  audioThumbnail: {
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: null | string;
+    version: number;
+    id: number;
+    audioId: number;
+    fileId: number;
+    thumbnailId: number;
+  };
+  audiosToTopics: [
+    {
+      id: number;
+      topicKey: string;
+      audioId: number;
+      topic: null;
+    },
+  ];
+  level: {
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: null | string;
+    version: number;
+    key: string;
+    slug: string;
+    description: string;
+    enabled: number;
+    translates: [];
+  };
+}
+export interface IAllTopics {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: null | string;
+  version: number;
+  isSelected?: boolean;
+  bgColor?: string;
+  color?: string;
+  key: string;
+  slug: string;
+  description: string;
+  enabled: number;
+  translates: [
+    {
+      createdAt: string;
+      updatedAt: string;
+      deletedAt: null | string;
+      version: number;
+      id: number;
+      name: string;
+      lang: string;
+      topicKey: string;
+    },
+  ];
+}
+export interface ITopicCarouselProps {
+  item: IAllTopics;
+  onPress: () => void;
 }
