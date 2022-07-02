@@ -4,7 +4,7 @@ import { reducer as videoDetails } from '@clvtube/video-details/reducer/videoDet
 import { reducer as podcastList } from '@clvtube/home/podcast/reducer/podcastList';
 import { reducer as homePage } from '@clvtube/home/index/redux/homePage';
 import { reducer as authReducer } from '@clvtube/auth/slice';
-import topicReducer from '@clvtube/level-topic/reducer/topicReducer';
+import { reducer as topicReducer } from '@clvtube/chooseTopic/slice';
 
 const rootReducer = combineReducers({
   videoDetails,

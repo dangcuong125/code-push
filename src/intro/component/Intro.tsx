@@ -1,13 +1,15 @@
-// import Component from Package
+// 🚀 import Component from Package
 import React, { useRef, useState } from 'react';
-import { Box, Button, Center, Pressable, Text, VStack } from 'native-base';
-
-import { useNavigation } from '@react-navigation/native';
 import { Dimensions, Image, TouchableOpacity } from 'react-native';
+import { Box, Button, Center, Pressable, Text, VStack } from 'native-base';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { AUTH } from '@clvtube/common/constants/route.constants';
 
+// 🚀 import component from Page
+import { IntroProps } from '@clvtube/common/navigators/Root';
+import { AUTH } from '@clvtube/common/constants/route.constants';
 import { slider } from '@clvtube/mocks/dataOnboarding';
+
+
 const { width, height } = Dimensions.get('window');
 
 const renderItemSlider = ({ item, index }) => {
@@ -32,11 +34,9 @@ const renderItemSlider = ({ item, index }) => {
   );
 };
 
-const Intro = () => {
+const Intro = ({ navigation }: IntroProps) => {
   const [index, setIndex] = useState(0);
   const refCarousel = useRef<Carousel<any>>(null);
-
-  const navigator = useNavigation();
 
   const nextSlider = () => {
     if (index !== slider.length - 1) {
@@ -44,27 +44,35 @@ const Intro = () => {
       setIndex(nextSlideIndex);
       refCarousel?.current?.snapToItem(nextSlideIndex);
     } else {
-      navigator.navigate(AUTH);
+      navigation.navigate(AUTH);
     }
   };
 
   return (
-    <VStack bgColor={'white'} height={height} justifyContent={'space-evenly'}>
-      <VStack safeAreaY={10} flex={1}>
+    <VStack
+      height={height}
+      bgColor={'white'}
+      justifyContent={'space-evenly'}
+    >
+      <VStack
+        safeAreaY={10}
+        flex={1}
+      >
         <Pressable
           px={4}
           mt={10}
           onPress={() => {
-            console.warn('Redirect Page Login!');
-            return navigator.navigate(AUTH);
-          }}>
+            return navigation.navigate(AUTH);
+          }}
+        >
           <Text
             fontStyle={'normal'}
             fontSize={'16px'}
             fontWeight={600}
             lineHeight={'22px'}
             textAlign={'right'}
-            color={'#0E3C9E'}>
+            color={'#0E3C9E'}
+          >
             Skip
           </Text>
         </Pressable>
@@ -111,7 +119,8 @@ const Intro = () => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={nextSlider}>
+            onPress={nextSlider}
+          >
             {index === slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>

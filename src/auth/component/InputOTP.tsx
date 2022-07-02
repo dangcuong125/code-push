@@ -109,9 +109,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
                       height: 52,
                       lineHeight: 52,
                     }}>
-                    {internalValue && internalValue.length > 0
-                      ? internalValue[index]
-                      : ''}
+                    {internalValue && internalValue.length > 0 ? internalValue[index] : ''}
                   </Text>
                 </View>
               </TouchableOpacity>

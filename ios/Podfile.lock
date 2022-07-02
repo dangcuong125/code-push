@@ -477,6 +477,8 @@ PODS:
     - React-perflogger (= 0.68.1)
   - RNAppleAuthentication (2.1.5):
     - React-Core
+  - RNCAsyncStorage (1.17.7):
+    - React-Core
   - RNFBApp (14.9.1):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
@@ -596,6 +598,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -729,6 +732,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -823,6 +828,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   RNAppleAuthentication: 63c2127ace11985b94f852fc480eb84145653712
+  RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
   RNFBApp: fd23737680ed2bdde41ca27d8bfb171b6d668c6b
   RNFBAuth: 4cfeb48367f81b135aced4bb9800df5488bc9660
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
@@ -839,4 +845,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c1ca8f6cfa48793a4d105f08f1add95b473ddeba
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
