@@ -7,7 +7,7 @@ import PopularVideo from './component/PopularVideo';
 import VideoPupolar from './component/VideoPupolar';
 import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
 
-const HomePage = () => {
+const VideoList = () => {
   return (
     <ScrollView>
       <VStack space={4}>
@@ -23,4 +23,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default VideoList;
