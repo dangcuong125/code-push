@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import {
   Box,
@@ -21,6 +21,7 @@ import {
   VideoTypeCarouselProps,
 } from '../interfaces';
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
+import { useGetVideoList } from '@clvtube/common/hooks/useGetVideoList';
 import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
@@ -45,7 +46,7 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   );
 };
 
-const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
+const VideoListCarousel = ({ item }: any) => {
   return (
     <Box
       mt={4}
@@ -63,13 +64,13 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
             fontWeight={400}
             color={'#1A1A1A'}
             lineHeight={'22px'}>
-            {item.title}
+            {item.name}
           </Text>
           <Image
-            source={item.image}
+            source={{ uri: item?.thumbnails?.medium?.url }}
             resizeMode="contain"
-            mt={1}
-            mb={4}
+            width={item?.thumbnails.medium.width}
+            height={item?.thumbnails.medium.height}
             alt=""
           />
           <Text
@@ -78,16 +79,7 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
             fontWeight={400}
             lineHeight={'19px'}
             color={'#1A1A1A'}>
-            {item.content}
-          </Text>
-          <Text
-            fontStyle={'normal'}
-            fontSize={'16px'}
-            fontWeight={400}
-            lineHeight={'22px'}
-            color={'#1A1A1A'}
-            mt={2}>
-            {item.suggestion}
+            {item.desc}
           </Text>
         </Center>
       </Box>
@@ -97,8 +89,10 @@ const VideoListCarousel = ({ item }: IVideoListCarouselProps) => {
 
 export const VideoList = () => {
   const { t } = useTranslation();
+  const [topicKey, setTopicKey] = useState('');
   const { data } = useGetAllTopics('en', 1, 100);
-  const videoListCarousel = useAppSelector(state => state.homePage.videoList);
+  const { data: videos } = useGetVideoList(topicKey, 1, 100);
+  const videoListCarousel = videos?.data?.items;
   const videoTypeCarousel = useAppSelector(
     state => state.homePage.videoTypeCarousel,
   );
@@ -109,6 +103,7 @@ export const VideoList = () => {
     return (
       <VideoTypeCarousel
         onPress={() => {
+          setTopicKey(item.key);
           dispatch(selectOnlyOneTypeVideo(item.key));
         }}
         item={item}

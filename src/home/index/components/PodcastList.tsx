@@ -118,6 +118,7 @@ export const PodcastList = () => {
                   width={'101px'}
                   height={'100px'}
                   borderRadius={'10px'}
+                  alt=""
                 />
                 <VStack space={1.5} width={'60%'}>
                   <Heading
