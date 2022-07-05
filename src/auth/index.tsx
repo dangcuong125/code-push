@@ -28,6 +28,7 @@ import { AuthProps } from '../common/navigators/Root';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuthGoogle } from './slice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('screen');
 const isIOS = Platform.OS === 'ios';
@@ -38,7 +39,6 @@ const Auth = ({ navigation }: AuthProps) => {
   const inputRef = useRef<InputReference>(null);
 
   const { mutate } = useLoginMutation();
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Auth = ({ navigation }: AuthProps) => {
     }
   }, []);
 
-  // 🚀 Event auth with phoneNumber
+  // 🎉 Event auth with phoneNumber
   const onChangePhone = (text: string) => {
     setFocusInput(true);
     setPhoneNumber(text);
@@ -82,7 +82,7 @@ const Auth = ({ navigation }: AuthProps) => {
     }
   };
 
-  // 🚀 Event auth with Google
+  // 🎉 Event auth with Google
   const handleLoginWithGoogle = async () => {
     try {
       const { idToken } = await GoogleSignin.signIn();
@@ -91,7 +91,7 @@ const Auth = ({ navigation }: AuthProps) => {
 
       auth()
         .currentUser?.getIdTokenResult()
-        .then(token => {
+        .then(async token => {
           dispatch(
             updateAccountWithAuthGoogle({
               email: idGoogle.user.email,
@@ -100,6 +100,8 @@ const Auth = ({ navigation }: AuthProps) => {
             }),
           );
           console.log(token);
+
+          await AsyncStorage.setItem('token_App', token.token);
 
           mutate(token.token, {
             onSuccess: data => {
@@ -116,7 +118,7 @@ const Auth = ({ navigation }: AuthProps) => {
     }
   };
 
-  // 🚀 Event auth with Apple
+  // 🎉 Event auth with Apple
   const handleLoginWithApple = async () => {
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
@@ -139,7 +141,7 @@ const Auth = ({ navigation }: AuthProps) => {
 
   return (
     <VStack bgColor={'white'} height={'100%'} safeAreaX={4}>
-      {/* 🚀 Images Screen Login */}
+      {/* 🎉 Images Screen Login */}
       <Center marginBottom={'-50px'}>
         <Image
           source={imagePath.LOGIN_REGISTER}
@@ -151,7 +153,7 @@ const Auth = ({ navigation }: AuthProps) => {
       </Center>
 
       <VStack space={5}>
-        {/* 🚀 Feature login with phoneNumber */}
+        {/* 🎉 Feature login with phoneNumber */}
         <Input
           ref={inputRef}
           height={'47px'}
@@ -191,7 +193,7 @@ const Auth = ({ navigation }: AuthProps) => {
           {phoneNumber ? 'Đăng nhập' : 'Tiếp tục'}
         </Button>
 
-        {/* 🚀 Option auth with Social */}
+        {/* 🎉 Option auth with Social */}
         <Box mt={'10px'}>
           <Divider height={'1px'} backgroundColor={'neutral.900'} />
           <Center>
@@ -211,7 +213,7 @@ const Auth = ({ navigation }: AuthProps) => {
           </Center>
         </Box>
 
-        {/* 🚀 Feature login with Google */}
+        {/* 🎉 Feature login with Google */}
         <Button
           height={'48px'}
           backgroundColor={'transparent'}
@@ -242,7 +244,7 @@ const Auth = ({ navigation }: AuthProps) => {
           </HStack>
         </Button>
 
-        {/* 🚀 Feature login with Facebook */}
+        {/* 🎉 Feature login with Facebook */}
         <Button
           height={'48px'}
           backgroundColor={'transparent'}
@@ -268,7 +270,7 @@ const Auth = ({ navigation }: AuthProps) => {
           </HStack>
         </Button>
 
-        {/* 🚀 Feature login with Apple */}
+        {/* 🎉 Feature login with Apple */}
         {isIOS && (
           <Button
             height={'48px'}
@@ -297,7 +299,7 @@ const Auth = ({ navigation }: AuthProps) => {
           </Button>
         )}
 
-        {/* 🚀 version Application */}
+        {/* 🎉 version Application */}
         <Center mt={'40px'}>
           <Text
             fontStyle={'normal'}
