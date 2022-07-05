@@ -10,6 +10,7 @@ import {
 } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
@@ -19,8 +20,8 @@ import {
   IPodcastTypeCarouselProps,
   IPodcastTypes,
 } from '../interfaces';
-import { useGetPodcastList } from '../hooks/useGetPodcastList';
-import { useGetAllTopics } from '../hooks/useGetAllTopics';
+import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
+import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import {
   receiveTopicsPodcast,
   selectOnlyOneTypePodcast,
@@ -50,15 +51,15 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
 
 export const PodcastList = () => {
   // const dispatch = useAppDispatch()
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [topicKey, setTopicKey] = useState<string>('');
-  console.log(topicKey);
   const PODCAST_TYPE = useAppSelector(
     state => state.homePage.podcastTypeCarousel,
   );
   const { data } = useGetPodcastList(topicKey, 1, 10);
   const podcastList = data?.data?.items;
-  const { data: topics } = useGetAllTopics('en', -1, 1, 100);
+  const { data: topics } = useGetAllTopics('en', 1, 100);
 
   const renderItem = ({ item }: { item: IPodcastTypes }) => {
     return (
@@ -93,7 +94,7 @@ export const PodcastList = () => {
             fontSize={'12px'}
             fontWeight={400}
             color={'#216BCD'}>
-            Xem tất cả
+            {t('viewAll')}
           </Text>
         </HStack>
         <FlatList
@@ -117,6 +118,7 @@ export const PodcastList = () => {
                   width={'101px'}
                   height={'100px'}
                   borderRadius={'10px'}
+                  alt=""
                 />
                 <VStack space={1.5} width={'60%'}>
                   <Heading

@@ -14,7 +14,7 @@ export const Speak = () => {
         </Text>
         {AUDIO_RECOMMEND?.map((item, index) => (
           <Flex key={index} direction="row" marginTop={'20px'}>
-            <Image source={item.image} />
+            <Image source={item.image} alt="" />
             <Box marginLeft="12px">
               <Text color="text.200" fontWeight={600}>
                 {item.title}

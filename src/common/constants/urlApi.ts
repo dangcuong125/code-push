@@ -7,3 +7,4 @@ export const REGISTER_POST = '/client/register';
 export const GET_ALL_TOPICS = '/client/topics';
 export const GET_ALL_LEVELS = '/client/levels';
 export const POST_LEVEL_TOPIC = '/client/choose-level-topics';
+export const GET_VIDEO_LIST = '/client/videos';
