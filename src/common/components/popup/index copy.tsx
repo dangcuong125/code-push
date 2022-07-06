@@ -11,6 +11,10 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> mapping api for transcript run with audio and scroll to offset
 const Popup = ({ showModal, setShowModal }) => {
   return (
     <Fragment>

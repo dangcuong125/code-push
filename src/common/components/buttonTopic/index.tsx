@@ -15,16 +15,12 @@ const ButtonTopic = ({
       variant="outline"
       borderColor="#3D9BE0"
       bgColor={
-        item.enabled === 1 || displayPickingTopic === 'All'
-          ? '#3D9BE0'
-          : '#FFFFFF'
+        item.enabled === 1 || displayPickingTopic === 'All' ? '#3D9BE0' : '#FFFFFF'
       }
       onPress={() => handlePickingTopic(item)}
       _text={{
         color:
-          item.enabled === 1 || displayPickingTopic === 'All'
-            ? '#FFFFFF'
-            : '#3D9BE0',
+          item.enabled === 1 || displayPickingTopic === 'All' ? '#FFFFFF' : '#3D9BE0',
         fontStyle: 'normal',
         height: '20px',
         fontWeight: 400,

@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 import TrackPlayer, { Event, State } from 'react-native-track-player';
 
 let wasPausedByDuck = false;
