@@ -17,13 +17,13 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { imageSocial } from '@clvtube/common/constants/imagePath';
-import { Dimensions, Image } from 'react-native';
+import { Dimensions, Image, Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuthGoogle } from '../slice';
 import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
-import { CreateInfoProps } from '../../common/navigators/Root';
+import { CreateInfoProps } from '../../common/navigators/RootNavigator';
 
 const { width, height } = Dimensions.get('window');
 
@@ -45,6 +45,14 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
   const dispatch = useAppDispatch();
 
   const handleSubmitToRegister = () => {
+    if (account.phone === '') {
+      Alert.alert('Bạn vui lòng nhập số điện thoại để đăng ký 📲');
+      return;
+    };
+    if (account.address === '') {
+      Alert.alert('Bạn vui lòng nhập địa chỉ để đăng ký 🏠');
+      return;
+    };
     dispatch(updateAccountWithAuthGoogle(account));
     mutate(
       {

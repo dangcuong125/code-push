@@ -11,19 +11,22 @@ import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useGetAllLevels } from '@clvtube/common/hooks/useLevels';
 import { Alert, TouchableOpacity } from 'react-native';
-import { useGetAllTopics, usePostLevelTopicMutation } from '../common/hooks/useTopics';
+import { useGetAllTopics, usePostChooseLevelTopic } from '../common/hooks/useTopics';
 import { selectLevel, selectTopic, updateDataLevel, updateDataTopic } from './slice';
 import { IDataLevelOrTopic } from '../chooseTopic/interfaces/interfaces';
+import { useNavigation } from '@react-navigation/native';
+import { HOME } from '../common/constants/route.constants';
 
 
 const Topic = () => {
   const { level, topic } = useAppSelector(state => state.topicReducer);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   const { data: topicData } = useGetAllTopics();
   const { data: levelData } = useGetAllLevels();
 
-  const { mutate } = usePostLevelTopicMutation();
+  const { mutate } = usePostChooseLevelTopic();
 
   const filterDataLevel = levelData?.data.items.filter((item: IDataLevelOrTopic) => {
     if (item.enabled === -1) {
@@ -82,9 +85,13 @@ const Topic = () => {
       topicKeys,
     },
     {
-      onSuccess: (data: any): void => console.log(data),
-      onError: () => {
-        Alert.alert('⛔️ Không thể connect đến server');
+      onSuccess: (data: any) => {
+        if (data?.status === 417) {
+          navigation.navigate({HOME});
+        }
+      },
+      onError: (err) => {
+        Alert.alert(`⛔️ ${err}`);
         // navigator.navigate(AUTH);
       },
     },

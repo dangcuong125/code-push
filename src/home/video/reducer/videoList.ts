@@ -8,10 +8,10 @@ export const videoList = createSlice({
   name: 'video-list',
   initialState,
   reducers: {
-    receiveTopicsVideo: (state: IInitialState, action) => {
+    receiveTopicsVideo: (state: IInitialState, action: any) => {
       state.videoTopics = action.payload;
     },
-    selectOnlyOneTypeVideo: (state: IInitialState, action) => {
+    selectOnlyOneTypeVideo: (state: IInitialState, action: any) => {
       state.videoTopics = state.videoTopics.map(item => {
         const isSelected = item.key === action.payload;
         item.isSelected = !isSelected;

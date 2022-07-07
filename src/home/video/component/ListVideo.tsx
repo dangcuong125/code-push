@@ -1,136 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
 import {
-  Box,
-  Button,
-  // Center,
-  Flex,
-  HStack,
-  Heading,
-  Image,
-  Text,
+  Heading, HStack, Text,
   VStack,
 } from 'native-base';
+import React, { useEffect } from 'react';
+import { FlatList, TouchableOpacity } from 'react-native';
 
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
-import {
-  IVideoListCarousel,
-  IVideoTypeCarousel,
-  IVideoTypeCarouselProps,
-} from '../interface';
-import {
-  receiveTopicsVideo,
-  selectOnlyOneTypeVideo,
-} from '../reducer/videoList';
-import { useGetVideoList } from '@clvtube/common/hooks/useGetVideoList';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+
+import { updateDataTopic, updateKeyPickingTopic } from '@clvtube/chooseTopic/slice';
+import ButtonTopic from '@clvtube/common/components/buttonTopic';
+import { useGetAllTopics } from '@clvtube/common/hooks/useTopics';
+import { useGetAllVideos } from '@clvtube/common/hooks/useVideos';
 import { useTranslation } from 'react-i18next';
+import { updateVideosData } from '../slice';
+import { useNavigation } from '@react-navigation/native';
+import { VIDEO } from '../../../common/constants/route.constants';
+import VideoItem from '../../../common/components/video-item/index';
 
-const VideoTypeCarousel = ({ item, onPress }: IVideoTypeCarouselProps) => {
-  return (
-    <Button
-      height={'27px'}
-      lineHeight={'27px'}
-      px={2}
-      marginLeft={4}
-      variant="outline"
-      borderColor="#3D9BE0"
-      bgColor={item.bgColor || '#FFFFFF'}
-      onPress={onPress}
-      _text={{
-        color: item.color || '#3D9BE0',
-        fontStyle: 'normal',
-        height: '20px',
-        fontWeight: 400,
-      }}>
-      {item.description}
-    </Button>
-  );
-};
-
-const VideoListCarousel = ({ item, t }: { item: any; t: any }) => {
-  return (
-    <Box
-      mt={4}
-      ml={4}
-      width={'272px'}
-      px={4}
-      py={2}
-      marginRight={2}
-      bgColor={'white'}
-      borderRadius="12px">
-      <Box>
-        <Flex>
-          <Image
-            source={{ uri: item?.thumbnails.medium.url }}
-            resizeMode="contain"
-            width={item?.thumbnails.medium.width}
-            height={item?.thumbnails.medium.height}
-            alt=""
-          />
-          <Text
-            fontStyle={'normal'}
-            textAlign={'center'}
-            fontSize="16px"
-            fontWeight={600}
-            color={'#1A1A1A'}>
-            {item.name}
-          </Text>
-          <Text
-            fontStyle={'normal'}
-            fontSize={'14px'}
-            textAlign={'center'}
-            fontWeight={400}
-            lineHeight={'19px'}
-            marginTop="8px"
-            color={'#1A1A1A'}>
-            {item.desc}
-          </Text>
-          <Button
-            marginTop="16px"
-            width="120px"
-            height="40px"
-            margin="auto"
-            bgColor={'text.500'}>
-            {t('start')}
-          </Button>
-        </Flex>
-      </Box>
-    </Box>
-  );
-};
 
 const ListVideo = () => {
-  const [topicKey, setTopicKey] = useState('');
   const { t } = useTranslation();
-  const { data } = useGetAllTopics('en', 1, 100);
-  const { data: videos } = useGetVideoList(topicKey, 1, 100);
-  const videoListCarousel = videos?.data?.items;
-  const videoTypeCarousel = useAppSelector(
-    state => state.videoList.videoTopics,
-  );
   const dispatch = useAppDispatch();
+  const navigator = useNavigation();
 
-  const renderVideoTypeCarousel = ({ item }: { item: IVideoTypeCarousel }) => {
-    const onPress = () => {
-      setTopicKey(item.key);
-      dispatch(selectOnlyOneTypeVideo(item.key));
-    };
-    return <VideoTypeCarousel item={item} onPress={onPress} />;
-  };
+  const { topic, pickingTopic } = useAppSelector(state => state.topicReducer);
+  const { videos } = useAppSelector(state => state.videoReducer);
+  // const { videos } = useAppSelector(state => state.videoReducer);
 
-  const renderVideoListCarousel = ({ item }: { item: IVideoListCarousel }) => {
-    return <VideoListCarousel item={item} t={t} />;
-  };
+  const { data: topicData } = useGetAllTopics();
+  const { data: videosData } = useGetAllVideos();
+
+  console.log({topic: topicData?.data.items});
+  console.log({video: videosData?.data.items});
 
   useEffect(() => {
-    dispatch(receiveTopicsVideo(data?.data?.items));
-  }, [data?.data?.items]);
+    if (pickingTopic !== 'All') {
+      // Alert.alert('Bạn không thể lấy API rồi!');
+    };
+  }, [pickingTopic]);
+
+  useEffect(() => {
+    dispatch(updateDataTopic(topicData?.data?.items));
+  }, [topicData?.data?.items]);
+
+  useEffect(() => {
+    dispatch(updateVideosData(videosData?.data.items));
+  }, [videosData?.data.items]);
+
+  const handlePickingTopic = (item: any) => {
+    dispatch(updateKeyPickingTopic(item));
+  };
 
   return (
-    <VStack bgColor={'transparent'}>
-      <VStack bgColor={'white'} safeAreaY={4} space={5}>
+      <VStack bgColor={'white'} safeAreaY={4} space={4}>
         <HStack
           safeAreaX={4}
           justifyContent={'space-between'}
@@ -142,26 +65,42 @@ const ListVideo = () => {
             color={'#000000'}>
             Danh sách video
           </Heading>
-          <Text
-            fontStyle={'normal'}
-            fontSize={'12px'}
-            fontWeight={400}
-            color={'#216BCD'}>
-            Xem tất cả
-          </Text>
+          <TouchableOpacity
+            onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}
+          >
+            <Text
+              fontStyle={'normal'}
+              fontSize={'12px'}
+              fontWeight={400}
+              color={'#216BCD'}
+            >
+              Xem tất cả
+            </Text>
+          </TouchableOpacity>
         </HStack>
         <FlatList
           horizontal={true}
-          data={videoTypeCarousel}
-          renderItem={renderVideoTypeCarousel}
+          data={topic}
+          renderItem={({ item }) => (
+            <ButtonTopic displayPickingTopic={pickingTopic} item={item} handlePickingTopic={handlePickingTopic} />
+          )}
         />
-      </VStack>
+        {/* <FlatList
+          horizontal={true}
+          data={videoListCarousel}
+          renderItem={renderVideoListCarousel}
+          showsHorizontalScrollIndicator={false}
+        /> */}
       <FlatList
         horizontal={true}
-        data={videoListCarousel}
-        renderItem={renderVideoListCarousel}
+        data={videos}
+        renderItem={({ item }) => {
+          return (
+            <VideoItem item={item} />
+          )
+        }}
       />
-    </VStack>
+      </VStack>
   );
 };
 

@@ -1,4 +1,4 @@
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import SearchHeader from '@clvtube/common/components/searchHeader/index';
 import { ScrollView, VStack } from 'native-base';
 import React from 'react';
 
@@ -14,7 +14,7 @@ const HomePage = () => {
     <ScrollView>
       <VStack space={4}>
         <VStack safeAreaTop={10} bgColor={'white'}>
-          <SearchingHeader />
+          <SearchHeader />
           <Welcome />
         </VStack>
         <VideoList />

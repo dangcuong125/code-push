@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { store } from '@clvtube/common/redux/store';
 import { theme } from '@clvtube/common/theme/theme';
-import Root from '@clvtube/common/navigators/Root';
+import RootNavigator from '@clvtube/common/navigators/RootNavigator';
 import './i18n.config';
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
       <Provider store={store}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
-            <Root />
+            <RootNavigator />
           </QueryClientProvider>
         </NavigationContainer>
       </Provider>

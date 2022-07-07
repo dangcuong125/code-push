@@ -1,6 +1,7 @@
 export interface IInitialStateLevelTopic {
   level: IDataLevelOrTopic[];
   topic: IDataLevelOrTopic[];
+  pickingTopic: string;
 }
 
 export interface IDataLevelOrTopic {

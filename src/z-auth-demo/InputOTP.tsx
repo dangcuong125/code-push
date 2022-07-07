@@ -1,4 +1,5 @@
-import { InputOTPProps } from '@clvtube/common/navigators/Root';
+import { HOME_NAVIGATOR } from '@clvtube/common/constants/route.constants';
+import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
@@ -70,7 +71,7 @@ function InputOTP({ navigation }: InputOTPProps) {
         // const response = await confirm.confirm(internalValue)
         // const authData = JSON.parse(response)
         // if(!lodash.isEmpty(authData.user)){
-        navigation.navigate('Home', {});
+        navigation.navigate(HOME_NAVIGATOR, {});
         // }
       } catch (error) {
         Alert.alert(JSON.stringify(error));

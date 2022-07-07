@@ -24,6 +24,7 @@ export const imageHomePage = {
   VIDEO_LIST: require('../assets/images/video-list.png'),
   VIDEO_POPULAR: require('../assets/images/videoPopular.png'),
   VIDEO_2: require('../assets/images/video_2.png'),
+  VIDEO_ITEM: require('../assets/images/oustanding-video-page.png'),
 };
 
 export const imageSocial = {

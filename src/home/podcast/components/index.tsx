@@ -1,4 +1,4 @@
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import { SearchingHeader } from '@clvtube/common/components/searchHeader/index';
 import { Box } from 'native-base';
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';

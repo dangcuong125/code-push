@@ -8,13 +8,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 // import component from pages
 import HomePage from '@clvtube/home/index/components/index';
-import Video from '@clvtube/home/video';
 import Podcast from '@clvtube/home/podcast/components/index';
 import Account from '@clvtube/home/account';
+import VideoRoute from './VideoNavigator';
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => {
+const HomeTabBottom = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -43,7 +43,7 @@ const Home = () => {
       {/* Page Home Video*/}
       <Tab.Screen
         name="Video"
-        component={Video}
+        component={VideoRoute}
         options={{
           tabBarIcon: ({ color }) => {
             return <Octicons name="video" color={color} size={25} />;
@@ -84,4 +84,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeTabBottom;

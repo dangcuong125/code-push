@@ -24,7 +24,7 @@ import {
   OPENDASHBOARD,
 } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '../common/hooks/useAppDispatch';
-import { AuthProps } from '../common/navigators/Root';
+import { AuthProps } from '../common/navigators/RootNavigator';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuthGoogle } from './slice';
