@@ -2,32 +2,43 @@ import { extendTheme } from 'native-base';
 
 export const theme = extendTheme({
   colors: {
-    // Add new color
-    primary: {
-      100: '#3D9BE0',
-      200: '#216BCD',
-      300: '#0E3C9E',
-      400: '#ECF7FB',
+    neural: {
+      1: '#FFFFFF',
+      2: '#E6E6E6',
+      22: '#F5F5F5',
+      3: '#CCCCCC',
+      4: '#666666',
+      5: '#999999',
+      6: '#808080',
+      7: '#666666',
+      8: '#4D4D4D',
+      9: '#333333',
+      10: '#1A1A1A',
     },
-    neutral: {
-      50: '#E6E6E6',
-      100: '#CCCCCC',
-      200: '#B3B3B3',
-      300: '#999999',
-      400: '#808080',
-      500: '#666666',
-      600: '#4D4D4D',
-      700: '#333333',
-      800: '#1A1A1A',
-      900: '#999999',
+    primary: {
+      11: '#3D9BE0',
+      12: '#31BAFA',
+      13: '#84D6FC',
+      14: '#EBF8FE',
+      21: '#216BCD',
+      22: '#2883E3',
+      23: '#459FF4',
+      24: '#90C6F9',
+      31: '#0E3C9E',
+      32: '#1E4DB4',
+      33: '#6C82C9',
+      34: '#E6E9F6',
     },
     secondary: {
-      100: '#ECF7FB',
-      200: '#D4A418',
+      1: '#AF5300',
+      2: '#D4A418',
     },
-    warning: '#FFC107',
-    success: '#28A745',
-    error: '#DC3545',
+    popup: {
+      success: '#28A745',
+      warning: '#FFC107',
+      error: '#DC3545',
+    },
+
     // Redefinig only one shade, rest of the color will remain same.
     amber: {
       400: '#d97706',

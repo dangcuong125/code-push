@@ -23,15 +23,14 @@ export const PopularTopics = ({
       borderWidth={1}
       borderColor="#E6E6E6"
       borderRadius={'10px'}
-      {...rest}
-    >
+      {...rest}>
       <TouchableOpacity
-        onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}
-      >
+        onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}>
         <HStack
           safeAreaX={2}
           justifyContent={'space-evenly'}
-          alignItems={'center'}>
+          alignItems={'center'}
+        >
           <Text
             fontStyle={'normal'}
             fontSize={'14px'}
@@ -40,7 +39,10 @@ export const PopularTopics = ({
             color={'#1A1A1A'}>
             {contentTopic}
           </Text>
-          <Image source={imageSrc} />
+          <Image source={imageSrc} resizeMode='contain' style={{
+            width: 60,
+            height: 60,
+          }} />
         </HStack>
       </TouchableOpacity>
     </Pressable>

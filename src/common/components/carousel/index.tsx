@@ -27,6 +27,7 @@ const Item = ({ index, scrollX, component }: ItemProps) => {
       transform: [{ scaleY: size.value }],
     };
   });
+
   return (
     <Animated.View
       style={[

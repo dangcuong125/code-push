@@ -9,7 +9,6 @@ import { IntroProps } from '@clvtube/common/navigators/RootNavigator';
 import { AUTH } from '@clvtube/common/constants/route.constants';
 import { slider } from '@clvtube/mocks/dataOnboarding';
 
-
 const { width, height } = Dimensions.get('window');
 
 const renderItemSlider = ({ item, index }) => {
@@ -49,30 +48,21 @@ const Intro = ({ navigation }: IntroProps) => {
   };
 
   return (
-    <VStack
-      height={height}
-      bgColor={'white'}
-      justifyContent={'space-evenly'}
-    >
-      <VStack
-        safeAreaY={10}
-        flex={1}
-      >
+    <VStack height={height} bgColor={'white'} justifyContent={'space-evenly'}>
+      <VStack safeAreaY={10} flex={1}>
         <Pressable
           px={4}
           mt={10}
           onPress={() => {
             return navigation.navigate(AUTH);
-          }}
-        >
+          }}>
           <Text
             fontStyle={'normal'}
             fontSize={'16px'}
             fontWeight={600}
             lineHeight={'22px'}
             textAlign={'right'}
-            color={'#0E3C9E'}
-          >
+            color={'#0E3C9E'}>
             Skip
           </Text>
         </Pressable>
@@ -119,8 +109,7 @@ const Intro = ({ navigation }: IntroProps) => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={nextSlider}
-          >
+            onPress={nextSlider}>
             {index === slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>

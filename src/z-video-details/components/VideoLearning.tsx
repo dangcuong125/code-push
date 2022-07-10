@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { Box, Button, Flex, HStack } from 'native-base';
+import { Box, Button, Flex, HStack, ScrollView } from 'native-base';
 import YouTube from 'react-native-youtube';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -38,7 +38,7 @@ const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
     if (currentTime === 2) dispatch(previewVideo(false));
   };
   return (
-    <>
+    <ScrollView>
       <SafeAreaView>
         <Flex
           marginLeft="20px"
@@ -116,7 +116,7 @@ const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
         />
         ;
       </Box>
-    </>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

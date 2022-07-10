@@ -17,7 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { imageSocial } from '@clvtube/common/constants/imagePath';
-import { Dimensions, Image, Alert } from 'react-native';
+import { Alert, Dimensions, Image } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuthGoogle } from '../slice';
@@ -48,11 +48,11 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
     if (account.phone === '') {
       Alert.alert('Bạn vui lòng nhập số điện thoại để đăng ký 📲');
       return;
-    };
+    }
     if (account.address === '') {
       Alert.alert('Bạn vui lòng nhập địa chỉ để đăng ký 🏠');
       return;
-    };
+    }
     dispatch(updateAccountWithAuthGoogle(account));
     mutate(
       {

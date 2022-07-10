@@ -18,8 +18,8 @@ export const HOME_NAVIGATOR = 'HomeNavigator';
 export const VIDEO = {
   INDEX: 'Index',
   VIDEO_LIST: 'VideoList',
-  VIDEO_PLAYING1: 'VideoPlaying1',
-  VIDEO_PLAYING2: 'VideoPlaying2',
+  VIDEO_PLAYING: 'VideoPlaying',
+  POPUP: 'Popup',
 };
 
 export const VIDEO_LIST = 'VideoList';

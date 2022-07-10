@@ -109,7 +109,9 @@ function InputOTP({ navigation }: InputOTPProps) {
                   onPress={() => inputRef.current?.focus()}>
                   <View style={styles.cellView}>
                     <Text style={styles.cellText}>
-                      {internalValue && internalValue.length > 0 ? internalValue[index] : ''}
+                      {internalValue && internalValue.length > 0
+                        ? internalValue[index]
+                        : ''}
                     </Text>
                   </View>
                 </TouchableOpacity>

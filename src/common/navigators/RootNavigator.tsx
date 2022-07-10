@@ -32,7 +32,6 @@ import {
   VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants';
 
-
 export type RootStackParamList = {
   Intro: { navigation: any };
   Auth: { navigation: any };

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import {
   Box,
   HStack,
@@ -17,17 +17,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
+import Popup from '@clvtube/common/components/popup';
 
 const Account = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const authState = useAppSelector(state => state.authReducer);
 
   return (
     <ScrollView bgColor={'white'}>
+      {showModal && <Popup showModal={showModal} setShowModal={setShowModal} />}
       <VStack bgColor={'white'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
         <HStack space={4} alignItems={'center'} my={8}>
           <Image
             source={{
-              uri: 'https://imgs.search.brave.com/JRnuikW-t9S559YrN-ZsOQy95aT8hanL7NfB4DgiIRE/rs:fit:1200:720:1/g:ce/aHR0cDovL3ZuY3Bo/YXRob2MuY29tL1Vw/bG9hZC9pbWFnZXMv/TmdoaWVuLWN1dS9x/dWFuLXZvLXRodW9u/Z18xLmpwZw',
+              uri: 'https://imgs.search.brave.com/4jk8lerwUosOsdsHE9MckoE6HWgVaJtrPg7UfjJMr_M/rs:fit:750:1000:1/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS4xMDk3/MjI5ODAyLjI2NzUv/YmcsZjhmOGY4LWZs/YXQsNzUweCwwNzUs/Zi1wYWQsNzUweDEw/MDAsZjhmOGY4Lmpw/Zw',
             }}
             style={{
               width: 100,
@@ -72,9 +76,11 @@ const Account = () => {
         </HStack>
         <VStack mt={3}>
           {/* Edit Account */}
-          <Pressable>
+          <TouchableOpacity
+            onPress={() => setShowModal(true)}
+          >
             <Box
-              height={'57px'}
+              height={'53px'}
               px={5}
               borderRadius={'13px'}
               borderWidth={'1px'}
@@ -100,7 +106,7 @@ const Account = () => {
                 />
               </HStack>
             </Box>
-          </Pressable>
+          </TouchableOpacity>
           {/* Notifycation */}
           <Pressable>
             <Box height={'57px'} px={5} borderRadius={'13px'}>
