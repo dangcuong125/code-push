@@ -20,8 +20,10 @@ import {
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
 } from '../interfaces';
+
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import { useGetVideoList } from '@clvtube/common/hooks/useGetVideoList';
+
 import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
@@ -93,10 +95,10 @@ export const VideoList = () => {
   const { data } = useGetAllTopics('en', 1, 100);
   const { data: videos } = useGetVideoList(topicKey, 1, 100);
   const videoListCarousel = videos?.data?.items;
+
   const videoTypeCarousel = useAppSelector(
     state => state.homePage.videoTypeCarousel,
   );
-
   const dispatch = useAppDispatch();
 
   const renderVideoTypeCarousel = ({ item }: { item: IVideoTypeCarousel }) => {
@@ -114,6 +116,7 @@ export const VideoList = () => {
   const renderVideoListCarousel = ({ item }: IVideoListCarouselProps) => {
     return <VideoListCarousel item={item} />;
   };
+
   useEffect(() => {
     dispatch(receiveTopicsVideo(data?.data?.items));
   }, [data?.data?.items]);

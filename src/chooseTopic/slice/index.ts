@@ -4,6 +4,7 @@ import { IInitialStateLevelTopic } from '../interfaces/interfaces';
 const initialState: IInitialStateLevelTopic = {
   level: [],
   topic: [],
+  pickingTopic: 'All',
 };
 
 const topicSlice = createSlice({
@@ -24,11 +25,6 @@ const topicSlice = createSlice({
         return item;
       });
     },
-    // filterDataLevel: (state: IInitialStateLevelTopic): string => {
-    //   // let levelKey;
-    //   const levelKey = state.level.find(item => item.enabled === 1);
-    //   return levelKey;
-    // },
     updateDataTopic: (state: IInitialStateLevelTopic, action: any) => {
       state.topic = action.payload;
     },
@@ -42,10 +38,33 @@ const topicSlice = createSlice({
         return item;
       });
     },
+    updateKeyPickingTopic: (state: IInitialStateLevelTopic, action: any) => {
+      state.topic = state.topic.map(item => {
+        if (item.key === action.payload.key && item.enabled === 1) {
+          return item;
+        }
+        if (item.key === action.payload.key && item.enabled === -1) {
+          return { ...item, enabled: 1 };
+        }
+        return item;
+      });
+      const filterTopicKey = state.topic.find(item => {
+        return item.key === action.payload.key;
+      });
+      if (filterTopicKey) {
+        state.pickingTopic = filterTopicKey.slug;
+      }
+    },
   },
 });
 
 export const {
-  actions: { updateDataLevel, selectLevel, updateDataTopic, selectTopic },
+  actions: {
+    updateDataLevel,
+    selectLevel,
+    updateDataTopic,
+    selectTopic,
+    updateKeyPickingTopic,
+  },
   reducer,
 } = topicSlice;

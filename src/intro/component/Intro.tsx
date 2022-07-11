@@ -5,7 +5,7 @@ import { Box, Button, Center, Pressable, Text, VStack } from 'native-base';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // 🚀 import component from Page
-import { IntroProps } from '@clvtube/common/navigators/Root';
+import { IntroProps } from '@clvtube/common/navigators/RootNavigator';
 import { AUTH } from '@clvtube/common/constants/route.constants';
 import { slider } from '@clvtube/mocks/dataOnboarding';
 

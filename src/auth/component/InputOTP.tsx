@@ -6,7 +6,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import { CREATE_INFO } from '@clvtube/common/constants/route.constants';
-import { InputOTPProps } from '@clvtube/common/navigators/Root';
+import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
 
 export interface InputReference extends TextInput {
   value: string;

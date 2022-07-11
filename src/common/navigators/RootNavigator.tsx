@@ -13,16 +13,16 @@ import CreateInfo from '@clvtube/auth/component/CreateInfo';
 import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
 import Topic from '@clvtube/chooseTopic';
-import Home from './Home';
+import HomeTabBottom from './HomeTabBottom';
 
 import SearchPage from '../../search';
-import VideoDetailPage from '@clvtube/video-details/components/index';
+import VideoDetailPage from '@clvtube/z-video-details/components/index';
 
 // 🚀 import Constants from file Constants
 import {
   AUTH,
   CREATE_INFO,
-  HOME,
+  HOME_NAVIGATOR,
   INPUT_OTP,
   INTRO,
   OPENDASHBOARD,
@@ -41,7 +41,7 @@ export type RootStackParamList = {
   CreateInfo: { navigation: any };
   RegisterSuccess: {};
   Topic: {};
-  Home: {};
+  HomeNavigator: {};
 
   Search: {};
   VideoDetails: {};
@@ -61,17 +61,17 @@ export type InputOTPProps = NativeStackScreenProps<
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const Root = () => {
+const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={TOPIC}>
-      {/* Route Intro */}
+    <Stack.Navigator initialRouteName={HOME_NAVIGATOR}>
+      {/* ✅ Route Intro */}
       <Stack.Screen
         name={INTRO}
         component={Intro}
         options={{ headerShown: false }}
       />
 
-      {/* Route Auth */}
+      {/* ✅ Route Auth */}
       <Stack.Screen
         name={AUTH}
         component={Auth}
@@ -98,17 +98,17 @@ const Root = () => {
         options={{ headerShown: false }}
       />
 
-      {/* Route Select Level-Topic */}
+      {/* ✅ Route Select Level-Topic */}
       <Stack.Screen
         name={TOPIC}
         component={Topic}
         options={{ headerShown: false }}
       />
 
-      {/* Route Home */}
+      {/* ✅ Route Home-Navigator */}
       <Stack.Screen
-        name={HOME}
-        component={Home}
+        name={HOME_NAVIGATOR}
+        component={HomeTabBottom}
         options={{ headerShown: false }}
       />
 
@@ -127,4 +127,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default RootNavigator;

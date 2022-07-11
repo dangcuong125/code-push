@@ -1,4 +1,4 @@
-import { PopularTopics } from '@clvtube/common/components/popular-topic/index';
+import { PopularTopics } from '@clvtube/common/components/trendingTopic/index';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { HStack, Heading, VStack } from 'native-base';
 import React from 'react';

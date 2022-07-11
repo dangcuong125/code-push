@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@clvtube/common/navigators/Root';
+import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
 
 export interface IinitialState {
   numberTranscipt: number;

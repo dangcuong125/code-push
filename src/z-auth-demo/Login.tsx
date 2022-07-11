@@ -16,7 +16,7 @@ import auth from '@react-native-firebase/auth';
 import appleAuth, {
   AppleButton,
 } from '@invertase/react-native-apple-authentication';
-import { LoginProps } from '@clvtube/common/navigators/Root';
+import { LoginProps } from '@clvtube/common/navigators/RootNavigator';
 import { envData } from '@clvtube/common/constants/envData';
 import Config from 'react-native-config';
 

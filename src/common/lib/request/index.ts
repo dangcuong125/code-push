@@ -15,7 +15,7 @@ const execute = axios.create({
 execute.interceptors.request.use(async config => {
   const tokenValue = await AsyncStorage.getItem('token_App');
   if (tokenValue) {
-    config.headers.Authentication = `Bearer ${tokenValue}`;
+    config.headers.Authorization = `Bearer ${tokenValue}`;
   }
   return config;
 });

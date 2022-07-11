@@ -3,11 +3,13 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { Box, Button, Flex, HStack } from 'native-base';
 import YouTube from 'react-native-youtube';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { VideoDetailPageProps } from '../interfaces';
+
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { loopVideo, previewVideo } from '../reducer/videoDetails';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+
 import { Carousel } from '@clvtube/common/components/carousel';
+import { VideoDetailPageProps } from '../interfaces';
+import { loopVideo, previewVideo } from '../reducer/videoDetails';
 
 const transcript = [
   {
@@ -16,8 +18,10 @@ const transcript = [
     offset: 480,
   },
 ];
+
 const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
   const youtubeRef = useRef<YouTube>(null);
+
   const dispatch = useAppDispatch();
   const numberTranscipt = useAppSelector(
     state => state.videoDetails.numberTranscipt,
@@ -27,6 +31,7 @@ const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
   );
   const isLoopVideo = useAppSelector(state => state.videoDetails.loopVideo);
   const isStopVideo = useAppSelector(state => state.videoDetails.previewVideo);
+
   const handleYoutubeVideo = async () => {
     dispatch(previewVideo(true));
     const currentTime = await youtubeRef?.current?.getCurrentTime();
@@ -116,7 +121,7 @@ const VideoLearning = ({ navigation }: VideoDetailPageProps) => {
 };
 const styles = StyleSheet.create({
   videoLearning: {
-    height: 230,
+    height: 300,
     marginTop: 10,
   },
   transcript: {

@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-// import { ItemProps } from '../../../components/video-details/interfaces'
+
 import { CarouselProps, ItemProps } from '../../interfaces/common.interface';
 
 const SRC_WIDTH = Dimensions.get('window').width;

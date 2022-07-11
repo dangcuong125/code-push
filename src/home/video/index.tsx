@@ -1,7 +1,7 @@
 import { ScrollView, VStack } from 'native-base';
 import React from 'react';
 
-import { SearchingHeader } from '@clvtube/common/components/searching-header/index';
+import SearchHeader from '@clvtube/common/components/searchHeader/index';
 import ListVideo from './component/ListVideo';
 import PopularVideo from './component/PopularVideo';
 import VideoPupolar from './component/VideoPupolar';
@@ -12,7 +12,7 @@ const VideoList = () => {
     <ScrollView>
       <VStack space={4}>
         <VStack safeAreaTop={10} bgColor={'white'}>
-          <SearchingHeader />
+          <SearchHeader />
           <PopularVideo />
         </VStack>
         <VideoPupolar />
