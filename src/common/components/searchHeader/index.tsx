@@ -8,7 +8,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { imageLogo } from '../../constants/imagePath';
 
-
 const SearchHeader = () => {
   return (
     <HStack safeAreaX={4} height={'48px'} alignItems={'center'}>

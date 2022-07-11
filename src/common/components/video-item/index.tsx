@@ -4,13 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { VIDEO } from '../../constants/route.constants';
 
 const VideoItem = ({ item }) => {
-    const navigator = useNavigation()
+  const navigator = useNavigation();
 
   return (
-    <Box
-      width={270}
-      marginLeft={4}
-    >
+    <Box width={270} marginLeft={4}>
       <VStack space={3}>
         <Image
           source={{ uri: item?.thumbnails.medium.url }}
@@ -28,8 +25,7 @@ const VideoItem = ({ item }) => {
           textAlign={'center'}
           color={'#1A1A1A'}
           numberOfLines={1}
-          paddingX={'10%'}
-        >
+          paddingX={'10%'}>
           {item.name}
         </Heading>
         <Text
@@ -39,8 +35,7 @@ const VideoItem = ({ item }) => {
           lineHeight={'19px'}
           textAlign={'center'}
           color={'#666666'}
-          numberOfLines={1}
-        >
+          numberOfLines={1}>
           {item.desc}
         </Text>
         <Button
@@ -57,13 +52,14 @@ const VideoItem = ({ item }) => {
             fontWeight: 600,
             lineHeight: '20px',
           }}
-          onPress={() => navigator.navigate(VIDEO.VIDEO_PLAYING2, {id: item.id})}
-        >
-            Bắt đầu ngay
+          onPress={() =>
+            navigator.navigate(VIDEO.VIDEO_PLAYING, { id: item.id })
+          }>
+          Bắt đầu ngay
         </Button>
       </VStack>
     </Box>
-  )
-}
+  );
+};
 
 export default VideoItem;
