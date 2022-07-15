@@ -76,9 +76,7 @@ const Account = () => {
         </HStack>
         <VStack mt={3}>
           {/* Edit Account */}
-          <TouchableOpacity
-            onPress={() => setShowModal(true)}
-          >
+          <TouchableOpacity onPress={() => setShowModal(true)}>
             <Box
               height={'53px'}
               px={5}
