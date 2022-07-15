@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { Heading, HStack, Image, Text, VStack } from 'native-base';
+import { HStack, Heading, Image, Text, VStack } from 'native-base';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -10,7 +10,7 @@ const VideoItem = ({ item }) => {
   const navigator = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigator.navigate(VIDEO.VIDEO_PLAYING, {id: item.id})}>
+      onPress={() => navigator.navigate(VIDEO.VIDEO_PLAYING, { id: item.id })}>
       <HStack space={2} marginBottom={4}>
         <Image
           source={{ uri: item?.thumbnails.medium.url }}

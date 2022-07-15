@@ -7,6 +7,7 @@ import { reducer as authReducer } from '@clvtube/auth/slice';
 import { reducer as topicReducer } from '@clvtube/chooseTopic/slice';
 import { reducer as videoList } from '@clvtube/home/video/reducer/videoList';
 import { reducer as videoReducer } from '@clvtube/home/video/slice';
+import { reducer as videoItemReducer } from '@clvtube/videoDetails/playingVideo/slice';
 
 const rootReducer = combineReducers({
   videoDetails,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   authReducer,
   videoList,
   videoReducer,
+  videoItemReducer,
 });
 
 const store = configureStore({
