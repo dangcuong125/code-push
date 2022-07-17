@@ -1,21 +1,20 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { HStack, Pressable, Text } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { VIDEO } from '../../constants/route.constants';
+// navigator.navigate(VIDEO.VIDEO_LIST, {})
 
 type PopularTopicsProps = {
   contentTopic: string;
   imageSrc: any;
+  onPress?: () => void;
 } & any;
 
 export const PopularTopics = ({
   contentTopic,
   imageSrc,
+  onPress,
   ...rest
 }: PopularTopicsProps) => {
-  const navigator = useNavigation();
-
   return (
     <Pressable
       width={'46.5%'}
@@ -24,8 +23,7 @@ export const PopularTopics = ({
       borderColor="#E6E6E6"
       borderRadius={'10px'}
       {...rest}>
-      <TouchableOpacity
-        onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}>
+      <TouchableOpacity onPress={onPress}>
         <HStack
           safeAreaX={2}
           justifyContent={'space-evenly'}

@@ -14,6 +14,7 @@ import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
 import Topic from '@clvtube/chooseTopic';
 import HomeTabBottom from './HomeTabBottom';
+import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 
 import SearchPage from '../../search';
 import VideoDetailPage from '@clvtube/z-video-details/components/index';
@@ -26,6 +27,7 @@ import {
   INPUT_OTP,
   INTRO,
   OPENDASHBOARD,
+  PODCAST_DETAIL,
   REGISTER_SUCCESS,
   SEARCH_PAGE,
   TOPIC,
@@ -42,6 +44,10 @@ export type RootStackParamList = {
   Topic: {};
   HomeNavigator: {};
 
+  Home: {};
+  PodcastDetail: {};
+  Podcast: {};
+  PodcastListWithTopic: {};
   Search: {};
   VideoDetails: {};
   StartDashboard: {};
@@ -94,6 +100,11 @@ const RootNavigator = () => {
       <Stack.Screen
         name={OPENDASHBOARD}
         component={OpenDashboard}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={PODCAST_DETAIL}
+        component={PodcastDetail}
         options={{ headerShown: false }}
       />
 

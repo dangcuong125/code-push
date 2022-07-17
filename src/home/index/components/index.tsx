@@ -8,8 +8,9 @@ import { ReviseNewWord } from './ReviseNewWord';
 import { Speak } from './Speak';
 import { VideoList } from './VideoList';
 import { Welcome } from './Welcome';
+import { HomePageProps } from '../interfaces';
 
-const HomePage = () => {
+const HomePage = ({ navigation, route }: HomePageProps) => {
   return (
     <ScrollView>
       <VStack space={4}>
@@ -19,7 +20,7 @@ const HomePage = () => {
         </VStack>
         <VideoList />
         <Recently />
-        <PodcastList />
+        <PodcastList navigation={navigation} route={route} />
         <ReviseNewWord />
         <Speak />
       </VStack>

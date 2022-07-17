@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 import TrackPlayer, { Event, State } from 'react-native-track-player';
 
 let wasPausedByDuck = false;
@@ -17,6 +18,8 @@ module.exports = async function setup() {
   TrackPlayer.addEventListener(Event.RemotePrevious, () => {
     TrackPlayer.skipToPrevious();
   });
+
+  TrackPlayer.addEventListener(Event.RemoteStop, () => TrackPlayer.destroy());
 
   TrackPlayer.addEventListener(Event.RemoteDuck, async e => {
     if (e.permanent === true) {

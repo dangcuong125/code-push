@@ -16,6 +16,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
+  HomePageProps,
   IAudioTopicItem,
   IPodcastTypeCarouselProps,
   IPodcastTypes,
@@ -26,6 +27,7 @@ import {
   receiveTopicsPodcast,
   selectOnlyOneTypePodcast,
 } from '../redux/homePage';
+import { PODCAST_DETAIL } from '@clvtube/common/constants/route.constants';
 
 const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   return (
@@ -49,7 +51,7 @@ const PodcastTypeCarousel = ({ item, onPress }: IPodcastTypeCarouselProps) => {
   );
 };
 
-export const PodcastList = () => {
+export const PodcastList = ({ navigation }: HomePageProps) => {
   // const dispatch = useAppDispatch()
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -111,6 +113,9 @@ export const PodcastList = () => {
               borderColor="#E6E6E6"
               borderWidth={'1px'}
               borderRadius={'12px'}
+              onPress={() =>
+                navigation.navigate(PODCAST_DETAIL, { id: item.id })
+              }
               p={3}>
               <HStack space={4} alignItems={'center'}>
                 <Image

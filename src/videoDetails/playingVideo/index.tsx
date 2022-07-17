@@ -6,7 +6,7 @@ import IconHeader from './component/IconHeader';
 import YoutubeVideo from './component/YoutubeVideo';
 import ListVideo from '../../home/video/component/ListVideo';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { updateVideoItem, updateVideoTranscripts } from './slice';
+import { updateVideoItem } from './slice';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const PlayingVideo = () => {
