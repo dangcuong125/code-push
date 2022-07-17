@@ -19,6 +19,8 @@ module.exports = async function setup() {
     TrackPlayer.skipToPrevious();
   });
 
+  TrackPlayer.addEventListener(Event.RemoteStop, () => TrackPlayer.destroy());
+
   TrackPlayer.addEventListener(Event.RemoteDuck, async e => {
     if (e.permanent === true) {
       TrackPlayer.stop();

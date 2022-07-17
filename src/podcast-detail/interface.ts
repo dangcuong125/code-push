@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@clvtube/common/navigators/Root';
+import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
 
 export type PodcastDetailProps = NativeStackScreenProps<
   RootStackParamList,
@@ -20,10 +20,17 @@ export interface ITranscriptItem {
   startTime: string;
   audioId: number;
 }
+export interface IHelloWorld {
+  startTime: string;
+  offset: number;
+}
 export interface IInitialState {
   duration: number;
   position: number;
-  startTime: string;
+  heightOfParagraph: string;
+  paragraphInfo: any;
+  sliderValue: number;
+  defaultValue: number;
 }
 export interface IPodcastDetail {
   id: number;

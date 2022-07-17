@@ -1,5 +1,9 @@
 {
   "viewAll": "View All",
   "welcome": "Welcome",
-  "start": "Start"
+  "start": "Start",
+  "popularVideos": "Popular Videos",
+  "save": "Save",
+  "setting": "Settings",
+  "textSize": "Text Size"
 }

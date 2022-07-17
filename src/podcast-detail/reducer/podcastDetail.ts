@@ -4,7 +4,10 @@ import { IInitialState } from '../interface';
 const initialState: IInitialState = {
   duration: 0,
   position: 0,
-  startTime: '',
+  heightOfParagraph: '',
+  paragraphInfo: [],
+  sliderValue: 0,
+  defaultValue: 50,
 };
 
 export const podcastDetailSlice = createSlice({
@@ -17,9 +20,31 @@ export const podcastDetailSlice = createSlice({
     getPosition: (state, action) => {
       state.position = action.payload;
     },
+    getHeightOfParagraph: (state, action) => {
+      state.heightOfParagraph = action.payload;
+    },
+    getPositionAndStartTime: (state, action) => {
+      state.paragraphInfo.push({
+        offset: action.payload.offset,
+        startTime: action.payload.startTime,
+      });
+    },
+    getSliderValue: (state, action) => {
+      state.sliderValue = action.payload;
+    },
+    getDefaultValueSlider: (state, action) => {
+      state.defaultValue = action.payload;
+    },
   },
 });
 export const {
-  actions: { getDurations, getPosition },
+  actions: {
+    getDurations,
+    getPosition,
+    getHeightOfParagraph,
+    getPositionAndStartTime,
+    getSliderValue,
+    getDefaultValueSlider,
+  },
   reducer,
 } = podcastDetailSlice;

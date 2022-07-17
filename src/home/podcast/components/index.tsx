@@ -11,15 +11,15 @@ import { PodcastListProps } from '../interfaces';
 
 const Podcast = ({ navigation, route }: PodcastListProps) => {
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       <ScrollView>
         <Box bgColor="#FFFFFF" paddingTop="20px">
           <SearchingHeader />
           <PopularTopics navigation={navigation} route={route} />
         </Box>
         <OutStandingPodcast />
-        <PodcastList />
+        <PodcastList navigation={navigation} route={route} />
         <MaybeYouLike />
         <Speak />
       </ScrollView>

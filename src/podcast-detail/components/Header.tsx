@@ -4,9 +4,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import { PodcastDetailProps } from '../interface';
 import { SliderAudio } from './SliderAudio';
+import { SettingModal } from './SettingModal';
 
 export const Header = ({ navigation }: PodcastDetailProps) => {
   const [displaySliderAudio, setDisplaySliderAudio] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <Box>
       <Flex direction="row" justifyContent="space-between">
@@ -27,20 +29,24 @@ export const Header = ({ navigation }: PodcastDetailProps) => {
             color="text.200"
             marginRight="10px"
           />
-          <Icon
+          {/* <Icon
             as={AntDesign}
             name="setting"
             size="6"
             color="text.200"
             marginRight="10px"
-          />
+          /> */}
           <Icon
             as={AntDesign}
             name="setting"
+            onPress={() => {
+              setOpen(true);
+            }}
             size="6"
             color="text.200"
             marginRight="25px"
           />
+          <SettingModal open={open} setOpen={setOpen} />
         </Flex>
       </Flex>
       <SliderAudio displaySliderAudio={displaySliderAudio} />

@@ -1,9 +1,12 @@
 import { PopularTopics } from '@clvtube/common/components/trendingTopic/index';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { HStack, Heading, VStack } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { VIDEO } from '@clvtube/common/constants/route.constants';
 import React from 'react';
 
 const PopularVideo = () => {
+  const navigator = useNavigation();
   return (
     <VStack safeArea={4} space={3}>
       <Heading
@@ -19,6 +22,7 @@ const PopularVideo = () => {
           <PopularTopics
             contentTopic="Chemistry"
             imageSrc={imagePodcast.MATH_PODCAST}
+            onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}
           />
           <PopularTopics
             contentTopic="Chemistry"

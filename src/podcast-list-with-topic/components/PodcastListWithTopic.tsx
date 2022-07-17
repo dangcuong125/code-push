@@ -8,17 +8,14 @@ import { PodcastListWithTopicProps } from '../interface';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
 import { PODCAST_DETAIL } from '@clvtube/common/constants/route.constants';
-// import { useGetPodcastDetail } from '../hooks/useGetPodcastDetail';
 
 export const PodcastListWithTopic = ({
   navigation,
 }: PodcastListWithTopicProps) => {
   const topic = useAppSelector(state => state.podcastList.podcastKeySelected);
   const { data } = useGetPodcastList(topic, 1, 100);
-  // const { data: dataPodcastDetail } = useGetPodcastDetail(12);
-  // const podcastDetail = dataPodcastDetail?.data?.items;
+
   const podcastList = data?.data?.items;
-  console.log(podcastList);
   return (
     <>
       <Box
@@ -65,12 +62,14 @@ export const PodcastListWithTopic = ({
             alt=""
           />
         </Flex>
-        <Box
-          bgColor="#FFFFFF"
-          height="1000px"
-          borderTopRadius={'25px'}
-          marginTop="36px">
-          <ScrollView>
+        <ScrollView contentInset={{ bottom: 344 }}>
+          <Flex
+            direction="row"
+            flexWrap={'wrap'}
+            bgColor="#FFFFFF"
+            borderTopRadius={'25px'}
+            paddingBottom="10px"
+            marginTop="36px">
             {podcastList?.map((podcast: any) => (
               <Pressable
                 key={podcast.key}
@@ -79,6 +78,7 @@ export const PodcastListWithTopic = ({
                 marginTop="24px"
                 marginLeft="16px"
                 textAlign={'center'}
+                margin="auto"
                 onPress={() =>
                   navigation.navigate(PODCAST_DETAIL, { id: podcast.id })
                 }>
@@ -114,8 +114,8 @@ export const PodcastListWithTopic = ({
                 </Box>
               </Pressable>
             ))}
-          </ScrollView>
-        </Box>
+          </Flex>
+        </ScrollView>
       </Box>
     </>
   );

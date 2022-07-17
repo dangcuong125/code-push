@@ -32,3 +32,6 @@ export const imageSocial = {
   FB: require('../assets/images/fb.png'),
   APPLE: require('../assets/images/apple.png'),
 };
+export const podcastDetailSetting = {
+  SETTING_TEXT_SIZE: require('../assets/images/textSetting.png'),
+};

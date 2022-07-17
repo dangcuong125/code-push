@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "2.1.5",
+    "@miblanchard/react-native-slider": "^2.1.0",
     "@native-base/icons": "0.0.11",
     "@react-native-async-storage/async-storage": "^1.17.7",
     "@react-native-community/slider": "^4.2.4",
@@ -23,6 +24,7 @@
     "@react-navigation/bottom-tabs": "6.3.1",
     "@react-navigation/native": "6.0.10",
     "@react-navigation/native-stack": "6.6.2",
+    "@react-navigation/stack": "^6.2.2",
     "@reduxjs/toolkit": "1.8.1",
     "appcenter": "4.4.4",
     "appcenter-analytics": "4.4.4",

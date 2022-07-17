@@ -19,7 +19,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   console.log({ startTime });
 
   useEffect(() => {
-    const itemDisplay = videoPlay?.videoTranscripts?.find((item) => {
+    const itemDisplay = videoPlay?.videoTranscripts?.find(item => {
       if (startTime - 500 < item.startTime && item.startTime < startTime + 500) {
         return item;
       }
@@ -42,7 +42,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
         videoId={videoPlay?.videoCode}
         play={true}
         fullscreen={false}
-        onProgress={e => setStartTime(e.currentTime*1000)}
+        onProgress={e => setStartTime(e.currentTime * 1000)}
         style={{
           height: 250,
         }}
