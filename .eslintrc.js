@@ -130,6 +130,6 @@ module.exports = {
     ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
-    'multiline-ternary': ['error', 'never'],
+    'multiline-ternary': ['error', 'always-multiline'],
   },
-}
+};

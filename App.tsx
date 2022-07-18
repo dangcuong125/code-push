@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux';
@@ -17,8 +17,12 @@ import { store } from '@clvtube/common/redux/store';
 import { theme } from '@clvtube/common/theme/theme';
 import RootNavigator from '@clvtube/common/navigators/RootNavigator';
 import './i18n.config';
+import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   const queryClient = new QueryClient();
   return (
     <NativeBaseProvider theme={theme}>

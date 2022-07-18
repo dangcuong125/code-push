@@ -4,7 +4,6 @@ import AntDeisgn from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { useNavigation } from '@react-navigation/native';
-import { VIDEO } from '../../../common/constants/route.constants';
 
 const HeaderListVideo = () => {
   const navigator = useNavigation();
@@ -33,11 +32,7 @@ const HeaderListVideo = () => {
               Mathematics
             </Heading>
             <HStack space={1}>
-              <MaterialIcons
-                name="video-library"
-                size={20}
-                color="black"
-              />
+              <MaterialIcons name="video-library" size={20} color="black" />
               <Text
                 fontStyle={'normal'}
                 fontSize={'14px'}
