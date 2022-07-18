@@ -73,6 +73,7 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             address: '',
           });
           dispatch(updateAccountWithAuthGoogle(account));
+          Alert.alert('Rất tiếc, bạn chưa đăng ký thành công tài khoản!');
         },
       },
     );

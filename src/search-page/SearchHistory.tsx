@@ -1,5 +1,5 @@
-import { Box, HStack, Text, VStack } from 'native-base';
 import React from 'react';
+import { Box, HStack, Text, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const SearchHistory = () => {

@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { Image } from 'react-native';
+import { Image, Alert } from 'react-native';
 import { HStack, Icon, Input } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { imageLogo } from '../../constants/imagePath';
+import { useNavigation } from '@react-navigation/native';
+import { HOME_ROUTE } from '@clvtube/common/constants/route.constants';
 
 const SearchHeader = () => {
+  const navigator = useNavigation();
+
   return (
     <HStack safeAreaX={4} height={'48px'} alignItems={'center'}>
       {/* Element Logo */}
@@ -36,6 +40,7 @@ const SearchHeader = () => {
         InputLeftElement={
           <Icon as={<AntDesign name="search1" />} ml={3} mr={-2} />
         }
+        onPressIn={() => navigator.navigate(HOME_ROUTE.SEARCH, {})}
       />
       {/* Element Notify */}
       <Ionicons

@@ -86,7 +86,8 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             textDecorationLine={'underline'}
             textDecorationColor={'#999999'}
             color={'black'}
-            flex={1}>
+            flex={1}
+          >
               {transcript && transcript?.content}
           </Text>
           <MaterialIcons
