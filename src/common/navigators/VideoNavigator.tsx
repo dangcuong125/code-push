@@ -1,34 +1,35 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Video from '@clvtube/home/video';
-import ListVideo from '@clvtube/videoDetails/listVideo';
+import ListVideo from '@clvtube/video-detail/listVideo';
+import PlayingVideo from '@clvtube/video-detail/playingVideo';
 
-import PlayingVideo from '@clvtube/videoDetails/playingVideo';
-import { VIDEO } from '../constants/route.constants';
+import { VIDEO_ROUTE } from '../constants/route.constants';
 
-export type HomeStackParamList = {
+
+export type VideoStackParamList = {
   Index: {};
   VideoList: {};
   VideoPlaying: {};
 };
-const Stack = createNativeStackNavigator<HomeStackParamList>();
+const Stack = createNativeStackNavigator<VideoStackParamList>();
 
 const VideoRoute = () => {
   return (
-    <Stack.Navigator initialRouteName={VIDEO.INDEX}>
+    <Stack.Navigator initialRouteName={VIDEO_ROUTE.INDEX}>
       <Stack.Screen
-        name={VIDEO.INDEX}
+        name={VIDEO_ROUTE.INDEX}
         component={Video}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={VIDEO.VIDEO_LIST}
+        name={VIDEO_ROUTE.VIDEO_LIST}
         component={ListVideo}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={VIDEO.VIDEO_PLAYING}
+        name={VIDEO_ROUTE.VIDEO_PLAYING}
         component={PlayingVideo}
         options={{ headerShown: false }}
       />

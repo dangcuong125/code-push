@@ -2,7 +2,7 @@ import { ScrollView } from 'native-base';
 import React, { Fragment } from 'react';
 import HeaderListVideo from './component/HeaderListVideo';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import VideoItem from '@clvtube/videoDetails/listVideo/component/VideoItem';
+import VideoItem from '@clvtube/video-detail/listVideo/component/VideoItem';
 const ListVideo = () => {
   const { videos } = useAppSelector(state => state.videoReducer);
 

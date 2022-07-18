@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Heading, Image, Text, VStack } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import { VIDEO } from '../../constants/route.constants';
+import { VIDEO_ROUTE } from '../../constants/route.constants';
 
 const VideoItem = ({ item }) => {
   const navigator = useNavigation();
@@ -53,7 +53,7 @@ const VideoItem = ({ item }) => {
             lineHeight: '20px',
           }}
           onPress={() =>
-            navigator.navigate(VIDEO.VIDEO_PLAYING, { id: item.id })
+            navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
           }>
           Bắt đầu ngay
         </Button>

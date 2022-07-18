@@ -64,7 +64,7 @@ const RegisterSuccess = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate(TOPIC)}>
+        onPress={() => navigator.navigate(TOPIC, {})}>
         Bắt đầu ngay
       </Button>
     </VStack>

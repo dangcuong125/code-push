@@ -6,7 +6,7 @@ import { Alert, Dimensions, Image } from 'react-native';
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { TOPIC } from '../../common/constants/route.constants';
+import { TOPIC, TAB_BOTTOM } from '../../common/constants/route.constants';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const { width } = Dimensions.get('screen');
@@ -30,9 +30,9 @@ const OpenDashboard = () => {
     (async () => {
       try {
         const value = await AsyncStorage.getItem('token_App');
-        if (value) {
-          Alert.alert(value);
-        }
+        // if (value) {
+        //   Alert.alert(value);
+        // }
       } catch (error) {
         Alert.alert('Error!!!');
       }
@@ -90,7 +90,7 @@ const OpenDashboard = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate(TOPIC)}>
+        onPress={() => navigator.navigate(TAB_BOTTOM)}>
         Bắt đầu ngay
       </Button>
     </VStack>
