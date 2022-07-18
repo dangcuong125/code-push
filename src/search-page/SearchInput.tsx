@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon, Input, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-
 const SearchInput = () => {
   const navigation = useNavigation();
   const inputRef = useRef(null);
@@ -13,10 +12,7 @@ const SearchInput = () => {
   }, []);
 
   return (
-    <VStack
-      safeAreaX={4}
-      space={2}
-    >
+    <VStack safeAreaX={4} space={2}>
       <AntDesign
         name="arrowleft"
         size={25}
@@ -43,7 +39,6 @@ const SearchInput = () => {
           <Icon as={<AntDesign name="search1" />} size={5} ml={3} mr={-1} />
         }
       />
-
     </VStack>
   );
 };

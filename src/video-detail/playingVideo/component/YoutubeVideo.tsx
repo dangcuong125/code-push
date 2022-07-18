@@ -5,12 +5,13 @@ import YouTube from 'react-native-youtube';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-
 const YoutubeVideo = ({ videoPlay, id }: any) => {
   const [startTime, setStartTime] = useState(0);
   const youtubeRef = useRef<YouTube>(null);
 
-  const oneIndex = videoPlay?.videoTranscripts?.find((item, index) => index === 0);
+  const oneIndex = videoPlay?.videoTranscripts?.find(
+    (item, index) => index === 0,
+  );
 
   const [transcript, setTranscript] = useState(oneIndex);
 
@@ -19,11 +20,10 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   console.log({ startTime });
 
   useEffect(() => {
-    const itemDisplay = videoPlay?.videoTranscripts?.find(item => {
-      if (startTime - 500 < item.startTime && item.startTime < startTime + 500) {
-        return item;
-      }
-    });
+    const itemDisplay = videoPlay?.videoTranscripts?.find(
+      item =>
+        startTime - 500 < item.startTime && item.startTime < startTime + 500,
+    );
     if (itemDisplay) {
       setTranscript(itemDisplay);
     }
@@ -86,9 +86,8 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             textDecorationLine={'underline'}
             textDecorationColor={'#999999'}
             color={'black'}
-            flex={1}
-          >
-              {transcript && transcript?.content}
+            flex={1}>
+            {transcript && transcript?.content}
           </Text>
           <MaterialIcons
             name="keyboard-arrow-right"

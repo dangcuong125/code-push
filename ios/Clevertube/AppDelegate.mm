@@ -9,6 +9,7 @@
 #import <Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import "RNSplashScreen.h"
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -68,6 +69,7 @@
   [self.window makeKeyAndVisible];
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  [RNSplashScreen show];
   return YES;
 }
 

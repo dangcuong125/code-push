@@ -7,7 +7,6 @@ import PlayingVideo from '@clvtube/video-detail/playingVideo';
 
 import { VIDEO_ROUTE } from '../constants/route.constants';
 
-
 export type VideoStackParamList = {
   Index: {};
   VideoList: {};

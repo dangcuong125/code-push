@@ -7,10 +7,11 @@ import TopSearch from './TopSearch';
 
 const SearchPage = () => {
   return (
-    <SafeAreaView style={{
-      backgroundColor: 'white',
-      height: '100%',
-    }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: 'white',
+        height: '100%',
+      }}>
       <VStack>
         <SearchInput />
         <ScrollView>

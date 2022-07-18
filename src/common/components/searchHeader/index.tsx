@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Image, Alert } from 'react-native';
+import { Image } from 'react-native';
 import { HStack, Icon, Input } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';

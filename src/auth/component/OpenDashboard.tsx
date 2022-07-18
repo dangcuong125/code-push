@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Button, Center, Heading, Text, VStack } from 'native-base';
-import { Alert, Dimensions, Image } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { TOPIC, TAB_BOTTOM } from '../../common/constants/route.constants';
+import { TAB_BOTTOM } from '../../common/constants/route.constants';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const { width } = Dimensions.get('screen');
@@ -25,19 +25,6 @@ const OpenDashboard = () => {
   //     Alert.alert('Error!!!')
   //   }
   // }
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const value = await AsyncStorage.getItem('token_App');
-        // if (value) {
-        //   Alert.alert(value);
-        // }
-      } catch (error) {
-        Alert.alert('Error!!!');
-      }
-    })();
-  }, []);
 
   return (
     <VStack
