@@ -5,18 +5,33 @@ import { useGetVideoItem } from '../../common/hooks/useVideos';
 import IconHeader from './component/IconHeader';
 import YoutubeVideo from './component/YoutubeVideo';
 import ListVideo from '../../home/video/component/ListVideo';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { updateVideoItem } from './slice';
+import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const PlayingVideo = () => {
   const { id } = useRoute().params;
   console.log({ id });
-  const [paramsVideo, setParamsVideo] = useState(() => id);
-  const { data: videoItem } = useGetVideoItem(paramsVideo);
 
-  console.log({ video: videoItem?.data });
+  const { videoItem } = useAppSelector(state => state.videoItemReducer);
+
+  // const [a, ...rest] = videoItem.videoTranscripts;
+
+  const dispatch = useAppDispatch();
+
+  const [paramsVideo, setParamsVideo] = useState(() => id);
+  const { data } = useGetVideoItem(paramsVideo);
+
+  console.log({ video: data?.data });
 
   useEffect(() => {
     setParamsVideo(id);
   }, [id]);
+
+  useEffect(() => {
+    dispatch(updateVideoItem(data?.data));
+    // dispatch(updateVideoTranscripts(data?.data.videoTranscripts));
+  }, [data?.data]);
 
   return (
     <ScrollView>
@@ -27,7 +42,7 @@ const PlayingVideo = () => {
           safeAreaTop={12}
           backgroundColor={'white'}>
           <IconHeader />
-          <YoutubeVideo videoPlay={videoItem?.data} />
+          <YoutubeVideo videoPlay={videoItem} id={id} />
           <ListVideo />
         </VStack>
       </VStack>

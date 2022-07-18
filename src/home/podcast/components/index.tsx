@@ -1,4 +1,4 @@
-import { SearchingHeader } from '@clvtube/common/components/searchHeader/index';
+import SearchingHeader from '@clvtube/common/components/searchHeader/index';
 import { Box } from 'native-base';
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
@@ -7,18 +7,19 @@ import { OutStandingPodcast } from './OutstandingPodcast';
 import { PodcastList } from './PodcastList';
 import PopularTopics from './PopularTopics';
 import { Speak } from './Speak';
+import { PodcastListProps } from '../interfaces';
 
-const Podcast = () => {
+const Podcast = ({ navigation, route }: PodcastListProps) => {
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       <ScrollView>
         <Box bgColor="#FFFFFF" paddingTop="20px">
           <SearchingHeader />
-          <PopularTopics />
+          <PopularTopics navigation={navigation} route={route} />
         </Box>
         <OutStandingPodcast />
-        <PodcastList />
+        <PodcastList navigation={navigation} route={route} />
         <MaybeYouLike />
         <Speak />
       </ScrollView>

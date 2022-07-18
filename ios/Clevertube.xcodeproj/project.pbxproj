@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3261B3782875345E00E1A6CC /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3261B3772875345E00E1A6CC /* dummy.swift */; };
 		3E25F1E7E4654D24AAED8293 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2F547B2634A27899CD39A /* MaterialIcons.ttf */; };
 		462C5B1756E64B7799540AF2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C89F8E19BADD445EBDAC7564 /* Foundation.ttf */; };
 		51467112F4F04CC3BEB2F5D3 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F60CA19FBC0C466C8E03B12F /* Zocial.ttf */; };
@@ -30,7 +31,6 @@
 		D5DE19A4B9924371BE37254F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42E08C1E6CD549D98A9AECF1 /* Octicons.ttf */; };
 		EB6B2E09424D4F4780226E58 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99997FD19A0043F5883A648A /* Entypo.ttf */; };
 		F5E7E1156A9DEA116C4B427B /* libPods-Clevertube-ClevertubeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6EC887443A4420E5999CB19 /* libPods-Clevertube-ClevertubeTests.a */; };
-		FB20C7EA2823C654004183C1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = FB20C7E92823C654004183C1 /* Config.xcconfig */; };
 		FB33FAAD281C466200C08758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB33FAAC281C466200C08758 /* GoogleService-Info.plist */; };
 		FBB582A3282D111900404819 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBB582A2282D111900404819 /* AppCenter-Config.plist */; };
 /* End PBXBuildFile section */
@@ -75,6 +75,8 @@
 		27F1C950284673F100F82A86 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		2D020C1916164A1891D9C0CF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		2EDEAB936D9C1EB8F0265D70 /* libPods-Clevertube.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Clevertube.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3261B3762875345E00E1A6CC /* Clevertube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clevertube-Bridging-Header.h"; sourceTree = "<group>"; };
+		3261B3772875345E00E1A6CC /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		42E08C1E6CD549D98A9AECF1 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		440471F1275A442282997611 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		45473EC5ABE64FD4AE887A70 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				3261B3772875345E00E1A6CC /* dummy.swift */,
 				FBB582A2282D111900404819 /* AppCenter-Config.plist */,
 				FB20C7E92823C654004183C1 /* Config.xcconfig */,
 				FB33FAAC281C466200C08758 /* GoogleService-Info.plist */,
@@ -206,6 +209,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				FFAC36C171A840C0B1C8662B /* Resources */,
+				3261B3762875345E00E1A6CC /* Clevertube-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -308,14 +312,14 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -350,7 +354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB20C7EA2823C654004183C1 /* Config.xcconfig in Resources */,
 				FBB582A3282D111900404819 /* AppCenter-Config.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
@@ -551,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				3261B3782875345E00E1A6CC /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +574,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DF1D6B6C862D21382B3A817 /* Pods-Clevertube-ClevertubeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				DEVELOPMENT_TEAM = "";
@@ -578,7 +583,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ClevertubeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -599,12 +604,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E7D3BCDA55F188FCDA9D3D7C /* Pods-Clevertube-ClevertubeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ClevertubeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,6 +652,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bili.clevertube;
 				PRODUCT_NAME = Clevertube;
 				PROVISIONING_PROFILE_SPECIFIER = ClevertubeDev;
+				SWIFT_OBJC_BRIDGING_HEADER = "Clevertube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -677,6 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bili.clevertube;
 				PRODUCT_NAME = Clevertube;
 				PROVISIONING_PROFILE_SPECIFIER = ClevertubeAdhoc;
+				SWIFT_OBJC_BRIDGING_HEADER = "Clevertube-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -732,7 +740,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -797,7 +805,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -815,6 +823,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 				);
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

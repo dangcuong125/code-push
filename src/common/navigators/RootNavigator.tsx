@@ -13,21 +13,23 @@ import CreateInfo from '@clvtube/auth/component/CreateInfo';
 import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
 import Topic from '@clvtube/chooseTopic';
-import HomeTabBottom from './HomeTabBottom';
+import TabBottom from './TabBottom';
+import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 
-import SearchPage from '../../search';
+import SearchPage from '../../search-page';
 import VideoDetailPage from '@clvtube/z-video-details/components/index';
 
 // 🚀 import Constants from file Constants
 import {
   AUTH,
   CREATE_INFO,
-  HOME_NAVIGATOR,
   INPUT_OTP,
   INTRO,
   OPENDASHBOARD,
+  PODCAST_DETAIL,
   REGISTER_SUCCESS,
   SEARCH_PAGE,
+  TAB_BOTTOM,
   TOPIC,
   VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants';
@@ -40,8 +42,12 @@ export type RootStackParamList = {
   CreateInfo: { navigation: any };
   RegisterSuccess: {};
   Topic: {};
-  HomeNavigator: {};
+  TabBottom: {};
 
+  Home: {};
+  PodcastDetail: {};
+  Podcast: {};
+  PodcastListWithTopic: {};
   Search: {};
   VideoDetails: {};
   StartDashboard: {};
@@ -62,7 +68,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={HOME_NAVIGATOR}>
+    <Stack.Navigator initialRouteName={INTRO}>
       {/* ✅ Route Intro */}
       <Stack.Screen
         name={INTRO}
@@ -96,6 +102,11 @@ const RootNavigator = () => {
         component={OpenDashboard}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name={PODCAST_DETAIL}
+        component={PodcastDetail}
+        options={{ headerShown: false }}
+      />
 
       {/* ✅ Route Select Level-Topic */}
       <Stack.Screen
@@ -106,8 +117,8 @@ const RootNavigator = () => {
 
       {/* ✅ Route Home-Navigator */}
       <Stack.Screen
-        name={HOME_NAVIGATOR}
-        component={HomeTabBottom}
+        name={TAB_BOTTOM}
+        component={TabBottom}
         options={{ headerShown: false }}
       />
 

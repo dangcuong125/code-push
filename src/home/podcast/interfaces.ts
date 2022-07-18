@@ -1,3 +1,6 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
+
 interface IItem {
   title: string;
   content: string;
@@ -20,11 +23,17 @@ export interface IInitialState {
   podcastTopics: IAllTopics[];
   podcastOutstanding: IPodcastOutstanding[];
   podcastPopular: IPodcastOutstandingItem[];
+  podcastKeySelected: string;
 }
 interface IPodcastOutstandingItem {
   id: number;
   image: HTMLImageElement;
   title: string;
+}
+export interface IPopularTopics {
+  topic_key: string;
+  name: null | string;
+  image_id: any;
 }
 export interface IPodcastListItem {
   createdAt: string;
@@ -96,3 +105,7 @@ export interface ITopicCarouselProps {
   item: IAllTopics;
   onPress: () => void;
 }
+export type PodcastListProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Podcast'
+>;

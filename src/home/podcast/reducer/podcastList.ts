@@ -4,6 +4,7 @@ import { imagePodcast } from '@clvtube/common/constants/imagePath';
 
 const initialState: IInitialState = {
   podcastTopics: [],
+  podcastKeySelected: '',
   podcastOutstanding: [
     {
       title: 'hello world123',
@@ -56,9 +57,16 @@ export const podcastList = createSlice({
         return item;
       });
     },
+    receiveTopicKeySelected: (state, action) => {
+      state.podcastKeySelected = action.payload;
+    },
   },
 });
 export const {
-  actions: { handleClickPodcastTopics, receiveTopicPodcast },
+  actions: {
+    handleClickPodcastTopics,
+    receiveTopicPodcast,
+    receiveTopicKeySelected,
+  },
   reducer,
 } = podcastList;

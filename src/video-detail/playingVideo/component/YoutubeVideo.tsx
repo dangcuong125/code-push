@@ -1,18 +1,48 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { Badge, HStack, Text, VStack } from 'native-base';
-import React from 'react';
 import YouTube from 'react-native-youtube';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-const YoutubeVideo = ({ videoPlay }) => {
+const YoutubeVideo = ({ videoPlay, id }: any) => {
+  const [startTime, setStartTime] = useState(0);
+  const youtubeRef = useRef<YouTube>(null);
+
+  const oneIndex = videoPlay?.videoTranscripts?.find(
+    (item, index) => index === 0,
+  );
+
+  const [transcript, setTranscript] = useState(oneIndex);
+
+  console.log({ oneIndex });
+
+  console.log({ startTime });
+
+  useEffect(() => {
+    const itemDisplay = videoPlay?.videoTranscripts?.find(
+      item =>
+        startTime - 500 < item.startTime && item.startTime < startTime + 500,
+    );
+    if (itemDisplay) {
+      setTranscript(itemDisplay);
+    }
+  }, [startTime]);
+
+  useEffect(() => {
+    setStartTime(0);
+    setTranscript('');
+  }, [id]);
+
   return (
     <VStack>
       <YouTube
+        ref={youtubeRef}
         apiKey="react native"
         videoId={videoPlay?.videoCode}
         play={true}
         fullscreen={false}
+        onProgress={e => setStartTime(e.currentTime * 1000)}
         style={{
           height: 250,
         }}
@@ -57,7 +87,7 @@ const YoutubeVideo = ({ videoPlay }) => {
             textDecorationColor={'#999999'}
             color={'black'}
             flex={1}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            {transcript && transcript?.content}
           </Text>
           <MaterialIcons
             name="keyboard-arrow-right"

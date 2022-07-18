@@ -2,35 +2,46 @@ import { PopularTopics } from '@clvtube/common/components/trendingTopic/index';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { Box, Flex, Heading } from 'native-base';
 import React from 'react';
+import { IPopularTopics, PodcastListProps } from '../interfaces';
+import {
+  HOME_NAVIGATOR,
+  PODCAST_LIST_WITH_TOPIC,
+} from '@clvtube/common/constants/route.constants';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { receiveTopicKeySelected } from '../reducer/podcastList';
+import { useGetPopularTopics } from '@clvtube/common/hooks/useGetPopularTopics';
+// import { useTranslation } from 'react-i18next';
 
-const PopularTopicsPodcast = () => {
+const PopularTopicsPodcast = ({ navigation }: PodcastListProps) => {
+  const dispatch = useAppDispatch();
+  const { data } = useGetPopularTopics('vi', 1, 4);
+  const popularTopics = data?.data;
   return (
     <Box marginTop="24px" paddingBottom={'15px'}>
       <Box margin="16px">
         <Heading color={'#222B45'}>Chủ đề phổ biến</Heading>
         <Flex
           direction="row"
-          justifyContent="space-around"
+          flexWrap="wrap"
+          justifyContent="space-between"
           marginTop="12px"
           bgColor="#FFFFFF">
-          <PopularTopics
-            contentTopic="Mathematics"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
-          <PopularTopics
-            contentTopic="Physics"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
-        </Flex>
-        <Flex direction="row" justifyContent="space-around" marginTop="20px">
-          <PopularTopics
-            contentTopic="Chemistry"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
-          <PopularTopics
-            contentTopic="Biology"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
+          {popularTopics?.map((topic: IPopularTopics) => (
+            <>
+              <PopularTopics
+                onPress={() => {
+                  dispatch(receiveTopicKeySelected(topic?.topic_key));
+                  navigation.navigate(HOME_NAVIGATOR, {
+                    screen: 'Podcast',
+                    params: { screen: PODCAST_LIST_WITH_TOPIC },
+                  });
+                }}
+                marginTop="20px"
+                contentTopic={topic?.name || 'hello world'}
+                imageSrc={topic?.image_id || imagePodcast.MATH_PODCAST}
+              />
+            </>
+          ))}
         </Flex>
       </Box>
     </Box>

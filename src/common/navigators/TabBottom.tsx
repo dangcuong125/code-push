@@ -7,14 +7,14 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // import component from pages
-import HomePage from '@clvtube/home/index/components/index';
-import Podcast from '@clvtube/home/podcast/components/index';
-import Account from '@clvtube/home/account';
 import VideoRoute from './VideoNavigator';
+import HomeRoute from './HomeNavigator';
+import Account from '@clvtube/home/account';
+import { PodcastRoutes } from './Podcast';
 
 const Tab = createBottomTabNavigator();
 
-const HomeTabBottom = () => {
+const TabBottom = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -31,7 +31,7 @@ const HomeTabBottom = () => {
       {/* Page Home Index */}
       <Tab.Screen
         name="Trang chủ"
-        component={HomePage}
+        component={HomeRoute}
         options={{
           tabBarLabel: 'Trang chủ',
           tabBarIcon: ({ color }) => {
@@ -54,7 +54,7 @@ const HomeTabBottom = () => {
       {/* Page Home Podcast */}
       <Tab.Screen
         name="Podcast"
-        component={Podcast}
+        component={PodcastRoutes}
         options={{
           tabBarIcon: ({ color }) => {
             return (
@@ -84,4 +84,4 @@ const HomeTabBottom = () => {
   );
 };
 
-export default HomeTabBottom;
+export default TabBottom;

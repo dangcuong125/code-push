@@ -6,7 +6,6 @@ import {
   Heading,
   Image,
   Pressable,
-  //   Flex,
   Text,
   VStack,
 } from 'native-base';
@@ -20,8 +19,13 @@ import {
 } from '../reducer/podcastList';
 import { useGetPodcastList } from '@clvtube/common/hooks/useGetPodcastList';
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
-import { IAllTopics, ITopicCarouselProps } from '../interfaces';
+import {
+  IAllTopics,
+  ITopicCarouselProps,
+  PodcastListProps,
+} from '../interfaces';
 import { useTranslation } from 'react-i18next';
+import { PODCAST_DETAIL } from '@clvtube/common/constants/route.constants';
 
 const Item = ({ item, onPress }: ITopicCarouselProps) => {
   return (
@@ -45,7 +49,7 @@ const Item = ({ item, onPress }: ITopicCarouselProps) => {
   );
 };
 
-export const PodcastList = () => {
+export const PodcastList = ({ navigation }: PodcastListProps) => {
   const { t } = useTranslation();
   const podcastTopics = useAppSelector(
     state => state.podcastList.podcastTopics,
@@ -105,6 +109,9 @@ export const PodcastList = () => {
               borderColor="#E6E6E6"
               borderWidth={'1px'}
               borderRadius={'12px'}
+              onPress={() =>
+                navigation.navigate(PODCAST_DETAIL, { id: item.id })
+              }
               p={3}>
               <HStack space={4} alignItems={'center'}>
                 <Image
