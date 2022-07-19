@@ -9,22 +9,25 @@ import { Speak } from './Speak';
 import { VideoList } from './VideoList';
 import { Welcome } from './Welcome';
 import { HomePageProps } from '../interfaces';
+import { SafeAreaView } from 'react-native';
 
 const HomePage = ({ navigation, route }: HomePageProps) => {
   return (
-    <ScrollView>
-      <VStack space={4}>
-        <VStack safeAreaTop={10} bgColor={'white'}>
-          <SearchHeader />
-          <Welcome />
+    <SafeAreaView style={{ backgroundColor: 'white' }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <VStack space={4}>
+          <VStack safeAreaTop={2} bgColor={'white'}>
+            <SearchHeader />
+            <Welcome />
+          </VStack>
+          <VideoList />
+          <Recently />
+          <PodcastList navigation={navigation} route={route} />
+          <ReviseNewWord />
+          <Speak />
         </VStack>
-        <VideoList />
-        <Recently />
-        <PodcastList navigation={navigation} route={route} />
-        <ReviseNewWord />
-        <Speak />
-      </VStack>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

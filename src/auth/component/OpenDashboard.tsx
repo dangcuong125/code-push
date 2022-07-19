@@ -6,8 +6,8 @@ import { Dimensions, Image } from 'react-native';
 import { imagePath } from '@clvtube/common/constants/imagePath';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { TAB_BOTTOM } from '../../common/constants/route.constants';
-import { useAppSelector } from '../../common/hooks/useAppSelector';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
 
 const { width } = Dimensions.get('screen');
 
