@@ -1,4 +1,5 @@
 export const imageLogo = {
+  LOGO_SPLASH: require('../assets/images/logo-splash.png'),
   LOGO: require('../assets/images/logo.png'),
   LOGO_MINI: require('../assets/images/logo_mini.png'),
 };

@@ -145,12 +145,14 @@ export const VideoList = () => {
         </HStack>
         <FlatList
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={videoTypeCarousel}
           renderItem={renderVideoTypeCarousel}
         />
       </VStack>
       <FlatList
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         data={videoListCarousel}
         renderItem={renderVideoListCarousel}
       />

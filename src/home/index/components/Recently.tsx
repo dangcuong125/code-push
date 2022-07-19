@@ -80,6 +80,7 @@ export const Recently = () => {
       <FlatList
         data={DATA_VIEWED_RECENTLY}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         renderItem={renderItem}
       />
     </VStack>
