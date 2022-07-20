@@ -1,5 +1,8 @@
 import { execute } from '@clvtube/common/lib/request';
-import { GET_ALL_TOPICS, POST_LEVEL_TOPIC } from '@clvtube/common/constants/urlApi.constants';
+import {
+  GET_ALL_TOPICS,
+  POST_LEVEL_TOPIC,
+} from '@clvtube/common/constants/urlApi.constants';
 
 // 🚀 Get All Topics
 export const getAllTopics = async (lang: string, page: number) => {

@@ -1,36 +1,26 @@
+import { useNavigation } from '@react-navigation/native';
+import { Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import {
-  Box,
-  HStack,
-  Heading,
-  Pressable,
-  ScrollView,
-  Text,
-  VStack,
-} from 'native-base';
-import { useNavigation } from '@react-navigation/native';
 
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 import SettingNotify from '@clvtube/account/component/SettingNotify';
 
-import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
-import Language from '@clvtube/account/component/Language';
 import DarkMode from '@clvtube/account/component/DarkMode';
-
+import Language from '@clvtube/account/component/Language';
+import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
 
 const Account = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [showModalSettingNotify, setShowModalSettingNotify] = useState<boolean>(false);
+  const [showModalSettingNotify, setShowModalSettingNotify] =
+    useState<boolean>(false);
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
   const [showModalDarkMode, setShowModalDarkMode] = useState<boolean>(false);
 
@@ -40,14 +30,8 @@ const Account = () => {
 
   return (
     <ScrollView bgColor={'white'}>
-      <VStack
-        height={'100%'}
-        safeAreaX={4}
-        safeAreaTop={12}
-        bgColor={'white'}
-      >
-
-      {/* ✅ Element Info User */}
+      <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'white'}>
+        {/* ✅ Element Info User */}
         <HStack space={4} alignItems={'center'} my={8}>
           <Image
             source={{
@@ -95,13 +79,11 @@ const Account = () => {
           </VStack>
         </HStack>
 
-      {/* ✅ Element Feature Account */}
+        {/* ✅ Element Feature Account */}
         <VStack mt={3}>
-
-        {/* 🏆 Edit Account */}
+          {/* 🏆 Edit Account */}
           <TouchableOpacity
-            onPress={() => navigator.navigate(ACCOUNT_ROUTE.EDIT_ACCOUNT, {})}
-          >
+            onPress={() => navigator.navigate(ACCOUNT_ROUTE.EDIT_ACCOUNT, {})}>
             <Box
               height={'53px'}
               px={5}
@@ -132,10 +114,8 @@ const Account = () => {
             </Box>
           </TouchableOpacity>
 
-        {/* 🏆 Notifycation */}
-          <TouchableOpacity
-            onPress={() => setShowModalSettingNotify(true)}
-          >
+          {/* 🏆 Notifycation */}
+          <TouchableOpacity onPress={() => setShowModalSettingNotify(true)}>
             <Box height={'57px'} px={5} borderRadius={'13px'}>
               <HStack
                 height={'100%'}
@@ -163,29 +143,22 @@ const Account = () => {
               </HStack>
             </Box>
           </TouchableOpacity>
-          {
-            showModalSettingNotify &&
+          {showModalSettingNotify && (
             <SettingNotify
               showModal={showModalSettingNotify}
               setShowModal={setShowModalSettingNotify}
             />
-          }
+          )}
 
-        {/* 🏆 Language */}
-          <TouchableOpacity
-            onPress={() => setShowModalLanguage(true)}
-          >
+          {/* 🏆 Language */}
+          <TouchableOpacity onPress={() => setShowModalLanguage(true)}>
             <Box height={'57px'} px={5} borderRadius={'13px'}>
               <HStack
                 height={'100%'}
                 justifyContent={'space-between'}
                 alignItems={'center'}>
                 <HStack space={4} alignItems={'center'}>
-                  <MaterialIcons
-                    name="language"
-                    size={23}
-                    color={'#292D32'}
-                  />
+                  <MaterialIcons name="language" size={23} color={'#292D32'} />
                   <Text
                     color={'#000000'}
                     fontStyle={'normal'}
@@ -202,18 +175,15 @@ const Account = () => {
               </HStack>
             </Box>
           </TouchableOpacity>
-          {
-            showModalLanguage &&
+          {showModalLanguage && (
             <Language
               showModal={showModalLanguage}
               setShowModal={setShowModalLanguage}
             />
-          }
+          )}
 
-        {/* 🏆 DarkMode */}
-          <TouchableOpacity
-            onPress={() => setShowModalDarkMode(true)}
-          >
+          {/* 🏆 DarkMode */}
+          <TouchableOpacity onPress={() => setShowModalDarkMode(true)}>
             <Box height={'57px'} px={5} borderRadius={'13px'}>
               <HStack
                 height={'100%'}
@@ -241,15 +211,14 @@ const Account = () => {
               </HStack>
             </Box>
           </TouchableOpacity>
-          {
-            showModalDarkMode &&
+          {showModalDarkMode && (
             <DarkMode
               showModal={showModalDarkMode}
               setShowModal={setShowModalDarkMode}
             />
-          }
+          )}
 
-        {/* 🏆 Help center */}
+          {/* 🏆 Help center */}
           <TouchableOpacity>
             <Box height={'57px'} px={5} borderRadius={'13px'}>
               <HStack
@@ -257,11 +226,7 @@ const Account = () => {
                 justifyContent={'space-between'}
                 alignItems={'center'}>
                 <HStack space={4} alignItems={'center'}>
-                  <MaterialIcons
-                    name="live-help"
-                    size={23}
-                    color={'#292D32'}
-                  />
+                  <MaterialIcons name="live-help" size={23} color={'#292D32'} />
                   <Text
                     color={'#000000'}
                     fontStyle={'normal'}
@@ -287,11 +252,7 @@ const Account = () => {
                 justifyContent={'flex-start'}
                 alignItems={'center'}
                 space={4}>
-                <AntDeisgn
-                  name="logout"
-                  size={25}
-                  color={'#DC3545'}
-                />
+                <AntDeisgn name="logout" size={25} color={'#DC3545'} />
                 <Text
                   color={'#DC3545'}
                   fontStyle={'normal'}

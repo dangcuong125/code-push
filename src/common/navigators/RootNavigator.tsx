@@ -1,23 +1,21 @@
 // 🚀 import Component from package
-import React from 'react';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import React from 'react';
 
 // 🚀 import Components from Pages
-import Intro from '@clvtube/intro/component/Intro';
 import Auth from '@clvtube/auth';
-import InputOTP from '@clvtube/auth/component/InputOTP';
 import CreateAccount from '@clvtube/auth/component/CreateAccount';
-import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
+import InputOTP from '@clvtube/auth/component/InputOTP';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
+import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
+import Intro from '@clvtube/intro/component/Intro';
+import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 import LevelTopic from '../../level-topic/index';
 import TabBottom from './TabBottom';
-import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 
-import SearchPage from '../../search-page';
-import VideoDetailPage from '@clvtube/z-video-details/components/index';
 import SplashLoading from '@clvtube/splash-loading';
 
 // 🚀 import Constants from file Constants
@@ -30,11 +28,9 @@ import {
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
-  SEARCH_PAGE,
   SPLASH_LOADING,
   TAB_BOTTOM,
 } from '../constants/route.constants';
-
 
 export type RootStackParamList = {
   SplashLoading: {};
@@ -86,7 +82,7 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
 
-    {/* ✅ Route Auth */}
+      {/* ✅ Route Auth */}
       <Stack.Screen
         name={AUTH}
         component={Auth}
@@ -118,20 +114,19 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
 
-    {/* ✅ Route Select Level-Topic */}
+      {/* ✅ Route Select Level-Topic */}
       <Stack.Screen
         name={LEVEL_TOPIC}
         component={LevelTopic}
         options={{ headerShown: false }}
       />
 
-    {/* ✅ Route Tab_Bottom */}
+      {/* ✅ Route Tab_Bottom */}
       <Stack.Screen
         name={TAB_BOTTOM}
         component={TabBottom}
         options={{ headerShown: false }}
       />
-
     </Stack.Navigator>
   );
 };

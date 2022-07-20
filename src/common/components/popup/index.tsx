@@ -45,8 +45,7 @@ const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
                 lineHeight={'19px'}
                 color={'neural.10'}
                 textAlign={'center'}
-                paddingX={6}
-                >
+                paddingX={6}>
                 Bạn đã đổi mật khẩu thành công và bạn hãy tận hưởng tính năng
               </Text>
               <Button
@@ -66,20 +65,18 @@ const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
                 }}>
                 Tiếp tục
               </Button>
-              {
-                isSuccess && (
-                  <TouchableOpacity>
-                    <Text
-                      fontStyle={'normal'}
-                      fontSize={'14px'}
-                      fontWeight={600}
-                      lineHeight={'30px'}
-                      color={'primary.21'}>
-                      Thoát
-                    </Text>
-                  </TouchableOpacity>
-                )
-              }
+              {isSuccess && (
+                <TouchableOpacity>
+                  <Text
+                    fontStyle={'normal'}
+                    fontSize={'14px'}
+                    fontWeight={600}
+                    lineHeight={'30px'}
+                    color={'primary.21'}>
+                    Thoát
+                  </Text>
+                </TouchableOpacity>
+              )}
             </VStack>
           </ScrollView>
         </Box>

@@ -9,8 +9,5 @@ export const useGetAllTopics = (lang = 'en', page = 1) => {
 };
 
 export const usePostChooseLevelTopic = () => {
-  return useMutation(
-    QUERY_KEYS.POST_LEVEL_TOPIC,
-    postSelectLevelTopic,
-  );
+  return useMutation(QUERY_KEYS.POST_LEVEL_TOPIC, postSelectLevelTopic);
 };

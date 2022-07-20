@@ -1,5 +1,8 @@
 import { execute } from '@clvtube/common/lib/request';
-import { GET_ALL_TOPICS, POST_LEVEL_TOPIC } from '../constants/urlApi.constants';
+import {
+  GET_ALL_TOPICS,
+  POST_LEVEL_TOPIC,
+} from '../constants/urlApi.constants';
 
 export const TopicAPI = {
   // 🚀 Get All Topics

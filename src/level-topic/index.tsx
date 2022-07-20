@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Alert, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   Button,
   HStack,
@@ -9,7 +8,8 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
@@ -24,9 +24,7 @@ import {
 import { useGetAllLevels } from './hooks/useLevel';
 import { useGetAllTopics, usePostChooseLevelTopic } from './hooks/useTopic';
 
-import { IDataLevelOrTopic } from './interfaces/interfaces';
-import { HOME, TAB_BOTTOM } from '../common/constants/route.constants';
-
+import { TAB_BOTTOM } from '../common/constants/route.constants';
 
 const LevelTopic = () => {
   const navigation = useNavigation();
@@ -40,7 +38,7 @@ const LevelTopic = () => {
 
   useEffect(() => {
     dispatch(updateDataLevel(levelData?.data?.items));
-  }, [levelData?.data?.items])
+  }, [levelData?.data?.items]);
 
   useEffect(() => {
     dispatch(updateDataTopic(topicData?.data?.items));
@@ -83,7 +81,6 @@ const LevelTopic = () => {
     })
     .map(item => item.key);
 
-
   const handleSubmitLevelTopic = () => {
     if (levelKey === undefined && !topicKeys.length) {
       Alert.alert('Bạn hãy chọn Level và Topic để được tiếp tục! 🚀');
@@ -104,7 +101,7 @@ const LevelTopic = () => {
         topicKeys,
       },
       {
-        onSuccess: (data: any) => {
+        onSuccess: () => {
           navigation.navigate(TAB_BOTTOM, {});
         },
         onError: err => {
@@ -148,7 +145,11 @@ const LevelTopic = () => {
               <TouchableOpacity key={item.key}>
                 <Button
                   leftIcon={
-                    item.isSelected ? (<Icon as={<MaterialIcons name="done" />} />) : ''
+                    item.isSelected ? (
+                      <Icon as={<MaterialIcons name="done" />} />
+                    ) : (
+                      ''
+                    )
                   }
                   marginBottom={'18px'}
                   borderRadius={'12px'}
@@ -181,7 +182,11 @@ const LevelTopic = () => {
               <TouchableOpacity key={item.key}>
                 <Button
                   leftIcon={
-                    item.isSelected ? (<Icon as={<MaterialIcons name="done" />} />) : ''
+                    item.isSelected ? (
+                      <Icon as={<MaterialIcons name="done" />} />
+                    ) : (
+                      ''
+                    )
                   }
                   borderRadius={'12px'}
                   borderWidth={0.5}
@@ -215,7 +220,6 @@ const LevelTopic = () => {
             Tiếp tục
           </Button>
         </TouchableOpacity>
-
       </VStack>
     </ScrollView>
   );

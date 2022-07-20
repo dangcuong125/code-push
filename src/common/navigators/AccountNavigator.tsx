@@ -4,11 +4,10 @@ import { ACCOUNT_ROUTE } from '../constants/route.constants';
 import Account from '@clvtube/home/account';
 import EditAccount from '@clvtube/account/edit-account';
 
-
 export type AccountStackParamList = {
-    Index: {},
-    EditAccount: {},
-}
+  Index: {};
+  EditAccount: {};
+};
 
 const Stack = createNativeStackNavigator<AccountStackParamList>();
 

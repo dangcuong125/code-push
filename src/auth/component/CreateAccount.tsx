@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Heading,
-  Icon,
-  Input,
-  VStack,
-} from 'native-base';
+import { Box, Button, Heading, Icon, Input, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
-import { Alert, Dimensions } from 'react-native';
+import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuthGoogle } from '../slice';
 import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
 import { CreateInfoProps } from '../../common/navigators/RootNavigator';
-
-const { width, height } = Dimensions.get('window');
 
 const CreateAccount = ({ navigation }: CreateInfoProps) => {
   const authState = useAppSelector(state => state.authReducer);
@@ -301,7 +291,6 @@ const CreateAccount = ({ navigation }: CreateInfoProps) => {
           />
         </Box>
       </HStack> */}
-
     </VStack>
   );
 };
