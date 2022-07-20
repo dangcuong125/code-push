@@ -1,3 +1,6 @@
+// Route rule SplashLoading
+export const SPLASH_LOADING = 'SplashLoading';
+
 // 🎉 Route rule Intro
 export const INTRO = 'Intro';
 

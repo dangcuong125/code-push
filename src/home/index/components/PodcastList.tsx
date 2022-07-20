@@ -101,6 +101,7 @@ export const PodcastList = ({ navigation }: HomePageProps) => {
         </HStack>
         <FlatList
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={PODCAST_TYPE}
           renderItem={renderItem}
         />
@@ -123,7 +124,7 @@ export const PodcastList = ({ navigation }: HomePageProps) => {
                   width={'101px'}
                   height={'100px'}
                   borderRadius={'10px'}
-                  alt=""
+                  alt="thumbnail"
                 />
                 <VStack space={1.5} width={'60%'}>
                   <Heading

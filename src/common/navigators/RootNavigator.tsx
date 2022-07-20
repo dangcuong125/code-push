@@ -16,6 +16,10 @@ import LevelTopic from '../../level-topic/index';
 import TabBottom from './TabBottom';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 
+import SearchPage from '../../search-page';
+import VideoDetailPage from '@clvtube/z-video-details/components/index';
+import SplashLoading from '@clvtube/splash-loading';
+
 // 🚀 import Constants from file Constants
 import {
   AUTH,
@@ -26,11 +30,14 @@ import {
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
+  SEARCH_PAGE,
+  SPLASH_LOADING,
   TAB_BOTTOM,
 } from '../constants/route.constants';
 
 
 export type RootStackParamList = {
+  SplashLoading: {};
   Intro: { navigation: any };
   Auth: { navigation: any };
   OpenDashboard: {};
@@ -64,9 +71,15 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={AUTH}>
+    <Stack.Navigator initialRouteName={SPLASH_LOADING}>
+      {/* ✅ Route Splash */}
+      <Stack.Screen
+        name={SPLASH_LOADING}
+        component={SplashLoading}
+        options={{ headerShown: false }}
+      />
 
-    {/* ✅ Route Intro */}
+      {/* ✅ Route Intro */}
       <Stack.Screen
         name={INTRO}
         component={Intro}
