@@ -10,7 +10,9 @@ const VideoItem = ({ item }) => {
   const navigator = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })}>
+      onPress={() =>
+        navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
+      }>
       <HStack space={2} marginBottom={4}>
         <Image
           source={{ uri: item?.thumbnails.medium.url }}

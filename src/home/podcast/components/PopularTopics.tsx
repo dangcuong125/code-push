@@ -4,8 +4,8 @@ import { Box, Flex, Heading } from 'native-base';
 import React from 'react';
 import { IPopularTopics, PodcastListProps } from '../interfaces';
 import {
-  HOME_NAVIGATOR,
   PODCAST_LIST_WITH_TOPIC,
+  TAB_BOTTOM,
 } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { receiveTopicKeySelected } from '../reducer/podcastList';
@@ -31,7 +31,7 @@ const PopularTopicsPodcast = ({ navigation }: PodcastListProps) => {
               <PopularTopics
                 onPress={() => {
                   dispatch(receiveTopicKeySelected(topic?.topic_key));
-                  navigation.navigate(HOME_NAVIGATOR, {
+                  navigation.navigate(TAB_BOTTOM, {
                     screen: 'Podcast',
                     params: { screen: PODCAST_LIST_WITH_TOPIC },
                   });
