@@ -5,8 +5,7 @@ import { Animated, View } from 'react-native';
 import { Box } from 'native-base';
 import { getHeightOfParagraph } from '../reducer/podcastDetail';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { Word } from './PodcastDetail';
-// import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { Word } from './Words';
 
 export const Transcripts = React.memo(function Transcripts({
   item,

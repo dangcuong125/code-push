@@ -1,71 +1,17 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable multiline-ternary */
 /* eslint-disable array-callback-return */
-import { Box, Image, Text } from 'native-base';
+import { Box, Image, Skeleton, Text } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { useGetPodcastDetail } from '../hooks/useGetPodcastDetail';
 import { IPodcastDetail, ITranscriptItem } from '../interface';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import {
-  getDurations,
-  getPosition,
-  getPositionAndStartTime,
-} from '../reducer/podcastDetail';
+import { getPosition, getPositionAndStartTime } from '../reducer/podcastDetail';
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
-
-// eslint-disable-next-line react/display-name
-export const Word = React.memo(
-  ({
-    displayHighlightText,
-    word,
-    position,
-  }: {
-    displayHighlightText: boolean;
-    word: string;
-    position: number;
-  }) => {
-    const fadeAnimation = useRef(new Animated.Value(0)).current;
-    const colorText = fadeAnimation.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['#000000', '#3D9BE0'],
-    });
-    const sliderValue = useAppSelector(
-      state => state.podcastDetail.sliderValue,
-    );
-    let fontSize = 14;
-    if (sliderValue >= 70) fontSize = 18;
-    if (sliderValue < 70 && sliderValue > 50) fontSize = 16;
-    if (sliderValue < 50) fontSize = 14;
-
-    useEffect(() => {
-      Animated.timing(fadeAnimation, {
-        toValue: displayHighlightText ? 1 : 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    }, [position]);
-    return (
-      <Animated.Text
-        style={{
-          color: colorText,
-          height: 25,
-          fontSize,
-        }}>
-        {word}{' '}
-      </Animated.Text>
-    );
-  },
-  (prev, next) => {
-    return !(
-      prev.displayHighlightText !== next.displayHighlightText ||
-      prev.word !== next.word
-    );
-  },
-);
 
 const HeaderPodcast = React.memo(function HeaderPodcast({
   podcastDetail,
@@ -107,6 +53,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   const dispatch = useAppDispatch();
   const ref = useRef<FlatList>(null);
   const [currentPosition, setCurrentPosition] = useState(0);
+  // const goBack = useAppSelector(state => state.podcastDetail.goBack);
 
   const { id } = useRoute().params;
 
@@ -114,10 +61,9 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     state => state.podcastDetail.heightOfParagraph,
   );
 
-  const { data } = useGetPodcastDetail(id);
+  const { data, isLoading } = useGetPodcastDetail(id);
   const podcastDetail = data?.data;
 
-  const duration = useProgress(300).duration;
   const position = useProgress(300).position;
   const position1 = useProgress().position;
 
@@ -158,6 +104,11 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
       />
     );
   };
+  const resetAudio = async () => {
+    await TrackPlayer.reset();
+    await TrackPlayer.stop();
+  };
+  // if (goBack) destroyAudio();
   const startTimeOfParagraphGreaterThanPosition =
     podcastDetail?.audioTranscripts?.find(
       (item: ITranscriptItem) => Number(item.startTime) > position,
@@ -166,10 +117,10 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) -
       Math.ceil(position1) <
     0.99;
+  // if (isLoading) {
+  //   return <Skeleton />;
+  // }
 
-  useEffect(() => {
-    dispatch(getDurations(duration));
-  }, [duration]);
   useEffect(() => {
     dispatch(getPosition(position1));
     ref?.current?.scrollToOffset({
@@ -197,19 +148,27 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   }, [position1]);
   useEffect(() => {
     if (podcastDetail) setUpPlayer();
-  }, [podcastDetail]);
+  });
+  useEffect(() => {
+    resetAudio();
+  }, []);
   return (
     <>
-      <FlatList
-        ref={ref}
-        data={transcriptWords}
-        onScroll={e => {
-          setCurrentPosition(e.nativeEvent.contentOffset.y);
-        }}
-        ListFooterComponent={FooterPodcast}
-        ListHeaderComponent={<HeaderPodcast podcastDetail={podcastDetail} />}
-        renderItem={renderItem}
-      />
+      {isLoading ? (
+        <Skeleton.Text px="4" h="40" />
+      ) : (
+        <FlatList
+          ref={ref}
+          data={transcriptWords}
+          onScroll={e => {
+            setCurrentPosition(e.nativeEvent.contentOffset.y);
+          }}
+          // removeClippedSubviews={true}
+          ListFooterComponent={FooterPodcast}
+          ListHeaderComponent={<HeaderPodcast podcastDetail={podcastDetail} />}
+          renderItem={renderItem}
+        />
+      )}
     </>
   );
 });

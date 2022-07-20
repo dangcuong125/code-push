@@ -8,6 +8,7 @@ const initialState: IInitialState = {
   paragraphInfo: [],
   sliderValue: 0,
   defaultValue: 50,
+  goBack: false,
 };
 
 export const podcastDetailSlice = createSlice({
@@ -35,6 +36,9 @@ export const podcastDetailSlice = createSlice({
     getDefaultValueSlider: (state, action) => {
       state.defaultValue = action.payload;
     },
+    userIsGoingBack: state => {
+      state.goBack = !state.goBack;
+    },
   },
 });
 export const {
@@ -45,6 +49,7 @@ export const {
     getPositionAndStartTime,
     getSliderValue,
     getDefaultValueSlider,
+    userIsGoingBack,
   },
   reducer,
 } = podcastDetailSlice;

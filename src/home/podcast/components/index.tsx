@@ -2,11 +2,11 @@ import SearchingHeader from '@clvtube/common/components/searchHeader/index';
 import { Box } from 'native-base';
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import { MaybeYouLike } from './MaybeYouLike';
-import { OutStandingPodcast } from './OutstandingPodcast';
+// import { MaybeYouLike } from './MaybeYouLike';
+// import { OutStandingPodcast } from './OutstandingPodcast';
 import { PodcastList } from './PodcastList';
 import PopularTopics from './PopularTopics';
-import { Speak } from './Speak';
+// import { Speak } from './Speak';
 import { PodcastListProps } from '../interfaces';
 
 const Podcast = ({ navigation, route }: PodcastListProps) => {
@@ -18,10 +18,10 @@ const Podcast = ({ navigation, route }: PodcastListProps) => {
           <SearchingHeader />
           <PopularTopics navigation={navigation} route={route} />
         </Box>
-        <OutStandingPodcast />
+        {/* <OutStandingPodcast /> */}
         <PodcastList navigation={navigation} route={route} />
-        <MaybeYouLike />
-        <Speak />
+        {/* <MaybeYouLike /> */}
+        {/* <Speak /> */}
       </ScrollView>
     </SafeAreaView>
   );

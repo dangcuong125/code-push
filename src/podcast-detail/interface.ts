@@ -31,6 +31,7 @@ export interface IInitialState {
   paragraphInfo: any;
   sliderValue: number;
   defaultValue: number;
+  goBack: boolean;
 }
 export interface IPodcastDetail {
   id: number;

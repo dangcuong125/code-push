@@ -5,17 +5,24 @@ import Feather from 'react-native-vector-icons/Feather';
 import { PodcastDetailProps } from '../interface';
 import { SliderAudio } from './SliderAudio';
 import { SettingModal } from './SettingModal';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { userIsGoingBack } from '../reducer/podcastDetail';
 
 export const Header = ({ navigation }: PodcastDetailProps) => {
   const [displaySliderAudio, setDisplaySliderAudio] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
   return (
     <Box>
       <Flex direction="row" justifyContent="space-between">
         <Icon
           size="6"
           color="text.200"
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(userIsGoingBack());
+          }}
           as={AntDesign}
           name="arrowleft"
           marginLeft="23px"
@@ -29,13 +36,6 @@ export const Header = ({ navigation }: PodcastDetailProps) => {
             color="text.200"
             marginRight="10px"
           />
-          {/* <Icon
-            as={AntDesign}
-            name="setting"
-            size="6"
-            color="text.200"
-            marginRight="10px"
-          /> */}
           <Icon
             as={AntDesign}
             name="setting"
