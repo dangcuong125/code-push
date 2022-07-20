@@ -9,8 +9,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // import component from pages
 import VideoRoute from './VideoNavigator';
 import HomeRoute from './HomeNavigator';
-import Account from '@clvtube/home/account';
 import { PodcastRoutes } from './Podcast';
+import AccountRoute from './AccountNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,7 +67,7 @@ const TabBottom = () => {
       {/* Page Home Account */}
       <Tab.Screen
         name="Tài khoản"
-        component={Account}
+        component={AccountRoute}
         options={{
           tabBarIcon: ({ color }) => {
             return (

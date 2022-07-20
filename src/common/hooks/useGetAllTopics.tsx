@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 import { execute } from '@clvtube/common/lib/request';
-import { GET_ALL_TOPICS } from '../constants/urlApi';
+import { GET_ALL_TOPICS } from '../constants/urlApi.constants';
 
 export const useGetAllTopics = (lang: string, page: number, limit: number) => {
   return useQuery([QUERY_KEYS.ALL_TOPICS, lang, page, limit], () =>

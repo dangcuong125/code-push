@@ -22,7 +22,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide();
+    SplashScreen?.hide();
   }, []);
   const queryClient = new QueryClient();
   const config = {

@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 import { execute } from '@clvtube/common/lib/request';
-import { GET_PODCAST_LIST } from '../constants/urlApi';
+import { GET_PODCAST_LIST } from '../constants/urlApi.constants';
 
 export const useGetPodcastList = (
   topicKey: string,

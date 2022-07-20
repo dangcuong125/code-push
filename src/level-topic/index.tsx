@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import { Alert, TouchableOpacity } from 'react-native';
 import {
   Button,
   HStack,
@@ -9,56 +9,65 @@ import {
   Text,
   VStack,
 } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { useGetAllLevels } from '@clvtube/common/hooks/useLevels';
-import { Alert, TouchableOpacity } from 'react-native';
-import {
-  useGetAllTopics,
-  usePostChooseLevelTopic,
-} from '../common/hooks/useTopics';
 import {
   selectLevel,
   selectTopic,
   updateDataLevel,
   updateDataTopic,
 } from './slice';
-import { IDataLevelOrTopic } from '../chooseTopic/interfaces/interfaces';
-import { useNavigation } from '@react-navigation/native';
-import { HOME } from '../common/constants/route.constants';
 
-const Topic = () => {
-  const { level, topic } = useAppSelector(state => state.topicReducer);
-  const dispatch = useAppDispatch();
+import { useGetAllLevels } from './hooks/useLevel';
+import { useGetAllTopics, usePostChooseLevelTopic } from './hooks/useTopic';
+
+import { IDataLevelOrTopic } from './interfaces/interfaces';
+import { HOME, TAB_BOTTOM } from '../common/constants/route.constants';
+
+
+const LevelTopic = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const { level, topic } = useAppSelector(state => state.topicReducer);
 
-  const { data: topicData } = useGetAllTopics();
   const { data: levelData } = useGetAllLevels();
+  const { data: topicData } = useGetAllTopics();
+
+  // console.log({ levelData: levelData?.data?.items, topicData: topicData?.data?.items });
+
+  useEffect(() => {
+    dispatch(updateDataLevel(levelData?.data?.items));
+  }, [levelData?.data?.items])
+
+  useEffect(() => {
+    dispatch(updateDataTopic(topicData?.data?.items));
+  }, [topicData?.data?.items]);
 
   const { mutate } = usePostChooseLevelTopic();
 
-  const filterDataLevel = levelData?.data.items.filter(
-    (item: IDataLevelOrTopic) => {
-      if (item.enabled === -1) {
-        return item;
-      }
-      return null;
-    },
-  );
-  const filterDataTopic = topicData?.data.items.filter(
-    (item: IDataLevelOrTopic) => {
-      if (item.enabled === -1) {
-        return item;
-      }
-      return null;
-    },
-  );
+  // const filterDataLevel = levelData?.data.items.filter(
+  //   (item: IDataLevelOrTopic) => {
+  //     if (item.enabled === -1) {
+  //       return item;
+  //     }
+  //     return null;
+  //   },
+  // );
+  // const filterDataTopic = topicData?.data.items.filter(
+  //   (item: IDataLevelOrTopic) => {
+  //     if (item.enabled === -1) {
+  //       return item;
+  //     }
+  //     return null;
+  //   },
+  // );
 
   // 🎉 filter data level
   const levelKey = level?.find(item => {
-    if (item.enabled === 1) {
+    if (item.isSelected) {
       return item;
     }
     return null;
@@ -67,20 +76,13 @@ const Topic = () => {
   // 🎉 filter data topic
   const topicKeys = topic
     ?.filter(item => {
-      if (item.enabled === 1) {
+      if (item.isSelected) {
         return item;
       }
       return null;
     })
     .map(item => item.key);
 
-  useEffect(() => {
-    dispatch(updateDataTopic(filterDataTopic));
-  }, [topicData?.data?.items]);
-
-  useEffect(() => {
-    dispatch(updateDataLevel(filterDataLevel));
-  }, [levelData?.data.items]);
 
   const handleSubmitLevelTopic = () => {
     if (levelKey === undefined && !topicKeys.length) {
@@ -103,9 +105,7 @@ const Topic = () => {
       },
       {
         onSuccess: (data: any) => {
-          if (data?.status === 417) {
-            navigation.navigate({ HOME });
-          }
+          navigation.navigate(TAB_BOTTOM, {});
         },
         onError: err => {
           Alert.alert(`⛔️ ${err}`);
@@ -144,27 +144,22 @@ const Topic = () => {
             Level hiện tại của bạn là gì?
           </Text>
           <HStack space={4} flexWrap={'wrap'}>
-            {level?.map((item, index) => (
-              <TouchableOpacity key={index}>
+            {level?.map(item => (
+              <TouchableOpacity key={item.key}>
                 <Button
-                  key={index}
                   leftIcon={
-                    item.enabled === 1 ? (
-                      <Icon as={<MaterialIcons name="done" />} />
-                    ) : (
-                      ''
-                    )
+                    item.isSelected ? (<Icon as={<MaterialIcons name="done" />} />) : ''
                   }
                   marginBottom={'18px'}
                   borderRadius={'12px'}
                   borderWidth={0.5}
-                  borderColor={item.enabled === 1 ? 'primary.100' : 'gray.400'}
-                  bgColor={item.enabled === 1 ? 'primary.100' : 'white'}
+                  borderColor={item.isSelected ? 'primary.11' : 'neural.2'}
+                  bgColor={item.isSelected ? 'primary.11' : 'neural.1'}
                   _text={{
-                    color: item.enabled === 1 ? 'white' : 'black',
+                    color: item.isSelected ? 'neural.1' : 'neural.10',
                   }}
                   onPress={() => dispatch(selectLevel(item))}>
-                  {item.key}
+                  {item.slug}
                 </Button>
               </TouchableOpacity>
             ))}
@@ -182,30 +177,28 @@ const Topic = () => {
             Chọn chủ đề mà bạn yêu thích
           </Text>
           <HStack space={4} flexWrap={'wrap'}>
-            {topic?.map((item, index) => (
-              <Button
-                key={index}
-                leftIcon={
-                  item.enabled === 1 ? (
-                    <Icon as={<MaterialIcons name="done" />} />
-                  ) : (
-                    ''
-                  )
-                }
-                borderRadius={'12px'}
-                borderWidth={0.5}
-                borderColor={item.enabled === 1 ? 'primary.100' : 'gray.400'}
-                bgColor={item.enabled === 1 ? 'primary.100' : 'white'}
-                marginBottom={'18px'}
-                _text={{
-                  color: item.enabled === 1 ? 'white' : 'black',
-                }}
-                onPress={() => dispatch(selectTopic(item))}>
-                {item.key}
-              </Button>
+            {topic?.map(item => (
+              <TouchableOpacity key={item.key}>
+                <Button
+                  leftIcon={
+                    item.isSelected ? (<Icon as={<MaterialIcons name="done" />} />) : ''
+                  }
+                  borderRadius={'12px'}
+                  borderWidth={0.5}
+                  borderColor={item.isSelected ? 'primary.11' : 'neural.2'}
+                  bgColor={item.isSelected ? 'primary.11' : 'neural.1'}
+                  marginBottom={'18px'}
+                  _text={{
+                    color: item.isSelected ? 'neural.1' : 'neural.10',
+                  }}
+                  onPress={() => dispatch(selectTopic(item))}>
+                  {item.slug}
+                </Button>
+              </TouchableOpacity>
             ))}
           </HStack>
         </VStack>
+
         <TouchableOpacity>
           <Button
             bgColor={'#216BCD'}
@@ -222,9 +215,10 @@ const Topic = () => {
             Tiếp tục
           </Button>
         </TouchableOpacity>
+
       </VStack>
     </ScrollView>
   );
 };
 
-export default Topic;
+export default LevelTopic;

@@ -1,5 +1,5 @@
 import { execute } from '@clvtube/common/lib/request';
-import { GET_VIDEO_LIST } from '../constants/urlApi';
+import { GET_VIDEO_LIST } from '../constants/urlApi.constants';
 
 export const VideoAPI = {
   // 🚀 Get All Videos

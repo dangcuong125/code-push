@@ -8,14 +8,15 @@ import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import {
   updateDataTopic,
   updateKeyPickingTopic,
-} from '@clvtube/chooseTopic/slice';
+} from '@clvtube/level-topic/slice';
 import ButtonTopic from '@clvtube/common/components/buttonTopic';
-import { useGetAllTopics } from '@clvtube/common/hooks/useTopics';
+
 import { useGetAllVideos } from '@clvtube/common/hooks/useVideos';
 import { updateVideosData } from '../slice';
 import { useNavigation } from '@react-navigation/native';
-import { VIDEO } from '../../../common/constants/route.constants';
+
 import VideoItem from '../../../common/components/video-item/index';
+import { useGetAllTopics } from '@clvtube/level-topic/hooks/useTopic';
 
 const ListVideo = () => {
   const dispatch = useAppDispatch();

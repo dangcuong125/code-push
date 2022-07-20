@@ -19,7 +19,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { envData } from '@clvtube/common/constants/envData';
 import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath';
 import {
-  CREATE_INFO,
+  CREATE_ACCOUNT,
   INPUT_OTP,
   OPENDASHBOARD,
 } from '@clvtube/common/constants/route.constants';
@@ -106,10 +106,10 @@ const Auth = ({ navigation }: AuthProps) => {
           mutate(token.token, {
             onSuccess: data => {
               if (data?.status === 201) {
-                navigation.navigate(OPENDASHBOARD);
+                navigation.navigate(OPENDASHBOARD, {});
               }
             },
-            onError: () => navigation.navigate(CREATE_INFO),
+            onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
           });
         });
       return idGoogle;
@@ -158,7 +158,7 @@ const Auth = ({ navigation }: AuthProps) => {
           ref={inputRef}
           height={'47px'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
+          borderColor={'neural.2'}
           borderRadius={'8px'}
           placeholder={focusInput ? '' : 'Nhập số điện thoại'}
           placeholderTextColor={'#999999'}
@@ -175,12 +175,12 @@ const Auth = ({ navigation }: AuthProps) => {
             textAlign: 'center',
           }}
           _focus={{
-            backgroundColor: 'primary.400',
-            borderColor: 'primary.200',
+            backgroundColor: 'primary.14',
+            borderColor: 'primary.21',
           }}
         />
         <Button
-          bgColor={'primary.200'}
+          bgColor={'primary.21'}
           borderRadius={'8px'}
           height={'48px'}
           _text={{
@@ -218,7 +218,7 @@ const Auth = ({ navigation }: AuthProps) => {
           height={'48px'}
           backgroundColor={'transparent'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
+          borderColor={'neural.2'}
           borderRadius={'8px'}
           onPress={handleLoginWithGoogle}>
           <HStack
@@ -238,7 +238,7 @@ const Auth = ({ navigation }: AuthProps) => {
               fontStyle={'normal'}
               fontSize={'14px'}
               fontWeight={400}
-              color={'neutral.800'}>
+              color={'neural.10'}>
               Tiếp tục với Google
             </Text>
           </HStack>
@@ -249,7 +249,7 @@ const Auth = ({ navigation }: AuthProps) => {
           height={'48px'}
           backgroundColor={'transparent'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
+          borderColor={'neural.2'}
           borderRadius={'8px'}>
           <HStack space={3} justifyContent={'center'} alignItems={'center'}>
             <Image
@@ -264,7 +264,7 @@ const Auth = ({ navigation }: AuthProps) => {
               fontStyle={'normal'}
               fontSize={'14px'}
               fontWeight={400}
-              color={'neutral.800'}>
+              color={'neural.10'}>
               Tiếp tục với Facebook
             </Text>
           </HStack>
@@ -276,7 +276,7 @@ const Auth = ({ navigation }: AuthProps) => {
             height={'48px'}
             backgroundColor={'transparent'}
             borderWidth={'1px'}
-            borderColor={'neutral.50'}
+            borderColor={'neural.2'}
             borderRadius={'8px'}
             onPress={handleLoginWithApple}>
             <HStack space={3} alignItems={'center'}>
@@ -292,7 +292,7 @@ const Auth = ({ navigation }: AuthProps) => {
                 fontStyle={'normal'}
                 fontSize={'14px'}
                 fontWeight={400}
-                color={'neutral.800'}>
+                color={'neural.10'}>
                 Tiếp tục với Apple
               </Text>
             </HStack>

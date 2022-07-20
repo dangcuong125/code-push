@@ -4,7 +4,7 @@ import { reducer as videoDetails } from '@clvtube/z-video-details/reducer/videoD
 import { reducer as podcastList } from '@clvtube/home/podcast/reducer/podcastList';
 import { reducer as homePage } from '@clvtube/home/index/redux/homePage';
 import { reducer as authReducer } from '@clvtube/auth/slice';
-import { reducer as topicReducer } from '@clvtube/chooseTopic/slice';
+import { reducer as topicReducer } from '@clvtube/level-topic/slice';
 import { reducer as videoList } from '@clvtube/home/video/reducer/videoList';
 import { reducer as videoReducer } from '@clvtube/home/video/slice';
 import { reducer as videoItemReducer } from '@clvtube/video-detail/playingVideo/slice';
