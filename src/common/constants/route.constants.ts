@@ -4,15 +4,15 @@ export const SPLASH_LOADING = 'SplashLoading';
 // 🎉 Route rule Intro
 export const INTRO = 'Intro';
 
-// Route rule Auth
+// 🎉 Route rule Auth
 export const AUTH = 'Auth';
 export const OPENDASHBOARD = 'OpenDashboard';
 export const INPUT_OTP = 'InputOTP';
-export const CREATE_INFO = 'CreateInfo';
+export const CREATE_ACCOUNT = 'CreateAccount';
 export const REGISTER_SUCCESS = 'RegisterSuccess';
 
 // 🎉 Route rule Select Level-Topic
-export const TOPIC = 'Topic';
+export const LEVEL_TOPIC = 'LevelTopic';
 
 // 🎉 Route rule TabBottom
 export const TAB_BOTTOM = 'TabBottom';
@@ -31,8 +31,11 @@ export const VIDEO_ROUTE = {
   POPUP: 'Popup',
 };
 
-export const VIDEO_LIST = 'VideoList';
-export const VIDEO_PLAYING = 'videoPlaying';
+// 🎉 Route rule AccountNavigator
+export const ACCOUNT_ROUTE = {
+  INDEX: 'Index',
+  EDIT_ACCOUNT: 'EditAccount',
+};
 
 // Route rule Home
 export const HOME = 'Home';

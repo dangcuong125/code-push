@@ -5,8 +5,9 @@ import { Dimensions, Image } from 'react-native';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import { useNavigation } from '@react-navigation/native';
-import { TOPIC } from '@clvtube/common/constants/route.constants';
+
 // import auth from '@react-native-firebase/auth'
+import { LEVEL_TOPIC } from '../../common/constants/route.constants';
 
 const { width } = Dimensions.get('screen');
 
@@ -64,7 +65,7 @@ const RegisterSuccess = () => {
           fontStyle: 'normal',
           color: '#FDFDFD',
         }}
-        onPress={() => navigator.navigate(TOPIC, {})}>
+        onPress={() => navigator.navigate(LEVEL_TOPIC, {})}>
         Bắt đầu ngay
       </Button>
     </VStack>

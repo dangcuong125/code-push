@@ -5,17 +5,19 @@ import { FlatList, TouchableOpacity } from 'react-native';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
+import ButtonTopic from '@clvtube/common/components/buttonTopic';
 import {
   updateDataTopic,
   updateKeyPickingTopic,
-} from '@clvtube/chooseTopic/slice';
-import ButtonTopic from '@clvtube/common/components/buttonTopic';
-import { useGetAllTopics } from '@clvtube/common/hooks/useTopics';
+} from '@clvtube/level-topic/slice';
+
 import { useGetAllVideos } from '@clvtube/common/hooks/useVideos';
-import { updateVideosData } from '../slice';
 import { useNavigation } from '@react-navigation/native';
-import { VIDEO } from '../../../common/constants/route.constants';
+import { updateVideosData } from '../slice';
+
+import { useGetAllTopics } from '@clvtube/level-topic/hooks/useTopic';
 import VideoItem from '../../../common/components/video-item/index';
+import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
 
 const ListVideo = () => {
   const dispatch = useAppDispatch();
@@ -63,7 +65,7 @@ const ListVideo = () => {
           Danh sách video
         </Heading>
         <TouchableOpacity
-          onPress={() => navigator.navigate(VIDEO.VIDEO_LIST, {})}>
+          onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}>
           <Text
             fontStyle={'normal'}
             fontSize={'12px'}

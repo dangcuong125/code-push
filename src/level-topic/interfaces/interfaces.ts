@@ -13,6 +13,7 @@ export interface IDataLevelOrTopic {
   slug: string;
   description: string;
   enabled: number;
+  isSelected: boolean;
   translates: ITranslates[];
 }
 

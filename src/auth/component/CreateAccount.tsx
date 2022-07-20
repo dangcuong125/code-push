@@ -1,23 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  HStack,
-  Heading,
-  Icon,
-  Input,
-  VStack,
-} from 'native-base';
+import { Box, Button, Heading, Icon, Input, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { imageSocial } from '@clvtube/common/constants/imagePath';
-import { Alert, Dimensions, Image } from 'react-native';
+import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuthGoogle } from '../slice';
@@ -25,18 +13,15 @@ import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
 import { CreateInfoProps } from '../../common/navigators/RootNavigator';
 
-const { width, height } = Dimensions.get('window');
-
-const CreateInfo = ({ navigation }: CreateInfoProps) => {
+const CreateAccount = ({ navigation }: CreateInfoProps) => {
   const authState = useAppSelector(state => state.authReducer);
-  const { email, phone, name, address, firIdToken } = authState;
+  const { phone, email, fullname, firIdToken } = authState;
   console.log({ authState });
 
   const [account, setAccount] = useState({
-    email: email || '',
     phone: phone || '',
-    name: name || '',
-    address: address || '',
+    email: email || '',
+    name: fullname || '',
     firIdToken,
   });
 
@@ -44,36 +29,31 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleSubmitToRegister = () => {
-    if (account.phone === '') {
+  const handleSubmitToRegister = async () => {
+    if (!account.phone) {
       Alert.alert('Bạn vui lòng nhập số điện thoại để đăng ký 📲');
       return;
     }
-    if (account.address === '') {
-      Alert.alert('Bạn vui lòng nhập địa chỉ để đăng ký 🏠');
-      return;
-    }
-    dispatch(updateAccountWithAuthGoogle(account));
     mutate(
       {
-        email: authState.email,
-        phone: authState.phone,
-        address: authState.address,
-        firIdToken: authState.firIdToken,
+        email: account.email,
+        phone: account.phone,
+        fullname: account.name,
+        firIdToken: account.firIdToken,
       },
       {
         onSuccess: data => {
           console.log({ taodzo: data?.data });
-          navigation.navigate(REGISTER_SUCCESS);
+          dispatch(updateAccountWithAuthGoogle(account));
+          navigation.navigate(REGISTER_SUCCESS, {});
         },
         onError: () => {
           setAccount({
             ...account,
             phone: '',
-            address: '',
           });
           dispatch(updateAccountWithAuthGoogle(account));
-          Alert.alert('Rất tiếc, bạn chưa đăng ký thành công tài khoản!');
+          Alert.alert('Rất tiếc, bạn chưa đăng ký thành công tài khoản! 😒');
         },
       },
     );
@@ -100,7 +80,7 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         <Input
           onChangeText={text => {
             setAccount({ ...account, phone: text });
-            // dispatch(updateAccountWithAuthGoogle({ phone: text }))
+            // dispatch(updateAccountWithAuthGoogle({ phone: text }));
           }}
           type="text"
           value={phone}
@@ -109,36 +89,36 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
           height={'48px'}
           borderRadius={'8px'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
+          borderColor={'neural.2'}
           placeholder="Số điện thoại"
-          placeholderTextColor={'neutral.300'}
+          placeholderTextColor={'neural.5'}
+          selectionColor={'neural.10'}
           InputLeftElement={
             <Icon
               as={<Feather name="phone" />}
-              size={25}
+              size={5}
               ml={2}
-              color={'neutral.900'}
+              color={'neural.8'}
             />
           }
           _input={{
             fontStyle: 'normal',
             fontSize: '14px',
             fontWeight: 400,
-            color: 'neutral.800',
+            color: 'neural.10',
           }}
           _focus={{
-            backgroundColor: 'primary.400',
-            borderColor: 'primary.100',
-            color: 'neutral.800',
+            backgroundColor: 'primary.14',
+            borderColor: 'primary.21',
           }}
           _disabled={{
-            backgroundColor: '#3D9BE0',
+            borderColor: 'neural.10',
           }}
         />
         {/* Label email */}
         <Input
           onChangeText={text => {
-            setAccount({ ...account, phone: text });
+            setAccount({ ...account, email: text });
             // dispatch(updateAccountWithAuthGoogle({ email: text }))
           }}
           type="text"
@@ -148,23 +128,24 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
           autoCapitalize="none"
           InputLeftElement={
             <Icon
-              as={<MaterialCommunityIcons name="email" />}
-              size={25}
+              as={<Ionicons name="ios-mail-unread-outline" />}
+              size={5}
               ml={2}
-              color={'neutral.900'}
+              color={'neural.8'}
             />
           }
           height={'48px'}
           borderRadius={'8px'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
+          borderColor={'neural.2'}
           placeholder="Email"
-          placeholderTextColor={'neutral.300'}
+          placeholderTextColor={'neural.5'}
+          selectionColor={'neural.10'}
           _input={{
             fontStyle: 'normal',
             fontSize: '14px',
             fontWeight: 400,
-            color: 'neutral.800',
+            color: 'neural.10',
           }}
           _focus={{
             backgroundColor: 'primary.400',
@@ -172,39 +153,40 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             color: 'neutral.800',
           }}
           _disabled={{
-            backgroundColor: '#3D9BE0',
+            borderColor: 'neural.10',
           }}
         />
         {/* Label name */}
         <Input
           onChangeText={
-            text => setAccount({ ...account, email: text })
+            text => setAccount({ ...account, name: text })
             // dispatch(updateAccountWithAuthGoogle({ name: text }))
           }
           type="text"
           value={account.name}
           name="name"
-          isDisabled={Boolean(name)}
+          // isDisabled={Boolean(name)}
           autoCapitalize="none"
           InputLeftElement={
             <Icon
-              as={<Ionicons name="text" />}
-              size={25}
+              as={<MaterialIcons name="drive-file-rename-outline" />}
+              size={5}
               ml={2}
-              color={'neutral.900'}
+              color={'neural.8'}
             />
           }
           height={'48px'}
           borderRadius={'8px'}
           borderWidth={'1px'}
-          borderColor={'neutral.50'}
-          placeholder="Họ tên"
-          placeholderTextColor={'neutral.300'}
+          borderColor={'neural.2'}
+          placeholder="Họ và tên"
+          placeholderTextColor={'neural.5'}
+          selectionColor={'neural.10'}
           _input={{
             fontStyle: 'normal',
             fontSize: '14px',
             fontWeight: 400,
-            color: 'neutral.800',
+            color: 'neural.10',
           }}
           _focus={{
             backgroundColor: 'primary.400',
@@ -212,56 +194,16 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             color: 'neutral.800',
           }}
           _disabled={{
-            backgroundColor: '#3D9BE0',
-          }}
-        />
-        {/* Label address */}
-        <Input
-          onChangeText={
-            text => setAccount({ ...account, address: text })
-            // dispatch(updateAccountWithAuthGoogle({ address: text }))
-          }
-          type="text"
-          value={address}
-          name="name"
-          isDisabled={Boolean(address)}
-          autoCapitalize="none"
-          InputLeftElement={
-            <Icon
-              as={<Entypo name="address" />}
-              size={25}
-              ml={2}
-              color={'neutral.900'}
-            />
-          }
-          height={'48px'}
-          borderRadius={'8px'}
-          borderWidth={'1px'}
-          borderColor={'neutral.50'}
-          placeholder="Địa chỉ"
-          placeholderTextColor={'neutral.300'}
-          _input={{
-            fontStyle: 'normal',
-            fontSize: '14px',
-            fontWeight: 400,
-            color: 'neutral.800',
-          }}
-          _focus={{
-            backgroundColor: 'primary.400',
-            borderColor: 'primary.100',
-            color: 'neutral.800',
-          }}
-          _disabled={{
-            backgroundColor: '#3D9BE0',
+            borderColor: 'neural.10',
           }}
         />
       </VStack>
       <Button
         onPress={handleSubmitToRegister}
-        bgColor={'primary.200'}
+        bgColor={'primary.21'}
         borderRadius={'8px'}
         height={'48px'}
-        mt={10}
+        mt={100}
         _text={{
           fontSize: '14px',
           fontWeight: 400,
@@ -270,7 +212,8 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
         }}>
         Đăng ký
       </Button>
-      <Box mt={12}>
+
+      {/* <Box mt={12}>
         <Divider height={'1px'} backgroundColor={'neutral.900'} />
         <Center>
           <Box
@@ -287,8 +230,9 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             hoặc tiếp tục với
           </Box>
         </Center>
-      </Box>
-      <HStack mt={6} justifyContent={'center'} space={5}>
+      </Box> */}
+
+      {/* <HStack mt={6} justifyContent={'center'} space={5}>
         <Box
           w={'44px'}
           h={'44px'}
@@ -346,9 +290,9 @@ const CreateInfo = ({ navigation }: CreateInfoProps) => {
             }}
           />
         </Box>
-      </HStack>
+      </HStack> */}
     </VStack>
   );
 };
 
-export default CreateInfo;
+export default CreateAccount;

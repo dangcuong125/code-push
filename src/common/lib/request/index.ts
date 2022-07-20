@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toQueryString } from '../common.lib';
-import { BASE_URL } from '@clvtube/common/constants/urlApi';
+import { BASE_URL } from '@clvtube/common/constants/urlApi.constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const execute = axios.create({

@@ -1,39 +1,35 @@
 // 🚀 import Component from package
-import React from 'react';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import React from 'react';
 
 // 🚀 import Components from Pages
-import Intro from '@clvtube/intro/component/Intro';
 import Auth from '@clvtube/auth';
+import CreateAccount from '@clvtube/auth/component/CreateAccount';
 import InputOTP from '@clvtube/auth/component/InputOTP';
-import CreateInfo from '@clvtube/auth/component/CreateInfo';
-import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
-import Topic from '@clvtube/chooseTopic';
-import TabBottom from './TabBottom';
+import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
+import Intro from '@clvtube/intro/component/Intro';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
+import LevelTopic from '../../level-topic/index';
+import TabBottom from './TabBottom';
 
-import SearchPage from '../../search-page';
-import VideoDetailPage from '@clvtube/z-video-details/components/index';
 import SplashLoading from '@clvtube/splash-loading';
 
 // 🚀 import Constants from file Constants
 import {
   AUTH,
-  CREATE_INFO,
+  CREATE_ACCOUNT,
   INPUT_OTP,
   INTRO,
+  LEVEL_TOPIC,
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
-  SEARCH_PAGE,
   SPLASH_LOADING,
   TAB_BOTTOM,
-  TOPIC,
-  VIDEO_DETAILS_PAGE,
 } from '../constants/route.constants';
 
 export type RootStackParamList = {
@@ -42,9 +38,9 @@ export type RootStackParamList = {
   Auth: { navigation: any };
   OpenDashboard: {};
   InputOTP: { navigation: any; confirmation: any };
-  CreateInfo: { navigation: any };
+  CreateAccount: { navigation: any };
   RegisterSuccess: {};
-  Topic: {};
+  LevelTopic: {};
   TabBottom: {};
 
   Home: {};
@@ -98,8 +94,8 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={CREATE_INFO}
-        component={CreateInfo}
+        name={CREATE_ACCOUNT}
+        component={CreateAccount}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -120,27 +116,15 @@ const RootNavigator = () => {
 
       {/* ✅ Route Select Level-Topic */}
       <Stack.Screen
-        name={TOPIC}
-        component={Topic}
+        name={LEVEL_TOPIC}
+        component={LevelTopic}
         options={{ headerShown: false }}
       />
 
-      {/* ✅ Route Home-Navigator */}
+      {/* ✅ Route Tab_Bottom */}
       <Stack.Screen
         name={TAB_BOTTOM}
         component={TabBottom}
-        options={{ headerShown: false }}
-      />
-
-      {/* Chưa có Final Design */}
-      <Stack.Screen
-        name={SEARCH_PAGE}
-        component={SearchPage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={VIDEO_DETAILS_PAGE}
-        component={VideoDetailPage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

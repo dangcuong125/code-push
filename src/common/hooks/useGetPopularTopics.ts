@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { execute } from '../lib/request/index';
-import { GET_POPULAR_TOPICS } from '../constants/urlApi';
+import { GET_POPULAR_TOPICS } from '../constants/urlApi.constants';
 import { QUERY_KEYS } from '../constants/querykeys.constants';
 
 export const useGetPopularTopics = (

@@ -1,4 +1,4 @@
-import { GET_VIDEO_LIST } from '../constants/urlApi';
+import { GET_VIDEO_LIST } from '../constants/urlApi.constants';
 import { execute } from '../lib/request/index';
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from '../constants/querykeys.constants';

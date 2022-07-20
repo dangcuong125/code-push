@@ -1,13 +1,17 @@
-import { Box, HStack, Heading, Modal, ScrollView, VStack } from 'native-base';
+import {
+  Box,
+  Button,
+  Heading,
+  Modal,
+  ScrollView,
+  Text,
+  VStack,
+} from 'native-base';
 import React, { Fragment } from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-type Ipops = {
-  showModal: boolean;
-  setShowModal: Function;
-};
-
-const Popup = ({ showModal, setShowModal }: Ipops) => {
+const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
   return (
     <Fragment>
       <Modal
@@ -15,29 +19,64 @@ const Popup = ({ showModal, setShowModal }: Ipops) => {
         onClose={() => setShowModal(false)}
         bgColor={'rgba(4, 4, 15, 0.4)'}>
         <Box
-          width={'100%'}
-          height={'55%'}
-          marginBottom={0}
-          marginTop={'auto'}
+          width={'84%'}
           bgColor={'neural.1'}
-          borderTopRadius={'25px'}>
+          shadow={'0px 0px 4px rgba(171, 190, 209, 0.4)'}
+          borderRadius={'12px'}>
           <ScrollView>
-            <VStack safeAreaX={4} safeAreaY={5} space={4}>
-              <HStack justifyContent={'space-between'}>
-                <Heading
-                  fontStyle={'normal'}
-                  fontSize={'18px'}
-                  fontWeight={500}
-                  lineHeight={'25px'}
-                  color={'neural.10'}>
-                  problem
-                </Heading>
-                <FontAwesome
-                  name="plus-square-o"
-                  size={22}
-                  color={'neural.10'}
-                />
-              </HStack>
+            <VStack alignItems={'center'} safeAreaY={5} space={4}>
+              <Ionicons
+                name="checkmark-done-circle-outline"
+                size={60}
+                color="green"
+              />
+              <Heading
+                fontStyle={'normal'}
+                fontSize={'18px'}
+                fontWeight={500}
+                lineHeight={'25px'}
+                color={'neural.10'}>
+                Thành công
+              </Heading>
+              <Text
+                fontStyle={'normal'}
+                fontSize={'14px'}
+                fontWeight={400}
+                lineHeight={'19px'}
+                color={'neural.10'}
+                textAlign={'center'}
+                paddingX={6}>
+                Bạn đã đổi mật khẩu thành công và bạn hãy tận hưởng tính năng
+              </Text>
+              <Button
+                colorScheme="success"
+                width={'65%'}
+                borderRadius={'8px'}
+                _text={{
+                  fontStyle: 'normal',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  lineHeight: '30px',
+                  color: '#FFFFFF',
+                }}
+                onPress={() => {
+                  setShowModal(false);
+                  onPress();
+                }}>
+                Tiếp tục
+              </Button>
+              {isSuccess && (
+                <TouchableOpacity>
+                  <Text
+                    fontStyle={'normal'}
+                    fontSize={'14px'}
+                    fontWeight={600}
+                    lineHeight={'30px'}
+                    color={'primary.21'}>
+                    Thoát
+                  </Text>
+                </TouchableOpacity>
+              )}
             </VStack>
           </ScrollView>
         </Box>

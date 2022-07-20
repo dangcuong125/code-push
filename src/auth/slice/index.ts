@@ -4,8 +4,7 @@ import { IUserAccount } from '../interfaces/index';
 const initialState: IUserAccount = {
   phone: '',
   email: '',
-  name: '',
-  address: '',
+  fullname: '',
   firIdToken: '',
 };
 
@@ -13,11 +12,10 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    updateAccountWithAuthGoogle: (state, action) => {
+    updateAccountWithAuthGoogle: (state: IUserAccount, action: any) => {
       state.phone = action.payload.phone;
       state.email = action.payload.email;
-      state.name = action.payload.name;
-      state.address = action.payload.address;
+      state.fullname = action.payload.name;
       state.firIdToken = action.payload.firIdToken;
     },
   },
