@@ -4,13 +4,13 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { VIDEO } from '../../../common/constants/route.constants';
+import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
 
 const VideoItem = ({ item }) => {
   const navigator = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigator.navigate(VIDEO.VIDEO_PLAYING, { id: item.id })}>
+      onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })}>
       <HStack space={2} marginBottom={4}>
         <Image
           source={{ uri: item?.thumbnails.medium.url }}

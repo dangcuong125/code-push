@@ -11,9 +11,10 @@ import CreateAccount from '@clvtube/auth/component/CreateAccount';
 import InputOTP from '@clvtube/auth/component/InputOTP';
 import OpenDashboard from '@clvtube/auth/component/OpenDashboard';
 import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
+import LevelTopic from '@clvtube/level-topic';
 import Intro from '@clvtube/intro/component/Intro';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
-import LevelTopic from '../../level-topic/index';
+
 import TabBottom from './TabBottom';
 
 import SplashLoading from '@clvtube/splash-loading';
@@ -38,7 +39,7 @@ export type RootStackParamList = {
   Auth: { navigation: any };
   OpenDashboard: {};
   InputOTP: { navigation: any; confirmation: any };
-  CreateAccount: { navigation: any };
+  CreateAccount: {};
   RegisterSuccess: {};
   LevelTopic: {};
   TabBottom: {};
@@ -54,10 +55,6 @@ export type RootStackParamList = {
 
 export type IntroProps = NativeStackScreenProps<RootStackParamList, 'Intro'>;
 export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
-export type CreateInfoProps = NativeStackScreenProps<
-  RootStackParamList,
-  'CreateInfo'
->;
 export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'
