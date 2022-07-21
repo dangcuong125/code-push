@@ -14,7 +14,7 @@ import { useGetPopularTopics } from '@clvtube/common/hooks/useGetPopularTopics';
 
 const PopularTopicsPodcast = ({ navigation }: PodcastListProps) => {
   const dispatch = useAppDispatch();
-  const { data } = useGetPopularTopics('vi', 1, 4);
+  const { data } = useGetPopularTopics('en', 1, 4);
   const popularTopics = data?.data;
   return (
     <Box marginTop="24px" paddingBottom={'15px'}>

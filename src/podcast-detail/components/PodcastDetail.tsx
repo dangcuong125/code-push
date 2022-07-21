@@ -4,7 +4,10 @@
 import { Box, Image, Skeleton, Text } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
-import TrackPlayer, { useProgress } from 'react-native-track-player';
+import TrackPlayer, {
+  Capability,
+  useProgress,
+} from 'react-native-track-player';
 import { useGetPodcastDetail } from '../hooks/useGetPodcastDetail';
 import { IPodcastDetail, ITranscriptItem } from '../interface';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
@@ -75,7 +78,15 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   };
 
   const setUpPlayer = async () => {
-    await TrackPlayer.setupPlayer();
+    await TrackPlayer.updateOptions({
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+        Capability.Stop,
+      ],
+    });
     await TrackPlayer.add([podcastTrack]);
   };
   // const paragraphInfo = useAppSelector(state => state?.podcastDetail?.paragraphInfo);
@@ -105,8 +116,9 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     );
   };
   const resetAudio = async () => {
+    await TrackPlayer.setupPlayer();
     await TrackPlayer.reset();
-    await TrackPlayer.stop();
+    // await TrackPlayer.stop();
   };
   // if (goBack) destroyAudio();
   const startTimeOfParagraphGreaterThanPosition =
@@ -148,9 +160,12 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   }, [position1]);
   useEffect(() => {
     if (podcastDetail) setUpPlayer();
-  });
+  }, [podcastTrack]);
   useEffect(() => {
     resetAudio();
+    return () => {
+      TrackPlayer.destroy();
+    };
   }, []);
   return (
     <>
