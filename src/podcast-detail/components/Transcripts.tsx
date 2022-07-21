@@ -57,8 +57,8 @@ export const Transcripts = React.memo(function Transcripts({
           fontWeight={400}>
           {item?.content?.map((word: ITranscriptContent, index: number) => {
             const displayHighlightText =
-              Number(word.start_time) < position + 0.17 &&
-              Number(word.start_time) > position - 0.17;
+              Number(word.start_time) < position + 0.15 &&
+              Number(word.start_time) > position - 0.15;
             const fadeAnimation = useRef(new Animated.Value(0)).current;
             const backgroundColor = fadeAnimation?.interpolate({
               inputRange: [0, 1],

@@ -64,10 +64,10 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     state => state.podcastDetail.heightOfParagraph,
   );
 
-  const { data, isLoading } = useGetPodcastDetail(id);
+  const { data, isLoading } = useGetPodcastDetail(12);
   const podcastDetail = data?.data;
 
-  const position = useProgress(300).position;
+  const position = useProgress(800).position;
   const position1 = useProgress().position;
 
   const podcastTrack = {
@@ -110,7 +110,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
       <Transcripts
         array={podcastDetail?.audioTranscripts}
         item={item}
-        position={position}
+        position={position1}
         index={index}
       />
     );
@@ -127,7 +127,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     );
   const autoScrollWhenMoveToNewParagraph =
     Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) -
-      Math.ceil(position1) <
+      Math.ceil(position) <
     0.99;
   // if (isLoading) {
   //   return <Skeleton />;
@@ -143,7 +143,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     if (
       autoScrollWhenMoveToNewParagraph &&
       Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) ===
-        Math.ceil(position1)
+        Math.ceil(position)
     ) {
       dispatch(
         getPositionAndStartTime({
