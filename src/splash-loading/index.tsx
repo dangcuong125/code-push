@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Alert, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -18,8 +18,6 @@ const SplashLoading = () => {
     try {
       const valueToken = await AsyncStorage.getItem('token_App');
       if (valueToken) {
-        console.log(valueToken);
-        Alert.alert(valueToken);
         navigator.navigate(TAB_BOTTOM, {});
       } else {
         navigator.navigate(AUTH, {});

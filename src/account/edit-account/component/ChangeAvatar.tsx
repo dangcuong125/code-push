@@ -7,7 +7,11 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { presignUrl } from '@clvtube/common/lib/request/files.lib';
 
 const ChangeAvatar = ({
-  showModal, setShowModal, setAvatar, infoUser, setInfoUser,
+  showModal,
+  setShowModal,
+  setAvatar,
+  infoUser,
+  setInfoUser,
 }) => {
   const chooseImageFromLibrary = async () => {
     const image = await ImagePicker.openPicker({
@@ -69,9 +73,7 @@ const ChangeAvatar = ({
                   <MaterialIcons name="arrow-forward-ios" size={20} />
                 </HStack>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={chooseImageFromLibrary}
-              >
+              <TouchableOpacity onPress={chooseImageFromLibrary}>
                 <HStack safeAreaY={4} justifyContent={'space-between'}>
                   <Text
                     fontStyle={'normal'}

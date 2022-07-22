@@ -64,7 +64,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={AUTH}>
+    <Stack.Navigator initialRouteName={SPLASH_LOADING}>
       {/* ✅ Route Splash */}
       <Stack.Screen
         name={SPLASH_LOADING}

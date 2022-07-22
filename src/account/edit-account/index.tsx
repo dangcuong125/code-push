@@ -20,7 +20,9 @@ import { useGetInfoUser, usePostInfoUser } from '../hooks/useAccount';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
 const EditAccount = () => {
-  const [avatar, setAvatar] = useState('https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp');
+  const [avatar, setAvatar] = useState(
+    'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
+  );
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
   const [infoUser, setInfoUser] = useState({
@@ -261,7 +263,13 @@ const EditAccount = () => {
       </VStack>
 
       {showModal && (
-        <ChangeAvatar showModal={showModal} setShowModal={setShowModal} setAvatar={setAvatar} infoUser={infoUser} setInfoUser={setInfoUser} />
+        <ChangeAvatar
+          showModal={showModal}
+          setShowModal={setShowModal}
+          setAvatar={setAvatar}
+          infoUser={infoUser}
+          setInfoUser={setInfoUser}
+        />
       )}
 
       {showModalNotify && (
