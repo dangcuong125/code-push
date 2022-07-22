@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
@@ -17,16 +17,23 @@ import SettingNotify from '@clvtube/account/component/SettingNotify';
 import DarkMode from '@clvtube/account/component/DarkMode';
 import Language from '@clvtube/account/component/Language';
 import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
+import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
 
 const Account = () => {
   const [showModalSettingNotify, setShowModalSettingNotify] =
     useState<boolean>(false);
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
   const [showModalDarkMode, setShowModalDarkMode] = useState<boolean>(false);
+  const [levelUser, setLevelUser] = useState('');
+
+  const authState = useAppSelector(state => state.authReducer);
+  const { data: DataInfoUser } = useGetInfoUser();
 
   const navigator = useNavigation();
 
-  const authState = useAppSelector(state => state.authReducer);
+  useEffect(() => {
+    setLevelUser(DataInfoUser?.data.levelKey);
+  }, [DataInfoUser?.data]);
 
   return (
     <ScrollView bgColor={'white'}>
@@ -35,7 +42,7 @@ const Account = () => {
         <HStack space={4} alignItems={'center'} my={8}>
           <Image
             source={{
-              uri: 'https://imgs.search.brave.com/4jk8lerwUosOsdsHE9MckoE6HWgVaJtrPg7UfjJMr_M/rs:fit:750:1000:1/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS4xMDk3/MjI5ODAyLjI2NzUv/YmcsZjhmOGY4LWZs/YXQsNzUweCwwNzUs/Zi1wYWQsNzUweDEw/MDAsZjhmOGY4Lmpw/Zw',
+              uri: 'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
             }}
             style={{
               width: 100,
@@ -50,7 +57,7 @@ const Account = () => {
               fontSize={'16px'}
               fontWeight={600}
               color={'#000000'}>
-              {authState.name}
+              {authState.fullname}
             </Heading>
             <Text
               fontStyle={'normal'}
@@ -73,7 +80,7 @@ const Account = () => {
                 fontSize={'12px'}
                 fontWeight={400}
                 color={'#4D4D4D'}>
-                Trình độ: Trung cấp
+                Trình độ: {levelUser}
               </Text>
             </HStack>
           </VStack>

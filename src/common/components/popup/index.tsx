@@ -11,7 +11,14 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
+const Popup = ({
+  showModal,
+  setShowModal,
+  isSuccess,
+  onPress,
+  title,
+  description,
+}) => {
   return (
     <Fragment>
       <Modal
@@ -36,7 +43,7 @@ const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
                 fontWeight={500}
                 lineHeight={'25px'}
                 color={'neural.10'}>
-                Thành công
+                {title}
               </Heading>
               <Text
                 fontStyle={'normal'}
@@ -46,7 +53,7 @@ const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
                 color={'neural.10'}
                 textAlign={'center'}
                 paddingX={6}>
-                Bạn đã đổi mật khẩu thành công và bạn hãy tận hưởng tính năng
+                {description}
               </Text>
               <Button
                 colorScheme="success"
@@ -63,7 +70,7 @@ const Popup = ({ isSuccess, showModal, setShowModal, onPress }) => {
                   setShowModal(false);
                   onPress();
                 }}>
-                Tiếp tục
+                Xác nhận
               </Button>
               {isSuccess && (
                 <TouchableOpacity>

@@ -17,7 +17,6 @@ const SplashLoading = () => {
   const getData = async () => {
     try {
       const valueToken = await AsyncStorage.getItem('token_App');
-      console.log(valueToken);
       if (valueToken) {
         navigator.navigate(TAB_BOTTOM, {});
       } else {

@@ -10,7 +10,6 @@ export const LoginAuthAPI = async (data: any) => {
 };
 
 export const RegisterAuthAPI = async (data: any) => {
-  console.log('dataAPI', data);
   const res = await execute.post(REGISTER_POST, { ...data });
   return res;
 };

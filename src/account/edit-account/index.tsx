@@ -9,22 +9,79 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ChangeAvatar from './component/ChangeAvatar';
 import Popup from '@clvtube/common/components/popup';
 import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
+import { useGetInfoUser, usePostInfoUser } from '../hooks/useAccount';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
 const EditAccount = () => {
+  const [avatar, setAvatar] = useState(
+    'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
+  );
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
+  const [infoUser, setInfoUser] = useState({
+    avatarId: 0,
+    email: '',
+    phone: '',
+    fullname: '',
+  });
+
+  console.log({ infoUser });
+
+  const { isTypeAuthPhone } = useAppSelector(state => state.authReducer);
+  const { data: DataInfoUser } = useGetInfoUser();
+  const { mutate } = usePostInfoUser();
+
+  if (isTypeAuthPhone) {
+    Alert.alert('Ban Auth with Phone');
+  }
+  console.log({ user: DataInfoUser?.data.client });
+
+  useEffect(() => {
+    setInfoUser({
+      ...infoUser,
+      avatarId: 0,
+      email: DataInfoUser?.data.client.email,
+      phone: DataInfoUser?.data.client.phone,
+      fullname: DataInfoUser?.data.client.fullname,
+    });
+  }, [DataInfoUser?.data]);
 
   const navigator = useNavigation();
 
+  const handleSubmitInfoUser = () => {
+    if (!infoUser.email || !infoUser.phone || !infoUser.fullname) {
+      Alert.alert('Bạn vui lòng nhập đủ thông tin rồi lưu nhé! ⛔️');
+    }
+
+    // dispatch(updateAccountWithAuthGoogle({ fullname: 'taodzo' }));
+
+    mutate(
+      {
+        avatarId: Number(infoUser.avatarId),
+        email: infoUser.email,
+        phone: infoUser.phone,
+        fullname: infoUser.fullname,
+      },
+      {
+        onSuccess: () => {
+          setShowModalNotify(true);
+        },
+        onError: () => {
+          Alert.alert('Error ❌');
+        },
+      },
+    );
+  };
+
   const handleNavigate = () => {
-    navigator.navigate(ACCOUNT_ROUTE.INDEX);
+    navigator.navigate(ACCOUNT_ROUTE.INDEX, {});
   };
 
   return (
@@ -49,7 +106,7 @@ const EditAccount = () => {
         <Avatar
           bg="amber.500"
           source={{
-            uri: 'https://imgs.search.brave.com/sPPpVQcHjjA7hi9kQkQcaxub5zLmjd4QMvose6-svlM/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/OTE2d3E3TkMtcDZa/M3otdEZxQmdBSGFF/SyZwaWQ9QXBp',
+            uri: `${avatar}`,
           }}
           size="xl">
           NB
@@ -93,6 +150,9 @@ const EditAccount = () => {
           </FormControl.Label>
           <Input
             type="text"
+            name="fullname"
+            value={infoUser.fullname}
+            onChangeText={text => setInfoUser({ ...infoUser, fullname: text })}
             borderWidth={'1px'}
             borderColor={'neural.2'}
             borderRadius={'8px'}
@@ -125,6 +185,10 @@ const EditAccount = () => {
           </FormControl.Label>
           <Input
             type="text"
+            name="phone"
+            value={infoUser.phone}
+            isDisabled={isTypeAuthPhone}
+            onChangeText={text => setInfoUser({ ...infoUser, phone: text })}
             borderWidth={'1px'}
             borderColor={'neural.2'}
             borderRadius={'8px'}
@@ -157,6 +221,10 @@ const EditAccount = () => {
           </FormControl.Label>
           <Input
             type="text"
+            name="email"
+            value={infoUser.email}
+            isDisabled={!isTypeAuthPhone}
+            onChangeText={text => setInfoUser({ ...infoUser, email: text })}
             borderWidth={'1px'}
             borderColor={'neural.2'}
             borderRadius={'8px'}
@@ -188,16 +256,20 @@ const EditAccount = () => {
               fontStyle: 'normal',
               color: '#FDFDFD',
             }}
-            onPress={() => {
-              setShowModalNotify(true);
-            }}>
+            onPress={handleSubmitInfoUser}>
             Lưu
           </Button>
         </TouchableOpacity>
       </VStack>
 
       {showModal && (
-        <ChangeAvatar showModal={showModal} setShowModal={setShowModal} />
+        <ChangeAvatar
+          showModal={showModal}
+          setShowModal={setShowModal}
+          setAvatar={setAvatar}
+          infoUser={infoUser}
+          setInfoUser={setInfoUser}
+        />
       )}
 
       {showModalNotify && (
@@ -205,6 +277,8 @@ const EditAccount = () => {
           showModal={showModalNotify}
           setShowModal={setShowModalNotify}
           isSuccess={false}
+          title="Thành công"
+          description="Bạn đã cập nhật tài khoản thành công!"
           onPress={handleNavigate}
         />
       )}

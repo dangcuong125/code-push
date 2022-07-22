@@ -1,15 +1,15 @@
 import { PopularTopics } from '@clvtube/common/components/trendingTopic/index';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
-import { Box, Flex, Heading } from 'native-base';
-import React from 'react';
-import { IPopularTopics, PodcastListProps } from '../interfaces';
 import {
   PODCAST_LIST_WITH_TOPIC,
   TAB_BOTTOM,
 } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { receiveTopicKeySelected } from '../reducer/podcastList';
 import { useGetPopularTopics } from '@clvtube/common/hooks/useGetPopularTopics';
+import { Box, Flex, Heading } from 'native-base';
+import React from 'react';
+import { IPopularTopics, PodcastListProps } from '../interfaces';
+import { receiveTopicKeySelected } from '../reducer/podcastList';
 // import { useTranslation } from 'react-i18next';
 
 const PopularTopicsPodcast = ({ navigation }: PodcastListProps) => {
