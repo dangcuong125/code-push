@@ -22,7 +22,7 @@ const DiscountBanner = ({ item }: IDiscountBannerProps) => {
 };
 
 export const Welcome = () => {
-  const { name } = useAppSelector(state => state.authReducer);
+  const { fullname } = useAppSelector(state => state.authReducer);
 
   const renderItem = ({ item }: { item: IDiscountBanner }) => {
     return <DiscountBanner item={item} />;
@@ -35,7 +35,7 @@ export const Welcome = () => {
         fontSize={'24px'}
         fontWeight={600}
         color={'#181818'}>
-        Hi, {name}
+        Hi, {fullname}
       </Heading>
       <Text
         fontStyle={'normal'}

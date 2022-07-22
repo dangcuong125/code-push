@@ -6,6 +6,7 @@ const initialState: IUserAccount = {
   email: '',
   fullname: '',
   firIdToken: '',
+  isTypeAuthPhone: false,
 };
 
 const authSlice = createSlice({
@@ -15,8 +16,9 @@ const authSlice = createSlice({
     updateAccountWithAuthGoogle: (state: IUserAccount, action: any) => {
       state.phone = action.payload.phone;
       state.email = action.payload.email;
-      state.fullname = action.payload.name;
+      state.fullname = action.payload.fullname;
       state.firIdToken = action.payload.firIdToken;
+      state.isTypeAuthPhone = action.payload.isTypeAuthPhone;
     },
   },
 });

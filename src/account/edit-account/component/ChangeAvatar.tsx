@@ -3,8 +3,27 @@ import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import ImagePicker from 'react-native-image-crop-picker';
+import { presignUrl } from '@clvtube/common/lib/request/files.lib';
 
-const ChangeAvatar = ({ showModal, setShowModal }) => {
+const ChangeAvatar = ({
+  showModal, setShowModal, setAvatar, infoUser, setInfoUser,
+}) => {
+  const chooseImageFromLibrary = async () => {
+    const image = await ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+    });
+    if (image) {
+      const dataImage = await presignUrl(image);
+      console.log({ dataImage });
+      setInfoUser({ ...infoUser, avatarId: dataImage.id });
+      setAvatar(image.path);
+      setShowModal(false);
+    }
+  };
+
   return (
     <Fragment>
       <Modal
@@ -50,7 +69,9 @@ const ChangeAvatar = ({ showModal, setShowModal }) => {
                   <MaterialIcons name="arrow-forward-ios" size={20} />
                 </HStack>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={chooseImageFromLibrary}
+              >
                 <HStack safeAreaY={4} justifyContent={'space-between'}>
                   <Text
                     fontStyle={'normal'}

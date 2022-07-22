@@ -1,5 +1,5 @@
-import { GET_ALL_LEVELS } from '@clvtube/common/constants/urlApi.constants';
 import { execute } from '@clvtube/common/lib/request';
+import { GET_ALL_LEVELS } from '@clvtube/common/constants/urlApi.constants';
 
 // 🚀 Get All Levels
 export const getAllLevels = async (lang: string, page: number) => {

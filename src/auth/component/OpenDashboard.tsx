@@ -13,7 +13,7 @@ const { width } = Dimensions.get('screen');
 
 const OpenDashboard = () => {
   const navigator = useNavigation();
-  const { name } = useAppSelector(state => state.authReducer);
+  const { fullname } = useAppSelector(state => state.authReducer);
 
   // const getData = async () => {
   //   try {
@@ -51,7 +51,7 @@ const OpenDashboard = () => {
           fontWeight={600}
           color={'neutral.800'}
           lineHeight={'46px'}>
-          Chào buổi sáng, {name}
+          Chào buổi sáng, {fullname}
         </Heading>
         <Text
           textAlign={'center'}

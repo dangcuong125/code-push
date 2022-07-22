@@ -2,16 +2,29 @@ import SearchHeader from '@clvtube/common/components/searchHeader/index';
 import { ScrollView, VStack } from 'native-base';
 import React from 'react';
 
+import { SafeAreaView } from 'react-native';
+import { HomePageProps } from '../interfaces';
 import { PodcastList } from './PodcastList';
 import { Recently } from './Recently';
 import { ReviseNewWord } from './ReviseNewWord';
 import { Speak } from './Speak';
 import { VideoList } from './VideoList';
 import { Welcome } from './Welcome';
-import { HomePageProps } from '../interfaces';
-import { SafeAreaView } from 'react-native';
 
 const HomePage = ({ navigation, route }: HomePageProps) => {
+  // useEffect(() => {
+  //   const getTokenValue = async () => {
+  //     try {
+  //       const token = await AsyncStorage.getItem('token_app')
+  //       if (token) {
+  //         console.log(token);
+  //         Alert.alert(token);
+  //       }
+  //     } catch (error) {}
+  //   };
+  //   getTokenValue();
+  // }, []);
+
   return (
     <SafeAreaView style={{ backgroundColor: 'white' }}>
       <ScrollView showsVerticalScrollIndicator={false}>
