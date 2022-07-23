@@ -9,7 +9,7 @@ import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { userIsGoingBack } from '../reducer/podcastDetail';
 
 export const Header = ({ navigation }: PodcastDetailProps) => {
-  const [displaySliderAudio, setDisplaySliderAudio] = useState(false);
+  const [displaySliderAudio, setDisplaySliderAudio] = useState(true);
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
 
