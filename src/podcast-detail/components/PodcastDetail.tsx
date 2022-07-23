@@ -12,7 +12,11 @@ import { useGetPodcastDetail } from '../hooks/useGetPodcastDetail';
 import { IPodcastDetail, ITranscriptItem } from '../interface';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { getPosition, getPositionAndStartTime } from '../reducer/podcastDetail';
+import {
+  getDurations,
+  getPosition,
+  getPositionAndStartTime,
+} from '../reducer/podcastDetail';
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
 
@@ -56,7 +60,6 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   const dispatch = useAppDispatch();
   const ref = useRef<FlatList>(null);
   const [currentPosition, setCurrentPosition] = useState(0);
-  // const goBack = useAppSelector(state => state.podcastDetail.goBack);
 
   const { id } = useRoute().params;
 
@@ -67,6 +70,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
   const { data, isLoading } = useGetPodcastDetail(id);
   const podcastDetail = data?.data;
 
+  const duration = useProgress(300).duration;
   const position = useProgress(300).position;
   const position1 = useProgress().position;
 
@@ -99,6 +103,11 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
       return item;
     },
   );
+  const resetAudio = async () => {
+    await TrackPlayer.setupPlayer();
+    await TrackPlayer.reset();
+    // await TrackPlayer.stop();
+  };
   const renderItem = ({
     item,
     index,
@@ -115,12 +124,6 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
       />
     );
   };
-  const resetAudio = async () => {
-    await TrackPlayer.setupPlayer();
-    await TrackPlayer.reset();
-    // await TrackPlayer.stop();
-  };
-  // if (goBack) destroyAudio();
   const startTimeOfParagraphGreaterThanPosition =
     podcastDetail?.audioTranscripts?.find(
       (item: ITranscriptItem) => Number(item.startTime) > position,
@@ -129,9 +132,10 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) -
       Math.ceil(position1) <
     0.99;
-  // if (isLoading) {
-  //   return <Skeleton />;
-  // }
+
+  useEffect(() => {
+    dispatch(getDurations(duration));
+  }, [duration]);
 
   useEffect(() => {
     dispatch(getPosition(position1));
@@ -178,7 +182,6 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
           onScroll={e => {
             setCurrentPosition(e.nativeEvent.contentOffset.y);
           }}
-          // removeClippedSubviews={true}
           ListFooterComponent={FooterPodcast}
           ListHeaderComponent={<HeaderPodcast podcastDetail={podcastDetail} />}
           renderItem={renderItem}

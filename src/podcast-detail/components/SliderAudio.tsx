@@ -5,7 +5,7 @@ import { formatTimePlayer } from '@clvtube/common/lib/common.lib';
 import TrackPlayer, {
   State,
   usePlaybackState,
-  useProgress,
+  // useProgress,
 } from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,7 +15,8 @@ export const SliderAudio = ({
 }: {
   displaySliderAudio: boolean;
 }) => {
-  const { duration } = useProgress();
+  // const { duration } = useProgress(300);
+  const duration = useAppSelector(state => state.podcastDetail.duration);
   const position = useAppSelector(state => state.podcastDetail.position);
 
   const positionConverted = formatTimePlayer(position);
