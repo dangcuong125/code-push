@@ -8,7 +8,6 @@ export const getInfoUser = async () => {
 };
 
 export const postInfoUser = async (data: any) => {
-  console.log({ patch: data });
   const res = await execute.patch(POST_INFO_USER, { ...data });
   return res;
 };

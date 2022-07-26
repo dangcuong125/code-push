@@ -1,19 +1,15 @@
-import { HStack, Heading, Text, VStack } from 'native-base';
-import React, { useEffect } from 'react';
+import { Alert, Center, Heading, HStack, Text, VStack } from 'native-base';
+import React, { useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
 import ButtonTopic from '@clvtube/common/components/buttonTopic';
-import {
-  updateDataTopic,
-  updateKeyPickingTopic,
-} from '@clvtube/level-topic/slice';
 
 import { useGetAllVideos } from '@clvtube/common/hooks/useVideos';
 import { useNavigation } from '@react-navigation/native';
-import { updateVideosData } from '../slice';
+import { selectTopic, updateTopicsData, updateVideosData } from '../slice';
 
 import { useGetAllTopics } from '@clvtube/level-topic/hooks/useTopic';
 import VideoItem from '../../../common/components/video-item/index';
@@ -22,33 +18,36 @@ import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
 const ListVideo = () => {
   const dispatch = useAppDispatch();
   const navigator = useNavigation();
+  const [topicPicking, setTopicPicking] = useState([]);
 
-  const { topic, pickingTopic } = useAppSelector(state => state.topicReducer);
-  const { videos } = useAppSelector(state => state.videoReducer);
-  // const { videos } = useAppSelector(state => state.videoReducer);
+  const { topics, videos } = useAppSelector(state => state.videoReducer);
 
-  const { data: topicData } = useGetAllTopics();
-  const { data: videosData } = useGetAllVideos();
+  console.log({ videos });
 
-  // console.log({ topic: topicData?.data.items });
-  // console.log({ video: videosData?.data.items });
+  const { data: topicsData } = useGetAllTopics();
+  const { data: videosData } = useGetAllVideos('', topicPicking, 1, 100);
+
+  // useEffect(() => {
+  //   if (pickingTopic !== 'All') {
+  //     // Alert.alert('Bạn không thể lấy API rồi!');
+  //   }
+  // }, [pickingTopic]);
+
+  // useEffect(() => {
+  //   dispatch(updateDataTopic(topicData?.data?.items));
+  // }, [topicData?.data?.items]);
 
   useEffect(() => {
-    if (pickingTopic !== 'All') {
-      // Alert.alert('Bạn không thể lấy API rồi!');
-    }
-  }, [pickingTopic]);
-
-  useEffect(() => {
-    dispatch(updateDataTopic(topicData?.data?.items));
-  }, [topicData?.data?.items]);
+    dispatch(updateTopicsData(topicsData?.data.items));
+  }, [topicsData?.data.items]);
 
   useEffect(() => {
     dispatch(updateVideosData(videosData?.data.items));
   }, [videosData?.data.items]);
 
-  const handlePickingTopic = (item: any) => {
-    dispatch(updateKeyPickingTopic(item));
+  const handlePickingTopic = (key: string) => {
+    dispatch(selectTopic(key));
+    setTopicPicking([key]);
   };
 
   return (
@@ -77,22 +76,44 @@ const ListVideo = () => {
       </HStack>
       <FlatList
         horizontal={true}
-        data={topic}
-        renderItem={({ item }) => (
-          <ButtonTopic
-            displayPickingTopic={pickingTopic}
+        showsHorizontalScrollIndicator={false}
+        data={topics}
+        renderItem={({ item }) =>
+        <ButtonTopic
             item={item}
             handlePickingTopic={handlePickingTopic}
+        />
+      }
+      />
+      {
+        videos && (
+          <FlatList
+            horizontal={true}
+            data={videos}
+            renderItem={({ item }) => {
+              return <VideoItem item={item} />;
+            }}
           />
-        )}
-      />
-      <FlatList
-        horizontal={true}
-        data={videos}
-        renderItem={({ item }) => {
-          return <VideoItem item={item} />;
-        }}
-      />
+        )
+      }
+      {
+        videos?.length === 0 && (
+          <Center>
+            <Alert w="90%" maxW="400" status="info" colorScheme="info">
+              <VStack space={2} flexShrink={1} w="100%">
+                <HStack flexShrink={1} space={2} alignItems="center" justifyContent="space-between">
+                  <HStack flexShrink={1} space={2} alignItems="center">
+                    <Alert.Icon />
+                    <Text fontSize="md" fontWeight="medium" color="coolGray.800">
+                      Topic hiện chưa có video để học tập
+                    </Text>
+                  </HStack>
+                </HStack>
+              </VStack>
+            </Alert>
+          </Center>
+        )
+      }
     </VStack>
   );
 };

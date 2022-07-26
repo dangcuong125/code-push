@@ -16,9 +16,9 @@ import auth from '@react-native-firebase/auth';
 import appleAuth, {
   AppleButton,
 } from '@invertase/react-native-apple-authentication';
-import { LoginProps } from '@clvtube/common/navigators/RootNavigator';
 import { envData } from '@clvtube/common/constants/envData';
 import Config from 'react-native-config';
+import { useNavigation } from '@react-navigation/native';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -26,7 +26,8 @@ interface InputReference extends TextInput {
   value: string;
 }
 
-function Login({ navigation }: LoginProps) {
+function Login() {
+  const navigation = useNavigation();
   const inputRef = useRef<InputReference>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>();
   const [, setFocusedInput] = useState<boolean>(true);
@@ -75,8 +76,6 @@ function Login({ navigation }: LoginProps) {
   const onGoogleButtonPress = async () => {
     // Get the users ID token
     const { idToken } = await GoogleSignin.signIn();
-
-    console.log(idToken, 'idToken');
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);

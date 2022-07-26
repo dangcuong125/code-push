@@ -1,9 +1,8 @@
+import { HStack, Text, VStack } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Badge, HStack, Text, VStack } from 'native-base';
 import YouTube from 'react-native-youtube';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Octicons from 'react-native-vector-icons/Octicons';
 
 const YoutubeVideo = ({ videoPlay, id }: any) => {
   const [startTime, setStartTime] = useState(0);
@@ -14,10 +13,6 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   );
 
   const [transcript, setTranscript] = useState(oneIndex);
-
-  console.log({ oneIndex });
-
-  console.log({ startTime });
 
   useEffect(() => {
     const itemDisplay = videoPlay?.videoTranscripts?.find(
@@ -55,7 +50,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
         borderRadius={8}>
         <HStack justifyContent={'space-between'} alignItems={'center'}>
           <HStack space={2}>
-            <Badge
+            {/* <Badge
               borderRadius={10}
               colorSchema={'#F4F4F4'}
               _text={{
@@ -68,7 +63,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             </Badge>
             <Badge borderRadius={10} colorSchema={'#F4F4F4'} paddingX={8}>
               <Octicons name="arrow-switch" size={20} color={'#B3B3B3'} />
-            </Badge>
+            </Badge> */}
           </HStack>
           <MaterialIcons name="filter-none" size={25} color="black" />
         </HStack>
@@ -76,8 +71,13 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
           safeAreaY={12}
           justifyContent={'space-between'}
           alignItems={'center'}
+          height={'180px'}
           space={3}>
-          <MaterialIcons name="keyboard-arrow-left" size={20} color="#999999" />
+          {/* <MaterialIcons
+            name="keyboard-arrow-left"
+            size={20}
+            color="#999999"
+          /> */}
           <Text
             fontStyle={'normal'}
             fontSize={'18px'}
@@ -85,15 +85,15 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             textAlign={'center'}
             textDecorationLine={'underline'}
             textDecorationColor={'#999999'}
-            color={'black'}
+            color={'neural.10'}
             flex={1}>
             {transcript && transcript?.content}
           </Text>
-          <MaterialIcons
+          {/* <MaterialIcons
             name="keyboard-arrow-right"
             size={20}
             color="#999999"
-          />
+          /> */}
         </HStack>
       </VStack>
     </VStack>

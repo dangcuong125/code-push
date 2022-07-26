@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { HStack, Pressable, Text } from 'native-base';
-// navigator.navigate(VIDEO.VIDEO_LIST, {})
 
 type PopularTopicsProps = {
+  item: any,
   contentTopic: string;
   imageSrc: any;
   onPress?: () => void;

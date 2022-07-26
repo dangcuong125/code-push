@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import { Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
+import { Avatar, Box, Heading, HStack, ScrollView, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -16,8 +16,8 @@ import SettingNotify from '@clvtube/account/component/SettingNotify';
 
 import DarkMode from '@clvtube/account/component/DarkMode';
 import Language from '@clvtube/account/component/Language';
-import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
+import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
 
 const Account = () => {
   const [showModalSettingNotify, setShowModalSettingNotify] =
@@ -25,6 +25,9 @@ const Account = () => {
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
   const [showModalDarkMode, setShowModalDarkMode] = useState<boolean>(false);
   const [levelUser, setLevelUser] = useState('');
+  const [avatar, setAvatar] = useState('');
+
+  console.log({ avatar });
 
   const authState = useAppSelector(state => state.authReducer);
   const { data: DataInfoUser } = useGetInfoUser();
@@ -32,7 +35,9 @@ const Account = () => {
   const navigator = useNavigation();
 
   useEffect(() => {
+    console.log({ userTaodzo: DataInfoUser?.data });
     setLevelUser(DataInfoUser?.data.levelKey);
+    setAvatar(DataInfoUser?.data.avatar.url);
   }, [DataInfoUser?.data]);
 
   return (
@@ -40,17 +45,14 @@ const Account = () => {
       <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'white'}>
         {/* ✅ Element Info User */}
         <HStack space={4} alignItems={'center'} my={8}>
-          <Image
-            source={{
-              uri: 'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
-            }}
-            style={{
-              width: 100,
-              height: 100,
-              resizeMode: 'cover',
-              borderRadius: 50,
-            }}
-          />
+        <Avatar
+          bg="amber.500"
+          source={{
+            uri: `${avatar}`,
+          }}
+          size="xl">
+          TD
+        </Avatar>
           <VStack space={1}>
             <Heading
               fontStyle={'normal'}

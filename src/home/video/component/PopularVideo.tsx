@@ -4,9 +4,12 @@ import { HStack, Heading, VStack } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
+import { useGetPopularTopics } from '@clvtube/common/hooks/useGetPopularTopics';
 
 const PopularVideo = () => {
   const navigator = useNavigation();
+  const { data: DataPopularTopic } = useGetPopularTopics('en', 1, 4);
+
   return (
     <VStack safeArea={4} space={3}>
       <Heading
@@ -19,25 +22,38 @@ const PopularVideo = () => {
       </Heading>
       <VStack flexWrap={'wrap'} space={4}>
         <HStack justifyContent={'space-around'}>
-          <PopularTopics
-            contentTopic="Chemistry"
-            imageSrc={imagePodcast.MATH_PODCAST}
-            onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}
-          />
-          <PopularTopics
-            contentTopic="Chemistry"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
+          {
+            DataPopularTopic?.data.map((item, index) => {
+              if (index === 0 || index === 1) {
+                return (
+                  <PopularTopics
+                    item={item}
+                    contentTopic={item.name}
+                    imageSrc={imagePodcast.MATH_PODCAST}
+                    onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}
+                  />
+                );
+              }
+              return null;
+            })
+          }
         </HStack>
         <HStack justifyContent={'space-around'}>
-          <PopularTopics
-            contentTopic="Chemistry"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
-          <PopularTopics
-            contentTopic="Chemistry"
-            imageSrc={imagePodcast.MATH_PODCAST}
-          />
+        {
+            DataPopularTopic?.data.map((item, index) => {
+              if (index === 2 || index === 3) {
+                return (
+                  <PopularTopics
+                    item={item}
+                    contentTopic={item.name}
+                    imageSrc={imagePodcast.MATH_PODCAST}
+                    onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}
+                  />
+                );
+              }
+              return null;
+            })
+          }
         </HStack>
       </VStack>
     </VStack>

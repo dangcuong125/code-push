@@ -11,9 +11,10 @@ import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuthGoogle } from '../slice';
 import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
-import { CreateInfoProps } from '../../common/navigators/RootNavigator';
+import { useNavigation } from '@react-navigation/native';
 
-const CreateAccount = ({ navigation }: CreateInfoProps) => {
+const CreateAccount = () => {
+  const navigation = useNavigation();
   const authState = useAppSelector(state => state.authReducer);
   const { phone, email, fullname, firIdToken } = authState;
   console.log({ authState });
@@ -42,8 +43,7 @@ const CreateAccount = ({ navigation }: CreateInfoProps) => {
         firIdToken: account.firIdToken,
       },
       {
-        onSuccess: data => {
-          console.log({ taodzo: data?.data });
+        onSuccess: () => {
           dispatch(updateAccountWithAuthGoogle(account));
           navigation.navigate(REGISTER_SUCCESS, {});
         },

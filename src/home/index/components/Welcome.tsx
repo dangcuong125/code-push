@@ -23,6 +23,7 @@ const DiscountBanner = ({ item }: IDiscountBannerProps) => {
 
 export const Welcome = () => {
   const { fullname } = useAppSelector(state => state.authReducer);
+  console.log({ fullname });
 
   const renderItem = ({ item }: { item: IDiscountBanner }) => {
     return <DiscountBanner item={item} />;
