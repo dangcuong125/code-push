@@ -15,7 +15,7 @@ export interface IVideoTypeCarousel {
   enabled: number;
   translates: [];
 }
-interface IVideoListCarousel {
+export interface IVideoListCarousel {
   id: number;
   title: string;
   image: HTMLImageElement;

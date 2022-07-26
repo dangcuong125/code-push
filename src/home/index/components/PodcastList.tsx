@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import {
   Button,
   HStack,
@@ -107,80 +108,86 @@ export const PodcastList = ({ navigation }: HomePageProps) => {
         />
       </VStack>
       <ScrollView>
-        <VStack height={'400px'} safeAreaX={4} space={5}>
-          {podcastList?.map((item: any, index: number) => (
-            <Pressable
-              key={index}
-              borderColor="#E6E6E6"
-              borderWidth={'1px'}
-              borderRadius={'12px'}
-              onPress={() =>
-                navigation.navigate(PODCAST_DETAIL, { id: item.id })
-              }
-              p={3}>
-              <HStack space={4} alignItems={'center'}>
-                <Image
-                  source={item.audioThumbnail?.thumbnailId}
-                  width={'101px'}
-                  height={'100px'}
-                  borderRadius={'10px'}
-                  alt="thumbnail"
-                />
-                <VStack space={1.5} width={'60%'}>
-                  <Heading
-                    fontStyle={'normal'}
-                    fontSize={'16px'}
-                    fontWeight={400}
-                    lineHeight={'22px'}
-                    color={'#161719'}>
-                    {item.title}
-                  </Heading>
-                  <Text
-                    fontStyle={'normal'}
-                    fontSize={'14px'}
-                    fontWeight={400}
-                    lineHeight={'19px'}
-                    color={'#999999'}>
-                    {item.desc}
-                  </Text>
-                  <HStack justifyContent={'flex-start'} alignItems={'center'}>
-                    <HStack space={0.5} alignItems={'center'}>
-                      <MaterialCommunityIcons
-                        name="clock-time-three-outline"
-                        size={15}
-                        color={'#3D9BE0'}
-                      />
+        <VStack safeAreaX={4} space={5}>
+          {podcastList?.length === 0 ? (
+            <Text textAlign="center" color="text.200">
+              {t('alertNoPodcast')}
+            </Text>
+          ) : (
+            podcastList?.map((item: any, index: number) => (
+              <Pressable
+                key={index}
+                borderColor="#E6E6E6"
+                borderWidth={'1px'}
+                borderRadius={'12px'}
+                onPress={() =>
+                  navigation.navigate(PODCAST_DETAIL, { id: item.id })
+                }
+                p={3}>
+                <HStack space={4} alignItems={'center'}>
+                  <Image
+                    source={item.audioThumbnail?.thumbnailId}
+                    width={'101px'}
+                    height={'100px'}
+                    borderRadius={'10px'}
+                    alt="thumbnail"
+                  />
+                  <VStack space={1.5} width={'60%'}>
+                    <Heading
+                      fontStyle={'normal'}
+                      fontSize={'16px'}
+                      fontWeight={400}
+                      lineHeight={'22px'}
+                      color={'#161719'}>
+                      {item.title}
+                    </Heading>
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'14px'}
+                      fontWeight={400}
+                      lineHeight={'19px'}
+                      color={'#999999'}>
+                      {item.desc}
+                    </Text>
+                    <HStack justifyContent={'flex-start'} alignItems={'center'}>
+                      <HStack space={0.5} alignItems={'center'}>
+                        <MaterialCommunityIcons
+                          name="clock-time-three-outline"
+                          size={15}
+                          color={'#3D9BE0'}
+                        />
+                        <Text
+                          fontStyle={'normal'}
+                          fontSize={'10px'}
+                          fontWeight={400}
+                          color={'#666666'}>
+                          01:30
+                        </Text>
+                      </HStack>
+                      <Entypo name="dot-single" size={15} color={'#999999'} />
                       <Text
                         fontStyle={'normal'}
                         fontSize={'10px'}
                         fontWeight={400}
-                        color={'#666666'}>
-                        01:30
+                        color={'#999999'}>
+                        Dev Taodzo
+                      </Text>
+                      <Entypo name="dot-single" size={15} color={'#999999'} />
+                      <Text
+                        fontStyle={'normal'}
+                        fontSize={'10px'}
+                        fontWeight={400}
+                        color={'#999999'}>
+                        {item.audiosToTopics?.map(
+                          (topic: IAudioTopicItem) => topic?.topicKey,
+                        )}
                       </Text>
                     </HStack>
-                    <Entypo name="dot-single" size={15} color={'#999999'} />
-                    <Text
-                      fontStyle={'normal'}
-                      fontSize={'10px'}
-                      fontWeight={400}
-                      color={'#999999'}>
-                      Dev Taodzo
-                    </Text>
-                    <Entypo name="dot-single" size={15} color={'#999999'} />
-                    <Text
-                      fontStyle={'normal'}
-                      fontSize={'10px'}
-                      fontWeight={400}
-                      color={'#999999'}>
-                      {item.audiosToTopics?.map(
-                        (topic: IAudioTopicItem) => topic?.topicKey,
-                      )}
-                    </Text>
-                  </HStack>
-                </VStack>
-              </HStack>
-            </Pressable>
-          ))}
+                  </VStack>
+                </HStack>
+              </Pressable>
+            ))
+          )}
         </VStack>
       </ScrollView>
     </VStack>

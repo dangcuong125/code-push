@@ -5,5 +5,7 @@
   "popularVideos": "Popular Videos",
   "save": "Save",
   "setting": "Settings",
-  "textSize": "Text Size"
+  "textSize": "Text Size",
+  "alertNoVideo": "Sorry, we will add new video in the shortest time",
+  "alertNoPodcast": "Sorry, we will add new podcast in the shortest time"
 }
