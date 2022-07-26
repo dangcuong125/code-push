@@ -5,5 +5,7 @@
   "popularVideos": "Video nổi bật",
   "save": "Lưu",
   "setting": "Cài Đặt",
-  "textSize": "Cỡ Chữ"
+  "textSize": "Cỡ Chữ",
+  "alertNoVideo": "Xin lỗi, chúng tôi sẽ thêm video mới trong thời gian sớm nhất",
+  "alertNoPodcast": "Xin lỗi, chúng tôi sẽ thêm podcast mới trong thời gian sớm nhất"
 }

@@ -1,5 +1,6 @@
+/* eslint-disable multiline-ternary */
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 import {
   Box,
   Button,
@@ -16,7 +17,7 @@ import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { receiveTopicsVideo, selectOnlyOneTypeVideo } from '../redux/homePage';
 
 import {
-  IVideoListCarouselProps,
+  // IVideoListCarousel,
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
 } from '../interfaces';
@@ -48,47 +49,6 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   );
 };
 
-const VideoListCarousel = ({ item }: any) => {
-  return (
-    <Box
-      mt={4}
-      width={'222px'}
-      px={4}
-      py={2}
-      marginRight={5}
-      bgColor={'white'}
-      borderRadius="12px">
-      <Box>
-        <Center>
-          <Text
-            fontStyle={'normal'}
-            fontSize="16px"
-            fontWeight={400}
-            color={'#1A1A1A'}
-            lineHeight={'22px'}>
-            {item.name}
-          </Text>
-          <Image
-            source={{ uri: item?.thumbnails?.medium?.url }}
-            resizeMode="contain"
-            width={item?.thumbnails.medium.width}
-            height={item?.thumbnails.medium.height}
-            alt=""
-          />
-          <Text
-            fontStyle={'normal'}
-            fontSize={'14px'}
-            fontWeight={400}
-            lineHeight={'19px'}
-            color={'#1A1A1A'}>
-            {item.desc}
-          </Text>
-        </Center>
-      </Box>
-    </Box>
-  );
-};
-
 export const VideoList = () => {
   const { t } = useTranslation();
   const [topicKey, setTopicKey] = useState('');
@@ -113,13 +73,11 @@ export const VideoList = () => {
     );
   };
 
-  const renderVideoListCarousel = ({ item }: IVideoListCarouselProps) => {
-    return <VideoListCarousel item={item} />;
-  };
-
   useEffect(() => {
     dispatch(receiveTopicsVideo(data?.data?.items));
   }, [data?.data?.items]);
+
+  const isHorizontal = true;
 
   return (
     <VStack bgColor={'transparent'}>
@@ -149,13 +107,57 @@ export const VideoList = () => {
           data={videoTypeCarousel}
           renderItem={renderVideoTypeCarousel}
         />
+        <ScrollView
+          horizontal={
+            videoListCarousel?.length > 0 ? isHorizontal : !isHorizontal
+          }>
+          <VStack safeAreaX={4} space={5}>
+            {videoListCarousel?.length === 0 ? (
+              <Text textAlign="center" color="text.200">
+                {t('alertNoVideo')}
+              </Text>
+            ) : (
+              videoListCarousel?.map((video: any, index: number) => (
+                <Box
+                  mt={4}
+                  width={'222px'}
+                  key={index}
+                  px={4}
+                  py={2}
+                  marginRight={5}
+                  bgColor={'white'}
+                  borderRadius="12px">
+                  <Center>
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize="16px"
+                      fontWeight={400}
+                      color={'#1A1A1A'}
+                      lineHeight={'22px'}>
+                      {video.name}
+                    </Text>
+                    <Image
+                      source={{ uri: video?.thumbnails?.medium?.url }}
+                      resizeMode="contain"
+                      width={video?.thumbnails.medium.width}
+                      height={video?.thumbnails.medium.height}
+                      alt=""
+                    />
+                    <Text
+                      fontStyle={'normal'}
+                      fontSize={'14px'}
+                      fontWeight={400}
+                      lineHeight={'19px'}
+                      color={'#1A1A1A'}>
+                      {video.desc}
+                    </Text>
+                  </Center>
+                </Box>
+              ))
+            )}
+          </VStack>
+        </ScrollView>
       </VStack>
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        data={videoListCarousel}
-        renderItem={renderVideoListCarousel}
-      />
     </VStack>
   );
 };
