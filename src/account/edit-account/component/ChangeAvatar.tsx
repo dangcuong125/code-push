@@ -21,7 +21,6 @@ const ChangeAvatar = ({
     });
     if (image) {
       const dataImage = await presignUrl(image);
-      console.log({ dataImage });
       setInfoUser({ ...infoUser, avatarId: dataImage.id });
       setAvatar(image.path);
       setShowModal(false);

@@ -6,8 +6,6 @@ import VideoItem from '@clvtube/video-detail/listVideo/component/VideoItem';
 const ListVideo = () => {
   const { videos } = useAppSelector(state => state.videoReducer);
 
-  console.log({ taodzo: videos });
-
   return (
     <Fragment>
       <HeaderListVideo />

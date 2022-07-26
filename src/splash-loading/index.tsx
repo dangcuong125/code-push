@@ -6,9 +6,26 @@ import { useNavigation } from '@react-navigation/native';
 import { AUTH, TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
 import { imageLogo } from '@clvtube/common/constants/imagePath';
 import { Spinner, Text } from 'native-base';
+import { useLoginMutation } from '../auth/hook/useAuthMutation';
+import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
+import { useAppDispatch } from '../common/hooks/useAppDispatch';
+import { updateAccountWithAuthGoogle } from '@clvtube/auth/slice';
 
 const SplashLoading = () => {
   const navigator = useNavigation();
+  const dispatch = useAppDispatch();
+  const { mutate } = useLoginMutation();
+  const { data } = useGetInfoUser();
+
+  useEffect(() => {
+    dispatch(
+      updateAccountWithAuthGoogle({
+        email: data?.data.client.email,
+        fullname: data?.data.client.fullname,
+      }),
+    );
+  }, [data?.data]);
+
   useEffect(() => {
     SplashScreen.hide();
     getData();
@@ -17,9 +34,20 @@ const SplashLoading = () => {
   const getData = async () => {
     try {
       const valueToken = await AsyncStorage.getItem('token_App');
+      console.log(valueToken);
       if (valueToken) {
-        navigator.navigate(TAB_BOTTOM, {});
+        mutate(valueToken, {
+          onSuccess: () => {
+            navigator.navigate(TAB_BOTTOM, {});
+          },
+          onError: async () => {
+            await AsyncStorage.clear();
+            // Alert.alert('onError');
+            navigator.navigate(AUTH, {});
+          },
+        });
       } else {
+        // Alert.alert('ELSE');
         navigator.navigate(AUTH, {});
       }
     } catch (error) {}

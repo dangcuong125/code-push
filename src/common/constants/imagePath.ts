@@ -12,6 +12,21 @@ export const imagePath = {
   LOGIN_REGISTER: require('../assets/images/login-register.png'),
   OTP: require('../assets/images/otp.png'),
 };
+export const imageIconTab = {
+  HOME: require('../assets/images/iconTab/home.png'),
+  HOME_ACTIVE: require('../assets/images/iconTab/home_active.png'),
+  VIDEO: require('../assets/images/iconTab/video.png'),
+  VIDEO_ACTIVE: require('../assets/images/iconTab/video_active.png'),
+  PODCAST: require('../assets/images/iconTab/podcast.png'),
+  PODCAST_ACTIVE: require('../assets/images/iconTab/podcast_active.png'),
+  ACCOUNT: require('../assets/images/iconTab/account.png'),
+  ACCOUNT_ACTIVE: require('../assets/images/iconTab/account_active.png'),
+};
+export const imageNotify = {
+  SUCCESS: require('../assets/images/notify/success.png'),
+  WARNING: require('../assets/images/notify/warning.png'),
+  ERROR: require('../assets/images/notify/error.png'),
+};
 export const imagePodcast = {
   MATH_PODCAST: require('../assets/images/math-podcast.png'),
   PODCAST_OUTSTANDING: require('../assets/images/onboarding1.png'),

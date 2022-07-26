@@ -2,14 +2,14 @@ import {
   Box,
   Button,
   Heading,
+  Image,
   Modal,
   ScrollView,
   Text,
-  VStack,
+  VStack
 } from 'native-base';
 import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Popup = ({
   showModal,
@@ -18,6 +18,7 @@ const Popup = ({
   onPress,
   title,
   description,
+  icon,
 }) => {
   return (
     <Fragment>
@@ -32,10 +33,10 @@ const Popup = ({
           borderRadius={'12px'}>
           <ScrollView>
             <VStack alignItems={'center'} safeAreaY={5} space={4}>
-              <Ionicons
-                name="checkmark-done-circle-outline"
-                size={60}
-                color="green"
+              <Image
+                source={icon}
+                height={20}
+                width={20}
               />
               <Heading
                 fontStyle={'normal'}

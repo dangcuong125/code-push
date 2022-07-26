@@ -18,11 +18,10 @@ import Popup from '@clvtube/common/components/popup';
 import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
 import { useGetInfoUser, usePostInfoUser } from '../hooks/useAccount';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { imageNotify } from '../../common/constants/imagePath';
 
 const EditAccount = () => {
-  const [avatar, setAvatar] = useState(
-    'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
-  );
+  const [avatar, setAvatar] = useState('');
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
   const [infoUser, setInfoUser] = useState({
@@ -32,8 +31,6 @@ const EditAccount = () => {
     fullname: '',
   });
 
-  console.log({ infoUser });
-
   const { isTypeAuthPhone } = useAppSelector(state => state.authReducer);
   const { data: DataInfoUser } = useGetInfoUser();
   const { mutate } = usePostInfoUser();
@@ -41,12 +38,12 @@ const EditAccount = () => {
   if (isTypeAuthPhone) {
     Alert.alert('Ban Auth with Phone');
   }
-  console.log({ user: DataInfoUser?.data.client });
 
   useEffect(() => {
+    // setAvatar(DataInfoUser?.data.avatar.url);
     setInfoUser({
       ...infoUser,
-      avatarId: 0,
+      avatarId: DataInfoUser?.data.avatar.id,
       email: DataInfoUser?.data.client.email,
       phone: DataInfoUser?.data.client.phone,
       fullname: DataInfoUser?.data.client.fullname,
@@ -56,6 +53,7 @@ const EditAccount = () => {
   const navigator = useNavigation();
 
   const handleSubmitInfoUser = () => {
+    console.log({ infoUser });
     if (!infoUser.email || !infoUser.phone || !infoUser.fullname) {
       Alert.alert('Bạn vui lòng nhập đủ thông tin rồi lưu nhé! ⛔️');
     }
@@ -109,7 +107,7 @@ const EditAccount = () => {
             uri: `${avatar}`,
           }}
           size="xl">
-          NB
+          TD
           <Avatar.Badge bgColor={'transparent'} borderWidth={0}>
             <FontAwesome
               name="edit"
@@ -279,6 +277,7 @@ const EditAccount = () => {
           isSuccess={false}
           title="Thành công"
           description="Bạn đã cập nhật tài khoản thành công!"
+          icon={imageNotify.SUCCESS}
           onPress={handleNavigate}
         />
       )}

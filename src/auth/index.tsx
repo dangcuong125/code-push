@@ -95,11 +95,10 @@ const Auth = ({ navigation }: AuthProps) => {
           dispatch(
             updateAccountWithAuthGoogle({
               email: idGoogle.user.email,
-              name: idGoogle.user.displayName,
+              fullname: idGoogle.user.displayName,
               firIdToken: token.token,
             }),
           );
-          console.log(token);
 
           await AsyncStorage.setItem('token_App', token.token);
 

@@ -2,7 +2,6 @@ import { Button } from 'native-base';
 import React from 'react';
 
 const ButtonTopic = ({
-  displayPickingTopic,
   item,
   handlePickingTopic,
 }: any) => {
@@ -15,16 +14,16 @@ const ButtonTopic = ({
       variant="outline"
       borderColor="#3D9BE0"
       bgColor={
-        item.enabled === 1 || displayPickingTopic === 'All'
-          ? '#3D9BE0'
-          : '#FFFFFF'
+        item.isSelected
+          ? 'primary.11'
+          : 'neural.1'
       }
-      onPress={() => handlePickingTopic(item)}
+      onPress={() => handlePickingTopic(item.key)}
       _text={{
         color:
-          item.enabled === 1 || displayPickingTopic === 'All'
-            ? '#FFFFFF'
-            : '#3D9BE0',
+          item.isSelected
+            ? 'neural.1'
+            : 'primary.11',
         fontStyle: 'normal',
         height: '20px',
         fontWeight: 400,
