@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView, VStack } from 'native-base';
 import { useGetVideoItem } from '../../common/hooks/useVideos';
 import IconHeader from './component/IconHeader';
@@ -7,18 +7,32 @@ import YoutubeVideo from './component/YoutubeVideo';
 import ListVideo from '../../home/video/component/ListVideo';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { updateVideoItem } from './slice';
+import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 const PlayingVideo = () => {
   const scrollViewRef = useRef();
   const { id } = useRoute().params;
+  console.log({ id });
+  const navigation = useNavigation();
 
   const { videoItem } = useAppSelector(state => state.videoItemReducer);
 
   const dispatch = useAppDispatch();
 
   const [paramsVideo, setParamsVideo] = useState(() => id);
-  const { data } = useGetVideoItem(paramsVideo);
+  const { data, error } = useGetVideoItem(paramsVideo);
+
+  console.log({ video: data?.data });
+  if (error) {
+    Alert.alert('Error', 'Oops, something went wrong', [
+      {
+        text: 'Ok',
+        onPress: () => navigation.goBack(),
+        style: 'cancel',
+      },
+    ]);
+  }
 
   useEffect(() => {
     setParamsVideo(id);
@@ -30,9 +44,7 @@ const PlayingVideo = () => {
   }, [data?.data]);
 
   return (
-    <ScrollView
-      ref={scrollViewRef}
-    >
+    <ScrollView ref={scrollViewRef}>
       <VStack bgColor={'#E5E5E5'} width={'100%'} height={'100%'}>
         <VStack
           space={2}

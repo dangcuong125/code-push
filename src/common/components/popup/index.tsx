@@ -6,7 +6,7 @@ import {
   Modal,
   ScrollView,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';

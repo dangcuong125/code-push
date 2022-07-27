@@ -7,6 +7,7 @@ const initialState: IUserAccount = {
   fullname: '',
   firIdToken: '',
   isTypeAuthPhone: false,
+  tokenApp: '',
 };
 
 const authSlice = createSlice({
@@ -20,10 +21,13 @@ const authSlice = createSlice({
       state.firIdToken = action.payload.firIdToken;
       state.isTypeAuthPhone = action.payload.isTypeAuthPhone;
     },
+    getTokenApp: (state, action) => {
+      state.tokenApp = action.payload;
+    },
   },
 });
 
 export const {
-  actions: { updateAccountWithAuthGoogle },
+  actions: { updateAccountWithAuthGoogle, getTokenApp },
   reducer,
 } = authSlice;

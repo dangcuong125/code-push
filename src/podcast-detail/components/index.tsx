@@ -9,7 +9,7 @@ export const PodcastDetail = ({ route, navigation }: PodcastDetailProps) => {
     <SafeAreaView style={{ backgroundColor: '#FFFFFF' }}>
       <StatusBar backgroundColor="#FFFFFF" />
       <Header navigation={navigation} route={route} />
-      <PodcastDetailLearning />
+      <PodcastDetailLearning navigation={navigation} />
     </SafeAreaView>
   );
 };

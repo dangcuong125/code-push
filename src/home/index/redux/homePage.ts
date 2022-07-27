@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IInitialState, IVideoTypeCarousel } from '../interfaces';
 import { VIDEO_LIST } from '@clvtube/mocks/homePage';
+// import {enableMapS}
 
 const initialState: IInitialState = {
   videoTypeCarousel: [],
   videoList: VIDEO_LIST,
   podcastTypeCarousel: [],
+  saveRecentVideoAndPodcast: [],
 };
 export const homePage = createSlice({
   name: 'home-page',
@@ -39,6 +41,9 @@ export const homePage = createSlice({
         },
       );
     },
+    getRecentVideoAndPodcast: (state, action) => {
+      state.saveRecentVideoAndPodcast.unshift(action.payload);
+    },
   },
 });
 export const {
@@ -47,6 +52,7 @@ export const {
     receiveTopicsVideo,
     receiveTopicsPodcast,
     selectOnlyOneTypePodcast,
+    getRecentVideoAndPodcast,
   },
   reducer,
 } = homePage;

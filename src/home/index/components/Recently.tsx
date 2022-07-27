@@ -1,20 +1,47 @@
-import { Box, HStack, Heading, Progress, Text, VStack } from 'native-base';
+import {
+  // HStack,
+  Heading,
+  Pressable,
+  // Progress,
+  Text,
+  VStack,
+} from 'native-base';
 import { FlatList, Image } from 'react-native';
-import React from 'react';
-import { DATA_VIEWED_RECENTLY } from '@clvtube/mocks/homePage';
-import { IDataViewRecently } from '../interfaces';
+import React, { useState } from 'react';
+import { HomePageProps, IDataViewRecently } from '../interfaces';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  HOME_ROUTE,
+  PODCAST_DETAIL,
+  VIDEO_ROUTE,
+} from '@clvtube/common/constants/route.constants';
 
-const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
+const VideoRecommended = ({
+  item,
+  navigation,
+}: {
+  item: any;
+  navigation: any;
+}) => {
   return (
-    <Box
+    <Pressable
       width="165px"
       ml={4}
       mr={2}
+      onPress={() =>
+        navigation.navigate(
+          item?.type === 'audio' ? PODCAST_DETAIL : VIDEO_ROUTE.VIDEO_PLAYING,
+          {
+            id: item?.item?.id,
+          },
+        )
+      }
       borderWidth={'1px'}
       borderColor={'#E6E6E6'}
       borderRadius={'12px'}>
       <Image
-        source={item.image}
+        source={item?.item.audioThumbnail?.thumbnailId}
         style={{
           width: 163,
           height: 87,
@@ -29,18 +56,18 @@ const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
           fontStyle={'normal'}
           fontSize={'10px'}
           fontWeight={600}
-          color={'#181818'}>
-          {item.title}
+          color={'text.300'}>
+          {item?.item?.title}
         </Text>
         <Text
           fontStyle={'normal'}
           fontSize={'12px'}
           fontWeight={400}
           lineHeight={'16px'}
-          color={'#181818'}>
-          {item.content}
+          color={'text.300'}>
+          {item?.item?.desc}
         </Text>
-        <HStack justifyContent={'space-between'} alignItems={'center'}>
+        {/* <HStack justifyContent={'space-between'} alignItems={'center'}>
           <Progress
             value={item.progress}
             height={'4px'}
@@ -55,15 +82,39 @@ const VideoRecommended = ({ item }: { item: IDataViewRecently }) => {
             color={'#4F4F4F'}>
             5/10
           </Text>
-        </HStack>
+        </HStack> */}
       </VStack>
-    </Box>
+    </Pressable>
   );
 };
 
-export const Recently = () => {
+export const Recently = ({ route, navigation }: HomePageProps) => {
+  const [recentVideosAndPodcasts, setRecentVideosAndPodcasts] = useState<any>();
+  const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
+  const recentVideoAndPodcast = useAppSelector(
+    state => state.homePage.saveRecentVideoAndPodcast,
+  );
+  // console.log('test', recentVideoAndPodcast);
+
+  const recentVideoAndPodcastWithoutDuplicate = [
+    ...new Set(recentVideoAndPodcast),
+  ].slice(0, 5);
+  const storeRecentVideoAndPodcast = async () => {
+    await AsyncStorage.setItem(
+      'recentVideoAndPodcast',
+      JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
+    );
+  };
+  if (tokenApp) storeRecentVideoAndPodcast();
+  if (route.name === HOME_ROUTE.INDEX) {
+    AsyncStorage.getItem('recentVideoAndPodcast')
+      .then(value => {
+        if (value !== null) setRecentVideosAndPodcasts(JSON.parse(value));
+      })
+      .catch(err => console.log('error', err));
+  }
   const renderItem = ({ item }: { item: IDataViewRecently }) => {
-    return <VideoRecommended item={item} />;
+    return <VideoRecommended item={item} navigation={navigation} />;
   };
   return (
     <VStack bgColor={'white'} safeAreaY={3}>
@@ -78,7 +129,7 @@ export const Recently = () => {
         Gần đây
       </Heading>
       <FlatList
-        data={DATA_VIEWED_RECENTLY}
+        data={recentVideosAndPodcasts}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={renderItem}

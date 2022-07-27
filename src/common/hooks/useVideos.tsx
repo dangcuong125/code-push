@@ -15,7 +15,11 @@ export const useGetAllVideos = (
 };
 
 export const useGetVideoItem = (id: number) => {
-  return useQuery([QUERY_KEYS.GET_VIDEO_ITEM, id], () =>
-    VideoAPI.getVideoITem(id),
+  return useQuery(
+    [QUERY_KEYS.GET_VIDEO_ITEM, id],
+    () => VideoAPI.getVideoITem(id),
+    {
+      retry: false,
+    },
   );
 };
