@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Box, Heading, HStack, ScrollView, Text, VStack } from 'native-base';
+import { Avatar, Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 

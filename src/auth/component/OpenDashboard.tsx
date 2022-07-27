@@ -4,20 +4,23 @@ import { Button, Center, Heading, Text, VStack } from 'native-base';
 import { Dimensions, Image } from 'react-native';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { getTokenApp } from '../slice/index';
 
 const { width } = Dimensions.get('screen');
 
 const OpenDashboard = () => {
+  const dispatch = useAppDispatch();
   const navigator = useNavigation();
   const { fullname } = useAppSelector(state => state.authReducer);
+  AsyncStorage.getItem('token_App').then(value => dispatch(getTokenApp(value)));
 
   // const getData = async () => {
   //   try {
-  //     const valueToken = await AsyncStorage.getItem('token_App');
   //     if (valueToken) {
   //       Alert.alert(valueToken);
   //     }
