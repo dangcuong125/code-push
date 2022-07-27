@@ -9,7 +9,7 @@ import {
 import { FlatList, Image } from 'react-native';
 import React, { useState } from 'react';
 import { HomePageProps, IDataViewRecently } from '../interfaces';
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+// import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   HOME_ROUTE,
@@ -90,22 +90,22 @@ const VideoRecommended = ({
 
 export const Recently = ({ route, navigation }: HomePageProps) => {
   const [recentVideosAndPodcasts, setRecentVideosAndPodcasts] = useState<any>();
-  const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
-  const recentVideoAndPodcast = useAppSelector(
-    state => state.homePage.saveRecentVideoAndPodcast,
-  );
-  // console.log('test', recentVideoAndPodcast);
+  // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
+  // const recentVideoAndPodcast = useAppSelector(
+  //   state => state.homePage.saveRecentVideoAndPodcast,
+  // );
+  // // console.log('test', recentVideoAndPodcast);
 
-  const recentVideoAndPodcastWithoutDuplicate = [
-    ...new Set(recentVideoAndPodcast),
-  ].slice(0, 5);
-  const storeRecentVideoAndPodcast = async () => {
-    await AsyncStorage.setItem(
-      'recentVideoAndPodcast',
-      JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
-    );
-  };
-  if (tokenApp) storeRecentVideoAndPodcast();
+  // const recentVideoAndPodcastWithoutDuplicate = [
+  //   ...new Set(recentVideoAndPodcast),
+  // ].slice(0, 5);
+  // const storeRecentVideoAndPodcast = async () => {
+  //   await AsyncStorage.setItem(
+  //     'recentVideoAndPodcast',
+  //     JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
+  //   );
+  // };
+  // if (tokenApp) storeRecentVideoAndPodcast();
   if (route.name === HOME_ROUTE.INDEX) {
     AsyncStorage.getItem('recentVideoAndPodcast')
       .then(value => {

@@ -23,6 +23,7 @@ import {
 } from '../reducer/podcastDetail';
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HeaderPodcast = React.memo(function HeaderPodcast({
   podcastDetail,
@@ -123,6 +124,22 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
     await TrackPlayer.reset();
     // await TrackPlayer.stop();
   };
+  // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
+  const recentVideoAndPodcast = useAppSelector(
+    state => state.homePage.saveRecentVideoAndPodcast,
+  );
+  // console.log('test', recentVideoAndPodcast);
+
+  const recentVideoAndPodcastWithoutDuplicate = [
+    ...new Set(recentVideoAndPodcast),
+  ].slice(0, 5);
+  const storeRecentVideoAndPodcast = async () => {
+    await AsyncStorage.setItem(
+      'recentVideoAndPodcast',
+      JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
+    );
+  };
+  if (data) storeRecentVideoAndPodcast();
   const renderItem = ({
     item,
     index,

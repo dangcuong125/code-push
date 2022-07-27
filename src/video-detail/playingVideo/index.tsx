@@ -9,9 +9,11 @@ import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { updateVideoItem } from './slice';
 import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PlayingVideo = () => {
   const scrollViewRef = useRef();
+  // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
   const { id } = useRoute().params;
   console.log({ id });
   const navigation = useNavigation();
@@ -22,6 +24,21 @@ const PlayingVideo = () => {
 
   const [paramsVideo, setParamsVideo] = useState(() => id);
   const { data, error } = useGetVideoItem(paramsVideo);
+  const recentVideoAndPodcast = useAppSelector(
+    state => state.homePage.saveRecentVideoAndPodcast,
+  );
+  console.log('test', recentVideoAndPodcast);
+
+  const recentVideoAndPodcastWithoutDuplicate = [
+    ...new Set(recentVideoAndPodcast),
+  ].slice(0, 5);
+  const storeRecentVideoAndPodcast = async () => {
+    await AsyncStorage.setItem(
+      'recentVideoAndPodcast',
+      JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
+    );
+  };
+  if (data) storeRecentVideoAndPodcast();
 
   console.log({ video: data?.data });
   if (error) {
