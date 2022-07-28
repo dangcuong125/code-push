@@ -49,7 +49,10 @@ const Intro = () => {
   };
 
   return (
-    <VStack height={height} bgColor={'neural.1'} justifyContent={'space-evenly'}>
+    <VStack
+      height={height}
+      bgColor={'neural.1'}
+      justifyContent={'space-evenly'}>
       <VStack safeAreaY={10} flex={1}>
         <Pressable
           px={4}
@@ -110,8 +113,7 @@ const Intro = () => {
               fontWeight: 400,
               fontStyle: 'normal',
               color: 'neural.1',
-            }}
-          >
+            }}>
             {index === slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>

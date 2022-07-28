@@ -34,7 +34,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 
-
 const isIOS = Platform.OS === 'ios';
 
 const Auth = () => {
@@ -139,7 +138,6 @@ const Auth = () => {
 
     return auth().signInWithCredential(appleCredential);
   };
-
 
   return (
     <VStack bgColor={'neural.1'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
@@ -254,7 +252,7 @@ const Auth = () => {
             borderColor={'neural.2'}
             borderRadius={'8px'}>
             <HStack space={3} justifyContent={'center'} alignItems={'center'}>
-            <Image
+              <Image
                 source={imageSocial.FB}
                 width={'25px'}
                 height={'25px'}
@@ -309,13 +307,13 @@ const Auth = () => {
               borderRadius={'8px'}
               onPress={handleLoginWithApple}>
               <HStack space={3} alignItems={'center'}>
-              <Image
-                source={imageSocial.APPLE}
-                width={'25px'}
-                height={'25px'}
-                resizeMode={'contain'}
-                alt={'image'}
-              />
+                <Image
+                  source={imageSocial.APPLE}
+                  width={'25px'}
+                  height={'25px'}
+                  resizeMode={'contain'}
+                  alt={'image'}
+                />
                 <Text
                   fontStyle={'normal'}
                   fontSize={'14px'}

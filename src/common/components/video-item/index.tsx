@@ -8,15 +8,11 @@ const VideoItem = ({ item }) => {
   const navigation = useNavigation();
 
   return (
-    <Box
-      width={270}
-      marginLeft={4}
-    >
+    <Box width={270} marginLeft={4}>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
-        }
-      >
+        }>
         <VStack space={3}>
           <Image
             source={{ uri: item?.thumbnails.medium.url }}
@@ -61,8 +57,7 @@ const VideoItem = ({ item }) => {
             }}
             onPress={() =>
               navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
-            }
-          >
+            }>
             Bắt đầu ngay
           </Button>
         </VStack>

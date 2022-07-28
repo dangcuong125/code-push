@@ -3,7 +3,7 @@ import { Image, TouchableOpacity } from 'react-native';
 import { HStack, Pressable, Text } from 'native-base';
 
 type PopularTopicsProps = {
-  item: any,
+  item: any;
   contentTopic: string;
   imageSrc: any;
   onPress?: () => void;

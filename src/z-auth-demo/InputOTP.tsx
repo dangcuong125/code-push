@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 
-
 export interface InputReference extends TextInput {
   value: string;
 }

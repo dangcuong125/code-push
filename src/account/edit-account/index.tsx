@@ -40,7 +40,7 @@ const EditAccount = () => {
   }
 
   useEffect(() => {
-    setAvatar(DataInfoUser?.data.avatar.url);
+    setAvatar(DataInfoUser?.data.avatar.url || 'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp');
     setInfoUser({
       ...infoUser,
       avatarId: DataInfoUser?.data.avatar.id,

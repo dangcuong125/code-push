@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, TextInput, TouchableOpacity, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Box, Button, Center, Image, Text, VStack } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -7,8 +7,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import { CREATE_ACCOUNT } from '@clvtube/common/constants/route.constants';
 import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
-import auth from '@react-native-firebase/auth';
-
 
 export interface InputReference extends TextInput {
   value: string;
@@ -39,11 +37,6 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
     }
   };
 
-  const handleResetOTP = async () => {
-    const newOTP = await auth().verifyPhoneNumber('0376897938', 120);
-    Alert.alert(`${newOTP}`);
-  };
-
   useEffect(() => {
     const clockCall = setInterval(() => {
       if (countDown === 0) {
@@ -54,7 +47,9 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
         setCountDown(countDown - 1);
       }
     }, 1000);
-    return () => { clearInterval(clockCall); };
+    return () => {
+      clearInterval(clockCall);
+    };
   });
 
   useEffect(() => {
@@ -152,7 +147,8 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontSize={'14px'}
               fontWeight={400}
               color={'neutral.800'}>
-              OTP sẽ hết hiệu lực sau <Text color={'#DC3545'}>{countDown}s</Text>
+              OTP sẽ hết hiệu lực sau{' '}
+              <Text color={'#DC3545'}>{countDown}s</Text>
             </Text>
           </Center>
         </View>
@@ -181,14 +177,11 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontWeight={400}
               color={'neutral.800'}>
               Không nhận được tin nhắn? {''}
-              <TouchableOpacity
-                onPress={handleResetOTP}
-              >
+              <TouchableOpacity>
                 <Text
                   color={'primary.11'}
                   textDecorationLine={'underline'}
-                  opacity={resetOTP ? 1 : 0.5}
-                >
+                  opacity={resetOTP ? 1 : 0.5}>
                   Gửi lại
                 </Text>
               </TouchableOpacity>

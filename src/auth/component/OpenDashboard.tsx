@@ -65,7 +65,8 @@ const OpenDashboard = () => {
           lineHeight={'25px'}
           color={'neural.10'}
           marginTop={'15px'}>
-          Chào bạn đến với ứng dụng học Tiếng Anh của chúng tôi, hãy bắt đầu trải nghiệm nào...
+          Chào bạn đến với ứng dụng học Tiếng Anh của chúng tôi, hãy bắt đầu
+          trải nghiệm nào...
         </Text>
       </Center>
 

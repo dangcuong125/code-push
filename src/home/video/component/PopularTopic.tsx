@@ -22,42 +22,38 @@ const PopularTopic = () => {
       </Heading>
       <VStack flexWrap={'wrap'} space={4}>
         <HStack justifyContent={'space-around'}>
-          {
-            DataPopularTopic?.data.map((item, index) => {
-              if (index === 0 || index === 1) {
-                return (
-                  <PopularTopics
-                    item={item}
-                    contentTopic={item.topic_key}
-                    imageSrc={imagePodcast.MATH_PODCAST}
-                    onPress={(item: any) => {
-                      navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
-                    }}
-                  />
-                );
-              }
-              return null;
-            })
-          }
+          {DataPopularTopic?.data.map((item, index) => {
+            if (index === 0 || index === 1) {
+              return (
+                <PopularTopics
+                  item={item}
+                  contentTopic={item.topic_key}
+                  imageSrc={imagePodcast.MATH_PODCAST}
+                  onPress={(item: any) => {
+                    navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
+                  }}
+                />
+              );
+            }
+            return null;
+          })}
         </HStack>
         <HStack justifyContent={'space-around'}>
-        {
-            DataPopularTopic?.data.map((item, index) => {
-              if (index === 2 || index === 3) {
-                return (
-                  <PopularTopics
-                    item={item}
-                    contentTopic={item.topic_key}
-                    imageSrc={imagePodcast.MATH_PODCAST}
-                    onPress={(item: any) => {
-                      navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
-                    }}
-                  />
-                );
-              }
-              return null;
-            })
-          }
+          {DataPopularTopic?.data.map((item, index) => {
+            if (index === 2 || index === 3) {
+              return (
+                <PopularTopics
+                  item={item}
+                  contentTopic={item.topic_key}
+                  imageSrc={imagePodcast.MATH_PODCAST}
+                  onPress={(item: any) => {
+                    navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
+                  }}
+                />
+              );
+            }
+            return null;
+          })}
         </HStack>
       </VStack>
     </VStack>

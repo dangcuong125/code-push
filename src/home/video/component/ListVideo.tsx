@@ -78,43 +78,40 @@ const ListVideo = () => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={topics}
-        renderItem={({ item }) =>
-        <ButtonTopic
-            item={item}
-            handlePickingTopic={handlePickingTopic}
-        />
-      }
+        renderItem={({ item }) => (
+          <ButtonTopic item={item} handlePickingTopic={handlePickingTopic} />
+        )}
       />
-      {
-        videos && (
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={videos}
-            renderItem={({ item }) => {
-              return <VideoItem item={item} />;
-            }}
-          />
-        )
-      }
-      {
-        videos?.length === 0 && (
-          <Center>
-            <Alert w="90%" maxW="400" status="info" colorScheme="info">
-              <VStack space={2} flexShrink={1} w="100%">
-                <HStack flexShrink={1} space={2} alignItems="center" justifyContent="space-between">
-                  <HStack flexShrink={1} space={2} alignItems="center">
-                    <Alert.Icon />
-                    <Text fontSize="md" fontWeight="medium" color="coolGray.800">
-                      Topic hiện chưa có video để học tập
-                    </Text>
-                  </HStack>
+      {videos && (
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={videos}
+          renderItem={({ item }) => {
+            return <VideoItem item={item} />;
+          }}
+        />
+      )}
+      {videos?.length === 0 && (
+        <Center>
+          <Alert w="90%" maxW="400" status="info" colorScheme="info">
+            <VStack space={2} flexShrink={1} w="100%">
+              <HStack
+                flexShrink={1}
+                space={2}
+                alignItems="center"
+                justifyContent="space-between">
+                <HStack flexShrink={1} space={2} alignItems="center">
+                  <Alert.Icon />
+                  <Text fontSize="md" fontWeight="medium" color="coolGray.800">
+                    Topic hiện chưa có video để học tập
+                  </Text>
                 </HStack>
-              </VStack>
-            </Alert>
-          </Center>
-        )
-      }
+              </HStack>
+            </VStack>
+          </Alert>
+        </Center>
+      )}
     </VStack>
   );
 };

@@ -79,9 +79,7 @@ const Popup = ({
                 {textButton}
               </Button>
               {!isSuccess && (
-                <TouchableOpacity
-                  onPress={() => setShowModal(false)}
-                >
+                <TouchableOpacity onPress={() => setShowModal(false)}>
                   <Text
                     fontStyle={'normal'}
                     fontSize={'14px'}

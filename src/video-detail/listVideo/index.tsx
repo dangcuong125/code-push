@@ -5,9 +5,10 @@ import VideoItem from '@clvtube/video-detail/listVideo/component/VideoItem';
 import { useRoute } from '@react-navigation/native';
 import { useGetAllVideos } from '@clvtube/common/hooks/useVideos';
 
-
 const ListVideo = () => {
-  const { item: { topic_key } } = useRoute().params;
+  const {
+    item: { topic_key },
+  } = useRoute().params;
   const [topicKey, setTopicKey] = useState([topic_key]);
   const [videoTopic, setVideoTopic] = useState([]);
   const { data: DataVideoTopicKey } = useGetAllVideos('', topicKey, 1, 100);
@@ -33,13 +34,8 @@ const ListVideo = () => {
         marginTop={'-6%'}
         borderTopRadius={'36px'}
         showsVerticalScrollIndicator={false}>
-        {
-          videoTopic?.length > 0 && (
-            videoTopic?.map(item =>
-              <VideoItem key={item.id} item={item} />,
-            )
-          )
-        }
+        {videoTopic?.length > 0 &&
+          videoTopic?.map(item => <VideoItem key={item.id} item={item} />)}
       </ScrollView>
     </Fragment>
   );

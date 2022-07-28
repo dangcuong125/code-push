@@ -1,5 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
+import {
+  Avatar,
+  Box,
+  HStack,
+  Heading,
+  ScrollView,
+  Text,
+  VStack,
+} from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
@@ -52,14 +60,14 @@ const Account = () => {
       <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'white'}>
         {/* ✅ Element Info User */}
         <HStack space={4} alignItems={'center'} my={8}>
-        <Avatar
-          bg="amber.500"
-          source={{
-            uri: `${avatar}`,
-          }}
-          size="xl">
-          TD
-        </Avatar>
+          <Avatar
+            bg="amber.500"
+            source={{
+              uri: `${avatar}`,
+            }}
+            size="xl">
+            TD
+          </Avatar>
           <VStack space={1}>
             <Heading
               fontStyle={'normal'}
@@ -261,9 +269,7 @@ const Account = () => {
           </TouchableOpacity>
 
           {/* 🏆 Logout */}
-          <TouchableOpacity
-            onPress={() => setShowModalLogout(true)}
-          >
+          <TouchableOpacity onPress={() => setShowModalLogout(true)}>
             <Box height={'57px'} px={5} marginTop={2} borderRadius={'13px'}>
               <HStack
                 height={'100%'}
@@ -290,7 +296,7 @@ const Account = () => {
               description="Bạn chắc chắn muốn đăng xuất?"
               textButton="Đăng xuất"
               colorButton={'popup.warning'}
-              textClose='Huỷ'
+              textClose="Huỷ"
               icon={imageNotify.WARNING}
               onPress={handleLogoutApp}
             />

@@ -3,7 +3,11 @@ import { Image, View } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { AUTH, INTRO, TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
+import {
+  AUTH,
+  INTRO,
+  TAB_BOTTOM,
+} from '@clvtube/common/constants/route.constants';
 import { imageLogo } from '@clvtube/common/constants/imagePath';
 import { Spinner, Text } from 'native-base';
 import { useLoginMutation } from '../auth/hook/useAuthMutation';

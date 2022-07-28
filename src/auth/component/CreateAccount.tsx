@@ -293,7 +293,6 @@ const CreateAccount = () => {
         </HStack> */}
       </KeyboardAwareScrollView>
     </VStack>
-
   );
 };
 
