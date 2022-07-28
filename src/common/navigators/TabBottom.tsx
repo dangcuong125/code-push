@@ -11,7 +11,6 @@ import AccountRoute from './AccountNavigator';
 import { imageIconTab } from '../constants/imagePath';
 import { Image } from 'native-base';
 
-
 const Tab = createBottomTabNavigator();
 
 const TabBottom = () => {
@@ -25,9 +24,13 @@ const TabBottom = () => {
           } else if (route.name === 'Video') {
             iconName = focused ? imageIconTab.VIDEO_ACTIVE : imageIconTab.VIDEO;
           } else if (route.name === 'Podcast') {
-            iconName = focused ? imageIconTab.PODCAST_ACTIVE : imageIconTab.PODCAST;
+            iconName = focused
+              ? imageIconTab.PODCAST_ACTIVE
+              : imageIconTab.PODCAST;
           } else if (route.name === 'Tài khoản') {
-            iconName = focused ? imageIconTab.ACCOUNT_ACTIVE : imageIconTab.ACCOUNT;
+            iconName = focused
+              ? imageIconTab.ACCOUNT_ACTIVE
+              : imageIconTab.ACCOUNT;
           }
           return (
             <Image
@@ -52,31 +55,18 @@ const TabBottom = () => {
         sceneContainerStyle: {
           backgroundColor: 'white',
         },
-      })}
-    >
+      })}>
       {/* TabBar Home */}
-      <Tab.Screen
-        name="Trang chủ"
-        component={HomeRoute}
-      />
+      <Tab.Screen name="Trang chủ" component={HomeRoute} />
 
       {/* TabBar Video */}
-      <Tab.Screen
-        name="Video"
-        component={VideoRoute}
-      />
+      <Tab.Screen name="Video" component={VideoRoute} />
 
       {/* TabBar PodCast */}
-      <Tab.Screen
-        name="Podcast"
-        component={PodcastRoutes}
-      />
+      <Tab.Screen name="Podcast" component={PodcastRoutes} />
 
       {/* TabBar Account */}
-      <Tab.Screen
-        name="Tài khoản"
-        component={AccountRoute}
-      />
+      <Tab.Screen name="Tài khoản" component={AccountRoute} />
     </Tab.Navigator>
   );
 };

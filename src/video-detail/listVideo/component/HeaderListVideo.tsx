@@ -5,7 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { imagePodcast } from '@clvtube/common/constants/imagePath';
 import { useNavigation } from '@react-navigation/native';
 
-const HeaderListVideo = () => {
+const HeaderListVideo = ({ nameTopic, videoTopic }) => {
   const navigator = useNavigation();
 
   return (
@@ -29,7 +29,7 @@ const HeaderListVideo = () => {
               fontWeight={'600'}
               lineHeight={'44px'}
               color={'#222B45'}>
-              Mathematics
+              {nameTopic}
             </Heading>
             <HStack space={1}>
               <MaterialIcons name="video-library" size={20} color="black" />
@@ -39,7 +39,7 @@ const HeaderListVideo = () => {
                 fontWeight={400}
                 lineHeight={'19px'}
                 color={'#1A1A1A'}>
-                15 Videos
+                {videoTopic?.length} Videos
               </Text>
             </HStack>
           </VStack>

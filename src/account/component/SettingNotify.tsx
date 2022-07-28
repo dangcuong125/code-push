@@ -31,7 +31,6 @@ const SettingNotify = ({ showModal, setShowModal }) => {
               <AntDeisgn
                 name="closecircleo"
                 size={22}
-                color={'neural.5'}
                 onPress={() => setShowModal(false)}
               />
             </HStack>
@@ -44,11 +43,11 @@ const SettingNotify = ({ showModal, setShowModal }) => {
                 borderWidth={'1px'}
                 borderColor={'neural.7'}
                 _icon={{
-                  color: 'white',
+                  color: 'neural.1',
                 }}
                 _checked={{
-                  backgroundColor: '#216BCD',
-                  borderColor: '#216BCD',
+                  backgroundColor: 'primary.21',
+                  borderColor: 'primary.21',
                 }}
                 _text={{
                   fontStyle: 'normal',
@@ -56,7 +55,6 @@ const SettingNotify = ({ showModal, setShowModal }) => {
                   fontWeight: 400,
                   lineHeight: '19px',
                   color: 'neural.10',
-                  order: 1,
                 }}>
                 Nhắc nhở học từ mới
               </Checkbox>
@@ -68,11 +66,11 @@ const SettingNotify = ({ showModal, setShowModal }) => {
                 borderWidth={'1px'}
                 borderColor={'neural.7'}
                 _icon={{
-                  color: 'white',
+                  color: 'neural.1',
                 }}
                 _checked={{
-                  backgroundColor: '#216BCD',
-                  borderColor: '#216BCD',
+                  backgroundColor: 'primary.21',
+                  borderColor: 'primary.21',
                 }}
                 _text={{
                   fontStyle: 'normal',
@@ -91,11 +89,11 @@ const SettingNotify = ({ showModal, setShowModal }) => {
                 borderWidth={'1px'}
                 borderColor={'neural.7'}
                 _icon={{
-                  color: 'white',
+                  color: 'neural.1',
                 }}
                 _checked={{
-                  backgroundColor: '#216BCD',
-                  borderColor: '#216BCD',
+                  backgroundColor: 'primary.21',
+                  borderColor: 'primary.21',
                 }}
                 _text={{
                   fontStyle: 'normal',

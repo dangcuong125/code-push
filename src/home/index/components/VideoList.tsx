@@ -29,10 +29,7 @@ import {
 
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import { useGetVideoList } from '@clvtube/common/hooks/useGetVideoList';
-import {
-  TAB_BOTTOM,
-  VIDEO_ROUTE,
-} from '@clvtube/common/constants/route.constants';
+import { VIDEO_ROUTE } from '@clvtube/common/constants/route.constants';
 import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {

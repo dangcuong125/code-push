@@ -31,7 +31,6 @@ const DarkMode = ({ showModal, setShowModal }) => {
               <Ionicons
                 name="close-circle"
                 size={22}
-                color={'neural.5'}
                 onPress={() => setShowModal(false)}
               />
             </HStack>
@@ -47,11 +46,11 @@ const DarkMode = ({ showModal, setShowModal }) => {
                   borderWidth={'1.5px'}
                   borderColor={'neural.7'}
                   _icon={{
-                    color: 'white',
+                    color: 'neural.1',
                   }}
                   _checked={{
-                    backgroundColor: '#216BCD',
-                    borderColor: '#216BCD',
+                    backgroundColor: 'primary.21',
+                    borderColor: 'primary.21',
                   }}
                   _text={{
                     fontStyle: 'normal',
@@ -72,11 +71,11 @@ const DarkMode = ({ showModal, setShowModal }) => {
                   borderWidth={'1.5px'}
                   borderColor={'neural.7'}
                   _icon={{
-                    color: 'white',
+                    color: 'neural.1',
                   }}
                   _checked={{
-                    backgroundColor: '#216BCD',
-                    borderColor: '#216BCD',
+                    backgroundColor: 'primary.21',
+                    borderColor: 'primary.21',
                   }}
                   _text={{
                     fontStyle: 'normal',

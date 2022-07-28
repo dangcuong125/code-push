@@ -5,9 +5,9 @@ import { Box, Button, Center, Pressable, Text, VStack } from 'native-base';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // 🚀 import component from Page
-import { IntroProps } from '@clvtube/common/navigators/RootNavigator';
 import { AUTH } from '@clvtube/common/constants/route.constants';
 import { slider } from '@clvtube/mocks/dataOnboarding';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,9 +19,9 @@ const renderItemSlider = ({ item, index }) => {
         source={item?.image}
         style={{ height: height * 0.4, width, resizeMode: 'contain' }}
       />
-      <Center marginBottom={5}>
+      <Center marginBottom={5} width={'80%'} margin={'auto'}>
         <Text
-          color={'neutral.800'}
+          color={'neural.10'}
           fontSize={'22px'}
           fontWeight={600}
           lineHeight={'46px'}
@@ -33,9 +33,10 @@ const renderItemSlider = ({ item, index }) => {
   );
 };
 
-const Intro = ({ navigation }: IntroProps) => {
+const Intro = () => {
   const [index, setIndex] = useState(0);
   const refCarousel = useRef<Carousel<any>>(null);
+  const navigation = useNavigation();
 
   const nextSlider = () => {
     if (index !== slider.length - 1) {
@@ -43,18 +44,21 @@ const Intro = ({ navigation }: IntroProps) => {
       setIndex(nextSlideIndex);
       refCarousel?.current?.snapToItem(nextSlideIndex);
     } else {
-      navigation.navigate(AUTH);
+      navigation.navigate(AUTH, {});
     }
   };
 
   return (
-    <VStack height={height} bgColor={'white'} justifyContent={'space-evenly'}>
+    <VStack
+      height={height}
+      bgColor={'neural.1'}
+      justifyContent={'space-evenly'}>
       <VStack safeAreaY={10} flex={1}>
         <Pressable
           px={4}
           mt={10}
           onPress={() => {
-            return navigation.navigate(AUTH);
+            return navigation.navigate(AUTH, {});
           }}>
           <Text
             fontStyle={'normal'}
@@ -62,7 +66,7 @@ const Intro = ({ navigation }: IntroProps) => {
             fontWeight={600}
             lineHeight={'22px'}
             textAlign={'right'}
-            color={'#0E3C9E'}>
+            color={'primary.31'}>
             Skip
           </Text>
         </Pressable>
@@ -81,14 +85,14 @@ const Intro = ({ navigation }: IntroProps) => {
           dotStyle={{
             height: 8,
             width: 40,
-            backgroundColor: '#216BCD',
+            backgroundColor: '#0E3C9E',
             marginHorizontal: -4,
             borderRadius: 4,
           }}
           inactiveDotStyle={{
             height: 8,
             width: 8,
-            backgroundColor: '#D9D9D9',
+            backgroundColor: '#E6E9F6',
             marginHorizontal: -4,
             borderRadius: 4,
           }}
@@ -100,16 +104,16 @@ const Intro = ({ navigation }: IntroProps) => {
       <Box marginBottom={8} paddingBottom={8} safeAreaX={4}>
         <TouchableOpacity>
           <Button
-            bgColor={'#216BCD'}
+            bgColor={'primary.21'}
             borderRadius={'8px'}
             height={'48px'}
+            onPress={nextSlider}
             _text={{
               fontSize: '14px',
               fontWeight: 400,
               fontStyle: 'normal',
-              color: '#FDFDFD',
-            }}
-            onPress={nextSlider}>
+              color: 'neural.1',
+            }}>
             {index === slider.length - 1 ? 'Bắt đầu' : 'Tiếp theo'}
           </Button>
         </TouchableOpacity>

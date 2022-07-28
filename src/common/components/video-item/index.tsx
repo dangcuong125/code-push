@@ -5,18 +5,14 @@ import { VIDEO_ROUTE } from '../../constants/route.constants';
 import { TouchableOpacity } from 'react-native';
 
 const VideoItem = ({ item }) => {
-  const navigator = useNavigation();
+  const navigation = useNavigation();
 
   return (
-    <Box
-      width={270}
-      marginLeft={4}
-    >
+    <Box width={270} marginLeft={4}>
       <TouchableOpacity
         onPress={() =>
-          navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
-        }
-      >
+          navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
+        }>
         <VStack space={3}>
           <Image
             source={{ uri: item?.thumbnails.medium.url }}
@@ -59,7 +55,9 @@ const VideoItem = ({ item }) => {
               fontWeight: 600,
               lineHeight: '20px',
             }}
-          >
+            onPress={() =>
+              navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
+            }>
             Bắt đầu ngay
           </Button>
         </VStack>

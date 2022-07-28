@@ -31,7 +31,7 @@ const OpenDashboard = () => {
 
   return (
     <VStack
-      bgColor={'white'}
+      bgColor={'neural.1'}
       height={'100%'}
       justifyContent={'flex-start'}
       space={12}
@@ -52,7 +52,7 @@ const OpenDashboard = () => {
           fontStyle={'normal'}
           fontSize={'22px'}
           fontWeight={600}
-          color={'neutral.800'}
+          color={'neural.10'}
           lineHeight={'46px'}>
           Chào buổi sáng, {fullname}
         </Heading>
@@ -63,24 +63,24 @@ const OpenDashboard = () => {
           fontSize={'18px'}
           fontWeight={300}
           lineHeight={'25px'}
-          color={'neutral.800'}
+          color={'neural.10'}
           marginTop={'15px'}>
-          Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is
-          simply dummy
+          Chào bạn đến với ứng dụng học Tiếng Anh của chúng tôi, hãy bắt đầu
+          trải nghiệm nào...
         </Text>
       </Center>
 
       <Button
-        bgColor={'#216BCD'}
+        bgColor={'primary.21'}
         borderRadius={'8px'}
         height={'48px'}
         _text={{
           fontSize: '14px',
           fontWeight: 400,
           fontStyle: 'normal',
-          color: '#FDFDFD',
+          color: 'neural.1',
         }}
-        onPress={() => navigator.navigate(TAB_BOTTOM)}>
+        onPress={() => navigator.navigate(TAB_BOTTOM, {})}>
         Bắt đầu ngay
       </Button>
     </VStack>
