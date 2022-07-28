@@ -32,7 +32,7 @@ import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuthGoogle } from './slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
+// import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -268,7 +268,8 @@ const Auth = () => {
               </Text>
             </HStack>
           </Button>
-          <LoginButton
+
+          {/* <LoginButton
             onLoginFinished={(error, result) => {
               if (error) {
                 console.log('login err' + error);
@@ -295,7 +296,7 @@ const Auth = () => {
               }
             }}
             onLogoutFinished={() => console.log('logout')}
-          />
+          /> */}
 
           {/* 🎉 Feature login with Apple */}
           {isIOS && (
