@@ -17,7 +17,7 @@ const PlayingVideo = () => {
 
   const dispatch = useAppDispatch();
 
-  const [paramsVideo, setParamsVideo] = useState(() => id);
+  const [paramsVideo, setParamsVideo] = useState(id);
   const { data } = useGetVideoItem(paramsVideo);
 
   useEffect(() => {

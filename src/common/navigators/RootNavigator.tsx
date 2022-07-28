@@ -36,9 +36,9 @@ import {
 export type RootStackParamList = {
   SplashLoading: {};
   Intro: { navigation: any };
-  Auth: { navigation: any };
+  Auth: {};
   OpenDashboard: {};
-  InputOTP: { navigation: any; confirmation: any };
+  InputOTP: { navigation: any; messageCode: any };
   CreateAccount: {};
   RegisterSuccess: {};
   LevelTopic: {};
@@ -53,8 +53,6 @@ export type RootStackParamList = {
   StartDashboard: {};
 };
 
-export type IntroProps = NativeStackScreenProps<RootStackParamList, 'Intro'>;
-export type AuthProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
 export type InputOTPProps = NativeStackScreenProps<
   RootStackParamList,
   'InputOTP'

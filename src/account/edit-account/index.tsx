@@ -40,7 +40,7 @@ const EditAccount = () => {
   }
 
   useEffect(() => {
-    // setAvatar(DataInfoUser?.data.avatar.url);
+    setAvatar(DataInfoUser?.data.avatar.url);
     setInfoUser({
       ...infoUser,
       avatarId: DataInfoUser?.data.avatar.id,
@@ -53,7 +53,6 @@ const EditAccount = () => {
   const navigator = useNavigation();
 
   const handleSubmitInfoUser = () => {
-    console.log({ infoUser });
     if (!infoUser.email || !infoUser.phone || !infoUser.fullname) {
       Alert.alert('Bạn vui lòng nhập đủ thông tin rồi lưu nhé! ⛔️');
     }
@@ -274,9 +273,12 @@ const EditAccount = () => {
         <Popup
           showModal={showModalNotify}
           setShowModal={setShowModalNotify}
-          isSuccess={false}
+          isSuccess={true}
           title="Thành công"
           description="Bạn đã cập nhật tài khoản thành công!"
+          textButton="Xác nhận"
+          colorButton={'popup.success'}
+          textClose=""
           icon={imageNotify.SUCCESS}
           onPress={handleNavigate}
         />

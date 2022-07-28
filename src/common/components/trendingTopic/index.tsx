@@ -10,6 +10,7 @@ type PopularTopicsProps = {
 } & any;
 
 export const PopularTopics = ({
+  item,
   contentTopic,
   imageSrc,
   onPress,
@@ -23,7 +24,7 @@ export const PopularTopics = ({
       borderColor="#E6E6E6"
       borderRadius={'10px'}
       {...rest}>
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity onPress={() => onPress(item)}>
         <HStack
           safeAreaX={2}
           justifyContent={'space-evenly'}

@@ -33,7 +33,6 @@ const Language = ({ showModal, setShowModal }) => {
               <Ionicons
                 name="close-circle"
                 size={22}
-                color={'neural.5'}
                 onPress={() => setShowModal(false)}
               />
             </HStack>

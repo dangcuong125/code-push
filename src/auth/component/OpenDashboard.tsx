@@ -4,7 +4,6 @@ import { Button, Center, Heading, Text, VStack } from 'native-base';
 import { Dimensions, Image } from 'react-native';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
@@ -15,20 +14,9 @@ const OpenDashboard = () => {
   const navigator = useNavigation();
   const { fullname } = useAppSelector(state => state.authReducer);
 
-  // const getData = async () => {
-  //   try {
-  //     const valueToken = await AsyncStorage.getItem('token_App');
-  //     if (valueToken) {
-  //       Alert.alert(valueToken);
-  //     }
-  //   } catch (error) {
-  //     Alert.alert('Error!!!')
-  //   }
-  // }
-
   return (
     <VStack
-      bgColor={'white'}
+      bgColor={'neural.1'}
       height={'100%'}
       justifyContent={'flex-start'}
       space={12}
@@ -49,7 +37,7 @@ const OpenDashboard = () => {
           fontStyle={'normal'}
           fontSize={'22px'}
           fontWeight={600}
-          color={'neutral.800'}
+          color={'neural.10'}
           lineHeight={'46px'}>
           Chào buổi sáng, {fullname}
         </Heading>
@@ -60,24 +48,23 @@ const OpenDashboard = () => {
           fontSize={'18px'}
           fontWeight={300}
           lineHeight={'25px'}
-          color={'neutral.800'}
+          color={'neural.10'}
           marginTop={'15px'}>
-          Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is
-          simply dummy
+          Chào bạn đến với ứng dụng học Tiếng Anh của chúng tôi, hãy bắt đầu trải nghiệm nào...
         </Text>
       </Center>
 
       <Button
-        bgColor={'#216BCD'}
+        bgColor={'primary.21'}
         borderRadius={'8px'}
         height={'48px'}
         _text={{
           fontSize: '14px',
           fontWeight: 400,
           fontStyle: 'normal',
-          color: '#FDFDFD',
+          color: 'neural.1',
         }}
-        onPress={() => navigator.navigate(TAB_BOTTOM)}>
+        onPress={() => navigator.navigate(TAB_BOTTOM, {})}>
         Bắt đầu ngay
       </Button>
     </VStack>

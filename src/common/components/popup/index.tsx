@@ -6,7 +6,7 @@ import {
   Modal,
   ScrollView,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { Fragment } from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -18,6 +18,9 @@ const Popup = ({
   onPress,
   title,
   description,
+  textButton,
+  colorButton,
+  textClose,
   icon,
 }) => {
   return (
@@ -37,6 +40,8 @@ const Popup = ({
                 source={icon}
                 height={20}
                 width={20}
+                resizeMode={'contain'}
+                alt={'image'}
               />
               <Heading
                 fontStyle={'normal'}
@@ -57,7 +62,7 @@ const Popup = ({
                 {description}
               </Text>
               <Button
-                colorScheme="success"
+                bgColor={colorButton}
                 width={'65%'}
                 borderRadius={'8px'}
                 _text={{
@@ -71,17 +76,19 @@ const Popup = ({
                   setShowModal(false);
                   onPress();
                 }}>
-                Xác nhận
+                {textButton}
               </Button>
-              {isSuccess && (
-                <TouchableOpacity>
+              {!isSuccess && (
+                <TouchableOpacity
+                  onPress={() => setShowModal(false)}
+                >
                   <Text
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={600}
                     lineHeight={'30px'}
-                    color={'primary.21'}>
-                    Thoát
+                    color={'neural.10'}>
+                    {textClose}
                   </Text>
                 </TouchableOpacity>
               )}

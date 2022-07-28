@@ -28,7 +28,7 @@ const VideoItem = ({ item }) => {
             fontWeight={600}
             color={'#1A1A1A'}
             numberOfLines={2}>
-            {item.name}
+            {item.desc}
           </Heading>
           <HStack justifyContent={'space-between'}>
             <HStack space={1.5} alignItems={'center'}>

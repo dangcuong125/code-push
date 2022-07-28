@@ -6,8 +6,8 @@ import React from 'react';
 import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
 import { useGetPopularTopics } from '@clvtube/common/hooks/useGetPopularTopics';
 
-const PopularVideo = () => {
-  const navigator = useNavigation();
+const PopularTopic = () => {
+  const navigation = useNavigation();
   const { data: DataPopularTopic } = useGetPopularTopics('en', 1, 4);
 
   return (
@@ -28,9 +28,11 @@ const PopularVideo = () => {
                 return (
                   <PopularTopics
                     item={item}
-                    contentTopic={item.name}
+                    contentTopic={item.topic_key}
                     imageSrc={imagePodcast.MATH_PODCAST}
-                    onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}
+                    onPress={(item: any) => {
+                      navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
+                    }}
                   />
                 );
               }
@@ -45,9 +47,11 @@ const PopularVideo = () => {
                 return (
                   <PopularTopics
                     item={item}
-                    contentTopic={item.name}
+                    contentTopic={item.topic_key}
                     imageSrc={imagePodcast.MATH_PODCAST}
-                    onPress={() => navigator.navigate(VIDEO_ROUTE.VIDEO_LIST, {})}
+                    onPress={(item: any) => {
+                      navigation.navigate(VIDEO_ROUTE.VIDEO_LIST, { item });
+                    }}
                   />
                 );
               }
@@ -59,4 +63,4 @@ const PopularVideo = () => {
     </VStack>
   );
 };
-export default PopularVideo;
+export default PopularTopic;

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Box, Heading, HStack, ScrollView, Text, VStack } from 'native-base';
+import { Avatar, Box, HStack, Heading, ScrollView, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
@@ -17,22 +17,29 @@ import SettingNotify from '@clvtube/account/component/SettingNotify';
 import DarkMode from '@clvtube/account/component/DarkMode';
 import Language from '@clvtube/account/component/Language';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
-import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
+import { ACCOUNT_ROUTE, AUTH } from '../../common/constants/route.constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Popup from '@clvtube/common/components/popup';
+import { imageNotify } from '@clvtube/common/constants/imagePath';
 
 const Account = () => {
   const [showModalSettingNotify, setShowModalSettingNotify] =
     useState<boolean>(false);
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
   const [showModalDarkMode, setShowModalDarkMode] = useState<boolean>(false);
+  const [showModalLogout, setShowModalLogout] = useState<boolean>(false);
   const [levelUser, setLevelUser] = useState('');
   const [avatar, setAvatar] = useState('');
-
-  console.log({ avatar });
 
   const authState = useAppSelector(state => state.authReducer);
   const { data: DataInfoUser } = useGetInfoUser();
 
   const navigator = useNavigation();
+
+  const handleLogoutApp = async () => {
+    await AsyncStorage.clear();
+    navigator.navigate(AUTH, {});
+  };
 
   useEffect(() => {
     console.log({ userTaodzo: DataInfoUser?.data });
@@ -253,8 +260,10 @@ const Account = () => {
             </Box>
           </TouchableOpacity>
 
-          {/* Logout */}
-          <TouchableOpacity>
+          {/* 🏆 Logout */}
+          <TouchableOpacity
+            onPress={() => setShowModalLogout(true)}
+          >
             <Box height={'57px'} px={5} marginTop={2} borderRadius={'13px'}>
               <HStack
                 height={'100%'}
@@ -272,6 +281,20 @@ const Account = () => {
               </HStack>
             </Box>
           </TouchableOpacity>
+          {showModalLogout && (
+            <Popup
+              showModal={showModalLogout}
+              setShowModal={setShowModalLogout}
+              isSuccess={false}
+              title="Đăng xuất"
+              description="Bạn chắc chắn muốn đăng xuất?"
+              textButton="Đăng xuất"
+              colorButton={'popup.warning'}
+              textClose='Huỷ'
+              icon={imageNotify.WARNING}
+              onPress={handleLogoutApp}
+            />
+          )}
         </VStack>
       </VStack>
     </ScrollView>

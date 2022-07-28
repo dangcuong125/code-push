@@ -1,4 +1,4 @@
-import { Alert, Center, Heading, HStack, Text, VStack } from 'native-base';
+import { Alert, Center, HStack, Heading, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 
@@ -89,6 +89,7 @@ const ListVideo = () => {
         videos && (
           <FlatList
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             data={videos}
             renderItem={({ item }) => {
               return <VideoItem item={item} />;

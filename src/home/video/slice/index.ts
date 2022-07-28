@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   topics: [],
   videos: [],
+  videosFeature: [],
   topicPicking: 'All',
 };
 
@@ -39,10 +40,18 @@ const videoSlice = createSlice({
     updateVideosData: (state, action) => {
       state.videos = action.payload;
     },
+    updateVideosFeature: (state, action) => {
+      state.videosFeature = action.payload;
+    },
   },
 });
 
 export const {
-  actions: { updateTopicsData, selectTopic, updateVideosData },
+  actions: {
+    updateTopicsData,
+    selectTopic,
+    updateVideosData,
+    updateVideosFeature,
+  },
   reducer,
 } = videoSlice;

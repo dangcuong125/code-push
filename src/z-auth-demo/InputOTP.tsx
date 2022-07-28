@@ -1,6 +1,7 @@
-import { HOME_NAVIGATOR } from '@clvtube/common/constants/route.constants';
 import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
+
 import React, { useEffect, useRef, useState } from 'react';
+import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -10,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
 
 export interface InputReference extends TextInput {
   value: string;
@@ -28,7 +30,7 @@ function InputOTP({ navigation }: InputOTPProps) {
   // const [confirm, setConfirm] = useState(confirmation)
 
   useEffect(() => {
-    clockCall = setInterval(() => {
+    const clockCall = setInterval(() => {
       decrementClock();
     }, 1000);
     return () => {
@@ -71,7 +73,7 @@ function InputOTP({ navigation }: InputOTPProps) {
         // const response = await confirm.confirm(internalValue)
         // const authData = JSON.parse(response)
         // if(!lodash.isEmpty(authData.user)){
-        navigation.navigate(HOME_NAVIGATOR, {});
+        navigation.navigate(TAB_BOTTOM, {});
         // }
       } catch (error) {
         Alert.alert(JSON.stringify(error));
