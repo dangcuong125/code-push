@@ -4,4 +4,5 @@ export interface IUserAccount {
   fullname: string;
   firIdToken: string;
   isTypeAuthPhone: boolean;
+  tokenApp: string;
 }

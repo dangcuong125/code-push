@@ -26,6 +26,7 @@ export interface IInitialState {
   videoTypeCarousel: IVideoTypeCarousel[];
   videoList: IVideoListCarousel[];
   podcastTypeCarousel: IVideoTypeCarousel[];
+  saveRecentVideoAndPodcast: any;
 }
 export interface IVideoListCarouselProps {
   item: IVideoListCarousel;

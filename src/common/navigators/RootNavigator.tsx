@@ -14,6 +14,7 @@ import RegisterSuccess from '@clvtube/auth/component/RegisterSuccess';
 import LevelTopic from '@clvtube/level-topic';
 import Intro from '@clvtube/intro/component/Intro';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
+import PlayingVideo from '@clvtube/video-detail/playingVideo';
 
 import TabBottom from './TabBottom';
 
@@ -31,6 +32,7 @@ import {
   REGISTER_SUCCESS,
   SPLASH_LOADING,
   TAB_BOTTOM,
+  VIDEO_ROUTE,
 } from '../constants/route.constants';
 
 export type RootStackParamList = {
@@ -120,6 +122,11 @@ const RootNavigator = () => {
       <Stack.Screen
         name={TAB_BOTTOM}
         component={TabBottom}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={VIDEO_ROUTE.VIDEO_PLAYING}
+        component={PlayingVideo}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

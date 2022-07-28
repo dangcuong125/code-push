@@ -3,13 +3,17 @@
 /* eslint-disable array-callback-return */
 import { Box, Image, Skeleton, Text } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import TrackPlayer, {
   Capability,
   useProgress,
 } from 'react-native-track-player';
 import { useGetPodcastDetail } from '../hooks/useGetPodcastDetail';
-import { IPodcastDetail, ITranscriptItem } from '../interface';
+import {
+  IPodcastDetail,
+  ITranscriptItem,
+  PodcastDetailProps,
+} from '../interface';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
@@ -19,6 +23,7 @@ import {
 } from '../reducer/podcastDetail';
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HeaderPodcast = React.memo(function HeaderPodcast({
   podcastDetail,
@@ -56,7 +61,9 @@ const FooterPodcast = React.memo(function FooterPodcast() {
   return <Box height="200px"></Box>;
 });
 
-const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
+const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
+  navigation,
+}: PodcastDetailProps) {
   const dispatch = useAppDispatch();
   const ref = useRef<FlatList>(null);
   const [currentPosition, setCurrentPosition] = useState(0);
@@ -67,7 +74,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     state => state.podcastDetail.heightOfParagraph,
   );
 
-  const { data, isLoading } = useGetPodcastDetail(id);
+  const { data, isLoading, error } = useGetPodcastDetail(id);
   const podcastDetail = data?.data;
 
   const duration = useProgress(300).duration;
@@ -80,6 +87,15 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     artist: 'Gutenburg',
     artwork: podcastDetail?.thumbnail?.url,
   };
+  if (error) {
+    Alert.alert('Error', 'Oops, something went wrong', [
+      {
+        text: 'Ok',
+        onPress: () => navigation.goBack(),
+        style: 'cancel',
+      },
+    ]);
+  }
 
   const setUpPlayer = async () => {
     await TrackPlayer.updateOptions({
@@ -108,6 +124,22 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning() {
     await TrackPlayer.reset();
     // await TrackPlayer.stop();
   };
+  // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
+  const recentVideoAndPodcast = useAppSelector(
+    state => state.homePage.saveRecentVideoAndPodcast,
+  );
+  // console.log('test', recentVideoAndPodcast);
+
+  const recentVideoAndPodcastWithoutDuplicate = [
+    ...new Set(recentVideoAndPodcast),
+  ].slice(0, 5);
+  const storeRecentVideoAndPodcast = async () => {
+    await AsyncStorage.setItem(
+      'recentVideoAndPodcast',
+      JSON.stringify(recentVideoAndPodcastWithoutDuplicate),
+    );
+  };
+  if (data) storeRecentVideoAndPodcast();
   const renderItem = ({
     item,
     index,

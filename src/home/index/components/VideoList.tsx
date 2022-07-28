@@ -2,29 +2,36 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, ScrollView } from 'react-native';
 import {
-  Box,
   Button,
   Center,
   HStack,
   Heading,
   Image,
+  Pressable,
   Text,
   VStack,
 } from 'native-base';
 
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { receiveTopicsVideo, selectOnlyOneTypeVideo } from '../redux/homePage';
+import {
+  getRecentVideoAndPodcast,
+  receiveTopicsVideo,
+  selectOnlyOneTypeVideo,
+} from '../redux/homePage';
 
 import {
   // IVideoListCarousel,
+  HomePageProps,
   IVideoTypeCarousel,
   VideoTypeCarouselProps,
 } from '../interfaces';
 
 import { useGetAllTopics } from '@clvtube/common/hooks/useGetAllTopics';
 import { useGetVideoList } from '@clvtube/common/hooks/useGetVideoList';
-
+import {
+  VIDEO_ROUTE,
+} from '@clvtube/common/constants/route.constants';
 import { useTranslation } from 'react-i18next';
 
 const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
@@ -49,7 +56,7 @@ const VideoTypeCarousel = ({ item, onPress }: VideoTypeCarouselProps) => {
   );
 };
 
-export const VideoList = () => {
+export const VideoList = ({ navigation }: HomePageProps) => {
   const { t } = useTranslation();
   const [topicKey, setTopicKey] = useState('');
   const { data } = useGetAllTopics('en', 1, 100);
@@ -109,17 +116,29 @@ export const VideoList = () => {
         />
         <ScrollView
           horizontal={
-            videoListCarousel?.length > 0 ? isHorizontal : !isHorizontal
+            videoListCarousel?.length === 0 ? !isHorizontal : isHorizontal
           }>
-          <VStack safeAreaX={4} space={5}>
-            {videoListCarousel?.length === 0 ? (
-              <Text textAlign="center" color="text.200">
-                {t('alertNoVideo')}
-              </Text>
-            ) : (
-              videoListCarousel?.map((video: any, index: number) => (
-                <Box
+          {videoListCarousel?.length === 0 ? (
+            <Text textAlign="center" color="text.200">
+              {t('alertNoVideo')}
+            </Text>
+          ) : (
+            videoListCarousel?.map((video: any, index: number) => {
+              const videoToPushToRecentArray = {
+                item: video,
+                type: 'video',
+              };
+              return (
+                <Pressable
                   mt={4}
+                  onPress={() => {
+                    navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
+                      id: video?.id,
+                    });
+                    dispatch(
+                      getRecentVideoAndPodcast(videoToPushToRecentArray),
+                    );
+                  }}
                   width={'222px'}
                   key={index}
                   px={4}
@@ -152,10 +171,10 @@ export const VideoList = () => {
                       {video.desc}
                     </Text>
                   </Center>
-                </Box>
-              ))
-            )}
-          </VStack>
+                </Pressable>
+              );
+            })
+          )}
         </ScrollView>
       </VStack>
     </VStack>

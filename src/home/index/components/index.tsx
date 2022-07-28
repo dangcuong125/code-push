@@ -31,8 +31,8 @@ const HomePage = ({ navigation, route }: HomePageProps) => {
           <SearchHeader />
           <Welcome />
         </VStack>
-        <VideoList />
-        <Recently />
+        <VideoList navigation={navigation} route={route} />
+        <Recently route={route} navigation={navigation} />
         <PodcastList navigation={navigation} route={route} />
         {/* <ReviseNewWord /> */}
         {/* <Speak /> */}

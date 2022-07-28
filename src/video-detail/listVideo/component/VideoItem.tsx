@@ -5,14 +5,22 @@ import { TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { VIDEO_ROUTE } from '../../../common/constants/route.constants';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { getRecentVideoAndPodcast } from '@clvtube/home/index/redux/homePage';
 
 const VideoItem = ({ item }) => {
   const navigator = useNavigation();
+  const dispatch = useAppDispatch();
+  const video = {
+    item,
+    type: 'video',
+  };
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id })
-      }>
+      onPress={() => {
+        navigator.navigate(VIDEO_ROUTE.VIDEO_PLAYING, { id: item.id });
+        dispatch(getRecentVideoAndPodcast(video));
+      }}>
       <HStack space={2} marginBottom={4}>
         <Image
           source={{ uri: item?.thumbnails.medium.url }}

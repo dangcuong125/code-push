@@ -20,8 +20,8 @@ const SplashLoading = () => {
   useEffect(() => {
     dispatch(
       updateAccountWithAuthGoogle({
-        email: data?.data.client.email,
-        fullname: data?.data.client.fullname,
+        email: data?.data?.client?.email || '',
+        fullname: data?.data?.client?.fullname || '',
       }),
     );
   }, [data?.data]);
