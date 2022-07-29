@@ -8,7 +8,7 @@ import {
   Image,
   Input,
   Text,
-  VStack,
+  VStack
 } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
@@ -24,14 +24,14 @@ import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath';
 import {
   CREATE_ACCOUNT,
   INPUT_OTP,
-  OPENDASHBOARD,
+  OPENDASHBOARD
 } from '@clvtube/common/constants/route.constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch } from '../common/hooks/useAppDispatch';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuthGoogle } from './slice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
 // import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
 
 const isIOS = Platform.OS === 'ios';
@@ -79,7 +79,7 @@ const Auth = () => {
         const messageCode = await auth().signInWithPhoneNumber(
           `+84${phoneNumber}`,
         );
-        navigation.navigate(INPUT_OTP, { messageCode });
+        navigation.navigate(INPUT_OTP, { phoneNumber, messageCode });
       }
     } catch (error) {
       console.log(error);
@@ -104,10 +104,9 @@ const Auth = () => {
           );
           await AsyncStorage.setItem('token_App', token.token);
           mutate(token.token, {
-            onSuccess: data => {
-              if (data?.status === 201) {
-                navigation.navigate(OPENDASHBOARD, {});
-              }
+            onSuccess: () => {
+              console.log({ tokenHAHA: token.token });
+              navigation.navigate(OPENDASHBOARD, {});
             },
             onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
           });
@@ -140,7 +139,7 @@ const Auth = () => {
   };
 
   return (
-    <VStack bgColor={'neural.1'} height={'100%'} safeAreaX={4} safeAreaTop={12}>
+    <VStack bgColor={'neural.1'} height={'100%'} safeAreaX={4} safeAreaTop={12} safeAreaBottom={4}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         {/* 🎉 Images Screen Login */}
         <Center height={'250px'}>

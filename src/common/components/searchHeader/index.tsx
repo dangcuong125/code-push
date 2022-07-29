@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Image } from 'react-native';
-import { HStack, Icon, Input } from 'native-base';
+import { HStack, Icon, Image, Input } from 'native-base';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -18,11 +17,10 @@ const SearchHeader = () => {
       {/* Element Logo */}
       <Image
         source={imageLogo.LOGO_MINI}
-        style={{
-          width: 32,
-          height: 32,
-          resizeMode: 'contain',
-        }}
+        width={'32px'}
+        height={'32px'}
+        resizeMode={'contain'}
+        alt={'image'}
       />
       {/* Element Input search */}
       <Input

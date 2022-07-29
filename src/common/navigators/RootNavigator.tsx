@@ -40,7 +40,7 @@ export type RootStackParamList = {
   Intro: { navigation: any };
   Auth: {};
   OpenDashboard: {};
-  InputOTP: { navigation: any; messageCode: any };
+  InputOTP: { navigation: any; phoneNumber: any; messageCode: any };
   CreateAccount: {};
   RegisterSuccess: {};
   LevelTopic: {};

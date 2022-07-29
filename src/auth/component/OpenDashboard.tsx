@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Center, Heading, Text, VStack } from 'native-base';
 import { Dimensions, Image } from 'react-native';
@@ -6,28 +6,46 @@ import { Dimensions, Image } from 'react-native';
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { getTokenApp } from '../slice/index';
+import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
+import { updateAccountUser } from '@clvtube/account/slice';
+import { LEVEL_TOPIC } from '../../common/constants/route.constants';
 
 const { width } = Dimensions.get('screen');
 
 const OpenDashboard = () => {
   const dispatch = useAppDispatch();
-  const navigator = useNavigation();
-  const { fullname } = useAppSelector(state => state.authReducer);
+  const navigation = useNavigation();
+  const [fullname, setFullname] = useState('');
+  const [level, setLevel] = useState('');
+
+  const { data: DataUser } = useGetInfoUser();
   AsyncStorage.getItem('token_App').then(value => dispatch(getTokenApp(value)));
 
-  // const getData = async () => {
-  //   try {
-  //     if (valueToken) {
-  //       Alert.alert(valueToken);
-  //     }
-  //   } catch (error) {
-  //     Alert.alert('Error!!!')
-  //   }
-  // }
+  console.log({ huhu: JSON.stringify(DataUser?.data) });
+
+  const handleNextOpenDasboard = () => {
+    if (level) {
+      navigation.navigate(TAB_BOTTOM, {});
+    } else {
+      navigation.navigate(LEVEL_TOPIC, {});
+    }
+  };
+
+  useEffect(() => {
+    dispatch(updateAccountUser({
+      avatar: DataUser?.data.avatar ? DataUser?.data?.avatar?.url : 'https://imgs.search.brave.com/I__FScJcLzgrOFTjSMIe8924ruM0k0rU3D3qZc4VsY8/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5D/MW92alQ5TkZ6Z0Zy/X3I1LUU5c2h3SGFI/YSZwaWQ9QXBp',
+      avatarId: DataUser?.data.avatar ? DataUser?.data?.avatar?.id : NaN,
+      fullname: DataUser?.data.client.fullname,
+      phone: DataUser?.data.client.phone,
+      email: DataUser?.data.client.email,
+      level: DataUser?.data.levelKey ? DataUser?.data.levelKey : '',
+    }));
+    setLevel(DataUser?.data.levelKey);
+    setFullname(DataUser?.data.client.fullname);
+  }, [DataUser?.data]);
 
   return (
     <VStack
@@ -80,7 +98,7 @@ const OpenDashboard = () => {
           fontStyle: 'normal',
           color: 'neural.1',
         }}
-        onPress={() => navigator.navigate(TAB_BOTTOM, {})}>
+        onPress={handleNextOpenDasboard}>
         Bắt đầu ngay
       </Button>
     </VStack>

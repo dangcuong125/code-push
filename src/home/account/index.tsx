@@ -1,14 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import {
   Avatar,
-  Box,
-  HStack,
-  Heading,
-  ScrollView,
+  Box, Heading, HStack, ScrollView,
   Text,
-  VStack,
+  VStack
 } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
@@ -24,11 +21,11 @@ import SettingNotify from '@clvtube/account/component/SettingNotify';
 
 import DarkMode from '@clvtube/account/component/DarkMode';
 import Language from '@clvtube/account/component/Language';
-import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
-import { ACCOUNT_ROUTE, AUTH } from '../../common/constants/route.constants';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Popup from '@clvtube/common/components/popup';
 import { imageNotify } from '@clvtube/common/constants/imagePath';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ACCOUNT_ROUTE, AUTH } from '../../common/constants/route.constants';
+
 
 const Account = () => {
   const [showModalSettingNotify, setShowModalSettingNotify] =
@@ -36,11 +33,8 @@ const Account = () => {
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
   const [showModalDarkMode, setShowModalDarkMode] = useState<boolean>(false);
   const [showModalLogout, setShowModalLogout] = useState<boolean>(false);
-  const [levelUser, setLevelUser] = useState('');
-  const [avatar, setAvatar] = useState('');
 
-  const authState = useAppSelector(state => state.authReducer);
-  const { data: DataInfoUser } = useGetInfoUser();
+  const accountUser = useAppSelector(state => state.accountReducer);
 
   const navigator = useNavigation();
 
@@ -49,11 +43,9 @@ const Account = () => {
     navigator.navigate(AUTH, {});
   };
 
-  useEffect(() => {
-    console.log({ userTaodzo: DataInfoUser?.data });
-    setLevelUser(DataInfoUser?.data.levelKey);
-    setAvatar(DataInfoUser?.data.avatar.url);
-  }, [DataInfoUser?.data]);
+  // useEffect(() => {
+  //   Alert.alert(JSON.stringify(accountUser));
+  // }, []);
 
   return (
     <ScrollView bgColor={'white'}>
@@ -63,7 +55,7 @@ const Account = () => {
           <Avatar
             bg="amber.500"
             source={{
-              uri: `${avatar}`,
+              uri: accountUser.avatar,
             }}
             size="xl">
             TD
@@ -74,7 +66,7 @@ const Account = () => {
               fontSize={'16px'}
               fontWeight={600}
               color={'#000000'}>
-              {authState.fullname}
+              {accountUser.fullname}
             </Heading>
             <Text
               fontStyle={'normal'}
@@ -88,7 +80,7 @@ const Account = () => {
               fontSize={'12px'}
               fontWeight={400}
               color={'#4D4D4D'}>
-              {authState.email}
+              {accountUser.email}
             </Text>
             <HStack alignItems={'center'}>
               <Ionicons name="md-star-sharp" color={'#FFC107'} size={20} />
@@ -97,7 +89,7 @@ const Account = () => {
                 fontSize={'12px'}
                 fontWeight={400}
                 color={'#4D4D4D'}>
-                Trình độ: {levelUser}
+                Trình độ: {accountUser.level}
               </Text>
             </HStack>
           </VStack>

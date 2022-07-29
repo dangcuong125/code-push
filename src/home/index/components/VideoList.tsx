@@ -158,7 +158,7 @@ export const VideoList = ({ navigation }: HomePageProps) => {
                       resizeMode="contain"
                       width={video?.thumbnails.medium.width}
                       height={video?.thumbnails.medium.height}
-                      alt=""
+                      alt="image"
                     />
                     <Text
                       fontStyle={'normal'}

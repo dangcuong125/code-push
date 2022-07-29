@@ -61,7 +61,7 @@ const PlayingVideo = () => {
   }, [data?.data]);
 
   return (
-    <ScrollView ref={scrollViewRef}>
+    <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false}>
       <VStack bgColor={'#E5E5E5'} width={'100%'} height={'100%'}>
         <VStack
           space={2}

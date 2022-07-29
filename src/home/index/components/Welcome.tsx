@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { Image } from 'react-native';
-import { Center, Heading, Text, VStack } from 'native-base';
+import { Center, Heading, Image, Text, VStack } from 'native-base';
 import Carousel from 'react-native-reanimated-carousel';
 
 import { IDiscountBanner, IDiscountBannerProps } from '../interfaces';
@@ -12,18 +10,16 @@ const DiscountBanner = ({ item }: IDiscountBannerProps) => {
   return (
     <Image
       source={item.image}
-      style={{
-        width: 262,
-        height: 121,
-        resizeMode: 'contain',
-      }}
+      width={'262px'}
+      height={'121px'}
+      resizeMode={'contain'}
+      alt={'image'}
     />
   );
 };
 
 export const Welcome = () => {
-  const { fullname } = useAppSelector(state => state.authReducer);
-  console.log({ fullname });
+  const { fullname } = useAppSelector(state => state.accountReducer);
 
   const renderItem = ({ item }: { item: IDiscountBanner }) => {
     return <DiscountBanner item={item} />;

@@ -25,6 +25,8 @@ import { useGetAllLevels } from './hooks/useLevel';
 import { useGetAllTopics, usePostChooseLevelTopic } from './hooks/useTopic';
 
 import { TAB_BOTTOM } from '../common/constants/route.constants';
+import { useQueryClient } from 'react-query';
+import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 
 const LevelTopic = () => {
   const navigation = useNavigation();
@@ -44,24 +46,9 @@ const LevelTopic = () => {
     dispatch(updateDataTopic(topicData?.data?.items));
   }, [topicData?.data?.items]);
 
+  const queryClient = useQueryClient();
+  const keys = queryClient.getQueryData(QUERY_KEYS.POST_LEVEL_TOPIC);
   const { mutate } = usePostChooseLevelTopic();
-
-  // const filterDataLevel = levelData?.data.items.filter(
-  //   (item: IDataLevelOrTopic) => {
-  //     if (item.enabled === -1) {
-  //       return item;
-  //     }
-  //     return null;
-  //   },
-  // );
-  // const filterDataTopic = topicData?.data.items.filter(
-  //   (item: IDataLevelOrTopic) => {
-  //     if (item.enabled === -1) {
-  //       return item;
-  //     }
-  //     return null;
-  //   },
-  // );
 
   // 🎉 filter data level
   const levelKey = level?.find(item => {
@@ -107,6 +94,9 @@ const LevelTopic = () => {
         onError: err => {
           Alert.alert(`⛔️ ${err}`);
           // navigator.navigate(AUTH);
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries(keys);
         },
       },
     );

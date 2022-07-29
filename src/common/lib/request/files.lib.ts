@@ -4,7 +4,6 @@ import { POST_FILE_PRESIGN } from '../../constants/urlApi.constants';
 
 export async function presignUrl(file: any, axiosInstant?: AxiosStatic) {
   if (file) {
-    console.log('dataImage', file);
     const imgType = file?.filename.split('.')[1].toLowerCase() || 'png';
     try {
       const presignHeaderInfo = await execute.post(POST_FILE_PRESIGN, {

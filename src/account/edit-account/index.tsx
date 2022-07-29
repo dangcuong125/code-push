@@ -9,58 +9,43 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, TouchableOpacity } from 'react-native';
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ChangeAvatar from './component/ChangeAvatar';
 import Popup from '@clvtube/common/components/popup';
 import { ACCOUNT_ROUTE } from '../../common/constants/route.constants';
-import { useGetInfoUser, usePostInfoUser } from '../hooks/useAccount';
+import { usePostInfoUser } from '../hooks/useAccount';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { imageNotify } from '../../common/constants/imagePath';
+import { useQueryClient } from 'react-query';
+import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 
 const EditAccount = () => {
-  const [avatar, setAvatar] = useState('');
+  const accountUser = useAppSelector(state => state.accountReducer);
+  const { isTypeAuthPhone } = useAppSelector(state => state.authReducer);
+  const navigator = useNavigation();
+
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
+  const [avatar, setAvatar] = useState(accountUser.avatar);
   const [infoUser, setInfoUser] = useState({
-    avatarId: 0,
-    email: '',
-    phone: '',
-    fullname: '',
+    avatarId: accountUser.avatarId,
+    fullname: accountUser.fullname,
+    email: accountUser.email,
+    phone: accountUser.phone,
   });
+  const { fullname, email, phone } = infoUser;
 
-  const { isTypeAuthPhone } = useAppSelector(state => state.authReducer);
-  const { data: DataInfoUser } = useGetInfoUser();
+  const queryClient = useQueryClient();
+  const keys = queryClient.getQueryData(QUERY_KEYS.POST_INFO_USER);
   const { mutate } = usePostInfoUser();
-
-  if (isTypeAuthPhone) {
-    Alert.alert('Ban Auth with Phone');
-  }
-
-  useEffect(() => {
-    setAvatar(
-      DataInfoUser?.data.avatar.url ||
-        'https://imgs.search.brave.com/_iPSRLq_tKl7SJdh_-kZw_VRmELKiJ1WZ3FbSKSWnFQ/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5R/c0hhSnExOHJiNktr/OW5LOXg2ckNnSGFI/YSZwaWQ9QXBp',
-    );
-    setInfoUser({
-      ...infoUser,
-      avatarId: DataInfoUser?.data.avatar.id,
-      email: DataInfoUser?.data.client.email,
-      phone: DataInfoUser?.data.client.phone,
-      fullname: DataInfoUser?.data.client.fullname,
-    });
-  }, [DataInfoUser?.data]);
-
-  const navigator = useNavigation();
 
   const handleSubmitInfoUser = () => {
     if (!infoUser.email || !infoUser.phone || !infoUser.fullname) {
       // Alert.alert('Bạn vui lòng nhập đủ thông tin rồi lưu nhé! ⛔️');
     }
-
-    // dispatch(updateAccountWithAuthGoogle({ fullname: 'taodzo' }));
 
     mutate(
       {
@@ -75,6 +60,9 @@ const EditAccount = () => {
         },
         onError: () => {
           Alert.alert('Error ❌');
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries(keys);
         },
       },
     );
@@ -132,7 +120,7 @@ const EditAccount = () => {
             fontSize={'10px'}
             fontWeight={400}
             color={'#4D4D4D'}>
-            phanthanhtao.taodzo.96@gmail.com
+            {email}
           </Text>
         </VStack>
       </HStack>
@@ -151,7 +139,7 @@ const EditAccount = () => {
           <Input
             type="text"
             name="fullname"
-            value={infoUser.fullname}
+            value={fullname}
             onChangeText={text => setInfoUser({ ...infoUser, fullname: text })}
             borderWidth={'1px'}
             borderColor={'neural.2'}
@@ -186,7 +174,7 @@ const EditAccount = () => {
           <Input
             type="text"
             name="phone"
-            value={infoUser.phone}
+            value={phone}
             isDisabled={isTypeAuthPhone}
             onChangeText={text => setInfoUser({ ...infoUser, phone: text })}
             borderWidth={'1px'}
@@ -222,7 +210,7 @@ const EditAccount = () => {
           <Input
             type="text"
             name="email"
-            value={infoUser.email}
+            value={email}
             isDisabled={!isTypeAuthPhone}
             onChangeText={text => setInfoUser({ ...infoUser, email: text })}
             borderWidth={'1px'}
