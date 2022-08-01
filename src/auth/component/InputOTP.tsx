@@ -5,11 +5,15 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-import { CREATE_ACCOUNT } from '@clvtube/common/constants/route.constants';
+import { CREATE_ACCOUNT, OPENDASHBOARD } from '@clvtube/common/constants/route.constants';
 import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
 import auth from '@react-native-firebase/auth';
 import Popup from '@clvtube/common/components/popup';
 import { imageNotify } from '../../common/constants/imagePath';
+import { useLoginMutation } from '../hook/useAuthMutation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppDispatch } from '../../common/hooks/useAppDispatch';
+import { updateAccountWithAuth } from '../slice';
 
 export interface InputReference extends TextInput {
   value: string;
@@ -18,6 +22,7 @@ export interface InputReference extends TextInput {
 const InputOTP = ({ route, navigation }: InputOTPProps) => {
   const { phoneNumber, messageCode } = route.params;
   const inputRef = useRef<InputReference>(null);
+  const dispatch = useAppDispatch();
 
   const lengthInput = 6;
   const [internalValue, setInternalValue] = useState<string>('');
@@ -25,6 +30,8 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
   const [resendOTP, setResendOTP] = useState<boolean>(false);
   const [confirm] = useState(messageCode);
   const [showModal, setShowModal] = useState(false);
+
+  const { mutate } = useLoginMutation();
 
   const onChangeText = (value: string) => {
     setInternalValue(value);
@@ -34,7 +41,21 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
     if (internalValue.length === lengthInput) {
       try {
         await confirm.confirm(internalValue);
-        return navigation.navigate(CREATE_ACCOUNT, {});
+        await auth().currentUser?.getIdTokenResult()
+          .then(async data => {
+            dispatch(updateAccountWithAuth({
+              phone: phoneNumber,
+              firIdToken: data.token,
+              isTypeAuthPhone: true,
+            }));
+            await AsyncStorage.setItem('token_App', data.token);
+            mutate(data.token, {
+              onSuccess: () => {
+                navigation.navigate(OPENDASHBOARD, {});
+              },
+              onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
+            });
+          });
       } catch (error) {
         setShowModal(true);
       }
@@ -68,8 +89,14 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
   }, []);
 
   return (
-    <VStack bgColor={'neural.1'} height={'100%'} safeAreaTop={12} safeAreaBottom={4}>
-      <KeyboardAwareScrollView extraScrollHeight={50} showsVerticalScrollIndicator={false}>
+    <VStack
+      bgColor={'neural.1'}
+      height={'100%'}
+      safeAreaTop={12}
+      safeAreaBottom={4}>
+      <KeyboardAwareScrollView
+        extraScrollHeight={50}
+        showsVerticalScrollIndicator={false}>
         <VStack safeAreaX={4}>
           <Box mt={5}>
             <AntDesign
@@ -93,7 +120,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               fontWeight={500}
               color={'neural.10'}
               textAlign={'center'}>
-              Nhập mã OTP đã được gửi về số điện thoại của bạn lor
+              Nhập mã OTP đã được gửi về số điện thoại của bạn
             </Text>
           </Center>
         </VStack>
@@ -191,12 +218,8 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
               color={'neural.10'}>
               Không nhận được tin nhắn? {''}
               <TouchableOpacity
-                onPress={resendOTP ? handleResendOTP : undefined}
-              >
-                <Text
-                  color={'primary.11'}
-                  textDecorationLine={'underline'}
-                >
+                onPress={resendOTP ? handleResendOTP : undefined}>
+                <Text color={'primary.11'} textDecorationLine={'underline'}>
                   Gửi lại
                 </Text>
               </TouchableOpacity>
@@ -204,22 +227,20 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
           </Center>
         </VStack>
       </KeyboardAwareScrollView>
-      {
-        showModal && (
-          <Popup
-            showModal={showModal}
-            setShowModal={setShowModal}
-            isSuccess={false}
-            title={'OTP không đúng'}
-            description={'Bạn kiểm tra lại mã xác thực đã gửi đến số điện thoại!'}
-            onPress={() => {}}
-            textButton={'Ok'}
-            colorButton={'popup.error'}
-            textClose={''}
-            icon={imageNotify.ERROR}
-          />
-        )
-      }
+      {showModal && (
+        <Popup
+          showModal={showModal}
+          setShowModal={setShowModal}
+          isSuccess={false}
+          title={'OTP không đúng'}
+          description={'Bạn kiểm tra lại mã xác thực đã gửi đến số điện thoại!'}
+          onPress={() => {}}
+          textButton={'Ok'}
+          colorButton={'popup.error'}
+          textClose={''}
+          icon={imageNotify.ERROR}
+        />
+      )}
     </VStack>
   );
 };

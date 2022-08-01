@@ -11,7 +11,7 @@ import {
   VStack
 } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // 🚀 import component auth with firebase
@@ -28,11 +28,11 @@ import {
 } from '@clvtube/common/constants/route.constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 import { useAppDispatch } from '../common/hooks/useAppDispatch';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
-import { updateAccountWithAuthGoogle } from './slice';
-// import { AccessToken, LoginButton } from 'react-native-fbsdk-next';
+import { updateAccountWithAuth } from './slice';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -92,11 +92,10 @@ const Auth = () => {
       const { idToken } = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const idGoogle = await auth().signInWithCredential(googleCredential);
-      auth()
-        .currentUser?.getIdTokenResult()
+      auth().currentUser?.getIdTokenResult()
         .then(async token => {
           dispatch(
-            updateAccountWithAuthGoogle({
+            updateAccountWithAuth({
               email: idGoogle.user.email,
               fullname: idGoogle.user.displayName,
               firIdToken: token.token,
@@ -105,7 +104,6 @@ const Auth = () => {
           await AsyncStorage.setItem('token_App', token.token);
           mutate(token.token, {
             onSuccess: () => {
-              console.log({ tokenHAHA: token.token });
               navigation.navigate(OPENDASHBOARD, {});
             },
             onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
@@ -115,6 +113,35 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // 🎉 Event auth with Facebook
+  const handleLoginWithFb = async () => {
+    // Attempt login with permissions
+    const result = await LoginManager.logInWithPermissions([
+      'public_profile',
+      'email',
+    ]);
+    if (result.isCancelled) {
+      console.log('User cancelled the login process');
+    }
+    // Once signed in, get the users AccesToken
+    const data = await AccessToken.getCurrentAccessToken();
+    if (!data) {
+      console.log('Something went wrong obtaining access token');
+      return;
+    }
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential = auth.FacebookAuthProvider.credential(
+      data.accessToken,
+    );
+    console.log(data, 'data');
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(facebookCredential).then(data => {
+      data.user.getIdTokenResult().then(token => {
+        console.log({ token: token.token });
+      });
+    });
   };
 
   // 🎉 Event auth with Apple
@@ -139,7 +166,12 @@ const Auth = () => {
   };
 
   return (
-    <VStack bgColor={'neural.1'} height={'100%'} safeAreaX={4} safeAreaTop={12} safeAreaBottom={4}>
+    <VStack
+      bgColor={'neural.1'}
+      height={'100%'}
+      safeAreaX={4}
+      safeAreaTop={12}
+      safeAreaBottom={4}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         {/* 🎉 Images Screen Login */}
         <Center height={'250px'}>
@@ -213,60 +245,65 @@ const Auth = () => {
           </Box>
 
           {/* 🎉 Feature login with Google */}
-          <Button
-            height={'48px'}
-            backgroundColor={'transparent'}
-            borderWidth={'1px'}
-            borderColor={'neural.2'}
-            borderRadius={'8px'}
-            onPress={handleLoginWithGoogle}>
-            <HStack
-              space={3}
-              width={'100%'}
-              justifyContent={'flex-start'}
-              alignItems={'center'}>
-              <Image
-                source={imageSocial.GOOGLE}
-                width={'25px'}
-                height={'25px'}
-                resizeMode={'contain'}
-                alt={'image'}
-              />
-              <Text
-                fontStyle={'normal'}
-                fontSize={'14px'}
-                fontWeight={400}
-                color={'neural.10'}>
-                Tiếp tục với Google
-              </Text>
-            </HStack>
-          </Button>
+          <TouchableOpacity>
+            <Button
+              height={'48px'}
+              backgroundColor={'transparent'}
+              borderWidth={'1px'}
+              borderColor={'neural.2'}
+              borderRadius={'8px'}
+              onPress={handleLoginWithGoogle}>
+              <HStack
+                space={3}
+                width={'100%'}
+                justifyContent={'flex-start'}
+                alignItems={'center'}>
+                <Image
+                  source={imageSocial.GOOGLE}
+                  width={'25px'}
+                  height={'25px'}
+                  resizeMode={'contain'}
+                  alt={'image'}
+                />
+                <Text
+                  fontStyle={'normal'}
+                  fontSize={'14px'}
+                  fontWeight={400}
+                  color={'neural.10'}>
+                  Tiếp tục với Google
+                </Text>
+              </HStack>
+            </Button>
+          </TouchableOpacity>
 
           {/* 🎉 Feature login with Facebook */}
-          <Button
-            position={'relative'}
-            height={'48px'}
-            backgroundColor={'transparent'}
-            borderWidth={'1px'}
-            borderColor={'neural.2'}
-            borderRadius={'8px'}>
-            <HStack space={3} justifyContent={'center'} alignItems={'center'}>
-              <Image
-                source={imageSocial.FB}
-                width={'25px'}
-                height={'25px'}
-                resizeMode={'contain'}
-                alt={'image'}
-              />
-              <Text
-                fontStyle={'normal'}
-                fontSize={'14px'}
-                fontWeight={400}
-                color={'neural.10'}>
-                Tiếp tục với Facebook
-              </Text>
-            </HStack>
-          </Button>
+          <TouchableOpacity>
+            <Button
+              position={'relative'}
+              height={'48px'}
+              backgroundColor={'transparent'}
+              borderWidth={'1px'}
+              borderColor={'neural.2'}
+              borderRadius={'8px'}
+              onPress={handleLoginWithFb}>
+              <HStack space={3} justifyContent={'center'} alignItems={'center'}>
+                <Image
+                  source={imageSocial.FB}
+                  width={'25px'}
+                  height={'25px'}
+                  resizeMode={'contain'}
+                  alt={'image'}
+                />
+                <Text
+                  fontStyle={'normal'}
+                  fontSize={'14px'}
+                  fontWeight={400}
+                  color={'neural.10'}>
+                  Tiếp tục với Facebook
+                </Text>
+              </HStack>
+            </Button>
+          </TouchableOpacity>
 
           {/* <LoginButton
             onLoginFinished={(error, result) => {
@@ -299,30 +336,32 @@ const Auth = () => {
 
           {/* 🎉 Feature login with Apple */}
           {isIOS && (
-            <Button
-              height={'48px'}
-              backgroundColor={'transparent'}
-              borderWidth={'1px'}
-              borderColor={'neural.2'}
-              borderRadius={'8px'}
-              onPress={handleLoginWithApple}>
-              <HStack space={3} alignItems={'center'}>
-                <Image
-                  source={imageSocial.APPLE}
-                  width={'25px'}
-                  height={'25px'}
-                  resizeMode={'contain'}
-                  alt={'image'}
-                />
-                <Text
-                  fontStyle={'normal'}
-                  fontSize={'14px'}
-                  fontWeight={400}
-                  color={'neural.10'}>
-                  Tiếp tục với Apple
-                </Text>
-              </HStack>
-            </Button>
+            <TouchableOpacity>
+              <Button
+                height={'48px'}
+                backgroundColor={'transparent'}
+                borderWidth={'1px'}
+                borderColor={'neural.2'}
+                borderRadius={'8px'}
+                onPress={handleLoginWithApple}>
+                <HStack space={3} alignItems={'center'}>
+                  <Image
+                    source={imageSocial.APPLE}
+                    width={'25px'}
+                    height={'25px'}
+                    resizeMode={'contain'}
+                    alt={'image'}
+                  />
+                  <Text
+                    fontStyle={'normal'}
+                    fontSize={'14px'}
+                    fontWeight={400}
+                    color={'neural.10'}>
+                    Tiếp tục với Apple
+                  </Text>
+                </HStack>
+              </Button>
+            </TouchableOpacity>
           )}
 
           {/* 🎉 version Application */}

@@ -5,10 +5,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
-import { updateAccountWithAuthGoogle } from '../slice';
+import { updateAccountWithAuth } from '../slice';
 import { useRegisterMutation } from '../hook/useAuthMutation';
 import { REGISTER_SUCCESS } from '../../common/constants/route.constants';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +17,6 @@ const CreateAccount = () => {
   const navigation = useNavigation();
   const authState = useAppSelector(state => state.authReducer);
   const { phone, email, fullname, firIdToken } = authState;
-  console.log({ authState });
 
   const [account, setAccount] = useState({
     phone: phone || '',
@@ -32,10 +30,6 @@ const CreateAccount = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmitToRegister = async () => {
-    if (!account.phone) {
-      Alert.alert('Bạn vui lòng nhập số điện thoại để đăng ký 📲');
-      return;
-    }
     mutate(
       {
         email: account.email,
@@ -45,17 +39,10 @@ const CreateAccount = () => {
       },
       {
         onSuccess: () => {
-          dispatch(updateAccountWithAuthGoogle(account));
+          dispatch(updateAccountWithAuth(account));
           navigation.navigate(REGISTER_SUCCESS, {});
         },
-        onError: () => {
-          setAccount({
-            ...account,
-            phone: '',
-          });
-          dispatch(updateAccountWithAuthGoogle(account));
-          Alert.alert('Rất tiếc, bạn chưa đăng ký thành công tài khoản! 😒');
-        },
+        onError: () => {},
       },
     );
   };
@@ -64,7 +51,11 @@ const CreateAccount = () => {
     <VStack height={'100%'} safeAreaX={4} safeAreaTop={12} bgColor={'neural.1'}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <Box mt={5}>
-          <AntDesign name="arrowleft" size={25} />
+          <AntDesign
+            name="arrowleft"
+            size={25}
+            onPress={() => navigation.goBack()}
+          />
         </Box>
         <Heading
           width={'50%'}

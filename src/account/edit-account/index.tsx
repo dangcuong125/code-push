@@ -31,10 +31,10 @@ const EditAccount = () => {
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
   const [avatar, setAvatar] = useState(accountUser.avatar);
   const [infoUser, setInfoUser] = useState({
-    avatarId: accountUser.avatarId,
-    fullname: accountUser.fullname,
-    email: accountUser.email,
-    phone: accountUser.phone,
+    avatarId: accountUser?.avatarId,
+    fullname: accountUser?.fullname,
+    email: accountUser?.email,
+    phone: accountUser?.phone,
   });
   const { fullname, email, phone } = infoUser;
 

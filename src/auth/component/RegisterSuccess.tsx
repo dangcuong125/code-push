@@ -50,8 +50,7 @@ const RegisterSuccess = () => {
           lineHeight={'25px'}
           color={'neutral.800'}
           marginTop={'15px'}>
-          Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is
-          simply dummy
+            Chào mừng bạn đến với ứng dụng học tiếng anh, bắt đầu trải nghiệm thôi nào!
         </Text>
       </Center>
 

@@ -1,9 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import {
   Avatar,
-  Box, Heading, HStack, ScrollView,
+  Box,
+  HStack,
+  Heading,
+  ScrollView,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -25,7 +28,6 @@ import Popup from '@clvtube/common/components/popup';
 import { imageNotify } from '@clvtube/common/constants/imagePath';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_ROUTE, AUTH } from '../../common/constants/route.constants';
-
 
 const Account = () => {
   const [showModalSettingNotify, setShowModalSettingNotify] =
@@ -55,7 +57,7 @@ const Account = () => {
           <Avatar
             bg="amber.500"
             source={{
-              uri: accountUser.avatar,
+              uri: accountUser?.avatar,
             }}
             size="xl">
             TD
@@ -66,7 +68,7 @@ const Account = () => {
               fontSize={'16px'}
               fontWeight={600}
               color={'#000000'}>
-              {accountUser.fullname}
+              {accountUser?.fullname}
             </Heading>
             <Text
               fontStyle={'normal'}
@@ -80,7 +82,7 @@ const Account = () => {
               fontSize={'12px'}
               fontWeight={400}
               color={'#4D4D4D'}>
-              {accountUser.email}
+              {accountUser?.email}
             </Text>
             <HStack alignItems={'center'}>
               <Ionicons name="md-star-sharp" color={'#FFC107'} size={20} />
@@ -89,7 +91,7 @@ const Account = () => {
                 fontSize={'12px'}
                 fontWeight={400}
                 color={'#4D4D4D'}>
-                Trình độ: {accountUser.level}
+                Trình độ: {accountUser?.level}
               </Text>
             </HStack>
           </VStack>
