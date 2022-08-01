@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Video from '@clvtube/home/video';
 import ListVideo from '@clvtube/video-detail/listVideo';
+import PlayingVideo from '@clvtube/video-detail/playingVideo';
 
 import { VIDEO_ROUTE } from '../constants/route.constants';
 
@@ -24,6 +25,11 @@ const VideoRoute = () => {
       <Stack.Screen
         name={VIDEO_ROUTE.VIDEO_LIST}
         component={ListVideo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={VIDEO_ROUTE.VIDEO_PLAYING}
+        component={PlayingVideo}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

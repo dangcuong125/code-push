@@ -9,7 +9,7 @@ import PupolarVideo from './component/PupolarVideo';
 
 const VideoList = () => {
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <VStack space={4}>
         <VStack safeAreaTop={10} bgColor={'neural.1'}>
           <SearchHeader />

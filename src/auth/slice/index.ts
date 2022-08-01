@@ -14,7 +14,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    updateAccountWithAuthGoogle: (state: IUserAccount, action: any) => {
+    updateAccountWithAuth: (state: IUserAccount, action: any) => {
       state.phone = action.payload.phone;
       state.email = action.payload.email;
       state.fullname = action.payload.fullname;
@@ -28,6 +28,6 @@ const authSlice = createSlice({
 });
 
 export const {
-  actions: { updateAccountWithAuthGoogle, getTokenApp },
+  actions: { updateAccountWithAuth, getTokenApp },
   reducer,
 } = authSlice;

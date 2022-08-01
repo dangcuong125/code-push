@@ -26,6 +26,7 @@ const PopularTopic = () => {
             if (index === 0 || index === 1) {
               return (
                 <PopularTopics
+                  key={index}
                   item={item}
                   contentTopic={item.topic_key}
                   imageSrc={imagePodcast.MATH_PODCAST}
@@ -43,6 +44,7 @@ const PopularTopic = () => {
             if (index === 2 || index === 3) {
               return (
                 <PopularTopics
+                  key={index}
                   item={item}
                   contentTopic={item.topic_key}
                   imageSrc={imagePodcast.MATH_PODCAST}
