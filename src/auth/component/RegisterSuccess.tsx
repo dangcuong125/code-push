@@ -50,7 +50,8 @@ const RegisterSuccess = () => {
           lineHeight={'25px'}
           color={'neutral.800'}
           marginTop={'15px'}>
-            Chào mừng bạn đến với ứng dụng học tiếng anh, bắt đầu trải nghiệm thôi nào!
+          Chào mừng bạn đến với ứng dụng học tiếng anh, bắt đầu trải nghiệm thôi
+          nào!
         </Text>
       </Center>
 

@@ -5,7 +5,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { imagePath } from '@clvtube/common/constants/imagePath';
-import { CREATE_ACCOUNT, OPENDASHBOARD } from '@clvtube/common/constants/route.constants';
+import {
+  CREATE_ACCOUNT,
+  OPENDASHBOARD,
+} from '@clvtube/common/constants/route.constants';
 import { InputOTPProps } from '@clvtube/common/navigators/RootNavigator';
 import auth from '@react-native-firebase/auth';
 import Popup from '@clvtube/common/components/popup';
@@ -41,13 +44,16 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
     if (internalValue.length === lengthInput) {
       try {
         await confirm.confirm(internalValue);
-        await auth().currentUser?.getIdTokenResult()
+        await auth()
+          .currentUser?.getIdTokenResult()
           .then(async data => {
-            dispatch(updateAccountWithAuth({
-              phone: phoneNumber,
-              firIdToken: data.token,
-              isTypeAuthPhone: true,
-            }));
+            dispatch(
+              updateAccountWithAuth({
+                phone: phoneNumber,
+                firIdToken: data.token,
+                isTypeAuthPhone: true,
+              }),
+            );
             await AsyncStorage.setItem('token_App', data.token);
             mutate(data.token, {
               onSuccess: () => {

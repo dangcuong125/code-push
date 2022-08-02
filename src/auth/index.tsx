@@ -8,7 +8,7 @@ import {
   Image,
   Input,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
@@ -24,7 +24,7 @@ import { imagePath, imageSocial } from '@clvtube/common/constants/imagePath';
 import {
   CREATE_ACCOUNT,
   INPUT_OTP,
-  OPENDASHBOARD
+  OPENDASHBOARD,
 } from '@clvtube/common/constants/route.constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -92,7 +92,8 @@ const Auth = () => {
       const { idToken } = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const idGoogle = await auth().signInWithCredential(googleCredential);
-      auth().currentUser?.getIdTokenResult()
+      auth()
+        .currentUser?.getIdTokenResult()
         .then(async token => {
           dispatch(
             updateAccountWithAuth({
@@ -137,14 +138,17 @@ const Auth = () => {
     );
     console.log(data, 'data');
     // Sign-in the user with the credential
-    return auth().signInWithCredential(facebookCredential).then(data => {
-      data.user.getIdTokenResult()
-        .then(async token => {
-          dispatch(updateAccountWithAuth({
-            fullname: data.user.displayName,
-            email: data.user.email,
-            firIdToken: token.token,
-          }));
+    return auth()
+      .signInWithCredential(facebookCredential)
+      .then(data => {
+        data.user.getIdTokenResult().then(async token => {
+          dispatch(
+            updateAccountWithAuth({
+              fullname: data?.user?.displayName,
+              email: data?.user?.email,
+              firIdToken: token?.token,
+            }),
+          );
           await AsyncStorage.setItem('token_App', token.token);
           mutate(token.token, {
             onSuccess: () => {
@@ -153,7 +157,8 @@ const Auth = () => {
             onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
           });
         });
-    }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   };
 
   // 🎉 Event auth with Apple
@@ -174,14 +179,17 @@ const Auth = () => {
     );
     console.log({ identityToken, nonce });
 
-    return auth().signInWithCredential(appleCredential).then(data => {
-      data.user.getIdTokenResult()
-        .then(async token => {
-          dispatch(updateAccountWithAuth({
-            fullname: data.user.displayName,
-            email: data.user.email,
-            firIdToken: token.token,
-          }));
+    return auth()
+      .signInWithCredential(appleCredential)
+      .then(data => {
+        data.user.getIdTokenResult().then(async token => {
+          dispatch(
+            updateAccountWithAuth({
+              fullname: data?.user?.displayName,
+              email: data?.user?.email,
+              firIdToken: token?.token,
+            }),
+          );
           await AsyncStorage.setItem('token_App', token.token);
           mutate(token.token, {
             onSuccess: () => {
@@ -190,7 +198,8 @@ const Auth = () => {
             onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
           });
         });
-    }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   };
 
   return (
