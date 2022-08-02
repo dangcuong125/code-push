@@ -138,10 +138,22 @@ const Auth = () => {
     console.log(data, 'data');
     // Sign-in the user with the credential
     return auth().signInWithCredential(facebookCredential).then(data => {
-      data.user.getIdTokenResult().then(token => {
-        console.log({ token: token.token });
-      });
-    });
+      data.user.getIdTokenResult()
+        .then(async token => {
+          dispatch(updateAccountWithAuth({
+            fullname: data.user.displayName,
+            email: data.user.email,
+            firIdToken: token.token,
+          }));
+          await AsyncStorage.setItem('token_App', token.token);
+          mutate(token.token, {
+            onSuccess: () => {
+              navigation.navigate(OPENDASHBOARD, {});
+            },
+            onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
+          });
+        });
+    }).catch(err => console.log(err));
   };
 
   // 🎉 Event auth with Apple
@@ -162,7 +174,23 @@ const Auth = () => {
     );
     console.log({ identityToken, nonce });
 
-    return auth().signInWithCredential(appleCredential);
+    return auth().signInWithCredential(appleCredential).then(data => {
+      data.user.getIdTokenResult()
+        .then(async token => {
+          dispatch(updateAccountWithAuth({
+            fullname: data.user.displayName,
+            email: data.user.email,
+            firIdToken: token.token,
+          }));
+          await AsyncStorage.setItem('token_App', token.token);
+          mutate(token.token, {
+            onSuccess: () => {
+              navigation.navigate(OPENDASHBOARD, {});
+            },
+            onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
+          });
+        });
+    }).catch(err => console.log(err));
   };
 
   return (

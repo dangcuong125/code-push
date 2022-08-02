@@ -9,7 +9,7 @@ import { reducer as videoList } from '@clvtube/home/video/reducer/videoList';
 import { reducer as videoReducer } from '@clvtube/home/video/slice';
 import { reducer as videoItemReducer } from '@clvtube/video-detail/playingVideo/slice';
 import { reducer as podcastDetail } from '@clvtube/podcast-detail/reducer/podcastDetail';
-import { reducer as accountReducer } from '@clvtube/account/slice/index';
+import { reducer as accountReducer } from '@clvtube/account/slice';
 
 const rootReducer = combineReducers({
   videoDetails,

@@ -29,14 +29,14 @@ const EditAccount = () => {
 
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [showModalNotify, setShowModalNotify] = useState<Boolean>(false);
-  const [avatar, setAvatar] = useState(accountUser.avatar);
+  const [avatar, setAvatar] = useState(accountUser?.avatar);
   const [infoUser, setInfoUser] = useState({
     avatarId: accountUser?.avatarId,
     fullname: accountUser?.fullname,
     email: accountUser?.email,
     phone: accountUser?.phone,
   });
-  const { fullname, email, phone } = infoUser;
+  const { avatarId, fullname, email, phone } = infoUser;
 
   const queryClient = useQueryClient();
   const keys = queryClient.getQueryData(QUERY_KEYS.POST_INFO_USER);
@@ -237,6 +237,12 @@ const EditAccount = () => {
             bgColor={'#216BCD'}
             borderRadius={'8px'}
             height={'48px'}
+            isDisabled={
+              avatarId === accountUser?.avatarId &&
+              fullname === accountUser?.fullname &&
+              email === accountUser?.email &&
+              phone === accountUser?.phone
+            }
             _text={{
               fontSize: '14px',
               fontWeight: 600,
