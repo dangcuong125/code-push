@@ -11,7 +11,7 @@ import {
   VStack,
 } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
+import { Alert, Platform, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // 🚀 import component auth with firebase
@@ -168,7 +168,7 @@ const Auth = () => {
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
 
-    if (appleAuthRequestResponse.identityToken) {
+    if (!appleAuthRequestResponse.identityToken) {
       throw new Error('Apple undefined login...');
     }
 
@@ -177,29 +177,30 @@ const Auth = () => {
       identityToken,
       nonce,
     );
-    console.log({ identityToken, nonce });
 
     return auth()
       .signInWithCredential(appleCredential)
       .then(data => {
-        data.user.getIdTokenResult().then(async token => {
-          dispatch(
-            updateAccountWithAuth({
-              fullname: data?.user?.displayName,
-              email: data?.user?.email,
-              firIdToken: token?.token,
-            }),
-          );
-          await AsyncStorage.setItem('token_App', token.token);
-          mutate(token.token, {
-            onSuccess: () => {
-              navigation.navigate(OPENDASHBOARD, {});
-            },
-            onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
+        auth()
+          .currentUser?.getIdTokenResult()
+          .then(async token => {
+            dispatch(
+              updateAccountWithAuth({
+                fullname: data?.user?.displayName,
+                email: data?.user?.email,
+                firIdToken: token?.token,
+              }),
+            );
+            await AsyncStorage.setItem('token_App', token.token);
+            mutate(token.token, {
+              onSuccess: () => {
+                navigation.navigate(OPENDASHBOARD, {});
+              },
+              onError: () => navigation.navigate(CREATE_ACCOUNT, {}),
+            });
           });
-        });
       })
-      .catch(err => console.log(err));
+      .catch(err => Alert.alert(err));
   };
 
   return (
