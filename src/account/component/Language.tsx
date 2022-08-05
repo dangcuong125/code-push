@@ -1,10 +1,30 @@
 import { Box, HStack, Heading, Modal, Radio, Text, VStack } from 'native-base';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Language = ({ showModal, setShowModal }) => {
+  const [valueLang, setValueLang] = useState('');
+  const { t, i18n } = useTranslation();
+
+  const handleChangelanguage = async (nextValue: string) => {
+    setValueLang(nextValue);
+    await AsyncStorage.setItem('language', nextValue);
+    i18n.changeLanguage(nextValue);
+  };
+
+  useEffect(() => {
+    const getValueLanguage = async () => {
+      const value = await AsyncStorage.getItem('language');
+      if (value) setValueLang(value);
+      if (!value) setValueLang('vi');
+    };
+    getValueLanguage();
+  }, []);
+
   return (
     <Fragment>
       <Modal
@@ -28,7 +48,7 @@ const Language = ({ showModal, setShowModal }) => {
                 fontWeight={600}
                 lineHeight={'20px'}
                 color={'neural.10'}>
-                Chọn ngôn ngữ chính
+                {t('chooseLanguage')}
               </Heading>
               <Ionicons
                 name="close-circle"
@@ -36,10 +56,14 @@ const Language = ({ showModal, setShowModal }) => {
                 onPress={() => setShowModal(false)}
               />
             </HStack>
-            <Radio.Group name="language">
+            <Radio.Group
+              name="language"
+              value={valueLang}
+              onChange={value => handleChangelanguage(value)}
+            >
               <VStack space={7}>
                 <Radio
-                  value="1"
+                  value='vi'
                   width={'100%'}
                   flexDirection={'row-reverse'}
                   justifyContent={'space-between'}
@@ -61,10 +85,10 @@ const Language = ({ showModal, setShowModal }) => {
                     lineHeight: '19px',
                     color: 'neural.10',
                   }}>
-                  Tiếng Việt
+                  {t('vi')}
                 </Radio>
                 <Radio
-                  value="2"
+                  value='en'
                   width={'100%'}
                   flexDirection={'row-reverse'}
                   justifyContent={'space-between'}
@@ -86,7 +110,7 @@ const Language = ({ showModal, setShowModal }) => {
                     lineHeight: '19px',
                     color: 'neural.10',
                   }}>
-                  Tiếng Anh
+                  {t('en')}
                 </Radio>
               </VStack>
             </Radio.Group>
@@ -98,7 +122,7 @@ const Language = ({ showModal, setShowModal }) => {
                   fontWeight={400}
                   lineHeight={'19px'}
                   color={'neural.10'}>
-                  Chọn ngôn ngữ khác
+                  {t('chooseLanguageAthoner')}
                 </Text>
                 <MaterialIcons name="arrow-forward-ios" size={20} />
               </HStack>

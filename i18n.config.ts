@@ -1,5 +1,5 @@
-import { en, vi } from '@clvtube/common/translations';
 import i18n from 'i18next';
+import { en, vi } from '@clvtube/common/translations';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {

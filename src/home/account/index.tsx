@@ -28,8 +28,10 @@ import Popup from '@clvtube/common/components/popup';
 import { imageNotify } from '@clvtube/common/constants/imagePath';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_ROUTE, AUTH } from '../../common/constants/route.constants';
+import { useTranslation } from 'react-i18next';
 
 const Account = () => {
+  const { t } = useTranslation();
   const [showModalSettingNotify, setShowModalSettingNotify] =
     useState<boolean>(false);
   const [showModalLanguage, setShowModalLanguage] = useState<boolean>(false);
@@ -75,7 +77,7 @@ const Account = () => {
               fontSize={'10px'}
               fontWeight={400}
               color={'#4D4D4D'}>
-              Thành viên mới
+              {t('newMember')}
             </Text>
             <Text
               fontStyle={'normal'}
@@ -91,7 +93,7 @@ const Account = () => {
                 fontSize={'12px'}
                 fontWeight={400}
                 color={'#4D4D4D'}>
-                Trình độ: {accountUser?.level}
+                {t('level')}: {accountUser?.level}
               </Text>
             </HStack>
           </VStack>
@@ -120,7 +122,7 @@ const Account = () => {
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={400}>
-                    Chỉnh sửa tài khoản
+                    {t('editAccount')}
                   </Text>
                 </HStack>
                 <SimpleLineIcons
@@ -150,7 +152,7 @@ const Account = () => {
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={400}>
-                    Thông báo
+                    {t('notification')}
                   </Text>
                 </HStack>
                 <SimpleLineIcons
@@ -182,7 +184,7 @@ const Account = () => {
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={400}>
-                    Ngôn ngữ chính
+                    {t('language')}
                   </Text>
                 </HStack>
                 <SimpleLineIcons
@@ -218,7 +220,7 @@ const Account = () => {
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={400}>
-                    Chế độ nền tối
+                    {t('darkmode')}
                   </Text>
                 </HStack>
                 <SimpleLineIcons
@@ -250,7 +252,7 @@ const Account = () => {
                     fontStyle={'normal'}
                     fontSize={'14px'}
                     fontWeight={400}>
-                    Trung tâm trợ giúp
+                    {t('helpCenter')}
                   </Text>
                 </HStack>
                 <SimpleLineIcons
@@ -276,7 +278,7 @@ const Account = () => {
                   fontStyle={'normal'}
                   fontSize={'14px'}
                   fontWeight={400}>
-                  Đăng xuất
+                  {t('logout')}
                 </Text>
               </HStack>
             </Box>
@@ -286,9 +288,9 @@ const Account = () => {
               showModal={showModalLogout}
               setShowModal={setShowModalLogout}
               isSuccess={false}
-              title="Đăng xuất"
-              description="Bạn chắc chắn muốn đăng xuất?"
-              textButton="Đăng xuất"
+              title={t('logout')}
+              description={t('confirmLogout')}
+              textButton={t('logout')}
               colorButton={'popup.warning'}
               textClose="Huỷ"
               icon={imageNotify.WARNING}
