@@ -13,7 +13,6 @@
   "expiredOTP": "OTP sẽ hết hiệu lực sau",
   "next": "Next",
   "login": "Login",
-  "phoneNumber": "Nhập số điện thoại",
   "confirm": "Confirm",
   "resgister": "Resgister",
   "fullname": "Fullname",
@@ -57,5 +56,6 @@
   "onl": "Turn on",
   "off": "Turn off",
   "cancel": "Cancel",
-  "confirmLogout": "Are you sure you want to sign out?"
+  "confirmLogout": "Are you sure you want to sign out?",
+  "phoneNumber": "Enter your phone number"
 }
