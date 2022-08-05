@@ -32,7 +32,7 @@ export const Welcome = () => {
         fontSize={'24px'}
         fontWeight={600}
         color={'#181818'}>
-        Hi, {fullname}
+        Xin chào, {fullname}
       </Heading>
       <Text
         fontStyle={'normal'}
@@ -40,7 +40,7 @@ export const Welcome = () => {
         fontWeight={400}
         color={'#888888'}
         mt={-2}>
-        What do you want to learn today?
+        Bạn muốn học gì hôm nay?
       </Text>
       <Center>
         <Carousel
