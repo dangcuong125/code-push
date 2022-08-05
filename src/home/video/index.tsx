@@ -3,7 +3,7 @@ import { ScrollView, VStack } from 'native-base';
 
 import SearchHeader from '@clvtube/common/components/searchHeader/index';
 import ListVideo from './component/ListVideo';
-import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
+// import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
 import PopularTopic from './component/PopularTopic';
 import PupolarVideo from './component/PupolarVideo';
 
@@ -17,7 +17,7 @@ const VideoList = () => {
         </VStack>
         <PupolarVideo />
         <ListVideo />
-        <MaybeYouLikeVideo />
+        {/* <MaybeYouLikeVideo /> */}
       </VStack>
     </ScrollView>
   );
