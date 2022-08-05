@@ -33,10 +33,12 @@ import { useAppDispatch } from '../common/hooks/useAppDispatch';
 import { InputReference } from './component/InputOTP';
 import { useLoginMutation } from './hook/useAuthMutation';
 import { updateAccountWithAuth } from './slice';
+import { useTranslation } from 'react-i18next';
 
 const isIOS = Platform.OS === 'ios';
 
 const Auth = () => {
+  const { t } = useTranslation();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [focusInput, setFocusInput] = useState<boolean>(false);
   const inputRef = useRef<InputReference>(null);
@@ -229,7 +231,7 @@ const Auth = () => {
             borderWidth={'1px'}
             borderColor={'neural.2'}
             borderRadius={'8px'}
-            placeholder={focusInput ? '' : 'Nhập số điện thoại'}
+            placeholder={focusInput ? '' : t('phoneNumber')}
             placeholderTextColor={'neural.5'}
             value={phoneNumber}
             onChangeText={onChangePhone}
@@ -259,7 +261,7 @@ const Auth = () => {
               color: 'neural.1',
             }}
             onPress={handleLoginWithPhonenumber}>
-            {phoneNumber ? 'Đăng nhập' : 'Tiếp tục'}
+            {t('login')}
           </Button>
 
           {/* 🎉 Option auth with Social */}
@@ -308,7 +310,7 @@ const Auth = () => {
                   fontSize={'14px'}
                   fontWeight={400}
                   color={'neural.10'}>
-                  Tiếp tục với Google
+                  {t('continue with')} Google
                 </Text>
               </HStack>
             </Button>
@@ -337,7 +339,7 @@ const Auth = () => {
                   fontSize={'14px'}
                   fontWeight={400}
                   color={'neural.10'}>
-                  Tiếp tục với Facebook
+                  {t('continue with')} Facebook
                 </Text>
               </HStack>
             </Button>
@@ -395,7 +397,7 @@ const Auth = () => {
                     fontSize={'14px'}
                     fontWeight={400}
                     color={'neural.10'}>
-                    Tiếp tục với Apple
+                    {t('continue with')} Apple
                   </Text>
                 </HStack>
               </Button>
@@ -410,7 +412,7 @@ const Auth = () => {
               fontWeight={600}
               lineHeight={'20px'}
               color={'neural.5'}>
-              Phiên bản 1.0.0
+              {t('ver')} 1.0.0
             </Text>
           </Center>
         </VStack>

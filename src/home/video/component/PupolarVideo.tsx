@@ -9,6 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useAppSelector } from '../../../common/hooks/useAppSelector';
 import { useGetVideoFeature } from '../hooks/useVideo';
 import { updateVideosFeature } from '../slice';
+import { formatTimePlayer } from '@clvtube/common/lib/common.lib';
 
 const PupolarVideo = () => {
   const { videosFeature } = useAppSelector(state => state.videoReducer);
@@ -86,7 +87,7 @@ const PupolarVideo = () => {
                       fontSize={'12px'}
                       fontWeight={400}
                       color={'#666666'}>
-                      {item.length}
+                      {formatTimePlayer(item.length)}
                     </Text>
                   </HStack>
                 </HStack>

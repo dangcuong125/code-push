@@ -14,9 +14,11 @@ import { useLoginMutation } from '../auth/hook/useAuthMutation';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
 import { useAppDispatch } from '../common/hooks/useAppDispatch';
 import { updateAccountUser } from '@clvtube/account/slice';
+import { useTranslation } from 'react-i18next';
 
 const SplashLoading = () => {
   const navigator = useNavigation();
+  const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: DataUser } = useGetInfoUser();
   const { mutate } = useLoginMutation();
@@ -43,6 +45,8 @@ const SplashLoading = () => {
 
   const getData = async () => {
     try {
+      const language = await AsyncStorage.getItem('language');
+      if (language) i18n.changeLanguage(language);
       const valueToken = await AsyncStorage.getItem('token_App');
       console.log(valueToken);
       if (valueToken) {
