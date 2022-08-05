@@ -59,11 +59,10 @@ const Language = ({ showModal, setShowModal }) => {
             <Radio.Group
               name="language"
               value={valueLang}
-              onChange={value => handleChangelanguage(value)}
-            >
+              onChange={value => handleChangelanguage(value)}>
               <VStack space={7}>
                 <Radio
-                  value='vi'
+                  value="vi"
                   width={'100%'}
                   flexDirection={'row-reverse'}
                   justifyContent={'space-between'}
@@ -88,7 +87,7 @@ const Language = ({ showModal, setShowModal }) => {
                   {t('vi')}
                 </Radio>
                 <Radio
-                  value='en'
+                  value="en"
                   width={'100%'}
                   flexDirection={'row-reverse'}
                   justifyContent={'space-between'}
