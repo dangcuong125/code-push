@@ -178,7 +178,7 @@ export const PodcastList = ({ navigation }: HomePageProps) => {
                           fontSize={'10px'}
                           fontWeight={400}
                           color={'#999999'}>
-                          Dev Taodzo
+                          Clevertube
                         </Text>
                         <Entypo name="dot-single" size={15} color={'#999999'} />
                         <Text

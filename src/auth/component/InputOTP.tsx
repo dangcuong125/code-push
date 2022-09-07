@@ -18,6 +18,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppDispatch } from '../../common/hooks/useAppDispatch';
 import { updateAccountWithAuth } from '../slice';
 
+// const isIOS = Platform.OS === 'ios';
+
 export interface InputReference extends TextInput {
   value: string;
 }
@@ -90,9 +92,9 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
     };
   });
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  // useEffect(() => {
+  //   inputRef.current?.focus();
+  // }, []);
 
   return (
     <VStack
@@ -102,6 +104,7 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
       safeAreaBottom={4}>
       <KeyboardAwareScrollView
         extraScrollHeight={50}
+        keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         <VStack safeAreaX={4}>
           <Box mt={5}>
@@ -134,13 +137,14 @@ const InputOTP = ({ route, navigation }: InputOTPProps) => {
           <TextInput
             ref={inputRef}
             onChangeText={onChangeText}
-            placeholder="useless placeholder"
             value={internalValue}
             maxLength={lengthInput}
+            autoFocus
             returnKeyType="done"
             keyboardType="numeric"
             style={{
-              display: 'none',
+              height: 0,
+              width: 0,
             }}
           />
           <View

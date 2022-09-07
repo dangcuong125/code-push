@@ -36,6 +36,7 @@ export const SliderAudio = ({
         <Flex
           alignItems="center"
           justifyContent="space-between"
+          marginY={2}
           direction="row">
           <Icon
             as={AntDesign}
@@ -43,7 +44,7 @@ export const SliderAudio = ({
               playBackState === State.Playing ? 'pausecircleo' : 'playcircleo'
             }
             onPress={togglePlayback}
-            size="5"
+            size="8"
             color="text.100"
           />
           <Text marginLeft="5px" color="text.100" width="33px">

@@ -3,7 +3,7 @@
 /* eslint-disable array-callback-return */
 import { Box, Image, Skeleton, Text } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, FlatList } from 'react-native';
+import { Alert, FlatList, Platform } from 'react-native';
 import TrackPlayer, {
   Capability,
   useProgress,
@@ -24,6 +24,8 @@ import {
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const isIOS = Platform.OS === 'ios';
 
 const HeaderPodcast = React.memo(function HeaderPodcast({
   podcastDetail,
@@ -151,7 +153,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
       <Transcripts
         array={podcastDetail?.audioTranscripts}
         item={item}
-        position={position}
+        position={isIOS ? position : 0} // disable auto scroll on android because of performance issues
         index={index}
       />
     );

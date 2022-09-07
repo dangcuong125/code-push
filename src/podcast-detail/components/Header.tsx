@@ -15,7 +15,7 @@ export const Header = ({ navigation }: PodcastDetailProps) => {
 
   return (
     <Box>
-      <Flex direction="row" justifyContent="space-between">
+      <Flex direction="row" justifyContent="space-between" marginTop={2}>
         <Icon
           size="6"
           color="text.200"

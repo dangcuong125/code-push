@@ -212,7 +212,9 @@ const Auth = () => {
       safeAreaX={4}
       safeAreaTop={12}
       safeAreaBottom={4}>
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
         {/* 🎉 Images Screen Login */}
         <Center height={'250px'}>
           <Image

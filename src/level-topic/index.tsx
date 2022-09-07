@@ -135,11 +135,13 @@ const LevelTopic = () => {
               <TouchableOpacity key={item.key}>
                 <Button
                   leftIcon={
-                    item.isSelected ? (
+                    item.isSelected
+                      ? (
                       <Icon as={<MaterialIcons name="done" />} />
-                    ) : (
-                      ''
-                    )
+                        )
+                      : (
+                          ''
+                        )
                   }
                   marginBottom={'18px'}
                   borderRadius={'12px'}
@@ -172,11 +174,13 @@ const LevelTopic = () => {
               <TouchableOpacity key={item.key}>
                 <Button
                   leftIcon={
-                    item.isSelected ? (
+                    item.isSelected
+                      ? (
                       <Icon as={<MaterialIcons name="done" />} />
-                    ) : (
-                      ''
-                    )
+                        )
+                      : (
+                          ''
+                        )
                   }
                   borderRadius={'12px'}
                   borderWidth={0.5}
