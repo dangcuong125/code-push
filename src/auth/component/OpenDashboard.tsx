@@ -6,7 +6,6 @@ import { Dimensions, Image } from 'react-native';
 import { imagePath } from '@clvtube/common/constants/imagePath';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { TAB_BOTTOM } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { getTokenApp } from '../slice/index';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
@@ -28,7 +27,8 @@ const OpenDashboard = () => {
 
   const handleNextOpenDasboard = () => {
     if (level) {
-      navigation.navigate(TAB_BOTTOM, {});
+      // navigation.navigate(TAB_BOTTOM, {});
+      navigation.navigate('Trang chủ', {});
     } else {
       navigation.navigate(LEVEL_TOPIC, {});
     }
@@ -41,9 +41,9 @@ const OpenDashboard = () => {
           ? DataUser?.data?.avatar?.url
           : 'https://imgs.search.brave.com/I__FScJcLzgrOFTjSMIe8924ruM0k0rU3D3qZc4VsY8/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5D/MW92alQ5TkZ6Z0Zy/X3I1LUU5c2h3SGFI/YSZwaWQ9QXBp',
         avatarId: DataUser?.data?.avatar ? DataUser?.data?.avatar?.id : NaN,
-        fullname: DataUser?.data?.client.fullname,
-        phone: DataUser?.data?.client.phone,
-        email: DataUser?.data?.client.email,
+        fullname: DataUser?.data?.client?.fullname,
+        phone: DataUser?.data?.client?.phone,
+        email: DataUser?.data?.client?.email,
         level: DataUser?.data?.levelKey ? DataUser?.data?.levelKey : '',
       }),
     );
