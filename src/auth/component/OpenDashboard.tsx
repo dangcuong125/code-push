@@ -10,7 +10,10 @@ import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { getTokenApp } from '../slice/index';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
 import { updateAccountUser } from '@clvtube/account/slice';
-import { LEVEL_TOPIC } from '../../common/constants/route.constants';
+import {
+  TAB_BOTTOM,
+  LEVEL_TOPIC,
+} from '../../common/constants/route.constants';
 
 const { width } = Dimensions.get('screen');
 
@@ -28,7 +31,7 @@ const OpenDashboard = () => {
   const handleNextOpenDasboard = () => {
     if (level) {
       // navigation.navigate(TAB_BOTTOM, {});
-      navigation.navigate('Trang chủ', {});
+      navigation.navigate(TAB_BOTTOM, { screen: 'Trang chủ' });
     } else {
       navigation.navigate(LEVEL_TOPIC, {});
     }
