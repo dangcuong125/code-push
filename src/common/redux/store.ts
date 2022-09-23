@@ -10,6 +10,7 @@ import { reducer as videoReducer } from '@clvtube/home/video/slice';
 import { reducer as videoItemReducer } from '@clvtube/video-detail/playingVideo/slice';
 import { reducer as podcastDetail } from '@clvtube/podcast-detail/reducer/podcastDetail';
 import { reducer as accountReducer } from '@clvtube/account/slice';
+import { reducer as searchPageReducer } from '@clvtube/search-page/reducer/searchPage';
 
 const rootReducer = combineReducers({
   videoDetails,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   videoReducer,
   videoItemReducer,
   podcastDetail,
+  searchPageReducer,
 });
 
 const store = configureStore({

@@ -2,10 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Icon, Input, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { getValueInputSearch } from './reducer/searchPage';
 
 const SearchInput = () => {
   const navigation = useNavigation();
   const inputRef = useRef(null);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -23,6 +26,7 @@ const SearchInput = () => {
         ref={inputRef}
         variant={'outline'}
         color={'black'}
+        onChangeText={text => dispatch(getValueInputSearch(text))}
         placeholder="Tìm kiếm"
         textAlignVertical={'center'}
         bgColor={'#F4F4F4'}

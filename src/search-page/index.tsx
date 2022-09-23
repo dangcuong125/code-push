@@ -1,11 +1,12 @@
 import React from 'react';
-import { ScrollView, VStack } from 'native-base';
-import { SafeAreaView } from 'react-native';
+import { Box, VStack } from 'native-base';
+import { SafeAreaView, ScrollView } from 'react-native';
 import SearchInput from './SearchInput';
-import SearchRecommend from './SearchRecommend';
-import TopSearch from './TopSearch';
+// import SearchRecommend from './SearchRecommend';
+import SearchResult from './SearchResult';
+import { SearchPageProps } from './interface';
 
-const SearchPage = () => {
+const SearchPage = ({ navigation, route }: SearchPageProps) => {
   return (
     <SafeAreaView
       style={{
@@ -14,9 +15,10 @@ const SearchPage = () => {
       }}>
       <VStack>
         <SearchInput />
-        <ScrollView>
-          <TopSearch />
-          <SearchRecommend />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SearchResult navigation={navigation} route={route} />
+          {/* <SearchRecommend /> */}
+          <Box></Box>
         </ScrollView>
       </VStack>
     </SafeAreaView>

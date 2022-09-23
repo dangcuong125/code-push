@@ -11,8 +11,8 @@ import { getTokenApp } from '../slice/index';
 import { useGetInfoUser } from '@clvtube/account/hooks/useAccount';
 import { updateAccountUser } from '@clvtube/account/slice';
 import {
-  TAB_BOTTOM,
   LEVEL_TOPIC,
+  TAB_BOTTOM,
 } from '../../common/constants/route.constants';
 
 const { width } = Dimensions.get('screen');
