@@ -51,7 +51,7 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
         fontWeight={400}
         lineHeight={'22px'}
         color={'neural.9'}>
-        {searchResult?.length > 0 ? 'Kết quả tìm kiếm' : 'Lịch sử tìm kiếm'}
+        {searchResult?.length ? 'Kết quả tìm kiếm' : 'Lịch sử tìm kiếm'}
       </Text>
       <Text
         fontStyle={'normal'}
@@ -60,10 +60,10 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
         fontWeight={400}
         lineHeight={'22px'}
         color={'neural.9'}>
-        {videoResult?.length > 0 && 'Video'}
+        {videoResult?.length && 'Video'}
       </Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {videoResult?.length > 0 &&
+        {videoResult?.length &&
           videoResult?.map(video => (
             <Pressable
               height="195px"
@@ -96,10 +96,10 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
         fontWeight={400}
         lineHeight={'22px'}
         color={'neural.9'}>
-        {podcastResult?.length > 0 && 'Podcast'}
+        {podcastResult?.length && 'Podcast'}
       </Text>
       <HStack space={3} py={2} flexWrap={'wrap'}>
-        {podcastResult?.length > 0 &&
+        {podcastResult?.length &&
           podcastResult?.map((podcast: ISearchResult) => (
             // <TouchableOpacity key={index}>
             //   <Button
