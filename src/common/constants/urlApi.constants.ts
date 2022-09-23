@@ -10,6 +10,7 @@ export const GET_PODCAST_LIST = '/audio';
 export const GET_VIDEO_LIST = '/client/videos';
 export const GET_VIDEO_LIST_FEATURE = '/client/videos/feature';
 export const GET_AUDIO_DETAIL = '/audio/';
+export const GET_SEARCH_RESULT = '/client/search/contents';
 export const GET_POPULAR_TOPICS = '/client/topics/feature';
 export const GET_INFO_USER = '/client/info';
 export const POST_INFO_USER = '/client/update-info';
