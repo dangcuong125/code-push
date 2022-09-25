@@ -3,12 +3,20 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon, Input, VStack } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { getValueInputSearch } from './reducer/searchPage';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import {
+  clearValueInputSearch,
+  getValueInputSearch,
+} from './reducer/searchPage';
 
 const SearchInput = () => {
   const navigation = useNavigation();
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
+
+  const valueInputWhenClickOnHistory = useAppSelector(
+    state => state.searchPageReducer.valueInputSearch,
+  );
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -19,12 +27,17 @@ const SearchInput = () => {
       <AntDesign
         name="arrowleft"
         size={25}
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          navigation.goBack();
+          dispatch(clearValueInputSearch());
+        }}
       />
 
       <Input
+        autoCapitalize="none"
         ref={inputRef}
         variant={'outline'}
+        value={valueInputWhenClickOnHistory}
         color={'black'}
         onChangeText={text => dispatch(getValueInputSearch(text))}
         placeholder="Tìm kiếm"

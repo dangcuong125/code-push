@@ -21,6 +21,7 @@ import {
   PODCAST_DETAIL,
   VIDEO_ROUTE,
 } from '@clvtube/common/constants/route.constants';
+import SearchHistory from './SearchHistory';
 
 const SearchResult = ({ navigation }: SearchPageProps) => {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
     dispatch(getSearchResult(searchResult));
     dispatch(classifySearchResult());
   }, [searchResult]);
+
   return (
     <VStack safeArea={4}>
       <Text
@@ -53,141 +55,138 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
         color={'neural.9'}>
         {searchResult?.length ? 'Kết quả tìm kiếm' : 'Lịch sử tìm kiếm'}
       </Text>
-      <Text
-        fontStyle={'normal'}
-        marginTop={'15px'}
-        fontSize={'16px'}
-        fontWeight={400}
-        lineHeight={'22px'}
-        color={'neural.9'}>
-        {videoResult?.length && 'Video'}
-      </Text>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {videoResult?.length &&
-          videoResult?.map(video => (
-            <Pressable
-              height="195px"
-              marginTop="9px"
-              onPress={() =>
-                navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
-                  id: video?.id,
-                })
-              }
-              marginRight="20px"
-              key={video?.id}
-              width="162px"
-              textAlign={'center'}>
-              <Image
-                source={{ uri: 'https://wallpaperaccess.com/full/317501.jpg' }}
-                width="162px"
-                height="126px"
-              />
-              <Box bgColor="#5AC8FA1A" padding="10px">
-                <Text color={'text.100'} fontWeight={400}>
-                  {video?.name}
-                </Text>
-              </Box>
-            </Pressable>
-          ))}
-      </ScrollView>
-      <Text
-        fontStyle={'normal'}
-        fontSize={'16px'}
-        fontWeight={400}
-        lineHeight={'22px'}
-        color={'neural.9'}>
-        {podcastResult?.length && 'Podcast'}
-      </Text>
-      <HStack space={3} py={2} flexWrap={'wrap'}>
-        {podcastResult?.length &&
-          podcastResult?.map((podcast: ISearchResult) => (
-            // <TouchableOpacity key={index}>
-            //   <Button
-            //     borderRadius={8}
-            //     px={5}
-            //     marginBottom={2}
-            //     bgColor={'#E6E6E6'}
-            //     _text={{
-            //       color: '#282F3E',
-            //     }}>
-            //     {item}
-            //   </Button>
-            // </TouchableOpacity>
-            <Pressable
-              key={podcast?.id}
-              marginTop="15px"
-              borderColor="#E6E6E6"
-              borderWidth={'1px'}
-              borderRadius={'12px'}
-              onPress={() => {
-                navigation.navigate(PODCAST_DETAIL, { id: podcast?.id });
-              }}
-              p={3}>
-              <HStack space={4} alignItems={'center'}>
-                <Image
-                  source={{
-                    uri: 'https://wallpaperaccess.com/full/317501.jpg',
+      {searchResult?.length ? (
+        <Box>
+          <Text
+            fontStyle={'normal'}
+            marginTop={'15px'}
+            fontSize={'16px'}
+            fontWeight={400}
+            lineHeight={'22px'}
+            color={'neural.9'}>
+            {!!videoResult?.length && 'Video'}
+          </Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {!!videoResult?.length &&
+              videoResult?.map(video => (
+                <Pressable
+                  height="195px"
+                  marginTop="9px"
+                  onPress={() =>
+                    navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
+                      id: video?.id,
+                    })
+                  }
+                  marginRight="20px"
+                  key={video?.id}
+                  width="162px"
+                  textAlign={'center'}>
+                  <Image
+                    source={{
+                      uri: 'https://wallpaperaccess.com/full/317501.jpg',
+                    }}
+                    width="162px"
+                    height="126px"
+                  />
+                  <Box bgColor="amber.500" padding="10px">
+                    <Text color={'text.100'} fontWeight={400}>
+                      {video?.name}
+                    </Text>
+                  </Box>
+                </Pressable>
+              ))}
+          </ScrollView>
+          <Text
+            fontStyle={'normal'}
+            fontSize={'16px'}
+            fontWeight={400}
+            lineHeight={'22px'}
+            color={'neural.9'}>
+            {!!podcastResult?.length && 'Podcast'}
+          </Text>
+          <HStack space={3} py={2} flexWrap={'wrap'}>
+            {!!podcastResult?.length &&
+              podcastResult?.map((podcast: ISearchResult) => (
+                <Pressable
+                  key={podcast?.id}
+                  marginTop="15px"
+                  borderColor="neural.2"
+                  borderWidth={'1px'}
+                  borderRadius={'12px'}
+                  onPress={() => {
+                    navigation.navigate(PODCAST_DETAIL, { id: podcast?.id });
                   }}
-                  width={'101px'}
-                  height={'100px'}
-                  borderRadius={'10px'}
-                />
-                <VStack space={1.5} width={'60%'}>
-                  <Heading
-                    fontStyle={'normal'}
-                    fontSize={'16px'}
-                    fontWeight={400}
-                    lineHeight={'22px'}
-                    color={'#161719'}>
-                    {podcast.name}
-                  </Heading>
-                  <Text
-                    fontStyle={'normal'}
-                    fontSize={'14px'}
-                    fontWeight={400}
-                    lineHeight={'19px'}
-                    color={'#999999'}>
-                    {podcast.desc}
-                  </Text>
-                  <HStack justifyContent={'flex-start'} alignItems={'center'}>
-                    <HStack space={0.5} alignItems={'center'}>
-                      <MaterialCommunityIcons
-                        name="clock-time-three-outline"
-                        size={15}
-                        color={'#3D9BE0'}
-                      />
+                  p={3}>
+                  <HStack space={4} alignItems={'center'}>
+                    <Image
+                      source={{
+                        uri: 'https://wallpaperaccess.com/full/317501.jpg',
+                      }}
+                      width={'101px'}
+                      height={'100px'}
+                      borderRadius={'10px'}
+                    />
+                    <VStack space={1.5} width={'60%'}>
+                      <Heading
+                        fontStyle={'normal'}
+                        fontSize={'16px'}
+                        fontWeight={400}
+                        lineHeight={'22px'}
+                        color={'text.100'}>
+                        {podcast.name}
+                      </Heading>
                       <Text
                         fontStyle={'normal'}
-                        fontSize={'10px'}
+                        fontSize={'14px'}
                         fontWeight={400}
-                        color={'#666666'}>
-                        01:30
+                        lineHeight={'19px'}
+                        color={'neural.5'}>
+                        {podcast.desc}
                       </Text>
-                    </HStack>
-                    <Entypo name="dot-single" size={15} color={'#999999'} />
-                    <Text
-                      fontStyle={'normal'}
-                      fontSize={'10px'}
-                      fontWeight={400}
-                      color={'#999999'}>
-                      Clevertube
-                    </Text>
-                    <Entypo name="dot-single" size={15} color={'#999999'} />
-                    {/* <Text
-                      fontStyle={'normal'}
-                      fontSize={'10px'}
-                      fontWeight={400}
-                      color={'#999999'}>
-                      {item.audiosToTopics?.map(
-                        (topic: any) => topic?.topicKey,
-                      )}
-                    </Text> */}
+                      <HStack
+                        justifyContent={'flex-start'}
+                        alignItems={'center'}>
+                        <HStack space={0.5} alignItems={'center'}>
+                          <MaterialCommunityIcons
+                            name="clock-time-three-outline"
+                            size={15}
+                            color={'primary.11'}
+                          />
+                          <Text
+                            fontStyle={'normal'}
+                            fontSize={'10px'}
+                            fontWeight={400}
+                            color={'neural.4'}>
+                            01:30
+                          </Text>
+                        </HStack>
+                        <Entypo
+                          name="dot-single"
+                          size={15}
+                          color={'neural.5'}
+                        />
+                        <Text
+                          fontStyle={'normal'}
+                          fontSize={'10px'}
+                          fontWeight={400}
+                          color={'neural.5'}>
+                          Clevertube
+                        </Text>
+                        <Entypo
+                          name="dot-single"
+                          size={15}
+                          color={'neural.5'}
+                        />
+                      </HStack>
+                    </VStack>
                   </HStack>
-                </VStack>
-              </HStack>
-            </Pressable>
-          ))}
-      </HStack>
+                </Pressable>
+              ))}
+          </HStack>
+        </Box>
+      ) : (
+        <SearchHistory />
+      )}
     </VStack>
   );
 };

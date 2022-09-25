@@ -42,6 +42,7 @@ export const theme = extendTheme({
     // Redefinig only one shade, rest of the color will remain same.
     amber: {
       400: '#d97706',
+      500: '#5AC8FA1A',
     },
     text: {
       100: '#161719',

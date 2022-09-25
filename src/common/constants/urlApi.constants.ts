@@ -15,3 +15,5 @@ export const GET_POPULAR_TOPICS = '/client/topics/feature';
 export const GET_INFO_USER = '/client/info';
 export const POST_INFO_USER = '/client/update-info';
 export const POST_FILE_PRESIGN = '/file/presigned-url';
+export const GET_SEARCH_HISTORY = '/client/search/history';
+export const DELETE_SEARCH_HISTORY = '/client/search';
