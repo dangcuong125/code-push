@@ -1,8 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { Box, Text } from 'native-base';
+import { Box, Text, useDisclose } from 'native-base';
 import { ITranscriptContent } from '../interface';
+import { WordDefinition } from '@clvtube/common/components/word-definition/index';
 
 // eslint-disable-next-line react/display-name
 export const Word = React.memo(
@@ -15,6 +16,7 @@ export const Word = React.memo(
     word: ITranscriptContent;
     setBackgroundColorForParagraph: boolean;
   }) => {
+    const { isOpen, onOpen, onClose } = useDisclose();
     const sliderValue = useAppSelector(
       state => state.podcastDetail.sliderValue,
     );
@@ -30,10 +32,12 @@ export const Word = React.memo(
     return (
       <Box bgColor={displayHighlightText ? '#FFE69A' : color}>
         <Text
+          onPress={() => onOpen()}
           color={displayHighlightText ? '#3D9BE0' : 'text.200'}
           fontSize={fontSize}>
           {word?.content}{' '}
         </Text>
+        <WordDefinition onClose={onClose} isOpen={isOpen} />
       </Box>
     );
   },
