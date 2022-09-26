@@ -6,6 +6,7 @@ export interface IInitialState {
   searchResult: ISearchResult[];
   videoSearchResult: ISearchResult[];
   podcastSearchResult: ISearchResult[];
+  searchHistory: ISearchHistory[];
 }
 export interface ISearchResult {
   id: number;
@@ -13,6 +14,14 @@ export interface ISearchResult {
   desc: string;
   media_type: string;
   image?: string;
+}
+export interface ISearchHistory {
+  created_at: string;
+  deletedAt: string;
+  id: number;
+  keyword: string;
+  searchTime: string;
+  userId: number;
 }
 export type SearchPageProps = NativeStackScreenProps<
   RootStackParamList,
