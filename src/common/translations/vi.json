@@ -57,5 +57,8 @@
   "off": "Tắt",
   "cancel": "Huỷ",
   "confirmLogout": "Bạn chắc chắn muốn đăng xuất?",
-  "phoneNumber": "Nhập số điện thoại"
+  "phoneNumber": "Nhập số điện thoại",
+  "newWord": "Từ mới",
+  "folder": "Thư mục",
+  "example": "Ví dụ"
 }

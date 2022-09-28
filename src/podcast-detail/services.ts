@@ -1,6 +1,6 @@
 import { GET_AUDIO_DETAIL } from '@clvtube/common/constants/urlApi.constants';
-import { execute } from '@clvtube/common/lib/request';
+import { axiosClient } from '@clvtube/common/lib/request';
 
 export const getAudioDetail = (id: number) => {
-  return execute.get(GET_AUDIO_DETAIL + id);
+  return axiosClient.get(GET_AUDIO_DETAIL + id);
 };

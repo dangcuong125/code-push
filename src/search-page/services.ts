@@ -1,4 +1,4 @@
-import { execute } from '@clvtube/common/lib/request';
+import { axiosClient } from '@clvtube/common/lib/request';
 import {
   DELETE_SEARCH_HISTORY,
   GET_SEARCH_HISTORY,
@@ -10,7 +10,7 @@ export const getSearchResult = (
   page: number,
   limit: number,
 ) => {
-  return execute.get(GET_SEARCH_RESULT, {
+  return axiosClient.get(GET_SEARCH_RESULT, {
     params: {
       keyword,
       page,
@@ -19,14 +19,14 @@ export const getSearchResult = (
   });
 };
 export const getSearchHistory = (size: number) => {
-  return execute.get(GET_SEARCH_HISTORY, {
+  return axiosClient.get(GET_SEARCH_HISTORY, {
     params: {
       size,
     },
   });
 };
 export const deleteSearchHistoryItem = (id: number) => {
-  return execute.delete(DELETE_SEARCH_HISTORY + `/${id}`);
+  return axiosClient.delete(DELETE_SEARCH_HISTORY + `/${id}`);
 };
 
 export const deleteAllSearchHistoryItem = () => {

@@ -53,10 +53,11 @@ export const theme = extendTheme({
       600: '#3D9BE0',
       700: '#FDFDFD',
       800: '#FFFFFF',
+      // 900: '#D70000',
     },
   },
   config: {
     // Changing initialColorMode to 'dark'
-    initialColorMode: 'dark',
+    initialColorMode: 'light',
   },
 });

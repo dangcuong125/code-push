@@ -11,6 +11,7 @@ import { reducer as videoItemReducer } from '@clvtube/video-detail/playingVideo/
 import { reducer as podcastDetail } from '@clvtube/podcast-detail/reducer/podcastDetail';
 import { reducer as accountReducer } from '@clvtube/account/slice';
 import { reducer as searchPageReducer } from '@clvtube/search-page/reducer/searchPage';
+import { reducer as saveNewWordReducer } from '@clvtube/save-new-word/reducer/saveNewWord';
 
 const rootReducer = combineReducers({
   videoDetails,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   videoItemReducer,
   podcastDetail,
   searchPageReducer,
+  saveNewWordReducer,
 });
 
 const store = configureStore({

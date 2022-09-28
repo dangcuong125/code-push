@@ -18,6 +18,7 @@ import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
   getDurations,
+  getLoadingState,
   getPosition,
   getPositionAndStartTime,
 } from '../reducer/podcastDetail';
@@ -205,6 +206,9 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
       TrackPlayer.destroy();
     };
   }, []);
+  useEffect(() => {
+    dispatch(getLoadingState(isLoading));
+  }, [isLoading]);
   return (
     <>
       {isLoading ? (

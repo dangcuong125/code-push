@@ -57,5 +57,8 @@
   "off": "Turn off",
   "cancel": "Cancel",
   "confirmLogout": "Are you sure you want to sign out?",
-  "phoneNumber": "Enter your phone number"
+  "phoneNumber": "Enter your phone number",
+  "newWord": "New Word",
+  "folder": "Folder",
+  "example": "Example"
 }
