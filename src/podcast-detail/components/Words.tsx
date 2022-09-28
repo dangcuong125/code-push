@@ -4,6 +4,8 @@ import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { Box, Text, useDisclose } from 'native-base';
 import { ITranscriptContent } from '../interface';
 import { WordDefinition } from '@clvtube/common/components/word-definition/index';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { getContentOfWord } from '@clvtube/save-new-word/reducer/saveNewWord';
 
 // eslint-disable-next-line react/display-name
 export const Word = React.memo(
@@ -16,7 +18,9 @@ export const Word = React.memo(
     word: ITranscriptContent;
     setBackgroundColorForParagraph: boolean;
   }) => {
+    const dispatch = useAppDispatch();
     const { isOpen, onOpen, onClose } = useDisclose();
+    const isLoading = useAppSelector(state => state.podcastDetail.isLoading);
     const sliderValue = useAppSelector(
       state => state.podcastDetail.sliderValue,
     );
@@ -30,15 +34,26 @@ export const Word = React.memo(
     else color = '#FFFFFF';
 
     return (
-      <Box bgColor={displayHighlightText ? '#FFE69A' : color}>
-        <Text
-          onPress={() => onOpen()}
-          color={displayHighlightText ? '#3D9BE0' : 'text.200'}
-          fontSize={fontSize}>
-          {word?.content}{' '}
-        </Text>
-        <WordDefinition onClose={onClose} isOpen={isOpen} />
-      </Box>
+      <>
+        <Box bgColor={displayHighlightText ? '#FFE69A' : color}>
+          <Text
+            onPress={() => {
+              onOpen();
+              dispatch(getContentOfWord(word?.content));
+            }}
+            color={displayHighlightText ? '#3D9BE0' : 'text.200'}
+            fontSize={fontSize}>
+            {word?.content}{' '}
+          </Text>
+          {!isLoading && (
+            <WordDefinition
+              content={word?.content}
+              isOpen={isOpen}
+              onClose={onClose}
+            />
+          )}
+        </Box>
+      </>
     );
   },
   (prev, next) => {

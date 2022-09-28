@@ -1,5 +1,5 @@
 import { Box, Flex, Icon, Input, Select, Text, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { IGroupItem, SaveNewWordProps } from '../interface';
 import { useGetWordGroupList } from '../hooks/useGetWordGroupList';
@@ -8,7 +8,12 @@ import { useGetSavedWordDetail } from '../hooks/useGetSavedWordDetail';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useSaveNewWord } from '../hooks/useSaveNewWord';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { getErrorMessage, getValueSelectFolder } from '../reducer/saveNewWord';
+import {
+  getValueSelectFolder,
+  resetErrorMessage,
+  showSuccessfulModal,
+} from '../reducer/saveNewWord';
+import { SuccessfulModal } from '@clvtube/common/components/successful-modal/index';
 
 export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
   const { t } = useTranslation();
@@ -17,10 +22,14 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
   const valueSelectFolder = useAppSelector(
     state => state.saveNewWordReducer.valueSelectFolder,
   );
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const errorMessage = useAppSelector(
+    state => state.saveNewWordReducer.errorMessage,
+  );
   const wordNeedToBeSaved = useAppSelector(
     state => state.saveNewWordReducer.wordNeedToBeSaved,
+  );
+  const isOpenSuccessfullModal = useAppSelector(
+    state => state.saveNewWordReducer.isOpenSuccessfullModal,
   );
 
   const { data } = useGetWordGroupList();
@@ -32,7 +41,9 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
   const groupList = data?.data?.items;
 
   const handleSaveNewWord = () => {
-    if (valueSelectFolder === '') setErrorMessage('Vui long dien thong tin');
+    if (valueSelectFolder === '') {
+      dispatch(resetErrorMessage('Vui lòng chọn thư mục'));
+    }
     mutate(
       {
         groupId: Number(valueSelectFolder),
@@ -40,7 +51,7 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
       },
       {
         onSuccess: () => {
-          console.log('thanh cong');
+          dispatch(showSuccessfulModal(true));
         },
       },
     );
@@ -49,7 +60,10 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
     <VStack>
       <Flex justifyContent="space-between" alignItems="center" direction="row">
         <Icon
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            navigation.goBack();
+            dispatch(resetErrorMessage(''));
+          }}
           as={AntDesign}
           name="arrowleft"
           color="text.200"
@@ -92,7 +106,7 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           placeholder="Trống"
           onValueChange={value => {
             dispatch(getValueSelectFolder(value));
-            setErrorMessage('');
+            dispatch(resetErrorMessage(''));
           }}
           mt={1}>
           {groupList?.map((item: IGroupItem) => (
@@ -103,7 +117,11 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
             />
           ))}
         </Select>
-        {errorMessage && <Text color="#D70000">{errorMessage}</Text>}
+        {errorMessage && (
+          <Text color="#D70000" marginTop="5px">
+            {errorMessage}
+          </Text>
+        )}
         <Text
           fontSize="16px"
           color="text.200"
@@ -120,6 +138,15 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           value={newWord?.example}
         />
       </Box>
+      <SuccessfulModal
+        isOpen={isOpenSuccessfullModal}
+        content="Bạn đã lưu từ vựng thành công!"
+        onExit={() => {
+          navigation.goBack();
+          dispatch(showSuccessfulModal(false));
+        }}
+        onClose={() => dispatch(showSuccessfulModal(false))}
+      />
     </VStack>
   );
 };

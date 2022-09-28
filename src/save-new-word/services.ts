@@ -1,4 +1,4 @@
-import { execute } from '@clvtube/common/lib/request';
+import { axiosClient } from '@clvtube/common/lib/request';
 import {
   GET_SAVED_WORD_DETAIL,
   GET_SAVED_WORD_LIST,
@@ -8,7 +8,7 @@ import {
 import { INewWord } from './interface';
 
 export const getWordGroupList = (page: number, limit: number) => {
-  return execute.get(GET_WORD_GROUP_LIST, {
+  return axiosClient.get(GET_WORD_GROUP_LIST, {
     params: {
       page,
       limit,
@@ -20,7 +20,7 @@ export const getSavedWordGroupList = (
   page: number,
   limit: number,
 ) => {
-  return execute.get(GET_SAVED_WORD_LIST, {
+  return axiosClient.get(GET_SAVED_WORD_LIST, {
     params: {
       groupId,
       page,
@@ -29,12 +29,12 @@ export const getSavedWordGroupList = (
   });
 };
 export const getSavedWordDetail = (word: string) => {
-  return execute.get(GET_SAVED_WORD_DETAIL, {
+  return axiosClient.get(GET_SAVED_WORD_DETAIL, {
     params: {
       word,
     },
   });
 };
 export const saveNewWord = (newWord: INewWord) => {
-  return execute.post(SAVE_NEW_WORD, newWord);
+  return axiosClient.post(SAVE_NEW_WORD, newWord);
 };

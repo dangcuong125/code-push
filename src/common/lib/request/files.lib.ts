@@ -1,12 +1,12 @@
 import axios, { AxiosStatic } from 'axios';
-import { execute } from '@clvtube/common/lib/request';
+import { axiosClient } from '@clvtube/common/lib/request';
 import { POST_FILE_PRESIGN } from '../../constants/urlApi.constants';
 
 export async function presignUrl(file: any, axiosInstant?: AxiosStatic) {
   if (file) {
     const imgType = file?.filename.split('.')[1].toLowerCase() || 'png';
     try {
-      const presignHeaderInfo = await execute.post(POST_FILE_PRESIGN, {
+      const presignHeaderInfo = await axiosClient.post(POST_FILE_PRESIGN, {
         type: imgType,
       });
       const urlPostImg = presignHeaderInfo?.data?.presign?.url;

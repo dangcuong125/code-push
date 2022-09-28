@@ -1,4 +1,4 @@
-import { execute } from '@clvtube/common/lib/request';
+import { axiosClient } from '@clvtube/common/lib/request';
 import { GET_VIDEO_LIST } from '../constants/urlApi.constants';
 
 export const VideoAPI = {
@@ -9,7 +9,7 @@ export const VideoAPI = {
     page: number = 1,
     limit: number = 100,
   ) => {
-    const res = await execute.get(GET_VIDEO_LIST, {
+    const res = await axiosClient.get(GET_VIDEO_LIST, {
       params: {
         levelKey,
         topicKeys,
@@ -21,7 +21,7 @@ export const VideoAPI = {
   },
   // 🚀 Get Videos Items by Id
   getVideoITem: async (id: number) => {
-    const res = await execute.get(GET_VIDEO_LIST + `/${id}`);
+    const res = await axiosClient.get(GET_VIDEO_LIST + `/${id}`);
     return res;
   },
 };

@@ -15,6 +15,7 @@ import LevelTopic from '@clvtube/level-topic';
 import Intro from '@clvtube/intro/component/Intro';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 import PlayingVideo from '@clvtube/video-detail/playingVideo';
+import { SaveNewWord } from '@clvtube/save-new-word/components/index';
 
 import TabBottom from './TabBottom';
 
@@ -30,6 +31,7 @@ import {
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
+  SAVE_NEW_WORD,
   SPLASH_LOADING,
   TAB_BOTTOM,
   VIDEO_ROUTE,
@@ -45,6 +47,7 @@ export type RootStackParamList = {
   RegisterSuccess: {};
   LevelTopic: {};
   TabBottom: {};
+  SaveNewWord: {};
 
   Home: {};
   PodcastDetail: {};
@@ -127,6 +130,11 @@ const RootNavigator = () => {
       <Stack.Screen
         name={VIDEO_ROUTE.VIDEO_PLAYING}
         component={PlayingVideo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={SAVE_NEW_WORD}
+        component={SaveNewWord}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

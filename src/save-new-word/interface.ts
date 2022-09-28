@@ -33,6 +33,7 @@ export interface IInitialState {
   wordNeedToBeSaved: string;
   savedWordList: ISavedWordItem[];
   valueSelectFolder: string;
+  isOpenSuccessfullModal: boolean;
   errorMessage: string;
 }
 export interface INewWord {
