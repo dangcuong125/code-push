@@ -58,9 +58,7 @@ const SearchHistory = () => {
         fontSize={'16px'}
         color={'#9B9B9B'}
         textAlign={'center'}
-        onPress={() => {
-          deleteAllSearch();
-        }}>
+        onPress={deleteAllSearch}>
         Xoá lịch sử tìm kiếm
       </Text>
     </VStack>
