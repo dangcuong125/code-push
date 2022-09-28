@@ -28,3 +28,7 @@ export const getSearchHistory = (size: number) => {
 export const deleteSearchHistoryItem = (id: number) => {
   return execute.delete(DELETE_SEARCH_HISTORY + `/${id}`);
 };
+
+export const deleteAllSearchHistoryItem = () => {
+  return execute.delete(DELETE_SEARCH_HISTORY);
+};
