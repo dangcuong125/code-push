@@ -11,12 +11,14 @@ import {
   getValueInputSearch,
 } from './reducer/searchPage';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useDeleteAllHistoryItem } from './hooks/useDeleteAllHistory';
 
 const SearchHistory = () => {
   const dispatch = useAppDispatch();
 
   const { data } = useGetSearchHistory();
   const { mutate } = useDeleteHistoryItem();
+  const { mutate: deleteAllSearch } = useDeleteAllHistoryItem();
 
   const searchHistory = data?.data;
 
@@ -52,7 +54,11 @@ const SearchHistory = () => {
           />
         </HStack>
       ))}
-      <Text fontSize={'16px'} color={'#9B9B9B'} textAlign={'center'}>
+      <Text
+        fontSize={'16px'}
+        color={'#9B9B9B'}
+        textAlign={'center'}
+        onPress={deleteAllSearch}>
         Xoá lịch sử tìm kiếm
       </Text>
     </VStack>
