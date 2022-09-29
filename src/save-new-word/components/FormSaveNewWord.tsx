@@ -1,4 +1,13 @@
-import { Box, Flex, Icon, Input, Select, Text, VStack } from 'native-base';
+import {
+  Box,
+  // Button,
+  Flex,
+  Icon,
+  Input,
+  Select,
+  Text,
+  VStack,
+} from 'native-base';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { IGroupItem, SaveNewWordProps } from '../interface';
@@ -7,13 +16,17 @@ import { useTranslation } from 'react-i18next';
 import { useGetSavedWordDetail } from '../hooks/useGetSavedWordDetail';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useSaveNewWord } from '../hooks/useSaveNewWord';
+import { SAVED_WORD_LIST } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
+  getGroupId,
   getValueSelectFolder,
-  resetErrorMessage,
+  resetErrorMessageForSelectFolder,
+  showCreateFolderModal,
   showSuccessfulModal,
 } from '../reducer/saveNewWord';
 import { SuccessfulModal } from '@clvtube/common/components/successful-modal/index';
+import { CreateFolderModal } from './CreateFolderModal';
 
 export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
   const { t } = useTranslation();
@@ -23,13 +36,16 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
     state => state.saveNewWordReducer.valueSelectFolder,
   );
   const errorMessage = useAppSelector(
-    state => state.saveNewWordReducer.errorMessage,
+    state => state.saveNewWordReducer.errorMessageForSelectFolder,
   );
   const wordNeedToBeSaved = useAppSelector(
     state => state.saveNewWordReducer.wordNeedToBeSaved,
   );
   const isOpenSuccessfullModal = useAppSelector(
     state => state.saveNewWordReducer.isOpenSuccessfullModal,
+  );
+  const isOpenCreateFolderModal = useAppSelector(
+    state => state.saveNewWordReducer.isOpenCreateFolderModal,
   );
 
   const { data } = useGetWordGroupList();
@@ -42,7 +58,7 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
 
   const handleSaveNewWord = () => {
     if (valueSelectFolder === '') {
-      dispatch(resetErrorMessage('Vui lòng chọn thư mục'));
+      dispatch(resetErrorMessageForSelectFolder('Vui lòng chọn thư mục'));
     }
     mutate(
       {
@@ -58,26 +74,25 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
   };
   return (
     <VStack>
-      <Flex justifyContent="space-between" alignItems="center" direction="row">
+      <Flex direction="row" justifyContent="space-between" width="95%">
         <Icon
           onPress={() => {
             navigation.goBack();
-            dispatch(resetErrorMessage(''));
+            dispatch(resetErrorMessageForSelectFolder(''));
           }}
           as={AntDesign}
           name="arrowleft"
           color="text.200"
+          marginLeft="17.67px"
           size="6"
         />
-        <Box>
-          <Text
-            fontSize="16px"
-            color="text.500"
-            fontWeight={600}
-            onPress={handleSaveNewWord}>
-            {t('save')}
-          </Text>
-        </Box>
+        <Text
+          fontSize="16px"
+          color="text.500"
+          fontWeight={600}
+          onPress={handleSaveNewWord}>
+          {t('save')}
+        </Text>
       </Flex>
       <Box marginTop="19px" margin="auto">
         <Text fontSize="16px" color="text.200" fontWeight={400}>
@@ -85,6 +100,7 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
         </Text>
         <Input
           width="343px"
+          color="text.200"
           height="46px"
           marginTop="12px"
           borderRadius="10px"
@@ -104,16 +120,25 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           borderRadius="10px"
           accessibilityLabel="Trống"
           placeholder="Trống"
+          color="text.200"
+          placeholderTextColor="text.200"
           onValueChange={value => {
             dispatch(getValueSelectFolder(value));
-            dispatch(resetErrorMessage(''));
+            dispatch(resetErrorMessageForSelectFolder(''));
           }}
           mt={1}>
+          {/* <Select.Item
+            label="Add new folder"
+            // onPress={() => dispatch(showCreateFolderModal(true))}
+            value={'1'}
+            _text={{ color: 'text.200' }}
+          /> */}
           {groupList?.map((item: IGroupItem) => (
             <Select.Item
               label={item?.title}
               value={item?.id?.toString()}
               key={item?.id}
+              _text={{ color: 'text.200' }}
             />
           ))}
         </Select>
@@ -134,9 +159,42 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           marginTop="12px"
           height="90px"
           borderRadius="10px"
+          color="text.200"
           isDisabled={true}
           value={newWord?.example}
         />
+        <Box marginTop="30px">
+          <Text
+            bgColor="neural.1"
+            padding="10px"
+            borderRadius="10px"
+            marginTop="10px"
+            borderWidth="1px"
+            color="text.200"
+            onPress={() => {
+              dispatch(showCreateFolderModal(true));
+            }}
+            borderColor="text.200">
+            Thêm danh mục mới
+          </Text>
+          {groupList?.map((item: IGroupItem) => (
+            <Text
+              key={item?.id}
+              bgColor="neural.1"
+              padding="10px"
+              borderRadius="10px"
+              marginTop="10px"
+              borderWidth="1px"
+              color="text.200"
+              onPress={() => {
+                dispatch(getGroupId(item?.id));
+                navigation.navigate(SAVED_WORD_LIST, {});
+              }}
+              borderColor="text.200">
+              {item?.title}
+            </Text>
+          ))}
+        </Box>
       </Box>
       <SuccessfulModal
         isOpen={isOpenSuccessfullModal}
@@ -146,6 +204,10 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           dispatch(showSuccessfulModal(false));
         }}
         onClose={() => dispatch(showSuccessfulModal(false))}
+      />
+      <CreateFolderModal
+        isOpen={isOpenCreateFolderModal}
+        onClose={() => dispatch(showCreateFolderModal(false))}
       />
     </VStack>
   );

@@ -3,7 +3,7 @@ import { getSavedWordGroupList } from '../services';
 import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 
 export const useGetSavedWordList = (
-  groupId: string,
+  groupId: undefined | string,
   page: number = 1,
   limit: number = 10,
 ) => {

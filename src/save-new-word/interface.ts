@@ -32,14 +32,25 @@ export interface ISavedWordItem {
 export interface IInitialState {
   wordNeedToBeSaved: string;
   savedWordList: ISavedWordItem[];
+  isOpenCreateFolderModal: boolean;
+  valueNameNewFolder: string;
   valueSelectFolder: string;
   isOpenSuccessfullModal: boolean;
-  errorMessage: string;
+  errorMessageForSelectFolder: string;
+  errorMsgForCreateFolder: string;
+  groupId: null | number;
 }
 export interface INewWord {
   evdictId: number;
   groupId: null | number;
 }
-export interface FormData {
-  folder: string;
+export interface IWordListId {
+  evdictToGroupIds: number[];
+}
+export interface INewFolder {
+  title: string;
+}
+export interface IActionPayloadForFilterSavedWord {
+  value: string;
+  data: ISavedWordItem[];
 }

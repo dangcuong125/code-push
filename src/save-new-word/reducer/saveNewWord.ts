@@ -1,12 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IInitialState, ISavedWordItem } from '../interface';
+import { IInitialState } from '../interface';
 
 const initialState: IInitialState = {
   wordNeedToBeSaved: '',
   savedWordList: [],
   valueSelectFolder: '',
-  errorMessage: '',
+  errorMessageForSelectFolder: '',
   isOpenSuccessfullModal: false,
+  groupId: 0,
+  isOpenCreateFolderModal: false,
+  valueNameNewFolder: '',
+  errorMsgForCreateFolder: '',
 };
 
 export const saveNewWord = createSlice({
@@ -16,27 +20,46 @@ export const saveNewWord = createSlice({
     getContentOfWord: (state, action: PayloadAction<string>) => {
       state.wordNeedToBeSaved = action.payload;
     },
-    getSavedWordList: (state, action: PayloadAction<ISavedWordItem[]>) => {
-      state.savedWordList = action.payload;
-    },
+    // getSavedWordList: (state, action: PayloadAction<ISavedWordItem[]>) => {
+    //   state.savedWordList = action.payload;
+    //   console.log('hello', state.savedWordList);
+    // },
     getValueSelectFolder: (state, action: PayloadAction<string>) => {
       state.valueSelectFolder = action.payload;
     },
-    resetErrorMessage: (state, action: PayloadAction<string>) => {
-      state.errorMessage = action.payload;
+    resetErrorMessageForSelectFolder: (
+      state,
+      action: PayloadAction<string>,
+    ) => {
+      state.errorMessageForSelectFolder = action.payload;
     },
     showSuccessfulModal: (state, action: PayloadAction<boolean>) => {
       state.isOpenSuccessfullModal = action.payload;
+    },
+    getGroupId: (state, action: PayloadAction<number>) => {
+      state.groupId = action.payload;
+    },
+    showCreateFolderModal: (state, action: PayloadAction<boolean>) => {
+      state.isOpenCreateFolderModal = action.payload;
+    },
+    setValueNameNewFolder: (state, action: PayloadAction<string>) => {
+      state.valueNameNewFolder = action.payload;
+    },
+    resetErrorMsgForCreateFolder: (state, action: PayloadAction<string>) => {
+      state.errorMsgForCreateFolder = action.payload;
     },
   },
 });
 export const {
   actions: {
     getContentOfWord,
-    getSavedWordList,
     getValueSelectFolder,
-    resetErrorMessage,
+    resetErrorMessageForSelectFolder,
     showSuccessfulModal,
+    getGroupId,
+    showCreateFolderModal,
+    setValueNameNewFolder,
+    resetErrorMsgForCreateFolder,
   },
   reducer,
 } = saveNewWord;

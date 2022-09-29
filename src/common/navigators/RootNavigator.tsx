@@ -16,6 +16,7 @@ import Intro from '@clvtube/intro/component/Intro';
 import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 import PlayingVideo from '@clvtube/video-detail/playingVideo';
 import { SaveNewWord } from '@clvtube/save-new-word/components/index';
+import { DisplaySavedWordList } from '@clvtube/save-new-word/components/DisplaySavedWordList';
 
 import TabBottom from './TabBottom';
 
@@ -31,6 +32,7 @@ import {
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
+  SAVED_WORD_LIST,
   SAVE_NEW_WORD,
   SPLASH_LOADING,
   TAB_BOTTOM,
@@ -48,6 +50,7 @@ export type RootStackParamList = {
   LevelTopic: {};
   TabBottom: {};
   SaveNewWord: {};
+  SaveWordList: {};
 
   Home: {};
   PodcastDetail: {};
@@ -135,6 +138,11 @@ const RootNavigator = () => {
       <Stack.Screen
         name={SAVE_NEW_WORD}
         component={SaveNewWord}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={SAVED_WORD_LIST}
+        component={DisplaySavedWordList}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
