@@ -30,5 +30,5 @@ export const deleteSearchHistoryItem = (id: number) => {
 };
 
 export const deleteAllSearchHistoryItem = () => {
-  return execute.delete(DELETE_SEARCH_HISTORY);
+  return axiosClient.delete(DELETE_SEARCH_HISTORY);
 };
