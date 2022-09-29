@@ -17,7 +17,7 @@ export const DisplaySavedWordList = () => {
   const groupId = useAppSelector(state =>
     state?.saveNewWordReducer?.groupId?.toString(),
   );
-  const { data, isLoading } = useGetSavedWordList(groupId);
+  const { data } = useGetSavedWordList(groupId);
   const { mutate } = useDeleteSavedWord();
 
   const wordList = data?.data?.items;
