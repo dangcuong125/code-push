@@ -44,3 +44,4 @@ export const PODCAST_DETAIL = 'PodcastDetail';
 export const SEARCH_PAGE = 'Search';
 export const VIDEO_DETAILS_PAGE = 'VideoDetails';
 export const SAVE_NEW_WORD = 'SaveNewWord';
+export const SAVED_WORD_LIST = 'SaveWordList';
