@@ -9,6 +9,7 @@ export interface ITranscriptContent {
   type: string;
   content: string;
   start_time: string;
+  isHighlighted?: boolean;
 }
 export interface ITranscriptItem {
   createdAt: string;
@@ -27,12 +28,31 @@ export interface IHelloWorld {
 export interface IInitialState {
   duration: number;
   position: number;
-  heightOfParagraph: string;
+  heightOfParagraph: number;
   paragraphInfo: any;
   sliderValue: number;
   defaultValue: number;
+  // paragraph: ITranscriptItem;
+  wordDefinition: any;
   goBack: boolean;
-  isLoading: boolean;
+  audioHighLightWords: IAudioHighlightWordInPodcastDetail[];
+}
+export interface IAudioHighlightWordInPodcastDetail {
+  created_at: string;
+  deletedAt: null | string;
+  id: number;
+  audioId: number;
+  evDictId: number;
+  evDict: {
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: null | string;
+    version: number;
+    idx: number;
+    word: string;
+    detail: string;
+    example: string;
+  };
 }
 export interface IPodcastDetail {
   id: number;
@@ -77,6 +97,6 @@ export interface IPodcastDetail {
     enabled: number;
     translates: [];
   };
-  audioHighlightWords: [];
+  audioHighlightWords: IAudioHighlightWordInPodcastDetail;
   audioTranscripts: ITranscriptItem[];
 }
