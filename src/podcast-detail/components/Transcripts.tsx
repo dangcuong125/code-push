@@ -3,7 +3,10 @@ import React from 'react';
 import { ITranscriptContent, ITranscriptItem } from '../interface';
 import { View } from 'react-native';
 import { Box } from 'native-base';
-import { getHeightOfParagraph } from '../reducer/podcastDetail';
+import {
+  getHeightOfParagraph,
+  setWordIsHighlighted,
+} from '../reducer/podcastDetail';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { Word } from './Words';
 
@@ -24,6 +27,9 @@ export const Transcripts = React.memo(function Transcripts({
     position <= Number(array[index + 1]?.startTime) &&
     position > Number(item?.startTime);
 
+  if (setBackgroundColorForParagraph) {
+    dispatch(setWordIsHighlighted(item?.content));
+  }
   return (
     <View
       onLayout={event =>

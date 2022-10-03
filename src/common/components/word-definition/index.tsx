@@ -3,6 +3,9 @@ import { Actionsheet, Center, Flex, Icon, Text } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { SAVE_NEW_WORD } from '@clvtube/common/constants/route.constants';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import RenderHtml from 'react-native-render-html';
+import { useWindowDimensions } from 'react-native';
 
 interface IWordDefinition {
   isOpen: boolean;
@@ -16,6 +19,10 @@ export const WordDefinition = ({
   content,
 }: IWordDefinition) => {
   const navigation = useNavigation();
+  const wordDefinition = useAppSelector(
+    state => state.podcastDetail.wordDefinition,
+  );
+  const { width } = useWindowDimensions();
   return (
     <Center>
       <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator={true}>
@@ -40,6 +47,12 @@ export const WordDefinition = ({
               name="bookmarks-outline"
             />
           </Flex>
+          <RenderHtml
+            contentWidth={width}
+            source={{
+              html: wordDefinition?.evDict?.detail,
+            }}
+          />
         </Actionsheet.Content>
       </Actionsheet>
     </Center>

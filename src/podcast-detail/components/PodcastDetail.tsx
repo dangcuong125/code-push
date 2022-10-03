@@ -17,10 +17,9 @@ import {
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
+  getAudioHighlightWords,
   getDurations,
-  getLoadingState,
   getPosition,
-  getPositionAndStartTime,
 } from '../reducer/podcastDetail';
 import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
@@ -184,12 +183,13 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
       Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) ===
         Math.ceil(position1)
     ) {
-      dispatch(
-        getPositionAndStartTime({
-          offset: currentPosition + Number(heightOfParagraph),
-          startTime: startTimeOfParagraphGreaterThanPosition?.startTime,
-        }),
-      );
+      // dispatch(
+      //   getPositionAndStartTime({
+      //     offset: currentPosition + Number(heightOfParagraph),
+      //     startTime: startTimeOfParagraphGreaterThanPosition?.startTime,
+      //     content: startTimeOfParagraphGreaterThanPosition?.content,
+      //   }),
+      // );
     }
     // if (currentPosition !== paragraphHasOffsetEqualToPosition?.offset) {
     //   ref?.current?.scrollToOffset({
@@ -207,8 +207,8 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
     };
   }, []);
   useEffect(() => {
-    dispatch(getLoadingState(isLoading));
-  }, [isLoading]);
+    dispatch(getAudioHighlightWords(podcastDetail?.audioHighlightWords));
+  }, [podcastDetail?.audioHighlightWords]);
   return (
     <>
       {isLoading ? (
