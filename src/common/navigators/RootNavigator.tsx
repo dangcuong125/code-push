@@ -17,6 +17,7 @@ import { PodcastDetail } from '@clvtube/podcast-detail/components/index';
 import PlayingVideo from '@clvtube/video-detail/playingVideo';
 import { SaveNewWord } from '@clvtube/save-new-word/components/index';
 import { DisplaySavedWordList } from '@clvtube/save-new-word/components/DisplaySavedWordList';
+import { CountDownScreen } from '@clvtube/game/count-down-screen/components/index';
 
 import TabBottom from './TabBottom';
 
@@ -25,6 +26,7 @@ import SplashLoading from '@clvtube/splash-loading';
 // 🚀 import Constants from file Constants
 import {
   AUTH,
+  COUNT_DOWN_GAME_SCREEN,
   CREATE_ACCOUNT,
   INPUT_OTP,
   INTRO,
@@ -50,8 +52,8 @@ export type RootStackParamList = {
   LevelTopic: {};
   TabBottom: {};
   SaveNewWord: {};
+  CountDownGameScreen: {};
   SaveWordList: {};
-
   Home: {};
   PodcastDetail: {};
   Podcast: {};
@@ -59,6 +61,7 @@ export type RootStackParamList = {
   Search: {};
   VideoDetails: {};
   StartDashboard: {};
+  GameListScreen: {};
 };
 
 export type InputOTPProps = NativeStackScreenProps<
@@ -143,6 +146,11 @@ const RootNavigator = () => {
       <Stack.Screen
         name={SAVED_WORD_LIST}
         component={DisplaySavedWordList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={COUNT_DOWN_GAME_SCREEN}
+        component={CountDownScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
