@@ -1,5 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type PodcastDetailProps = NativeStackScreenProps<
   RootStackParamList,
@@ -35,6 +35,8 @@ export interface IInitialState {
   // paragraph: ITranscriptItem;
   wordDefinition: any;
   goBack: boolean;
+  isLoading: boolean;
+  isSaveAudio: number;
   audioHighLightWords: IAudioHighlightWordInPodcastDetail[];
 }
 export interface IAudioHighlightWordInPodcastDetail {

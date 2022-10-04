@@ -8,6 +8,7 @@ import { PodcastList } from './PodcastList';
 import PopularTopics from './PopularTopics';
 // import { Speak } from './Speak';
 import { PodcastListProps } from '../interfaces';
+import PodcastSave from '@clvtube/podcast-save';
 
 const Podcast = ({ navigation, route }: PodcastListProps) => {
   return (
@@ -18,6 +19,9 @@ const Podcast = ({ navigation, route }: PodcastListProps) => {
         <VStack safeAreaTop={10} bgColor={'white'}>
           <SearchingHeader />
           <PopularTopics navigation={navigation} route={route} />
+        </VStack>
+        <VStack space={4}>
+          <PodcastSave navigation={navigation} route={route} />
         </VStack>
         {/* <OutStandingPodcast /> */}
         <PodcastList navigation={navigation} route={route} />

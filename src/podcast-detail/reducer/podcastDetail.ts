@@ -1,3 +1,4 @@
+import { RootState } from '@clvtube/common/redux/store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
   IAudioHighlightWordInPodcastDetail,
@@ -13,6 +14,8 @@ const initialState: IInitialState = {
   sliderValue: 0,
   defaultValue: 50,
   goBack: false,
+  isLoading: false,
+  isSaveAudio: 0,
   audioHighLightWords: [],
   wordDefinition: {},
 };
@@ -69,8 +72,15 @@ export const podcastDetailSlice = createSlice({
         item => item?.evDict?.word === action.payload,
       );
     },
+    setIsSaveAudio: (state, action: { payload: number }) => {
+      state.isSaveAudio = action.payload;
+    },
   },
 });
+
+export const getIsSaveAudio = (state: RootState) =>
+  state.podcastDetail.isSaveAudio;
+
 export const {
   actions: {
     getDurations,
@@ -80,6 +90,7 @@ export const {
     getSliderValue,
     getDefaultValueSlider,
     userIsGoingBack,
+    setIsSaveAudio,
     getAudioHighlightWords,
     setWordIsHighlighted,
     findWordIsClickedForDisplayDefinition,

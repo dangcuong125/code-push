@@ -2,11 +2,30 @@ import { HStack, Text, VStack } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
 import YouTube from 'react-native-youtube';
 
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {
+  getDuration,
+  getPosition,
+  getStartTime,
+  setDuration,
+  setPosition,
+} from '../slice';
+import {
+  MILLISECONDS_HIGHLIGHT,
+  USER_PROCESS_TOTAL,
+} from '@clvtube/common/constants/common.constants';
 
 const YoutubeVideo = ({ videoPlay, id }: any) => {
-  const [startTime, setStartTime] = useState(0);
+  // const [startTime, setStartTime] = useState(0);
   const youtubeRef = useRef<YouTube>(null);
+
+  const startTime = useAppSelector(getStartTime);
+  const position = useAppSelector(getPosition);
+  const duration = useAppSelector(getDuration);
+
+  const dispatch = useAppDispatch();
 
   const oneIndex = videoPlay?.videoTranscripts?.find(
     (item, index) => index === 0,
@@ -17,15 +36,24 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   useEffect(() => {
     const itemDisplay = videoPlay?.videoTranscripts?.find(
       item =>
-        startTime - 500 < item.startTime && item.startTime < startTime + 500,
+        position - MILLISECONDS_HIGHLIGHT < item.startTime &&
+        item.startTime < position + MILLISECONDS_HIGHLIGHT,
     );
     if (itemDisplay) {
       setTranscript(itemDisplay);
     }
-  }, [startTime]);
+  }, [position]);
+  useEffect(() => {
+    if (startTime && duration) {
+      youtubeRef.current?.seekTo((startTime * duration) / USER_PROCESS_TOTAL);
+    }
+  }, [startTime, duration]);
+  youtubeRef?.current?.getDuration().then(value => {
+    dispatch(setDuration(value));
+  });
 
   useEffect(() => {
-    setStartTime(0);
+    dispatch(setPosition(0));
     setTranscript('');
   }, [id]);
 
@@ -37,7 +65,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
         videoId={videoPlay?.videoCode}
         play={true}
         fullscreen={false}
-        onProgress={e => setStartTime(e.currentTime * 1000)}
+        onProgress={e => dispatch(setPosition(e.currentTime * 1000))}
         style={{
           height: 250,
         }}
