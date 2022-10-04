@@ -1,6 +1,11 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable multiline-ternary */
 /* eslint-disable array-callback-return */
+import { PROCESS } from '@clvtube/common/constants/common.constants';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRoute } from '@react-navigation/native';
 import { Box, Image, Skeleton, Text } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, Platform } from 'react-native';
@@ -14,17 +19,14 @@ import {
   ITranscriptItem,
   PodcastDetailProps,
 } from '../interface';
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import {
   getDurations,
   getLoadingState,
   getPosition,
   getPositionAndStartTime,
+  setIsSaveAudio,
 } from '../reducer/podcastDetail';
-import { useRoute } from '@react-navigation/native';
 import { Transcripts } from './Transcripts';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -78,11 +80,25 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
   );
 
   const { data, isLoading, error } = useGetPodcastDetail(id);
+
   const podcastDetail = data?.data;
 
   const duration = useProgress(300).duration;
   const position = useProgress(300).position;
   const position1 = useProgress().position;
+  useEffect(() => {
+    if (data?.data?.userToMedia && duration) {
+      dispatch(setIsSaveAudio(data?.data?.userToMedia));
+    } else {
+      dispatch(setIsSaveAudio(0));
+    }
+  }, [data?.data?.userToMedia, duration]);
+
+  useEffect(() => {
+    if (duration) {
+      TrackPlayer.seekTo((data?.data?.startTime * duration) / PROCESS);
+    }
+  }, [data?.data?.startTime, duration]);
 
   const podcastTrack = {
     url: podcastDetail?.audioThumbnail?.file?.url,
@@ -127,6 +143,7 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
     await TrackPlayer.reset();
     // await TrackPlayer.stop();
   };
+
   // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
   const recentVideoAndPodcast = useAppSelector(
     state => state.homePage.saveRecentVideoAndPodcast,

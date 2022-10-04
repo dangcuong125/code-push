@@ -1,5 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type PodcastDetailProps = NativeStackScreenProps<
   RootStackParamList,
@@ -33,6 +33,7 @@ export interface IInitialState {
   defaultValue: number;
   goBack: boolean;
   isLoading: boolean;
+  isSaveAudio: number;
 }
 export interface IPodcastDetail {
   id: number;

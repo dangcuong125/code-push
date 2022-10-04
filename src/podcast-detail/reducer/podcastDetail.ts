@@ -1,3 +1,4 @@
+import { RootState } from '@clvtube/common/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { IInitialState } from '../interface';
 
@@ -10,6 +11,7 @@ const initialState: IInitialState = {
   defaultValue: 50,
   goBack: false,
   isLoading: false,
+  isSaveAudio: 0,
 };
 
 export const podcastDetailSlice = createSlice({
@@ -43,8 +45,15 @@ export const podcastDetailSlice = createSlice({
     getLoadingState: (state, action) => {
       state.isLoading = action.payload;
     },
+    setIsSaveAudio: (state, action: { payload: number }) => {
+      state.isSaveAudio = action.payload;
+    },
   },
 });
+
+export const getIsSaveAudio = (state: RootState) =>
+  state.podcastDetail.isSaveAudio;
+
 export const {
   actions: {
     getDurations,
@@ -55,6 +64,7 @@ export const {
     getDefaultValueSlider,
     userIsGoingBack,
     getLoadingState,
+    setIsSaveAudio,
   },
   reducer,
 } = podcastDetailSlice;

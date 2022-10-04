@@ -1,11 +1,35 @@
+import { MediaType, PROCESS } from '@clvtube/common/constants/common.constants';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useDeleteVideo } from '@clvtube/video-detail/hooks/useDeleteVideo';
+import { useSaveVideo } from '@clvtube/video-detail/hooks/useSaveVideo';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Box, HStack, Icon } from 'native-base';
 import React from 'react';
-import { HStack } from 'native-base';
 import AntDeisgn from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { getDuration, getIsSaveVideo, getPosition } from '../slice';
 
 const IconHeader = () => {
   const navigator = useNavigation();
+  const isSaveVideo = useAppSelector(getIsSaveVideo);
+  const { id } = useRoute().params;
+
+  const { mutate: deleteVideo } = useDeleteVideo();
+  const { mutate: saveVideo } = useSaveVideo();
+  const position = useAppSelector(getPosition);
+  const duration = useAppSelector(getDuration);
+
+  const handleSaveVideo = () => {
+    saveVideo({
+      videoId: id,
+      mediaType: MediaType.VIDEO,
+      startTime: ((position / 1000) * PROCESS) / duration,
+    });
+  };
+
+  const handleDeleteVideo = () => {
+    if (isSaveVideo) deleteVideo([isSaveVideo]);
+  };
 
   return (
     <HStack
@@ -19,7 +43,27 @@ const IconHeader = () => {
         onPress={() => navigator.goBack()}
       />
       <HStack space={2}>
-        <MaterialIcons name="filter-none" size={25} color="black" />
+        {isSaveVideo ? (
+          <Box onTouchEnd={handleDeleteVideo}>
+            <Icon
+              size="6"
+              as={Ionicons}
+              name="bookmarks"
+              marginRight="10px"
+              color="black"
+            />
+          </Box>
+        ) : (
+          <Box onTouchEnd={handleSaveVideo}>
+            <Icon
+              size="6"
+              as={Ionicons}
+              name="bookmarks-outline"
+              marginRight="10px"
+              color="black"
+            />
+          </Box>
+        )}
         <AntDeisgn name="setting" size={25} color="black" />
       </HStack>
     </HStack>

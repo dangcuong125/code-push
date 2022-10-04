@@ -6,7 +6,7 @@ import IconHeader from './component/IconHeader';
 import YoutubeVideo from './component/YoutubeVideo';
 import ListVideo from '../../home/video/component/ListVideo';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { updateVideoItem } from './slice';
+import { setIsSaveVideo, setStartTime, updateVideoItem } from './slice';
 import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -27,7 +27,7 @@ const PlayingVideo = () => {
   const recentVideoAndPodcast = useAppSelector(
     state => state.homePage.saveRecentVideoAndPodcast,
   );
-  console.log('test', recentVideoAndPodcast);
+  // console.log('test', recentVideoAndPodcast);
 
   const recentVideoAndPodcastWithoutDuplicate = [
     ...new Set(recentVideoAndPodcast),
@@ -39,8 +39,11 @@ const PlayingVideo = () => {
     );
   };
   if (data) storeRecentVideoAndPodcast();
+  useEffect(() => {
+    if (data?.data?.startTime) dispatch(setStartTime(data?.data?.startTime));
+  }, [data?.data?.startTime]);
 
-  console.log({ video: data?.data });
+  // console.log({ video: data?.data });
   if (error) {
     Alert.alert('Error', 'Oops, something went wrong', [
       {
@@ -59,6 +62,11 @@ const PlayingVideo = () => {
   useEffect(() => {
     dispatch(updateVideoItem(data?.data));
   }, [data?.data]);
+  useEffect(() => {
+    if (data?.data?.userToMedia) {
+      dispatch(setIsSaveVideo(data?.data?.userToMedia));
+    }
+  }, [data?.data?.userToMedia]);
 
   return (
     <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false}>

@@ -6,6 +6,7 @@ import ListVideo from './component/ListVideo';
 // import MaybeYouLikeVideo from './component/MaybeYouLikeVideo';
 import PopularTopic from './component/PopularTopic';
 import PupolarVideo from './component/PupolarVideo';
+import VideoSave from '@clvtube/video-save';
 
 const VideoList = () => {
   return (
@@ -16,6 +17,7 @@ const VideoList = () => {
           <PopularTopic />
         </VStack>
         <PupolarVideo />
+        <VideoSave />
         <ListVideo />
         {/* <MaybeYouLikeVideo /> */}
       </VStack>
