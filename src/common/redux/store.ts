@@ -12,6 +12,8 @@ import { reducer as podcastDetail } from '@clvtube/podcast-detail/reducer/podcas
 import { reducer as accountReducer } from '@clvtube/account/slice';
 import { reducer as searchPageReducer } from '@clvtube/search-page/reducer/searchPage';
 import { reducer as saveNewWordReducer } from '@clvtube/save-new-word/reducer/saveNewWord';
+import { reducer as countDownForPreparingGame } from '@clvtube/game/count-down-screen/reducer/countDown';
+import { reducer as gameChooseRightWordReducer } from '@clvtube/game/choose-right-word-game/reducer/gameChooseRightWord';
 
 const rootReducer = combineReducers({
   videoDetails,
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
   podcastDetail,
   searchPageReducer,
   saveNewWordReducer,
+  countDownForPreparingGame,
+  gameChooseRightWordReducer,
 });
 
 const store = configureStore({

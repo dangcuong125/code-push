@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable multiline-ternary */
 /* eslint-disable array-callback-return */
-import { PROCESS } from '@clvtube/common/constants/common.constants';
+import { USER_PROCESS_TOTAL } from '@clvtube/common/constants/common.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,10 +20,9 @@ import {
   PodcastDetailProps,
 } from '../interface';
 import {
+  getAudioHighlightWords,
   getDurations,
-  getLoadingState,
   getPosition,
-  getPositionAndStartTime,
   setIsSaveAudio,
 } from '../reducer/podcastDetail';
 import { Transcripts } from './Transcripts';
@@ -96,7 +95,9 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
 
   useEffect(() => {
     if (duration) {
-      TrackPlayer.seekTo((data?.data?.startTime * duration) / PROCESS);
+      TrackPlayer.seekTo(
+        (data?.data?.startTime * duration) / USER_PROCESS_TOTAL,
+      );
     }
   }, [data?.data?.startTime, duration]);
 
@@ -201,12 +202,13 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
       Math.ceil(Number(startTimeOfParagraphGreaterThanPosition?.startTime)) ===
         Math.ceil(position1)
     ) {
-      dispatch(
-        getPositionAndStartTime({
-          offset: currentPosition + Number(heightOfParagraph),
-          startTime: startTimeOfParagraphGreaterThanPosition?.startTime,
-        }),
-      );
+      // dispatch(
+      //   getPositionAndStartTime({
+      //     offset: currentPosition + Number(heightOfParagraph),
+      //     startTime: startTimeOfParagraphGreaterThanPosition?.startTime,
+      //     content: startTimeOfParagraphGreaterThanPosition?.content,
+      //   }),
+      // );
     }
     // if (currentPosition !== paragraphHasOffsetEqualToPosition?.offset) {
     //   ref?.current?.scrollToOffset({
@@ -224,8 +226,8 @@ const PodcastDetailLearning = React.memo(function PodcastDetailLearning({
     };
   }, []);
   useEffect(() => {
-    dispatch(getLoadingState(isLoading));
-  }, [isLoading]);
+    dispatch(getAudioHighlightWords(podcastDetail?.audioHighlightWords));
+  }, [podcastDetail?.audioHighlightWords]);
   return (
     <>
       {isLoading ? (

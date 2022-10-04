@@ -3,4 +3,6 @@ export enum MediaType {
   AUDIO = 'audio',
 }
 
-export const PROCESS = 10;
+export const USER_PROCESS_TOTAL = 10;
+
+export const MILLISECONDS_HIGHLIGHT = 500;

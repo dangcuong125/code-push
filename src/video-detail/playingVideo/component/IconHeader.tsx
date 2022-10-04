@@ -1,4 +1,7 @@
-import { MediaType, PROCESS } from '@clvtube/common/constants/common.constants';
+import {
+  MediaType,
+  USER_PROCESS_TOTAL,
+} from '@clvtube/common/constants/common.constants';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useDeleteVideo } from '@clvtube/video-detail/hooks/useDeleteVideo';
 import { useSaveVideo } from '@clvtube/video-detail/hooks/useSaveVideo';
@@ -23,7 +26,7 @@ const IconHeader = () => {
     saveVideo({
       videoId: id,
       mediaType: MediaType.VIDEO,
-      startTime: ((position / 1000) * PROCESS) / duration,
+      startTime: ((position / 1000) * USER_PROCESS_TOTAL) / duration,
     });
   };
 

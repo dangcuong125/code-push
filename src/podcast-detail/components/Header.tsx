@@ -11,7 +11,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useSavePodcast } from '../hooks/useSavePodcast';
 import { useRoute } from '@react-navigation/native';
-import { MediaType, PROCESS } from '@clvtube/common/constants/common.constants';
+import {
+  MediaType,
+  USER_PROCESS_TOTAL,
+} from '@clvtube/common/constants/common.constants';
 import { useDeletePodcast } from '../hooks/useDeletePodcast';
 
 export const Header = ({ navigation }: PodcastDetailProps) => {
@@ -31,7 +34,7 @@ export const Header = ({ navigation }: PodcastDetailProps) => {
     savePod({
       audioId: id,
       mediaType: MediaType.AUDIO,
-      startTime: (position / duration) * PROCESS,
+      startTime: (position / duration) * USER_PROCESS_TOTAL,
     });
   };
 

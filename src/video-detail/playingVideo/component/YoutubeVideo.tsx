@@ -12,7 +12,10 @@ import {
   setDuration,
   setPosition,
 } from '../slice';
-import { PROCESS } from '@clvtube/common/constants/common.constants';
+import {
+  MILLISECONDS_HIGHLIGHT,
+  USER_PROCESS_TOTAL,
+} from '@clvtube/common/constants/common.constants';
 
 const YoutubeVideo = ({ videoPlay, id }: any) => {
   // const [startTime, setStartTime] = useState(0);
@@ -33,7 +36,8 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   useEffect(() => {
     const itemDisplay = videoPlay?.videoTranscripts?.find(
       item =>
-        position - 500 < item.startTime && item.startTime < position + 500,
+        position - MILLISECONDS_HIGHLIGHT < item.startTime &&
+        item.startTime < position + MILLISECONDS_HIGHLIGHT,
     );
     if (itemDisplay) {
       setTranscript(itemDisplay);
@@ -41,7 +45,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   }, [position]);
   useEffect(() => {
     if (startTime && duration) {
-      youtubeRef.current?.seekTo((startTime * duration) / PROCESS);
+      youtubeRef.current?.seekTo((startTime * duration) / USER_PROCESS_TOTAL);
     }
   }, [startTime, duration]);
   youtubeRef?.current?.getDuration().then(value => {

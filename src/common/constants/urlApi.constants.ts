@@ -1,6 +1,5 @@
 export const BASE_URL =
-  // 'http://clevertube-dev-alb-1086634962.ap-northeast-1.elb.amazonaws.com';
-  'http://localhost:3000';
+  'http://clevertube-dev-alb-1086634962.ap-northeast-1.elb.amazonaws.com';
 
 export const LOGIN_POST = '/client/login';
 export const REGISTER_POST = '/client/register';
@@ -22,3 +21,5 @@ export const CREATE_NEW_FOLDER_FOR_SAVING_WORD = '/user-save-words/group';
 export const USER_SAVES_WORD = '/user-save-words/word';
 export const ADMIN_DICTIONARY = '/admin/dictionaries';
 export const USER_SAVE_MEDIA = '/user-save-media';
+export const GAME_CHOOSE_RIGHT_WORD_AMOUNT_QUESTION =
+  '/game/choose-right-word/question/';

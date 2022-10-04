@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from '@clvtube/common/constants/querykeys.constants';
 import { IUserSaveMedia } from '@clvtube/common/interfaces/common.interface';
+import { generateId } from '@clvtube/common/utils/common.utils';
 import { useMutation, useQueryClient } from 'react-query';
 import { postUserSaveVideo } from '../services';
 
@@ -19,7 +20,7 @@ export const useSaveVideo = () => {
         ...previousData,
         data: {
           ...previousData?.data,
-          userToMedia: 1,
+          userToMedia: generateId(),
         },
       });
       return { previousData, saveVideo };
