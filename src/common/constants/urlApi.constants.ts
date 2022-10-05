@@ -23,3 +23,6 @@ export const ADMIN_DICTIONARY = '/admin/dictionaries';
 export const USER_SAVE_MEDIA = '/user-save-media';
 export const GAME_CHOOSE_RIGHT_WORD_AMOUNT_QUESTION =
   '/game/choose-right-word/question/';
+export const GAME_CHOOSE_RIGHT_WORD_RESULT = '/game/choose-right-word/result';
+export const GAME_CHOOSE_RIGHT_WORD_GET_RIGHT_ANSWER =
+  '/game/choose-right-word/answer/';

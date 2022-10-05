@@ -5,16 +5,25 @@ import { SafeAreaView } from 'react-native';
 import { ChooseRightWordGame } from '../../choose-right-word-game/components/index';
 import { useCountDown } from '@clvtube/common/hooks/useCountDown';
 import { useGetAmountQuestion } from '../hooks/useGetAmountQuestion';
-import { getAmountQuestionAndAnswer } from '../../choose-right-word-game/reducer/gameChooseRightWord';
+import {
+  getAmountQuestionAndAnswer,
+  listenClickEvent,
+} from '../../choose-right-word-game/reducer/gameChooseRightWord';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import * as lodash from 'lodash';
 
 export const CountDownScreen = () => {
   const countDown = useCountDown(3, 0);
   const dispatch = useAppDispatch();
-  const { data } = useGetAmountQuestion();
+  const { data, isSuccess } = useGetAmountQuestion();
 
   useEffect(() => {
-    dispatch(getAmountQuestionAndAnswer(data?.data));
+    if (!lodash.isEmpty(data?.data)) {
+      dispatch(getAmountQuestionAndAnswer(data?.data));
+    }
+  }, [data?.data]);
+  useEffect(() => {
+    if (isSuccess) dispatch(listenClickEvent());
   }, [data?.data]);
   return (
     <SafeAreaView>

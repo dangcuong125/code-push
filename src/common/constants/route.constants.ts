@@ -46,5 +46,7 @@ export const VIDEO_DETAILS_PAGE = 'VideoDetails';
 export const SAVE_NEW_WORD = 'SaveNewWord';
 export const SAVED_WORD_LIST = 'SaveWordList';
 
+export const TAB_ROUTE_GAME = 'GameTab';
 export const COUNT_DOWN_GAME_SCREEN = 'CountDownGameScreen';
 export const GAME_LIST_SCREEN = 'GameListScreen';
+export const GAME_RESULT = 'GameResult';
