@@ -8,13 +8,13 @@ import {
   getCorrectAnswer,
   listenAnswerIsChosen,
   listenClickEvent,
-  setIndex,
+  setIndexOfQuestionAndAnswers,
 } from '../reducer/gameChooseRightWord';
 import * as lodash from 'lodash';
 import { useGetCorrectAnswer } from '../hooks/useGetCorrectAnswer';
 import { useNavigation } from '@react-navigation/native';
-import { GAME_RESULT } from '@clvtube/common/constants/route.constants';
-import { TOTAL_QUESTIONS } from '@clvtube/common/constants/common.constant';
+import { RESULT_OF_CHOOSE_RIGHT_WORD_GAME } from '@clvtube/common/constants/route.constants';
+import { TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD } from '@clvtube/common/constants/common.constants';
 
 export const QuestionAndAnswers = () => {
   const dispatch = useAppDispatch();
@@ -30,9 +30,9 @@ export const QuestionAndAnswers = () => {
 
   const { data } = useGetCorrectAnswer(checkIdQuestionAndAnswersNotEmpty);
 
-  if (index === TOTAL_QUESTIONS) {
+  if (index === TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD) {
     setTimeout(() => {
-      navigation.navigate(GAME_RESULT);
+      navigation.navigate(RESULT_OF_CHOOSE_RIGHT_WORD_GAME);
     }, 1000);
   }
 
@@ -64,7 +64,7 @@ export const QuestionAndAnswers = () => {
                   }
                   dispatch(listenAnswerIsChosen(answer?.answerInfo?.content));
                   dispatch(listenClickEvent());
-                  dispatch(setIndex(1));
+                  dispatch(setIndexOfQuestionAndAnswers(1));
                 }}
                 mt="10px"
                 bgColor={

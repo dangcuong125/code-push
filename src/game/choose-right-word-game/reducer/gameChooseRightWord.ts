@@ -14,7 +14,7 @@ export const gameChooseRightWordSlice = createSlice({
   name: 'game-choose-right-word',
   initialState,
   reducers: {
-    setIndex: (state, action: PayloadAction<number>) => {
+    setIndexOfQuestionAndAnswers: (state, action: PayloadAction<number>) => {
       state.index += action.payload;
     },
     resetIndexOfQuestionAndAnswers: state => {
@@ -57,7 +57,7 @@ export const gameChooseRightWordSlice = createSlice({
 });
 export const {
   actions: {
-    setIndex,
+    setIndexOfQuestionAndAnswers,
     listenClickEvent,
     getAmountQuestionAndAnswer,
     listenAnswerIsChosen,
