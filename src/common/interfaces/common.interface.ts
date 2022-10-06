@@ -18,3 +18,22 @@ export interface IUserSaveMedia {
   audioId?: number;
   startTime: number;
 }
+export interface IWordDefinition {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: null | string;
+  version: number;
+  id: number;
+  videoId: number;
+  evDictId: number;
+  evDict: {
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: null | string;
+    version: number;
+    idx: number;
+    word: string;
+    detail: string | undefined;
+    example: null | string;
+  };
+}

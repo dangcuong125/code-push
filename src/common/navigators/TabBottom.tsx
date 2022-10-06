@@ -69,12 +69,12 @@ const TabBottom = () => {
       <Tab.Screen name="Podcast" component={PodcastRoutes} />
 
       {/* TabBar Account */}
-      <Tab.Screen name="Tài khoản" component={AccountRoute} />
       <Tab.Screen
         options={{ title: 'Trò chơi' }}
         name={TAB_ROUTE_GAME}
         component={GameNavigator}
       />
+      <Tab.Screen name="Tài khoản" component={AccountRoute} />
     </Tab.Navigator>
   );
 };

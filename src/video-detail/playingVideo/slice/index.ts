@@ -1,17 +1,17 @@
 import { RootState } from '@clvtube/common/redux/store';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IInitialState, IVideoHighlightWord } from '../interface';
 
-const initialState = {
+const initialState: IInitialState = {
   videoItem: {},
-  videoTranscripts: [
-    // { startTime: 123, content: 'Taodzo is developer' },
-    // { startTime: 456, content: 'binh dinh mai dinh' },
-    // { startTime: 789, content: 'the end...' },
-  ],
+  videoItemIsConverted: [],
   isSaveVideo: 0,
   startTime: 0,
   position: 0,
   duration: 0,
+  wordIsClicked: '',
+  videoHighlightWords: [],
+  wordDefinition: null,
 };
 
 const videoItemSlice = createSlice({
@@ -20,9 +20,6 @@ const videoItemSlice = createSlice({
   reducers: {
     updateVideoItem: (state, action) => {
       state.videoItem = action.payload;
-    },
-    updateVideoTranscripts: (state, action) => {
-      state.videoTranscripts = action.payload;
     },
     setIsSaveVideo: (state, action: { payload: number }) => {
       state.isSaveVideo = action.payload;
@@ -35,6 +32,35 @@ const videoItemSlice = createSlice({
     },
     setPosition: (state, action: { payload: number }) => {
       state.position = action.payload;
+    },
+    customVideoItemConverted: (state, action: PayloadAction<string[]>) => {
+      state.videoItemIsConverted = action.payload?.map((item: string) => {
+        const isHighlighted = state.videoHighlightWords.some(
+          (highlightWord: IVideoHighlightWord) =>
+            item === highlightWord?.evDict?.word,
+        );
+        return {
+          content: item,
+          isHighlighted,
+        };
+      });
+    },
+    getWordIsClicked: (state, action: PayloadAction<string>) => {
+      state.wordIsClicked = action.payload;
+    },
+    getVideoHighlightWord: (
+      state,
+      action: PayloadAction<IVideoHighlightWord[]>,
+    ) => {
+      state.videoHighlightWords = action.payload;
+    },
+    findWordIsClickedForDisplayDefinition: (
+      state,
+      action: PayloadAction<string>,
+    ) => {
+      state.wordDefinition = state.videoHighlightWords.find(
+        item => item?.evDict?.word === action.payload,
+      );
     },
   },
 });
@@ -53,11 +79,14 @@ export const getPosition = (state: RootState) =>
 export const {
   actions: {
     updateVideoItem,
-    updateVideoTranscripts,
     setIsSaveVideo,
     setStartTime,
     setDuration,
     setPosition,
+    getWordIsClicked,
+    customVideoItemConverted,
+    getVideoHighlightWord,
+    findWordIsClickedForDisplayDefinition,
   },
   reducer,
 } = videoItemSlice;
