@@ -13,9 +13,9 @@ import {
 } from '../../choose-right-word-game/reducer/gameChooseRightWord';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
-import { TOTAL_QUESTIONS } from '@clvtube/common/constants/common.constant';
+import { TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD } from '@clvtube/common/constants/common.constants';
 
-export const GameResult = () => {
+export const ResultOfGameChooseRightWord = () => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
 
@@ -51,11 +51,14 @@ export const GameResult = () => {
               Số đáp án đúng: {numCorrectAnswer?.length}
             </Text>
             <Text color={'text.200'} fontSize="18px">
-              Số đáp án không đúng: {TOTAL_QUESTIONS - numCorrectAnswer?.length}
+              Số đáp án không đúng:{' '}
+              {TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD -
+                numCorrectAnswer?.length}
             </Text>
           </Box>
           <Text textAlign="center" color="text.200" fontSize="18px" mt="20px">
-            Kết quả {numCorrectAnswer?.length}/{TOTAL_QUESTIONS}
+            Kết quả {numCorrectAnswer?.length}/
+            {TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD}
           </Text>
         </Box>
         <Button

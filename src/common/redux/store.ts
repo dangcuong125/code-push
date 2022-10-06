@@ -14,6 +14,7 @@ import { reducer as searchPageReducer } from '@clvtube/search-page/reducer/searc
 import { reducer as saveNewWordReducer } from '@clvtube/save-new-word/reducer/saveNewWord';
 import { reducer as countDownForPreparingGame } from '@clvtube/game/count-down-screen/reducer/countDown';
 import { reducer as gameChooseRightWordReducer } from '@clvtube/game/choose-right-word-game/reducer/gameChooseRightWord';
+import { reducer as gameDragWordReducer } from '@clvtube/game/drag-word-game/reducer/gameDragWord';
 
 const rootReducer = combineReducers({
   videoDetails,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   saveNewWordReducer,
   countDownForPreparingGame,
   gameChooseRightWordReducer,
+  gameDragWordReducer,
 });
 
 const store = configureStore({

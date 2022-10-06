@@ -49,4 +49,6 @@ export const SAVED_WORD_LIST = 'SaveWordList';
 export const TAB_ROUTE_GAME = 'GameTab';
 export const COUNT_DOWN_GAME_SCREEN = 'CountDownGameScreen';
 export const GAME_LIST_SCREEN = 'GameListScreen';
-export const GAME_RESULT = 'GameResult';
+export const RESULT_OF_CHOOSE_RIGHT_WORD_GAME = 'GameResult';
+export const GAME_DRAG_WORD = 'GameDragWord';
+export const RESULT_OF_DRAG_WORD_GAME = 'ResultOfDragWord';

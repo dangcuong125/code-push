@@ -11,6 +11,7 @@ export const GameItem = ({
   onPress,
   gameName,
   gameDescription,
+  ...rest
 }: IGameItemProps) => {
   return (
     <Pressable
@@ -19,6 +20,7 @@ export const GameItem = ({
       margin="auto"
       width="350px"
       onPress={onPress}
+      {...rest}
       borderRadius="10px">
       <Text
         color="neural.1"
@@ -37,7 +39,7 @@ export const GameItem = ({
         margin="auto"
         onPress={onPress}
         mt="20px">
-        Choi
+        Chơi
       </Button>
     </Pressable>
   );
