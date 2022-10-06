@@ -10,14 +10,16 @@ import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useDeleteSavedWord } from '../hooks/useDeleteSavedWord';
 import RenderHtml from 'react-native-render-html';
 import { ISavedWordItem } from '../interface';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { getSearchWord, setSearchWord } from '../reducer/saveNewWord';
 
 export const DisplaySavedWordList = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
-  const groupId = useAppSelector(state =>
-    state?.saveNewWordReducer?.groupId?.toString(),
-  );
-  const { data } = useGetSavedWordList(groupId);
+  const groupId = useAppSelector(state => state?.saveNewWordReducer?.groupId);
+  const search = useAppSelector(getSearchWord);
+  const { data } = useGetSavedWordList(groupId, search);
   const { mutate } = useDeleteSavedWord();
 
   const wordList = data?.data?.items;
@@ -69,6 +71,9 @@ export const DisplaySavedWordList = () => {
             InputLeftElement={
               <Icon as={AntDesign} name="search1" ml={3} mr={-2} />
             }
+            onChangeText={value => {
+              dispatch(setSearchWord(value));
+            }}
           />
         </Box>
         {wordList?.length ? (

@@ -15,15 +15,18 @@ export const getWordGroupList = (page: number, limit: number) => {
   });
 };
 export const getSavedWordGroupList = (
-  groupId: undefined | string,
+  groupId: null | number,
   page: number,
   limit: number,
+  search: string,
 ) => {
+  console.log({ search });
   return axiosClient.get(USER_SAVES_WORD, {
     params: {
       groupId,
       page,
       limit,
+      search,
     },
   });
 };
