@@ -1,3 +1,4 @@
+import { RootState } from '@clvtube/common/redux/store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IInitialState } from '../interface';
 
@@ -11,6 +12,7 @@ const initialState: IInitialState = {
   isOpenCreateFolderModal: false,
   valueNameNewFolder: '',
   errorMsgForCreateFolder: '',
+  searchWord: '',
 };
 
 export const saveNewWord = createSlice({
@@ -48,8 +50,14 @@ export const saveNewWord = createSlice({
     resetErrorMsgForCreateFolder: (state, action: PayloadAction<string>) => {
       state.errorMsgForCreateFolder = action.payload;
     },
+    setSearchWord: (state, action: PayloadAction<string>) => {
+      state.searchWord = action.payload;
+    },
   },
 });
+
+export const getSearchWord = (state: RootState) =>
+  state.saveNewWordReducer.searchWord;
 export const {
   actions: {
     getContentOfWord,
@@ -60,6 +68,7 @@ export const {
     showCreateFolderModal,
     setValueNameNewFolder,
     resetErrorMsgForCreateFolder,
+    setSearchWord,
   },
   reducer,
 } = saveNewWord;
