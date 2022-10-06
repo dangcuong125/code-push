@@ -39,6 +39,7 @@ export interface IInitialState {
   errorMessageForSelectFolder: string;
   errorMsgForCreateFolder: string;
   groupId: null | number;
+  searchWord: string;
 }
 export interface INewWord {
   evdictId: number;

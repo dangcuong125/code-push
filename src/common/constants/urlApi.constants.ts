@@ -1,5 +1,6 @@
 export const BASE_URL =
-  'http://clevertube-dev-alb-1086634962.ap-northeast-1.elb.amazonaws.com';
+  // 'http://clevertube-dev-alb-1086634962.ap-northeast-1.elb.amazonaws.com';
+  'http://localhost:3000';
 
 export const LOGIN_POST = '/client/login';
 export const REGISTER_POST = '/client/register';
