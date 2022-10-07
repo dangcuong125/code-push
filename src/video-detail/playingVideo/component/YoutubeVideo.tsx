@@ -132,6 +132,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
               fontStyle={'normal'}
               fontSize={'18px'}
               fontWeight={600}
+              flexBasis={'50%'}
               underline={item?.isHighlighted}
               onPress={() => {
                 if (item?.isHighlighted) {
@@ -144,7 +145,6 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
                 }
               }}
               textAlign={'center'}
-              // textDecorationLine={'underline'}
               textDecorationColor={'#999999'}
               color={'neural.10'}>
               {item?.content}
