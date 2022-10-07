@@ -14,6 +14,7 @@ import {
   getWordIsClicked,
   setDuration,
   setPosition,
+  setStartTime,
 } from '../slice';
 import {
   MILLISECONDS_HIGHLIGHT,
@@ -64,6 +65,11 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
       youtubeRef.current?.seekTo((startTime * duration) / USER_PROCESS_TOTAL);
     }
   }, [startTime, duration]);
+  useEffect(() => {
+    return () => {
+      dispatch(setStartTime(0));
+    };
+  }, []);
   youtubeRef?.current?.getDuration().then(value => {
     dispatch(setDuration(value));
   });
