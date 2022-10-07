@@ -85,34 +85,39 @@ export const VideoList = ({ navigation }: HomePageProps) => {
   const isHorizontal = true;
 
   return (
-    <VStack bgColor={'transparent'}>
-      <VStack bgColor={'white'} safeAreaY={4} space={5}>
-        <HStack
-          safeAreaX={4}
-          justifyContent={'space-between'}
-          alignItems={'center'}>
-          <Heading
-            fontStyle={'normal'}
-            fontSize={'18px'}
-            fontWeight={600}
-            color={'#000000'}>
-            Video
-          </Heading>
-          <Text
-            fontStyle={'normal'}
-            fontSize={'12px'}
-            fontWeight={400}
-            color={'#216BCD'}>
-            {t('viewAll')}
-          </Text>
-        </HStack>
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={videoTypeCarousel}
-          renderItem={renderVideoTypeCarousel}
-        />
+    <>
+      <VStack bgColor={'transparent'}>
+        <VStack bgColor={'white'} safeAreaY={4} space={5}>
+          <HStack
+            safeAreaX={4}
+            justifyContent={'space-between'}
+            alignItems={'center'}>
+            <Heading
+              fontStyle={'normal'}
+              fontSize={'18px'}
+              fontWeight={600}
+              color={'#000000'}>
+              Video
+            </Heading>
+            <Text
+              fontStyle={'normal'}
+              fontSize={'12px'}
+              fontWeight={400}
+              color={'#216BCD'}>
+              {t('viewAll')}
+            </Text>
+          </HStack>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={videoTypeCarousel}
+            renderItem={renderVideoTypeCarousel}
+          />
+        </VStack>
+      </VStack>
+      <VStack bgColor={'transparent'} marginTop={1} ml={'16px'}>
         <ScrollView
+          showsHorizontalScrollIndicator={false}
           horizontal={
             videoListCarousel?.length === 0 ? !isHorizontal : isHorizontal
           }>
@@ -149,19 +154,24 @@ export const VideoList = ({ navigation }: HomePageProps) => {
                       fontStyle={'normal'}
                       fontSize="16px"
                       fontWeight={400}
+                      mb={'8px'}
                       color={'#1A1A1A'}
                       lineHeight={'22px'}>
                       {video.name}
                     </Text>
+
                     <Image
                       source={{ uri: video?.thumbnails?.medium?.url }}
-                      resizeMode="contain"
+                      resizeMode="cover"
                       width={video?.thumbnails.medium.width}
                       height={video?.thumbnails.medium.height}
                       alt="image"
+                      borderRadius={'12px'}
+                      maxHeight={'50%'}
                     />
                     <Text
                       fontStyle={'normal'}
+                      mt={'16px'}
                       fontSize={'14px'}
                       fontWeight={400}
                       lineHeight={'19px'}
@@ -175,6 +185,6 @@ export const VideoList = ({ navigation }: HomePageProps) => {
           )}
         </ScrollView>
       </VStack>
-    </VStack>
+    </>
   );
 };
