@@ -6,7 +6,12 @@ import IconHeader from './component/IconHeader';
 import YoutubeVideo from './component/YoutubeVideo';
 import ListVideo from '../../home/video/component/ListVideo';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { setIsSaveVideo, setStartTime, updateVideoItem } from './slice';
+import {
+  getVideoHighlightWord,
+  setIsSaveVideo,
+  setStartTime,
+  updateVideoItem,
+} from './slice';
 import { Alert } from 'react-native';
 import { useAppSelector } from '../../common/hooks/useAppSelector';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,7 +20,6 @@ const PlayingVideo = () => {
   const scrollViewRef = useRef();
   // const tokenApp = useAppSelector(state => state.authReducer.tokenApp);
   const { id } = useRoute().params;
-  console.log({ id });
   const navigation = useNavigation();
 
   const { videoItem } = useAppSelector(state => state.videoItemReducer);
@@ -24,10 +28,11 @@ const PlayingVideo = () => {
 
   const [paramsVideo, setParamsVideo] = useState(() => id);
   const { data, error } = useGetVideoItem(paramsVideo);
+  // console.log('test', data?.data);
+
   const recentVideoAndPodcast = useAppSelector(
     state => state.homePage.saveRecentVideoAndPodcast,
   );
-  // console.log('test', recentVideoAndPodcast);
 
   const recentVideoAndPodcastWithoutDuplicate = [
     ...new Set(recentVideoAndPodcast),
@@ -61,6 +66,7 @@ const PlayingVideo = () => {
 
   useEffect(() => {
     dispatch(updateVideoItem(data?.data));
+    dispatch(getVideoHighlightWord(data?.data?.videoHighlightWords));
   }, [data?.data]);
   useEffect(() => {
     if (data?.data?.userToMedia) {

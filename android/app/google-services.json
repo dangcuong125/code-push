@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "213696605314-j23fkh0ij9akao7lvscnegcj7s042oco.apps.googleusercontent.com",
+          "client_id": "213696605314-49lr6oke61fgevd95csa2ripvcd195j4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bili.clevertube",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "d37152730db70aa344b6fa8f95426c2440cb525b"
           }
         },
         {

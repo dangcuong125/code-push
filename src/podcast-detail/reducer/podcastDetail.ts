@@ -17,7 +17,7 @@ const initialState: IInitialState = {
   isLoading: false,
   isSaveAudio: 0,
   audioHighLightWords: [],
-  wordDefinition: {},
+  wordDefinition: null,
 };
 
 export const podcastDetailSlice = createSlice({

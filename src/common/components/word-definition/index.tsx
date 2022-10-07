@@ -3,25 +3,24 @@ import { Actionsheet, Center, Flex, Icon, Text } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { SAVE_NEW_WORD } from '@clvtube/common/constants/route.constants';
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import RenderHtml from 'react-native-render-html';
 import { useWindowDimensions } from 'react-native';
+import { IWordDefinition } from '@clvtube/common/interfaces/common.interface';
 
-interface IWordDefinition {
+interface IWordDefinitionProps {
   isOpen: boolean;
   onClose: () => void;
   content: string;
+  wordDefinition: IWordDefinition;
 }
 
 export const WordDefinition = ({
   isOpen,
   onClose,
   content,
-}: IWordDefinition) => {
+  wordDefinition,
+}: IWordDefinitionProps) => {
   const navigation = useNavigation();
-  const wordDefinition = useAppSelector(
-    state => state.podcastDetail.wordDefinition,
-  );
   const { width } = useWindowDimensions();
   return (
     <Center>
@@ -50,7 +49,7 @@ export const WordDefinition = ({
           <RenderHtml
             contentWidth={width}
             source={{
-              html: wordDefinition?.evDict?.detail,
+              html: wordDefinition,
             }}
           />
         </Actionsheet.Content>

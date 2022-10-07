@@ -1,14 +1,17 @@
-import { HStack, Text, VStack } from 'native-base';
-import React, { useEffect, useRef, useState } from 'react';
+import { HStack, Text, VStack, useDisclose } from 'native-base';
+import React, { useEffect, useRef } from 'react';
 import YouTube from 'react-native-youtube';
 
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
+  customVideoItemConverted,
+  findWordIsClickedForDisplayDefinition,
   getDuration,
   getPosition,
   getStartTime,
+  getWordIsClicked,
   setDuration,
   setPosition,
 } from '../slice';
@@ -16,31 +19,44 @@ import {
   MILLISECONDS_HIGHLIGHT,
   USER_PROCESS_TOTAL,
 } from '@clvtube/common/constants/common.constants';
+import { WordDefinition } from '@clvtube/common/components/word-definition/index';
+import { IVideoTranscript, IWord } from '../interface';
+import { getContentOfWord } from '@clvtube/save-new-word/reducer/saveNewWord';
 
 const YoutubeVideo = ({ videoPlay, id }: any) => {
   // const [startTime, setStartTime] = useState(0);
   const youtubeRef = useRef<YouTube>(null);
+  const { isOpen, onClose, onOpen } = useDisclose();
 
   const startTime = useAppSelector(getStartTime);
   const position = useAppSelector(getPosition);
   const duration = useAppSelector(getDuration);
+  const sentenceConvertedToWords = useAppSelector(
+    state => state.videoItemReducer.videoItemIsConverted,
+  );
+  const wordIsClicked = useAppSelector(
+    state => state.videoItemReducer.wordIsClicked,
+  );
+  const wordDefinition = useAppSelector(
+    state => state.videoItemReducer.wordDefinition,
+  );
 
   const dispatch = useAppDispatch();
 
   const oneIndex = videoPlay?.videoTranscripts?.find(
-    (item, index) => index === 0,
+    (item: IVideoTranscript, index: number) => index === 0,
   );
-
-  const [transcript, setTranscript] = useState(oneIndex);
+  const videoItemConverted = oneIndex?.content?.split(' ');
 
   useEffect(() => {
     const itemDisplay = videoPlay?.videoTranscripts?.find(
-      item =>
+      (item: IVideoTranscript) =>
         position - MILLISECONDS_HIGHLIGHT < item.startTime &&
         item.startTime < position + MILLISECONDS_HIGHLIGHT,
     );
+    const sentenceInCertainTimeConverted = itemDisplay?.content?.split(' ');
     if (itemDisplay) {
-      setTranscript(itemDisplay);
+      dispatch(customVideoItemConverted(sentenceInCertainTimeConverted));
     }
   }, [position]);
   useEffect(() => {
@@ -51,10 +67,13 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   youtubeRef?.current?.getDuration().then(value => {
     dispatch(setDuration(value));
   });
+  useEffect(() => {
+    dispatch(customVideoItemConverted(videoItemConverted));
+  }, [oneIndex]);
 
   useEffect(() => {
     dispatch(setPosition(0));
-    setTranscript('');
+    dispatch(customVideoItemConverted([]));
   }, [id]);
 
   return (
@@ -96,8 +115,9 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
           <MaterialIcons name="filter-none" size={25} color="black" />
         </HStack>
         <HStack
+          flexWrap={'wrap'}
           safeAreaY={12}
-          justifyContent={'space-between'}
+          justifyContent={'center'}
           alignItems={'center'}
           height={'180px'}
           space={3}>
@@ -106,17 +126,38 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             size={20}
             color="#999999"
           /> */}
-          <Text
-            fontStyle={'normal'}
-            fontSize={'18px'}
-            fontWeight={600}
-            textAlign={'center'}
-            textDecorationLine={'underline'}
-            textDecorationColor={'#999999'}
-            color={'neural.10'}
-            flex={1}>
-            {transcript && transcript?.content}
-          </Text>
+          {sentenceConvertedToWords?.map((item: IWord, index: number) => (
+            <Text
+              key={index}
+              fontStyle={'normal'}
+              fontSize={'18px'}
+              fontWeight={600}
+              flexBasis={'50%'}
+              underline={item?.isHighlighted}
+              onPress={() => {
+                if (item?.isHighlighted) {
+                  dispatch(getWordIsClicked(item?.content));
+                  dispatch(getContentOfWord(item?.content));
+                  dispatch(
+                    findWordIsClickedForDisplayDefinition(item?.content),
+                  );
+                  onOpen();
+                }
+              }}
+              textAlign={'center'}
+              textDecorationColor={'#999999'}
+              color={'neural.10'}>
+              {item?.content}
+            </Text>
+          ))}
+          {isOpen && (
+            <WordDefinition
+              content={wordIsClicked}
+              isOpen={isOpen}
+              onClose={onClose}
+              wordDefinition={wordDefinition?.evDict?.detail}
+            />
+          )}
           {/* <MaterialIcons
             name="keyboard-arrow-right"
             size={20}

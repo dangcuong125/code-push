@@ -1,5 +1,6 @@
 import { RootStackParamList } from '@clvtube/common/navigators/RootNavigator';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { IWordDefinition } from '@clvtube/common/interfaces/common.interface';
 
 export type PodcastDetailProps = NativeStackScreenProps<
   RootStackParamList,
@@ -33,7 +34,7 @@ export interface IInitialState {
   sliderValue: number;
   defaultValue: number;
   // paragraph: ITranscriptItem;
-  wordDefinition: any;
+  wordDefinition: null | IWordDefinition;
   goBack: boolean;
   isLoading: boolean;
   isSaveAudio: number;

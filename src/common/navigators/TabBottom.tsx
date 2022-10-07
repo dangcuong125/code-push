@@ -12,6 +12,7 @@ import { imageIconTab } from '../constants/imagePath';
 import { Image } from 'native-base';
 // import { GameListScreen } from '@clvtube/game/game-list-screen/components/index';
 import { GameNavigator } from './GameNavigator';
+import { TAB_ROUTE_GAME } from '../constants/route.constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -68,8 +69,12 @@ const TabBottom = () => {
       <Tab.Screen name="Podcast" component={PodcastRoutes} />
 
       {/* TabBar Account */}
+      <Tab.Screen
+        options={{ title: 'Trò chơi' }}
+        name={TAB_ROUTE_GAME}
+        component={GameNavigator}
+      />
       <Tab.Screen name="Tài khoản" component={AccountRoute} />
-      <Tab.Screen name="Trò chơi" component={GameNavigator} />
     </Tab.Navigator>
   );
 };

@@ -4,18 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useCountDown } from '@clvtube/common/hooks/useCountDown';
+import { RESULT_OF_CHOOSE_RIGHT_WORD_GAME } from '@clvtube/common/constants/route.constants';
 
 export const Header = () => {
   const navigation = useNavigation();
   const countDown = useCountDown(60, 1);
+
+  if (countDown === 0) navigation.navigate(RESULT_OF_CHOOSE_RIGHT_WORD_GAME);
   return (
     <Flex direction="row" justifyContent="space-between">
       <Icon
         as={AntDesign}
         name="arrowleft"
-        onPress={() => {
-          navigation.goBack();
-        }}
+        onPress={navigation.goBack}
         color="text.600"
         marginLeft="17.67px"
         size="6"

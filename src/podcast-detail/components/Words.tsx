@@ -26,6 +26,9 @@ export const Word = React.memo(
     const sliderValue = useAppSelector(
       state => state.podcastDetail.sliderValue,
     );
+    const wordDefinition = useAppSelector(
+      state => state.podcastDetail.wordDefinition,
+    );
 
     let color: string;
     let fontSize = 14;
@@ -60,6 +63,7 @@ export const Word = React.memo(
             content={word?.content}
             isOpen={isOpen}
             onClose={onClose}
+            wordDefinition={wordDefinition?.evDict?.detail}
           />
         )}
       </>

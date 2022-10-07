@@ -18,6 +18,9 @@ import PlayingVideo from '@clvtube/video-detail/playingVideo';
 import { SaveNewWord } from '@clvtube/save-new-word/components/index';
 import { DisplaySavedWordList } from '@clvtube/save-new-word/components/DisplaySavedWordList';
 import { CountDownScreen } from '@clvtube/game/count-down-screen/components/index';
+import { ResultOfGameChooseRightWord } from '@clvtube/game/game-result/components/ResultOfGameChooseWord';
+import { DragWordGame } from '@clvtube/game/drag-word-game/components/index';
+import { ResultOfGameDragWord } from '@clvtube/game/game-result/components/ResultOfGameDragWord';
 
 import TabBottom from './TabBottom';
 
@@ -28,12 +31,15 @@ import {
   AUTH,
   COUNT_DOWN_GAME_SCREEN,
   CREATE_ACCOUNT,
+  GAME_DRAG_WORD,
   INPUT_OTP,
   INTRO,
   LEVEL_TOPIC,
   OPENDASHBOARD,
   PODCAST_DETAIL,
   REGISTER_SUCCESS,
+  RESULT_OF_CHOOSE_RIGHT_WORD_GAME,
+  RESULT_OF_DRAG_WORD_GAME,
   SAVED_WORD_LIST,
   SAVE_NEW_WORD,
   SPLASH_LOADING,
@@ -55,6 +61,8 @@ export type RootStackParamList = {
   CountDownGameScreen: {};
   SaveWordList: {};
   Home: {};
+  GameResult: {};
+  GameDragWord: {};
   PodcastDetail: {};
   Podcast: {};
   PodcastListWithTopic: {};
@@ -151,6 +159,21 @@ const RootNavigator = () => {
       <Stack.Screen
         name={COUNT_DOWN_GAME_SCREEN}
         component={CountDownScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={RESULT_OF_CHOOSE_RIGHT_WORD_GAME}
+        component={ResultOfGameChooseRightWord}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={GAME_DRAG_WORD}
+        component={DragWordGame}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={RESULT_OF_DRAG_WORD_GAME}
+        component={ResultOfGameDragWord}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
