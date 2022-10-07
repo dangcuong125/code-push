@@ -1,9 +1,9 @@
 import { VIDEO_ROUTE } from '@clvtube/common/constants/route.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useNavigation } from '@react-navigation/native';
-import { Box, HStack, Heading, Text, VStack } from 'native-base';
+import { Box, HStack, Heading, Image, Text, VStack } from 'native-base';
 import React, { useEffect } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAppSelector } from '../../../common/hooks/useAppSelector';
@@ -50,6 +50,7 @@ const PupolarVideo = () => {
                     resizeMode: 'cover',
                     marginBottom: 10,
                   }}
+                  borderTopRadius={'12px'}
                 />
                 <HStack justifyContent={'space-between'} alignItems={'center'}>
                   <HStack
@@ -102,6 +103,11 @@ const PupolarVideo = () => {
           if (index === 1 || index === 2) {
             return (
               <Box
+                onTouchEnd={() => {
+                  navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
+                    id: item.id,
+                  });
+                }}
                 width={'47%'}
                 borderRadius={'12px'}
                 backgroundColor={'rgba(90, 200, 250, 0.1)'}>
@@ -111,7 +117,7 @@ const PupolarVideo = () => {
                     style={{
                       width: '100%',
                       height: 126,
-                      resizeMode: 'contain',
+                      resizeMode: 'cover',
                       borderTopLeftRadius: 12,
                       borderTopRightRadius: 12,
                     }}
