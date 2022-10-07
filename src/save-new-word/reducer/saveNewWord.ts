@@ -53,6 +53,9 @@ export const saveNewWord = createSlice({
     setSearchWord: (state, action: PayloadAction<string>) => {
       state.searchWord = action.payload;
     },
+    resetValueSelectFolder: state => {
+      state.valueSelectFolder = '';
+    },
   },
 });
 
@@ -68,6 +71,7 @@ export const {
     showCreateFolderModal,
     setValueNameNewFolder,
     resetErrorMsgForCreateFolder,
+    resetValueSelectFolder,
     setSearchWord,
   },
   reducer,

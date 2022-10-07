@@ -1,13 +1,4 @@
-import {
-  Box,
-  // Button,
-  Flex,
-  Icon,
-  Input,
-  Select,
-  Text,
-  VStack,
-} from 'native-base';
+import { Box, Flex, Icon, Input, Select, Text, VStack } from 'native-base';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { IGroupItem, SaveNewWordProps } from '../interface';
@@ -22,6 +13,7 @@ import {
   getGroupId,
   getValueSelectFolder,
   resetErrorMessageForSelectFolder,
+  resetValueSelectFolder,
   showCreateFolderModal,
   showSuccessfulModal,
 } from '../reducer/saveNewWord';
@@ -79,6 +71,7 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           onPress={() => {
             navigation.goBack();
             dispatch(resetErrorMessageForSelectFolder(''));
+            dispatch(resetValueSelectFolder());
           }}
           as={AntDesign}
           name="arrowleft"
@@ -177,25 +170,29 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
             borderColor="text.200">
             Thêm danh mục mới
           </Text>
-          {groupList?.map((item: IGroupItem) => (
-            <Text
-              key={item?.id}
-              bgColor="neural.1"
-              padding="10px"
-              borderRadius="10px"
-              marginTop="10px"
-              borderWidth="1px"
-              color="text.200"
-              onPress={() => {
-                dispatch(getGroupId(item?.id));
-                navigation.navigate(SAVED_WORD_LIST, {});
-              }}
-              borderColor="text.200">
-              {item?.title}
-            </Text>
-          ))}
+          {groupList
+            ?.slice(0)
+            ?.reverse()
+            ?.map((item: IGroupItem) => (
+              <Text
+                key={item?.id}
+                bgColor="neural.1"
+                padding="10px"
+                borderRadius="10px"
+                marginTop="10px"
+                borderWidth="1px"
+                color="text.200"
+                onPress={() => {
+                  dispatch(getGroupId(item?.id));
+                  navigation.navigate(SAVED_WORD_LIST, {});
+                }}
+                borderColor="text.200">
+                {item?.title}
+              </Text>
+            ))}
         </Box>
       </Box>
+      <Box height="150px"></Box>
       <SuccessfulModal
         isOpen={isOpenSuccessfullModal}
         content="Bạn đã lưu từ vựng thành công!"

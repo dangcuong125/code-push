@@ -37,7 +37,7 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
     state => state.searchPageReducer.videoSearchResult,
   );
 
-  const { data } = useGetSearchResult(valueInput);
+  const { data } = useGetSearchResult(valueInput || '');
   const searchResult = data?.data?.items;
 
   useEffect(() => {
