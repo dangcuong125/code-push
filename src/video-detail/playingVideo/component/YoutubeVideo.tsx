@@ -1,4 +1,4 @@
-import { HStack, Text, VStack, useDisclose } from 'native-base';
+import { Box, HStack, Text, VStack, useDisclose } from 'native-base';
 import React, { useEffect, useRef } from 'react';
 import YouTube from 'react-native-youtube';
 
@@ -127,28 +127,30 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
             color="#999999"
           /> */}
           {sentenceConvertedToWords?.map((item: IWord, index: number) => (
-            <Text
-              key={index}
-              fontStyle={'normal'}
-              fontSize={'18px'}
-              fontWeight={600}
-              flexBasis={'50%'}
-              underline={item?.isHighlighted}
-              onPress={() => {
-                if (item?.isHighlighted) {
-                  dispatch(getWordIsClicked(item?.content));
-                  dispatch(getContentOfWord(item?.content));
-                  dispatch(
-                    findWordIsClickedForDisplayDefinition(item?.content),
-                  );
-                  onOpen();
-                }
-              }}
-              textAlign={'center'}
-              textDecorationColor={'#999999'}
-              color={'neural.10'}>
-              {item?.content}
-            </Text>
+            <Box key={index} height={'auto'}>
+              <Text
+                key={index}
+                fontStyle={'normal'}
+                fontSize={'18px'}
+                fontWeight={600}
+                flexBasis={'50%'}
+                underline={item?.isHighlighted}
+                onPress={() => {
+                  if (item?.isHighlighted) {
+                    dispatch(getWordIsClicked(item?.content));
+                    dispatch(getContentOfWord(item?.content));
+                    dispatch(
+                      findWordIsClickedForDisplayDefinition(item?.content),
+                    );
+                    onOpen();
+                  }
+                }}
+                textAlign={'center'}
+                textDecorationColor={'#999999'}
+                color={'neural.10'}>
+                {item?.content}
+              </Text>
+            </Box>
           ))}
           {isOpen && (
             <WordDefinition
