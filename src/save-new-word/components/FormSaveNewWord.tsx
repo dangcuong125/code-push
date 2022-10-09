@@ -1,4 +1,13 @@
-import { Box, Flex, Icon, Input, Select, Text, VStack } from 'native-base';
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Input,
+  Select,
+  Text,
+  VStack,
+} from 'native-base';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { IGroupItem, SaveNewWordProps } from '../interface';
@@ -157,19 +166,19 @@ export const FormSaveNewWord = ({ navigation }: SaveNewWordProps) => {
           value={newWord?.example}
         />
         <Box marginTop="30px">
-          <Text
-            bgColor="neural.1"
+          <Button
+            bgColor="text.600"
             padding="10px"
             borderRadius="10px"
+            _text={{ textAlign: 'left' }}
             marginTop="10px"
-            borderWidth="1px"
             color="text.200"
             onPress={() => {
               dispatch(showCreateFolderModal(true));
             }}
             borderColor="text.200">
             Thêm danh mục mới
-          </Text>
+          </Button>
           {groupList
             ?.slice(0)
             ?.reverse()
