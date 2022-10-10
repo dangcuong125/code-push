@@ -1,5 +1,11 @@
 /* eslint-disable multiline-ternary */
-import React, { useEffect } from 'react';
+import {
+  PODCAST_DETAIL,
+  VIDEO_ROUTE,
+} from '@clvtube/common/constants/route.constants';
+import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
+import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import _ from 'lodash';
 import {
   Box,
   HStack,
@@ -9,21 +15,17 @@ import {
   Text,
   VStack,
 } from 'native-base';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useGetSearchResult } from './hooks/useGetSearchResult';
-import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { ISearchResult, SearchPageProps } from './interface';
 import { classifySearchResult, getSearchResult } from './reducer/searchPage';
-import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {
-  PODCAST_DETAIL,
-  VIDEO_ROUTE,
-} from '@clvtube/common/constants/route.constants';
 import SearchHistory from './SearchHistory';
 
 const SearchResult = ({ navigation }: SearchPageProps) => {
+  const [search, setSearch] = useState('');
   const dispatch = useAppDispatch();
   const valueInput = useAppSelector(
     state => state.searchPageReducer.valueInputSearch,
@@ -37,8 +39,17 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
     state => state.searchPageReducer.videoSearchResult,
   );
 
-  const { data } = useGetSearchResult(valueInput || '');
+  const { data } = useGetSearchResult({
+    keyword: search,
+    page: 1,
+    limit: 10,
+  });
+
   const searchResult = data?.data?.items;
+  const debouncer = useCallback(_.debounce(setSearch, 1000), []);
+  useEffect(() => {
+    debouncer(valueInput);
+  }, [valueInput]);
 
   useEffect(() => {
     dispatch(getSearchResult(searchResult));

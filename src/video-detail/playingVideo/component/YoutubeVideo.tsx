@@ -2,9 +2,16 @@ import { Box, HStack, Text, VStack, useDisclose } from 'native-base';
 import React, { useEffect, useRef } from 'react';
 import YouTube from 'react-native-youtube';
 
+import { WordDefinition } from '@clvtube/common/components/word-definition/index';
+import {
+  MILLISECONDS_HIGHLIGHT,
+  USER_PROCESS_TOTAL,
+} from '@clvtube/common/constants/common.constants';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { getContentOfWord } from '@clvtube/save-new-word/reducer/saveNewWord';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { IVideoTranscript, IWord } from '../interface';
 import {
   customVideoItemConverted,
   findWordIsClickedForDisplayDefinition,
@@ -13,16 +20,10 @@ import {
   getStartTime,
   getWordIsClicked,
   setDuration,
+  setIsSaveVideo,
   setPosition,
   setStartTime,
 } from '../slice';
-import {
-  MILLISECONDS_HIGHLIGHT,
-  USER_PROCESS_TOTAL,
-} from '@clvtube/common/constants/common.constants';
-import { WordDefinition } from '@clvtube/common/components/word-definition/index';
-import { IVideoTranscript, IWord } from '../interface';
-import { getContentOfWord } from '@clvtube/save-new-word/reducer/saveNewWord';
 
 const YoutubeVideo = ({ videoPlay, id }: any) => {
   // const [startTime, setStartTime] = useState(0);
@@ -68,6 +69,7 @@ const YoutubeVideo = ({ videoPlay, id }: any) => {
   useEffect(() => {
     return () => {
       dispatch(setStartTime(0));
+      dispatch(setIsSaveVideo(0));
     };
   }, []);
   youtubeRef?.current?.getDuration().then(value => {
