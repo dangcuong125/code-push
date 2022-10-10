@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   Box,
   HStack,
@@ -12,6 +12,7 @@ import {
 import { ScrollView } from 'react-native';
 import { useGetSearchResult } from './hooks/useGetSearchResult';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
+import { useLazyQuery } from '@clvtube/common/hooks/useLazyQuery';
 import { ISearchResult, SearchPageProps } from './interface';
 import { classifySearchResult, getSearchResult } from './reducer/searchPage';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
@@ -22,6 +23,7 @@ import {
   VIDEO_ROUTE,
 } from '@clvtube/common/constants/route.constants';
 import SearchHistory from './SearchHistory';
+import _ from 'lodash';
 
 const SearchResult = ({ navigation }: SearchPageProps) => {
   const dispatch = useAppDispatch();
@@ -37,8 +39,13 @@ const SearchResult = ({ navigation }: SearchPageProps) => {
     state => state.searchPageReducer.videoSearchResult,
   );
 
-  const { data } = useGetSearchResult(valueInput || '');
+  const { data, execute } = useLazyQuery(useGetSearchResult);
+
   const searchResult = data?.data?.items;
+  const debouncer = useCallback(_.debounce(execute, 1000), []);
+  useEffect(() => {
+    debouncer({ keyword: valueInput, page: 1, limit: 10 });
+  }, [valueInput]);
 
   useEffect(() => {
     dispatch(getSearchResult(searchResult));

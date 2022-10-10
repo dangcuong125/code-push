@@ -103,50 +103,52 @@ const PupolarVideo = () => {
           if (index === 1 || index === 2) {
             return (
               <Box
-                onTouchEnd={() => {
-                  navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
-                    id: item.id,
-                  });
-                }}
                 width={'47%'}
                 borderRadius={'12px'}
                 backgroundColor={'rgba(90, 200, 250, 0.1)'}>
-                <VStack space={2}>
-                  <Image
-                    source={{ uri: item?.thumbnails.medium.url }}
-                    style={{
-                      width: '100%',
-                      height: 126,
-                      resizeMode: 'cover',
-                      borderTopLeftRadius: 12,
-                      borderTopRightRadius: 12,
-                    }}
-                  />
-                  <VStack safeAreaX={2} safeAreaBottom={3} space={2}>
-                    <Text
-                      fontStyle={'normal'}
-                      fontSize={'12px'}
-                      fontWeight={400}
-                      lineHeight={'16px'}
-                      color={'#181818'}>
-                      {item.desc}
-                    </Text>
-                    <HStack space={0.5} alignItems={'center'}>
-                      <MaterialCommunityIcons
-                        name="eye"
-                        size={15}
-                        color={'#3D9BE0'}
-                      />
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate(VIDEO_ROUTE.VIDEO_PLAYING, {
+                      id: item.id,
+                    });
+                  }}>
+                  <VStack space={2}>
+                    <Image
+                      source={{ uri: item?.thumbnails.medium.url }}
+                      style={{
+                        width: '100%',
+                        height: 126,
+                        resizeMode: 'cover',
+                        borderTopLeftRadius: 12,
+                        borderTopRightRadius: 12,
+                      }}
+                    />
+                    <VStack safeAreaX={2} safeAreaBottom={3} space={2}>
                       <Text
                         fontStyle={'normal'}
                         fontSize={'12px'}
                         fontWeight={400}
-                        color={'#666666'}>
-                        1234
+                        lineHeight={'16px'}
+                        color={'#181818'}>
+                        {item.desc}
                       </Text>
-                    </HStack>
+                      <HStack space={0.5} alignItems={'center'}>
+                        <MaterialCommunityIcons
+                          name="eye"
+                          size={15}
+                          color={'#3D9BE0'}
+                        />
+                        <Text
+                          fontStyle={'normal'}
+                          fontSize={'12px'}
+                          fontWeight={400}
+                          color={'#666666'}>
+                          1234
+                        </Text>
+                      </HStack>
+                    </VStack>
                   </VStack>
-                </VStack>
+                </TouchableOpacity>
               </Box>
             );
           }
