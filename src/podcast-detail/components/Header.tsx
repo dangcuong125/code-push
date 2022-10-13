@@ -1,41 +1,49 @@
-import { Box, Flex, Icon } from 'native-base';
+/* eslint-disable multiline-ternary */
+/* eslint-disable react/display-name */
+import { Box, Flex, Icon, useDisclose } from 'native-base';
 import React, { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
-import { PodcastDetailProps } from '../interface';
+import { IPodcastDetail, PodcastDetailProps } from '../interface';
 import { SliderAudio } from './SliderAudio';
 import { SettingModal } from './SettingModal';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
-import { getIsSaveAudio, userIsGoingBack } from '../reducer/podcastDetail';
+import {
+  saveNewAudio,
+  // getIsSaveAudio,
+  // saveNewAudio,
+  userIsGoingBack,
+} from '../reducer/podcastDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 import { useSavePodcast } from '../hooks/useSavePodcast';
-import { useRoute } from '@react-navigation/native';
-import {
-  MediaType,
-  USER_PROCESS_TOTAL,
-} from '@clvtube/common/constants/common.constants';
 import { useDeletePodcast } from '../hooks/useDeletePodcast';
 
-export const Header = ({ navigation }: PodcastDetailProps) => {
+interface HeadeProps {
+  navigation: PodcastDetailProps;
+  data: IPodcastDetail | undefined;
+}
+
+export const Header = React.memo(({ navigation, data }: HeadeProps) => {
   const [displaySliderAudio, setDisplaySliderAudio] = useState(true);
-  const [open, setOpen] = useState(false);
+  const {
+    isOpen: isOpenSettingModal,
+    onOpen: openSettingModal,
+    onClose: closeSettingModal,
+  } = useDisclose();
   const dispatch = useAppDispatch();
-  const { id } = useRoute().params;
+  const savedPodcastInfo = useAppSelector(
+    state => state.podcastDetail.podcastSaveInfo,
+  );
 
-  const position = useAppSelector(state => state.podcastDetail.position);
-  const duration = useAppSelector(state => state.podcastDetail.duration);
+  const isSaveAudio = data?.data?.userToMedia;
 
-  const isSaveAudio = useAppSelector(getIsSaveAudio);
   const { mutate: savePod } = useSavePodcast();
   const { mutate: deletePod } = useDeletePodcast();
 
   const savePodcast = () => {
-    savePod({
-      audioId: id,
-      mediaType: MediaType.AUDIO,
-      startTime: (position / duration) * USER_PROCESS_TOTAL,
-    });
+    dispatch(saveNewAudio());
+    savePod(savedPodcastInfo);
   };
 
   const deletePodcast = () => {
@@ -91,16 +99,21 @@ export const Header = ({ navigation }: PodcastDetailProps) => {
             as={AntDesign}
             name="setting"
             onPress={() => {
-              setOpen(true);
+              openSettingModal();
             }}
             size="6"
             color="text.200"
             marginRight="25px"
           />
-          <SettingModal open={open} setOpen={setOpen} />
+          {isOpenSettingModal && (
+            <SettingModal
+              isOpen={isOpenSettingModal}
+              onClose={closeSettingModal}
+            />
+          )}
         </Flex>
       </Flex>
       <SliderAudio displaySliderAudio={displaySliderAudio} />
     </Box>
   );
-};
+});

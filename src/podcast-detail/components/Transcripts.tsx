@@ -1,35 +1,27 @@
 /* eslint-disable multiline-ternary */
 import React from 'react';
-import { ITranscriptContent, ITranscriptItem } from '../interface';
+import { ITranscriptContent } from '../interface';
 import { View } from 'react-native';
 import { Box } from 'native-base';
 import {
   getHeightOfParagraph,
-  setWordIsHighlighted,
+  // setWordIsHighlighted,
 } from '../reducer/podcastDetail';
 import { useAppDispatch } from '@clvtube/common/hooks/useAppDispatch';
 import { Word } from './Words';
+import { useAppSelector } from '../../common/hooks/useAppSelector';
 
 export const Transcripts = React.memo(function Transcripts({
   item,
-  index,
-  position,
-  array,
 }: {
-  item: ITranscriptItem;
+  item: string;
   position: number;
-  index: number;
-  array: ITranscriptItem[];
 }) {
   const dispatch = useAppDispatch();
+  const transcript = useAppSelector(
+    state => state.podcastDetail.customAudioTranscripts?.infoAudio[item],
+  );
 
-  const setBackgroundColorForParagraph =
-    position <= Number(array[index + 1]?.startTime) &&
-    position > Number(item?.startTime);
-
-  if (setBackgroundColorForParagraph) {
-    dispatch(setWordIsHighlighted(item?.content));
-  }
   return (
     <View
       onLayout={event =>
@@ -41,23 +33,20 @@ export const Transcripts = React.memo(function Transcripts({
         marginTop="8px"
         marginLeft="16px"
         margin="auto"
-        bgColor={setBackgroundColorForParagraph ? '#3D9BE0' : '#FFFFFF'}
+        // bgColor={transcript?.isColorizeBgParahraph ? '#3D9BE0' : '#FFFFFF'}
+        bgColor={transcript.bgParagraph}
         padding="5px"
         flexDirection={'row'}
         marginRight="10px"
         flexWrap="wrap"
         fontWeight={400}>
-        {item?.content?.map((word: ITranscriptContent, index: number) => {
-          const displayHighlightText =
-            Number(word.start_time) < position + 0.17 &&
-            Number(word.start_time) > position - 0.17;
+        {transcript?.content?.map((word: ITranscriptContent, index: number) => {
           return (
             // <Animated.View key={index} style={[reanimatedStyle]}>
             <Box key={index}>
               <Word
-                displayHighlightText={displayHighlightText}
                 word={word}
-                setBackgroundColorForParagraph={setBackgroundColorForParagraph}
+                setBackgroundColorForParagraph={transcript?.bgParagraph}
               />
             </Box>
             // </Animated.View>

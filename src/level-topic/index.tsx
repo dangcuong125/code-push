@@ -7,6 +7,7 @@ import {
   ScrollView,
   Text,
   VStack,
+  View,
 } from 'native-base';
 import React, { useEffect } from 'react';
 import { Alert, TouchableOpacity } from 'react-native';
@@ -135,10 +136,11 @@ const LevelTopic = () => {
               <TouchableOpacity key={item.key}>
                 <Button
                   leftIcon={
+                    // eslint-disable-next-line multiline-ternary
                     item.isSelected ? (
                       <Icon as={<MaterialIcons name="done" />} />
                     ) : (
-                      ''
+                      <View></View>
                     )
                   }
                   marginBottom={'18px'}

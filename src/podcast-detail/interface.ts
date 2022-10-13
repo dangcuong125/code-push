@@ -11,6 +11,7 @@ export interface ITranscriptContent {
   content: string;
   start_time: string;
   isHighlighted?: boolean;
+  isDisplayColorizeText: boolean;
 }
 export interface ITranscriptItem {
   createdAt: string;
@@ -32,13 +33,23 @@ export interface IInitialState {
   heightOfParagraph: number;
   paragraphInfo: any;
   sliderValue: number;
+  customAudioTranscripts: any;
   defaultValue: number;
   // paragraph: ITranscriptItem;
   wordDefinition: null | IWordDefinition;
   goBack: boolean;
+  infoAudio: any;
+  audioTranscripts: ITranscriptItem[];
   isLoading: boolean;
   isSaveAudio: number;
   audioHighLightWords: IAudioHighlightWordInPodcastDetail[];
+  isInrangeOfStartTimeAndEndTime: number;
+  endTimeOfParagraph: string;
+  podcastSaveInfo: any;
+  audioId: null | number;
+  allTranscriptIds: number[];
+
+  normalizedParagraph: any;
 }
 export interface IAudioHighlightWordInPodcastDetail {
   created_at: string;
