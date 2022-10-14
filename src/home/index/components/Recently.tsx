@@ -41,7 +41,11 @@ const VideoRecommended = ({
       borderColor={'#E6E6E6'}
       borderRadius={'12px'}>
       <Image
-        source={item?.item.audioThumbnail?.thumbnailId}
+        source={
+          item?.type === 'audio'
+            ? item?.item.audioThumbnail?.thumbnailId
+            : { uri: item?.item?.thumbnails?.default?.url }
+        }
         style={{
           width: 163,
           height: 87,
@@ -56,14 +60,16 @@ const VideoRecommended = ({
           fontStyle={'normal'}
           fontSize={'10px'}
           fontWeight={600}
+          numberOfLines={1}
           color={'text.300'}>
-          {item?.item?.title}
+          {item?.type === 'audio' ? item?.item?.title : item?.item?.name}
         </Text>
         <Text
           fontStyle={'normal'}
           fontSize={'12px'}
           fontWeight={400}
           lineHeight={'16px'}
+          numberOfLines={2}
           color={'text.300'}>
           {item?.item?.desc}
         </Text>

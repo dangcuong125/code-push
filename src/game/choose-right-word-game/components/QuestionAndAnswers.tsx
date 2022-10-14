@@ -30,11 +30,13 @@ export const QuestionAndAnswers = () => {
 
   const { data } = useGetCorrectAnswer(checkIdQuestionAndAnswersNotEmpty);
 
-  if (index === TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD) {
-    setTimeout(() => {
-      navigation.navigate(RESULT_OF_CHOOSE_RIGHT_WORD_GAME);
-    }, 1000);
-  }
+  useEffect(() => {
+    if (index === TOTAL_QUESTIONS_OF_GAME_CHOOSE_RIGHT_WORD) {
+      setTimeout(() => {
+        navigation.navigate(RESULT_OF_CHOOSE_RIGHT_WORD_GAME);
+      }, 1000);
+    }
+  }, [index]);
 
   useEffect(() => {
     dispatch(getCorrectAnswer(data?.data));
