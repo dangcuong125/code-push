@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Button, Flex, Heading, Image, Modal, Slider, Text } from 'native-base';
@@ -11,18 +11,18 @@ import {
 import { useAppSelector } from '@clvtube/common/hooks/useAppSelector';
 
 export const SettingModal = ({
-  open,
-  setOpen,
+  isOpen,
+  onClose,
 }: {
-  open: boolean;
-  setOpen: Dispatch<boolean>;
+  isOpen: boolean;
+  onClose: () => void;
 }) => {
   const { t } = useTranslation();
   const valueSlider = useAppSelector(state => state.podcastDetail.defaultValue);
 
   const dispatch = useAppDispatch();
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)} safeAreaTop={true}>
+    <Modal isOpen={isOpen} onClose={onClose} safeAreaTop={true}>
       <Modal.Content bgColor="#FFFFFF" width="327px" height={'250px'}>
         <Text
           margin="auto"
@@ -77,7 +77,7 @@ export const SettingModal = ({
           width={'184px'}
           margin="auto"
           onPress={() => {
-            setOpen(false);
+            onClose();
             dispatch(getSliderValue(valueSlider));
           }}>
           {t('save')}

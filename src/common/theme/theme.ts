@@ -14,6 +14,7 @@ export const theme = extendTheme({
       8: '#4D4D4D',
       9: '#333333',
       10: '#1A1A1A',
+      11: '#FFE69A',
     },
     primary: {
       11: '#3D9BE0',

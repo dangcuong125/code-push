@@ -89,7 +89,8 @@ export default function PodcastSave({ navigation }: PodcastListProps) {
   };
   return (
     <Box bgColor="#FFFFFF">
-      {listAudio?.length ? (
+      {listAudio?.length
+        ? (
         <>
           <Box margin="16px">
             <Text fontSize={'20px'} fontWeight={600} color="#000000">
@@ -112,9 +113,10 @@ export default function PodcastSave({ navigation }: PodcastListProps) {
             </Box>
           </Box>
         </>
-      ) : (
+          )
+        : (
         <></>
-      )}
+          )}
     </Box>
   );
 }

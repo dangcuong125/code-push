@@ -46,7 +46,8 @@ const IconHeader = () => {
         onPress={() => navigator.goBack()}
       />
       <HStack space={2}>
-        {isSaveVideo ? (
+        {isSaveVideo
+          ? (
           <Box onTouchEnd={handleDeleteVideo}>
             <Icon
               size="6"
@@ -56,7 +57,8 @@ const IconHeader = () => {
               color="black"
             />
           </Box>
-        ) : (
+            )
+          : (
           <Box onTouchEnd={handleSaveVideo}>
             <Icon
               size="6"
@@ -66,7 +68,7 @@ const IconHeader = () => {
               color="black"
             />
           </Box>
-        )}
+            )}
         <AntDeisgn name="setting" size={25} color="black" />
       </HStack>
     </HStack>

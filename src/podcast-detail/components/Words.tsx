@@ -12,11 +12,9 @@ import { getContentOfWord } from '@clvtube/save-new-word/reducer/saveNewWord';
 // eslint-disable-next-line react/display-name
 export const Word = React.memo(
   ({
-    displayHighlightText,
     word,
     setBackgroundColorForParagraph,
   }: {
-    displayHighlightText: boolean;
     word: ITranscriptContent;
     setBackgroundColorForParagraph: boolean;
   }) => {
@@ -30,20 +28,21 @@ export const Word = React.memo(
       state => state.podcastDetail.wordDefinition,
     );
 
-    let color: string;
     let fontSize = 14;
     if (sliderValue >= 70) fontSize = 18;
     if (sliderValue < 70 && sliderValue > 50) fontSize = 16;
     if (sliderValue < 50) fontSize = 14;
 
-    if (setBackgroundColorForParagraph) color = '#3D9BE0';
-    else color = '#FFFFFF';
+    // eslint-disable-next-line no-unneeded-ternary
+    const color = setBackgroundColorForParagraph
+      ? setBackgroundColorForParagraph
+      : 'neural.1';
 
     const setHighLightWordAlongWithColorParagraph =
       word?.isHighlighted && setBackgroundColorForParagraph;
     return (
       <>
-        <Box bgColor={displayHighlightText ? '#FFE69A' : color}>
+        <Box bgColor={word?.isDisplayColorizeText ? 'neural.11' : color}>
           <Text
             onPress={() => {
               if (word?.isHighlighted) {
@@ -53,7 +52,7 @@ export const Word = React.memo(
               }
             }}
             underline={setHighLightWordAlongWithColorParagraph && true}
-            color={displayHighlightText ? '#3D9BE0' : 'text.200'}
+            color={word?.isDisplayColorizeText ? 'text.600' : 'text.200'}
             fontSize={fontSize}>
             {word?.content}{' '}
           </Text>
@@ -71,7 +70,6 @@ export const Word = React.memo(
   },
   (prev, next) => {
     return !(
-      prev.displayHighlightText !== next.displayHighlightText ||
       prev.word !== next.word ||
       prev.setBackgroundColorForParagraph !==
         next.setBackgroundColorForParagraph

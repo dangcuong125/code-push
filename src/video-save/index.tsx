@@ -92,7 +92,8 @@ export default function VideoSave() {
   };
   return (
     <Box bgColor="#FFFFFF">
-      {listVideo?.length ? (
+      {listVideo?.length
+        ? (
         <>
           <Box margin="16px">
             <Text fontSize={'18px'} fontWeight={600} color="#000000">
@@ -115,9 +116,10 @@ export default function VideoSave() {
             </Box>
           </Box>
         </>
-      ) : (
+          )
+        : (
         <></>
-      )}
+          )}
     </Box>
   );
 }
