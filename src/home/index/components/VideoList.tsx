@@ -156,6 +156,7 @@ export const VideoList = ({ navigation }: HomePageProps) => {
                       fontWeight={400}
                       mb={'8px'}
                       color={'#1A1A1A'}
+                      numberOfLines={1}
                       lineHeight={'22px'}>
                       {video.name}
                     </Text>
@@ -171,6 +172,7 @@ export const VideoList = ({ navigation }: HomePageProps) => {
                     />
                     <Text
                       fontStyle={'normal'}
+                      numberOfLines={2}
                       mt={'16px'}
                       fontSize={'14px'}
                       fontWeight={400}

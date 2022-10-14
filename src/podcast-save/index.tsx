@@ -30,10 +30,19 @@ const PodcastTypeCarousel = ({
           paddingX="2"
           maxW={'160px'}
           paddingY="4">
-          <Text color={'#181818'} fontSize="12px" fontWeight={600} mb={2}>
+          <Text
+            color={'#181818'}
+            fontSize="12px"
+            fontWeight={600}
+            mb={2}
+            numberOfLines={1}>
             {item?.audio?.audiosToTopics[0]?.topic?.description}
           </Text>
-          <Text color={'#181818'} fontSize="14px" fontWeight={400}>
+          <Text
+            color={'#181818'}
+            fontSize="14px"
+            fontWeight={400}
+            numberOfLines={1}>
             {item?.audio?.title}
           </Text>
           <HStack w="100%" mt={2}>
